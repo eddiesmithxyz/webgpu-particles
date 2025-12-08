@@ -1,0 +1,30 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/cake287/portfolio#readme",
+  "bugs": {
+    "url": "https://github.com/cake287/portfolio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cake287/portfolio.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./build/build.js",
+    "start": "node ./build/serve.js"
+  },
+  "dependencies": {
+    "tslib": "^2.5.2"
+  },
+  "devDependencies": {
+    "@webgpu/types": "^0.1.67",
+    "esbuild": "^0.27.1",
+    "esbuild-plugin-tsc": "^0.4.0",
+    "typescript": "^5.0.4"
+  }
+}
