@@ -1,17 +1,15 @@
-import { shaders } from "./shaders.ts";
-import { mat4 } from 'wgpu-matrix';
+import { shaders } from "../shader/shaders.ts";
 
 export class WGPU {
   private initialised = false;
 
   private device: GPUDevice = {} as GPUDevice;
-  private ctx: GPUCanvasContext = {} as GPUCanvasContext;
+  public ctx: GPUCanvasContext = {} as GPUCanvasContext;
   private renderPipeline: GPURenderPipeline = {} as GPURenderPipeline; 
 
 
-  public instanceCount = 81;
-
-  private vertexCount: number = 0;
+  private instanceCount = 0;
+  private vertexCount = 0;
 
   private vertexBuffer: GPUBuffer = {} as GPUBuffer;
   private instanceBuffer: GPUBuffer = {} as GPUBuffer;  
@@ -48,8 +46,9 @@ export class WGPU {
     return true;
   }
 
-  createBuffersAndPipeline(data: Float32Array<ArrayBuffer>) {
-    this.vertexCount = data.length / 6;
+  createBuffersAndPipeline(cubeData: Float32Array, instanceCount: number) {
+    this.vertexCount = cubeData.length / 6;
+    this.instanceCount = instanceCount;
 
     const vertBufferLayouts = [
       {
@@ -124,11 +123,12 @@ export class WGPU {
 
 
     // CREATE BUFFERS
+
     this.vertexBuffer = this.device.createBuffer({
-      size: data.byteLength,
+      size: cubeData.byteLength,
       usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
     });
-    this.device.queue.writeBuffer(this.vertexBuffer, 0, data, 0, data.length);
+    this.device.queue.writeBuffer(this.vertexBuffer, 0, cubeData as Float32Array<ArrayBuffer>, 0, cubeData.length);
 
 
     this.instanceBuffer = this.device.createBuffer({
@@ -137,6 +137,7 @@ export class WGPU {
     });
 
     
+    // UNIFORMS
     this.uniformBuffer = this.device.createBuffer({
       size: 16*4,
       usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
@@ -152,31 +153,13 @@ export class WGPU {
   }
 
 
-  render() {
+  render(instanceMatrices: Float32Array, viewProjectionMatrix: Float32Array) {
     if (!this.initialised) {
       throw ("WebGPU not initialised");
     }
 
-    // INSTANCE ATTRIBUTES
-    const instanceMatrices = new Float32Array(this.instanceCount * 16);
-    const rotationMatrix = mat4.multiply(mat4.rotationY(Date.now() * 0.001), mat4.rotationX(Date.now() * 0.0015));
-    for (let x = 0; x < 9; x++) {
-      for (let y = 0; y < 9; y++) {
-        const translationMatrix = mat4.translation([2*x-8, 2*y-8, -8]);
-        const modelMatrix = mat4.multiply(translationMatrix, rotationMatrix);
-
-        instanceMatrices.set(modelMatrix as Float32Array<ArrayBuffer>, (y*9 + x)*16);
-      }
-    }
+    
     this.device.queue.writeBuffer(this.instanceBuffer, 0, instanceMatrices as Float32Array<ArrayBuffer>, 0, this.instanceCount * 16);
-
-    // UNIFORMS
-    const viewProjectionMatrix = mat4.perspective(
-      2.0,
-      this.ctx.canvas.width / this.ctx.canvas.height,
-      0.1,
-      100.0
-    );
     this.device.queue.writeBuffer(this.uniformBuffer, 0, viewProjectionMatrix as Float32Array<ArrayBuffer>, 0, 16);
     
 
