@@ -2,17 +2,23 @@ import { shaders } from "./shaders.ts";
 import { mat4 } from 'wgpu-matrix';
 
 export class WGPU {
+  private initialised = false;
+
   private device: GPUDevice = {} as GPUDevice;
   private ctx: GPUCanvasContext = {} as GPUCanvasContext;
   private renderPipeline: GPURenderPipeline = {} as GPURenderPipeline; 
 
 
+  public instanceCount = 81;
+
   private vertexCount: number = 0;
 
   private vertexBuffer: GPUBuffer = {} as GPUBuffer;
-  private indexBuffer: GPUBuffer = {} as GPUBuffer;
+  private instanceBuffer: GPUBuffer = {} as GPUBuffer;  
   private uniformBuffer: GPUBuffer = {} as GPUBuffer;
   private bindGroup: GPUBindGroup = {} as GPUBindGroup;
+
+  private depthTexture: GPUTexture | null = null;
 
   public clearColour = { r: 0.1, g: 0.1, b: 0.1, a: 1 };
   
@@ -38,17 +44,12 @@ export class WGPU {
       alphaMode: "opaque"
     });
 
+    this.initialised = true;
     return true;
   }
 
-  createBuffersAndPipeline(data: 
-    {
-      positions: Float32Array<ArrayBuffer>,
-      normals: Float32Array<ArrayBuffer>
-    }
-    ) 
-  {
-    const { positions, normals } = data;
+  createBuffersAndPipeline(data: Float32Array<ArrayBuffer>) {
+    this.vertexCount = data.length / 6;
 
     const vertBufferLayouts = [
       {
@@ -57,11 +58,43 @@ export class WGPU {
             shaderLocation: 0,
             offset: 0,
             format: "float32x3"
+          },
+          {
+            shaderLocation: 1,
+            offset: 12,
+            format: "float32x3"
           }
         ],
-        arrayStride: 12,
+        arrayStride: 24,
         stepMode: "vertex"
-      } as GPUVertexBufferLayout
+      } as GPUVertexBufferLayout,
+
+      {
+        attributes: [
+          {
+            shaderLocation: 2,
+            offset: 0,
+            format: "float32x4"
+          },
+          {
+            shaderLocation: 3,
+            offset: 16,
+            format: "float32x4"
+          },
+          {
+            shaderLocation: 4,
+            offset: 32,
+            format: "float32x4"
+          },
+          {
+            shaderLocation: 5,
+            offset: 48,
+            format: "float32x4"
+          }
+        ],
+        arrayStride: 64,
+        stepMode: "instance"
+      } as GPUVertexBufferLayout,
     ];
 
     const shaderModule = this.device.createShaderModule({code: shaders});
@@ -77,23 +110,31 @@ export class WGPU {
         targets: [{ format: navigator.gpu.getPreferredCanvasFormat() }]
       },
       primitive: {
-        topology: "triangle-list"
+        topology: "triangle-list",
+        frontFace: "ccw",
+        cullMode: "back"
+      },
+      depthStencil: {
+        depthWriteEnabled: true,
+        depthCompare: 'less',
+        format: 'depth24plus',
       },
       layout: "auto"
     });
 
 
-    // FILL BUFFERS
+    // CREATE BUFFERS
     this.vertexBuffer = this.device.createBuffer({
-      size: positions.byteLength,
+      size: data.byteLength,
       usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
     });
-    this.device.queue.writeBuffer(this.vertexBuffer, 0, positions, 0, positions.length);
+    this.device.queue.writeBuffer(this.vertexBuffer, 0, data, 0, data.length);
 
-    
 
-    this.vertexCount = positions.length / 3;
-
+    this.instanceBuffer = this.device.createBuffer({
+      size: this.instanceCount * 64,
+      usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
+    });
 
     
     this.uniformBuffer = this.device.createBuffer({
@@ -112,19 +153,43 @@ export class WGPU {
 
 
   render() {
-    const rotationMatrix = mat4.multiply(mat4.rotationY(Date.now() * 0.001), mat4.rotationX(1.5));
-    const translationMatrix = mat4.translation([0, 0, -4]);
-    const modelMatrix = mat4.multiply(translationMatrix, rotationMatrix);
+    if (!this.initialised) {
+      throw ("WebGPU not initialised");
+    }
+
+    // INSTANCE ATTRIBUTES
+    const instanceMatrices = new Float32Array(this.instanceCount * 16);
+    const rotationMatrix = mat4.multiply(mat4.rotationY(Date.now() * 0.001), mat4.rotationX(Date.now() * 0.0015));
+    for (let x = 0; x < 9; x++) {
+      for (let y = 0; y < 9; y++) {
+        const translationMatrix = mat4.translation([2*x-8, 2*y-8, -8]);
+        const modelMatrix = mat4.multiply(translationMatrix, rotationMatrix);
+
+        instanceMatrices.set(modelMatrix as Float32Array<ArrayBuffer>, (y*9 + x)*16);
+      }
+    }
+    this.device.queue.writeBuffer(this.instanceBuffer, 0, instanceMatrices as Float32Array<ArrayBuffer>, 0, this.instanceCount * 16);
+
+    // UNIFORMS
     const viewProjectionMatrix = mat4.perspective(
       2.0,
       this.ctx.canvas.width / this.ctx.canvas.height,
       0.1,
       100.0
     );
-    const modelViewProjectionMatrix = mat4.multiply(viewProjectionMatrix, modelMatrix);
-    this.device.queue.writeBuffer(this.uniformBuffer, 0, modelViewProjectionMatrix as Float32Array<ArrayBuffer>, 0, 16);
+    this.device.queue.writeBuffer(this.uniformBuffer, 0, viewProjectionMatrix as Float32Array<ArrayBuffer>, 0, 16);
     
 
+    // create depth texture if needed
+    const canvasTexture = this.ctx.getCurrentTexture();
+    if (!this.depthTexture || this.depthTexture.width !== canvasTexture.width || this.depthTexture.height !== canvasTexture.height) {
+      this.depthTexture?.destroy();
+      this.depthTexture = this.device.createTexture({
+        size: canvasTexture,  // canvasTexture has width, height, and depthOrArrayLayers properties
+        format: 'depth24plus',
+        usage: GPUTextureUsage.RENDER_ATTACHMENT,
+      });
+    }
 
 
     const commandEncoder = this.device.createCommandEncoder();
@@ -134,15 +199,22 @@ export class WGPU {
           clearValue: this.clearColour,
           loadOp: "clear",
           storeOp: "store",
-          view: this.ctx.getCurrentTexture().createView()
+          view: canvasTexture.createView()
         }
-      ]
+      ],
+      depthStencilAttachment: {
+        depthClearValue: 1.0,
+        depthLoadOp: 'clear',
+        depthStoreOp: 'store',
+        view: this.depthTexture.createView()
+      }
     });
 
     passEncoder.setPipeline(this.renderPipeline);
     passEncoder.setVertexBuffer(0, this.vertexBuffer);
+    passEncoder.setVertexBuffer(1, this.instanceBuffer);
     passEncoder.setBindGroup(0, this.bindGroup);
-    passEncoder.draw(this.vertexCount);
+    passEncoder.draw(this.vertexCount, this.instanceCount, 0, 0);
 
     passEncoder.end();
     this.device.queue.submit([commandEncoder.finish()]);

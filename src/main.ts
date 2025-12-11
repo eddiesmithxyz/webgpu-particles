@@ -14,6 +14,7 @@ async function main() {
 
   window.wgpu = wgpu;
 
+  
   const cubeData = createCubeData();
   wgpu.createBuffersAndPipeline(cubeData);
 
