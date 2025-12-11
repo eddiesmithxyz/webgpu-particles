@@ -1,5 +1,8 @@
 import { mat4, vec3, quat, type Quat, type Vec3, type Mat4 } from 'wgpu-matrix';
 
+
+
+
 class CubeInstance {
   pos: Vec3 = vec3.create(0, 0, 0);
   rot: Quat = quat.create(0, 0, 0, 1);

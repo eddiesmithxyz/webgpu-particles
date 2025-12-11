@@ -1,6 +1,6 @@
-import {WGPU} from "./ts/wgpu.ts"
-import { createCubeData } from "./ts/cube.ts";
-import { Scene } from "./ts/scene.ts";
+import {WGPU} from "./wgpu/wgpu.ts"
+import { createCubeData } from "./wgpu/cube.ts";
+import { Scene } from "./scene/scene.ts";
 import { mat4 } from "wgpu-matrix";
 
 

@@ -1,4 +1,4 @@
-import { shaders } from "../shader/shaders.ts";
+import { shaders } from "./shaders.ts";
 
 export class WGPU {
   private initialised = false;
