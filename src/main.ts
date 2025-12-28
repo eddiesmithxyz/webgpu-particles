@@ -1,5 +1,5 @@
 import {WGPU} from "./wgpu/wgpu.ts"
-import { createCubeData } from "./wgpu/cube.ts";
+import { createSquareData } from "./wgpu/square.ts";
 import { Scene } from "./scene/scene.ts";
 import { mat4 } from "wgpu-matrix";
 
@@ -19,7 +19,7 @@ function render(wgpu: WGPU) {
     2.0,
     wgpu.ctx.canvas.width / wgpu.ctx.canvas.height,
     0.1,
-    100.0
+    1000.0
   );
   wgpu.render(scene.instanceData, mat4.multiply(projMatrix, scene.viewMatrix));
 
@@ -35,11 +35,11 @@ async function main() {
     return;
     
 
-  window.wgpu = wgpu; // debug
+  (window as any).wgpu = wgpu; // debug
 
-  
-  const cubeData = createCubeData();
-  wgpu.createBuffersAndPipeline(cubeData, scene.instanceCount);
+
+  const vertData = createSquareData();
+  wgpu.createBuffersAndPipeline(vertData, scene.instanceCount);
 
   lastTime = Date.now();
   requestAnimationFrame(() => render(wgpu));

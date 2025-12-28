@@ -7,13 +7,14 @@ export class WGPU {
   public ctx: GPUCanvasContext = {} as GPUCanvasContext;
   private renderPipeline: GPURenderPipeline = {} as GPURenderPipeline; 
 
+  private aspectRatio: number = 1.0;
 
   private instanceCount = 0;
   private vertexCount = 0;
 
   private vertexBuffer: GPUBuffer = {} as GPUBuffer;
   private instanceBuffer: GPUBuffer = {} as GPUBuffer;  
-  private uniformBuffer: GPUBuffer = {} as GPUBuffer;
+  private uniformBuffers: { viewProjectionMatrix: GPUBuffer, aspectRatio: GPUBuffer } = {} as { viewProjectionMatrix: GPUBuffer, aspectRatio: GPUBuffer };
   private bindGroup: GPUBindGroup = {} as GPUBindGroup;
 
   private depthTexture: GPUTexture | null = null;
@@ -46,8 +47,8 @@ export class WGPU {
     return true;
   }
 
-  createBuffersAndPipeline(cubeData: Float32Array, instanceCount: number) {
-    this.vertexCount = cubeData.length / 6;
+  createBuffersAndPipeline(vertData: Float32Array, instanceCount: number) {
+    this.vertexCount = vertData.length / 5;
     this.instanceCount = instanceCount;
 
     const vertBufferLayouts = [
@@ -61,10 +62,10 @@ export class WGPU {
           {
             shaderLocation: 1,
             offset: 12,
-            format: "float32x3"
+            format: "float32x2"
           }
         ],
-        arrayStride: 24,
+        arrayStride: 20,
         stepMode: "vertex"
       } as GPUVertexBufferLayout,
 
@@ -101,6 +102,27 @@ export class WGPU {
         stepMode: "instance"
       } as GPUVertexBufferLayout,
     ];
+    const bindGroupLayout = this.device.createBindGroupLayout({
+      entries: [
+        {
+          binding: 0,
+          visibility: GPUShaderStage.VERTEX,
+          buffer: {
+            type: "uniform",
+          },
+        },
+        {
+          binding: 1,
+          visibility: GPUShaderStage.VERTEX,
+          buffer: {
+            type: "uniform",
+          },
+        },
+      ],
+    });
+    const pipelineLayout = this.device.createPipelineLayout({
+      bindGroupLayouts: [bindGroupLayout],
+    });
 
     const shaderModule = this.device.createShaderModule({code: shaders});
     this.renderPipeline = this.device.createRenderPipeline({
@@ -116,27 +138,26 @@ export class WGPU {
       },
       primitive: {
         topology: "triangle-list",
-        frontFace: "ccw",
-        cullMode: "back"
+        // frontFace: "ccw",
+        // cullMode: "back"
+        cullMode: "none"
       },
       depthStencil: {
         depthWriteEnabled: true,
         depthCompare: 'less',
         format: 'depth24plus',
       },
-      layout: "auto"
+      layout: pipelineLayout
     });
 
 
     // CREATE BUFFERS
 
     this.vertexBuffer = this.device.createBuffer({
-      size: cubeData.byteLength,
+      size: vertData.byteLength,
       usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
     });
-    this.device.queue.writeBuffer(this.vertexBuffer, 0, cubeData as Float32Array<ArrayBuffer>, 0, cubeData.length);
-
-
+    this.device.queue.writeBuffer(this.vertexBuffer, 0, vertData as Float32Array<ArrayBuffer>, 0, vertData.length);
     this.instanceBuffer = this.device.createBuffer({
       size: this.instanceCount * 4 * 17, // 16 floats for model matrix + 1 float for id
       usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
@@ -144,15 +165,22 @@ export class WGPU {
 
     
     // UNIFORMS
-    this.uniformBuffer = this.device.createBuffer({
+    this.uniformBuffers.viewProjectionMatrix = this.device.createBuffer({
       size: 16*4,
       usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
     });
+    this.uniformBuffers.aspectRatio = this.device.createBuffer({
+      size: 4,
+      usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
+    });
+    
+
     
     this.bindGroup = this.device.createBindGroup({
-      layout: this.renderPipeline.getBindGroupLayout(0),
+      layout: bindGroupLayout,
       entries: [
-        { binding: 0, resource: { buffer: this.uniformBuffer }},
+        { binding: 0, resource: { buffer: this.uniformBuffers.viewProjectionMatrix }},
+        { binding: 1, resource: { buffer: this.uniformBuffers.aspectRatio }},
       ],
     });
 
@@ -164,12 +192,14 @@ export class WGPU {
       throw ("WebGPU not initialised");
     }
 
+
+    const canvasTexture = this.ctx.getCurrentTexture();
+
     this.device.queue.writeBuffer(this.instanceBuffer, 0, instanceData as Float32Array<ArrayBuffer>, 0, this.instanceCount * 17);
-    this.device.queue.writeBuffer(this.uniformBuffer, 0, viewProjectionMatrix as Float32Array<ArrayBuffer>, 0, 16);
-    
+    this.device.queue.writeBuffer(this.uniformBuffers.viewProjectionMatrix, 0, viewProjectionMatrix as Float32Array<ArrayBuffer>, 0, 16);
+    this.device.queue.writeBuffer(this.uniformBuffers.aspectRatio, 0, new Float32Array([canvasTexture.width / canvasTexture.height]), 0, 1);
 
     // create depth texture if needed
-    const canvasTexture = this.ctx.getCurrentTexture();
     if (!this.depthTexture || this.depthTexture.width !== canvasTexture.width || this.depthTexture.height !== canvasTexture.height) {
       this.depthTexture?.destroy();
       this.depthTexture = this.device.createTexture({

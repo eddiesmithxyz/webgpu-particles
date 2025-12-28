@@ -26,6 +26,7 @@ function falloff(signedDist: number): number {
 
 class CubeInstance {
   id: number;
+  mass = 0.05;
 
   pos: Vec3;
   rot: Quat = quat.create(0, 0, 0, 1);
@@ -63,15 +64,17 @@ class CubeInstance {
     const dDistdt = (dist - this.lastDist) / deltaTime;
     this.lastDist = dist;
 
-    const positionStiffness = -0.2;
+    const positionStiffness = -0.24;
     const velocityDamping = -1;
-    const gravityAmount = -positionStiffness*dist - velocityDamping*dDistdt;
-
+    let gravityAmount = -positionStiffness*dist - velocityDamping*dDistdt;
+    
+    const gravityClamp = 200;
+    gravityAmount = Math.atan(gravityAmount / gravityClamp) * gravityClamp;
+    
     const gravity = vec3.scale(sdfNormal(this.pos), -gravityAmount);
 
 
-    const mass = 0.05;
-    const accel = vec3.scale(gravity, 1 / mass);
+    const accel = vec3.scale(gravity, 1 / this.mass);
 
     this.velocity = vec3.add(this.velocity, vec3.scale(accel, deltaTime));
     this.pos = vec3.add(this.pos, vec3.scale(this.velocity, deltaTime));
@@ -80,7 +83,9 @@ class CubeInstance {
 }
 
 export class Scene {
-  private viewDistance: number = 30;
+  private timeScale = 1.7;
+
+  private viewDistance: number = 80;
   public viewMatrix: Mat4 = mat4.lookAt([0, 0, this.viewDistance], [0, 0, 0], [0, 1, 0]);
   private viewAngles: Vec2 = vec2.create(0, 0);
 
@@ -92,7 +97,7 @@ export class Scene {
   private mouseDown = false;
   private lastMouseCoord = vec2.create(0, 0);
 
-  constructor(side = 10) {
+  constructor(side = 9) {
     this.instanceCount = side*side*side;
     this.instanceData = new Float32Array(this.instanceCount * 17);
     
@@ -108,12 +113,17 @@ export class Scene {
             // vec3.create(2*x-(side-1), 2*y-(side-1), 15)
           ));
 
-          this.cubes[i].pos = vec3.scale(this.cubes[i].pos, 1.2);
+          if (i % 10 === 0) {
+            this.cubes[i].mass = 1;
+          }
+
+          this.cubes[i].pos = vec3.multiply(this.cubes[i].pos, vec3.create(15, 0.3, 0.3));
+          this.cubes[i].pos = vec3.add(this.cubes[i].pos, vec3.create(0, 50, 0));
 
           // random velocity
-          const maxSpeed = 5.0;
-          // this.cubes[i].velocity = vec3.create((Math.random()-0.5) * maxSpeed, (Math.random()-0.5) * maxSpeed, (Math.random()-0.5) * maxSpeed);
-          this.cubes[i].velocity = vec3.create(maxSpeed, 0, 0);
+          const startMaxSpeed = 5.0;
+          this.cubes[i].velocity = vec3.create((Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed);
+          // this.cubes[i].velocity = vec3.create(0, 0, 0);
         }
       }
     }
@@ -138,6 +148,8 @@ export class Scene {
   }
 
   update(deltaTime: number) {
+    deltaTime = Math.min(deltaTime, 0.1) * this.timeScale; // cap deltaTime to avoid issues
+
     for (let i = 0; i < this.instanceCount; i++) {
       const cube = this.cubes[i];
       cube.update(deltaTime);
@@ -147,7 +159,7 @@ export class Scene {
 
     if (this.mouseDown) {
       const deltaMouse = vec2.subtract(this.mouseCoord, this.lastMouseCoord);
-      this.viewAngles[0] += deltaMouse[0] * -1.5;
+      this.viewAngles[0] += deltaMouse[0] * 1.5;
       this.viewAngles[1] += deltaMouse[1] * -1;
     }
     let eye = vec3.create(0, 0, this.viewDistance);
