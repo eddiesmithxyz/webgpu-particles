@@ -1,9 +1,11 @@
-import { shaders } from "./shaders.ts";
+import { renderShaders } from "./shaders.ts";
+import { createSquareData } from "./square.ts";
+import { instanceDataLength } from "../common.ts";
 
-export class WGPUrenderer {
+export class WGPURenderer {
   private initialised = false;
 
-  private device: GPUDevice = {} as GPUDevice;
+  public device: GPUDevice = {} as GPUDevice;
   public ctx: GPUCanvasContext = {} as GPUCanvasContext;
   private renderPipeline: GPURenderPipeline = {} as GPURenderPipeline; 
 
@@ -11,7 +13,7 @@ export class WGPUrenderer {
   private vertexCount = 0;
 
   private vertexBuffer: GPUBuffer = {} as GPUBuffer;
-  private instanceBuffer: GPUBuffer = {} as GPUBuffer;  
+  public instanceBuffer: GPUBuffer = {} as GPUBuffer;  
   private uniformBuffers: { viewProjectionMatrix: GPUBuffer, aspectRatio: GPUBuffer } = {} as { viewProjectionMatrix: GPUBuffer, aspectRatio: GPUBuffer };
   private bindGroup: GPUBindGroup = {} as GPUBindGroup;
 
@@ -30,7 +32,11 @@ export class WGPUrenderer {
     }
 
 
-    this.device = await adapter.requestDevice();
+    this.device = await adapter.requestDevice({
+      requiredLimits: {
+        maxComputeInvocationsPerWorkgroup: 1024
+      }
+    });
 
     const canvas = document.querySelector("#gpuCanvas") as HTMLCanvasElement;
     this.ctx = canvas.getContext("webgpu") as GPUCanvasContext;
@@ -45,11 +51,14 @@ export class WGPUrenderer {
     return true;
   }
 
-  createBuffersAndPipeline(vertData: Float32Array, instanceCount: number) {
+  createBuffersAndPipeline(instanceCount: number) {
+    const vertData = createSquareData()
+
     this.vertexCount = vertData.length / 5;
     this.instanceCount = instanceCount;
 
-    const vertBufferLayouts = [
+    const bufferLayouts = [
+      // VERTEX
       {
         attributes: [
           {
@@ -67,36 +76,27 @@ export class WGPUrenderer {
         stepMode: "vertex"
       } as GPUVertexBufferLayout,
 
+      // INSTANCE
       {
         attributes: [
-          {
+          { // position
             shaderLocation: 2,
             offset: 0,
-            format: "float32x4"
+            format: "float32x3"
           },
-          {
+          { // velocity
             shaderLocation: 3,
-            offset: 16,
-            format: "float32x4"
+            offset: 12,
+            format: "float32x3"
           },
-          {
+          { // last dist
             shaderLocation: 4,
-            offset: 32,
-            format: "float32x4"
-          },
-          {
-            shaderLocation: 5,
-            offset: 48,
-            format: "float32x4"
-          },
-          {
-            shaderLocation: 6,
-            offset: 64,
+            offset: 24,
             format: "float32"
-          }
+          },
           
         ],
-        arrayStride: 68,
+        arrayStride: instanceDataLength * 4,
         stepMode: "instance"
       } as GPUVertexBufferLayout,
     ];
@@ -122,12 +122,12 @@ export class WGPUrenderer {
       bindGroupLayouts: [bindGroupLayout],
     });
 
-    const shaderModule = this.device.createShaderModule({code: shaders});
+    const shaderModule = this.device.createShaderModule({code: renderShaders});
     this.renderPipeline = this.device.createRenderPipeline({
       vertex: {
         module: shaderModule,
         entryPoint: "vertex_main",
-        buffers: vertBufferLayouts
+        buffers: bufferLayouts
       },
       fragment: {
         module: shaderModule,
@@ -160,7 +160,7 @@ export class WGPUrenderer {
     });
     this.device.queue.writeBuffer(this.vertexBuffer, 0, vertData as Float32Array<ArrayBuffer>, 0, vertData.length);
     this.instanceBuffer = this.device.createBuffer({
-      size: this.instanceCount * 4 * 17, // 16 floats for model matrix + 1 float for id
+      size: this.instanceCount * 4 * instanceDataLength,
       usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
     });
 
@@ -188,7 +188,7 @@ export class WGPUrenderer {
   }
 
 
-  render(instanceData: Float32Array, viewProjectionMatrix: Float32Array) {
+  render(viewProjectionMatrix: Float32Array) {
     if (!this.initialised) {
       throw ("WebGPU not initialised");
     }
@@ -196,7 +196,6 @@ export class WGPUrenderer {
 
     const canvasTexture = this.ctx.getCurrentTexture();
 
-    this.device.queue.writeBuffer(this.instanceBuffer, 0, instanceData as Float32Array<ArrayBuffer>, 0, this.instanceCount * 17);
     this.device.queue.writeBuffer(this.uniformBuffers.viewProjectionMatrix, 0, viewProjectionMatrix as Float32Array<ArrayBuffer>, 0, 16);
     this.device.queue.writeBuffer(this.uniformBuffers.aspectRatio, 0, new Float32Array([canvasTexture.width / canvasTexture.height]), 0, 1);
 

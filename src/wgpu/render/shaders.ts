@@ -1,4 +1,4 @@
-const shaders = /* wgsl */`
+export const renderShaders = /* wgsl */`
 struct VertexOut {
   @builtin(position) position : vec4f,
   @location(0) colour : vec4f,
@@ -11,11 +11,9 @@ struct VertexInput {
 }
 
 struct InstanceInput {
-  @location(2) modelMat0 : vec4f,
-  @location(3) modelMat1 : vec4f,
-  @location(4) modelMat2 : vec4f,
-  @location(5) modelMat3 : vec4f,
-  @location(6) instanceID : f32
+  @location(2) position : vec3f,
+  @location(3) velocity : vec3f,
+  @location(4) lastDist : f32
 }
 
 @group(0) @binding(0) var<uniform> viewProjectionMatrix : mat4x4<f32>;
@@ -26,19 +24,11 @@ fn vertex_main(
   vertex: VertexInput,
   instance: InstanceInput
 ) -> VertexOut {
-  let modelMatrix = mat4x4<f32>(
-    instance.modelMat0,
-    instance.modelMat1,
-    instance.modelMat2,
-    instance.modelMat3,
-  );
-  let modelViewProjectionMatrix = viewProjectionMatrix * modelMatrix;
-
   var output : VertexOut;
 
   const particleSize = 0.005;
 
-  output.position = modelViewProjectionMatrix * vec4f(0., 0., 0., 1.);
+  output.position = viewProjectionMatrix * vec4f(instance.position, 1.0);
   let vertPos = vertex.position.xy * vec2f(particleSize / aspectRatio, particleSize) * output.position.w;
   output.position += vec4f(vertPos, 0., 0.);
 
@@ -66,6 +56,3 @@ fn fragment_main(fragData: VertexOut) -> @location(0) vec4f {
 }
 
 `;
-
-
-export { shaders };
