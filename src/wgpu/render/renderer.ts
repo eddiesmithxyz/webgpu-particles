@@ -82,17 +82,17 @@ export class WGPURenderer {
           { // position
             shaderLocation: 2,
             offset: 0,
-            format: "float32x3"
+            format: "float32x4"
           },
           { // velocity
             shaderLocation: 3,
-            offset: 12,
-            format: "float32x3"
+            offset: 16,
+            format: "float32x4"
           },
           { // last dist
             shaderLocation: 4,
-            offset: 24,
-            format: "float32"
+            offset: 32,
+            format: "float32x4"
           },
           
         ],

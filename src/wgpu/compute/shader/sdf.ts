@@ -1,3 +1,11 @@
+import { wgslNumStr as str } from "../../common";
+
+const mass = str(0.05);
+const positionStiffness = str(-0.24);
+const velocityDamping = str(-1);
+const gravityClamp = str(200); // limit gravity
+
+
 export const sdfSrc = /* wgsl */`
 
 fn sdCapsule(p: vec3<f32>, a: vec3<f32>, b: vec3<f32>, r: f32) -> f32 {
@@ -95,8 +103,6 @@ fn sdf(pos: vec3<f32>) -> f32 {
     return minDist;
 }
 
-
-
 const EPSILON: f32 = 0.0001;
 fn sdfNormal(pos: vec3<f32>) -> vec3<f32> {
     let e = vec3<f32>(EPSILON, 0.0, 0.0);
@@ -106,6 +112,17 @@ fn sdfNormal(pos: vec3<f32>) -> vec3<f32> {
     let dz = sdf(pos + e.yyx) - sdf(pos - e.yyx);
 
     return normalize(vec3<f32>(dx, dy, dz));
+}
+
+const gravityClamp = ${gravityClamp};
+fn gravityAccel(pos: vec3<f32>, dist: f32, lastDist: f32) -> vec3<f32> {
+  let dDistdt = (dist - lastDist) / uniforms.deltaTime;
+  var gravityAmount = -${positionStiffness}*dist - ${velocityDamping}*dDistdt;
+  gravityAmount = atan(gravityAmount / gravityClamp) * gravityClamp;
+
+  let gravity = -sdfNormal(pos) * gravityAmount;
+  return gravity / ${mass};
+
 }
 
 

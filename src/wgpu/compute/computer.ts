@@ -1,11 +1,12 @@
-import { particleUpdateShaderSrc } from "./shader/particleUpdate";
+import { update1Src } from "./shader/update1";
+import { update2Src } from "./shader/update2";
 import { instanceDataLength, logInstanceData, sideLength } from "../common";
 
 export class WGPUComputer {
   private device: GPUDevice;
 
 
-  private pipeline: GPUComputePipeline;
+  private pipelines: GPUComputePipeline[];
   private bindGroup: GPUBindGroup;
 
   private instanceCount: number;
@@ -17,10 +18,8 @@ export class WGPUComputer {
 
 
   // could auto-generate this list from the shader code but not necessary for a small number
-  private uniforms = new Map<string, {length: number, value: Array<number>}>([
+  private uniforms = new Map<string, {length: number, value: number[]}>([
     ["deltaTime",       {length: 1, value: [0]}],
-    ["smoothingRadius", {length: 1, value: [1]}],
-    ["smoothRad9", {length: 1, value: [0]}],
   ]);
   private uniformsLength = Array.from(this.uniforms.values()).reduce((acc, u) => acc + u.length, 0);
 
@@ -32,10 +31,6 @@ export class WGPUComputer {
     this.instanceCount = instanceCount;
     this.renderInstanceBuffer = renderInstanceBuffer;
 
-    const module = this.device.createShaderModule({
-      label: "particle update",
-      code: particleUpdateShaderSrc
-    });
     
     const bindGroupLayout = this.device.createBindGroupLayout({
       entries: [
@@ -55,13 +50,24 @@ export class WGPUComputer {
       bindGroupLayouts: [bindGroupLayout],
     });
 
-    this.pipeline = device.createComputePipeline({
-      label: "particle update pipeline",
-      layout: pipelineLayout,
-      compute: {
-        module
-      }
-    });
+    
+    this.pipelines = [[1, update1Src], [2, update2Src]]
+      .map(([id, src]) => {
+      const module = this.device.createShaderModule({
+        label: `particle update ${id}`,
+        code: src as string
+      });
+
+      return device.createComputePipeline({
+        label: `particle update ${id} pipeline`,
+        layout: pipelineLayout,
+        compute: {
+          module
+        }
+      });
+    })
+
+
 
     
     this.instanceDataBuffer = device.createBuffer({
@@ -83,7 +89,7 @@ export class WGPUComputer {
 
     // add bindings for buffers to be used in the compute pipeline
     this.bindGroup = device.createBindGroup({
-      layout: this.pipeline.getBindGroupLayout(0),
+      layout: bindGroupLayout,
       entries: [
         { binding: 0, resource: { buffer: this.instanceDataBuffer }},
         { binding: 1, resource: { buffer: this.uniformBuffer }},
@@ -94,7 +100,6 @@ export class WGPUComputer {
   async run(deltaTime: number) {
     // update uniforms
     this.uniforms.get("deltaTime")!.value[0] = deltaTime;
-    this.uniforms.get("smoothRad9")!.value[0] = Math.pow(this.uniforms.get("smoothingRadius")!.value[0], 9);
 
     // write uniforms
     const uniformData = new Float32Array(this.uniformsLength);
@@ -109,11 +114,13 @@ export class WGPUComputer {
     
     // create compute commands
     const encoder = this.device.createCommandEncoder();
-    const pass = encoder.beginComputePass();
-    pass.setPipeline(this.pipeline);
-    pass.setBindGroup(0, this.bindGroup);
-    pass.dispatchWorkgroups(sideLength, 1, 1);
-    pass.end();
+    for (const pipeline of this.pipelines) {
+      const pass = encoder.beginComputePass();
+      pass.setPipeline(pipeline);
+      pass.setBindGroup(0, this.bindGroup);
+      pass.dispatchWorkgroups(sideLength, 1, 1);
+      pass.end();
+    }
     encoder.copyBufferToBuffer(this.instanceDataBuffer, 0, this.renderInstanceBuffer, 0);
     encoder.copyBufferToBuffer(this.instanceDataBuffer, 0, this.resultBuffer, 0);
 

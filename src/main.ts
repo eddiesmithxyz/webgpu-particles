@@ -2,7 +2,7 @@ import {WGPURenderer} from "./wgpu/render/renderer.ts"
 import { WGPUComputer } from "./wgpu/compute/computer.ts"
 import { Scene } from "./scene/scene.ts";
 import { mat4 } from "wgpu-matrix";
-import { sideLength } from "./wgpu/common.ts";
+import { sideLength, logInstanceData } from "./wgpu/common.ts";
 
 const scene = new Scene();
 

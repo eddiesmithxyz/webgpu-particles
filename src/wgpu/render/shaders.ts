@@ -17,9 +17,9 @@ struct VertexInput {
 }
 
 struct InstanceInput {
-  @location(2) position : vec3f,
-  @location(3) velocity : vec3f,
-  @location(4) lastDist : f32
+  @location(2) position : vec4f,
+  @location(3) velocity : vec4f,
+  @location(4) lastDist : vec4f
 }
 
 
@@ -32,15 +32,11 @@ fn vertex_main(
 
   const particleSize = 0.005;
 
-  output.position = uniforms.viewProjectionMatrix * vec4f(instance.position, 1.0);
+  output.position = uniforms.viewProjectionMatrix * instance.position;
   let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize) * output.position.w;
   output.position += vec4f(vertPos, 0., 0.);
 
-  // var baseColor = vec4f(0.4, 0.6, 0.8, 1.0);
   var baseColor = vec4f(0.8, 0.8, 0.8, 1.0);
-
-  // const highlightID = 54.0;
-  // if (instance.instanceID < highlightID + 0.5 && instance.instanceID >= highlightID - 0.5) { baseColor = vec4f(0.8, 0.6, 0.4, 1.0); }
   
   output.colour = baseColor;
   output.uv = vertex.uv;
@@ -50,7 +46,7 @@ fn vertex_main(
 
 @fragment
 fn fragment_main(fragData: VertexOut) -> @location(0) vec4f {
-  // circle 
+  // circle (need to switch on alpha blending)
   // const falloff = 5.0;
   // let uvLength = length(fragData.uv - vec2f(0.5, 0.5)) * 2.0;
   // let alpha = clamp(falloff * (1.0 - uvLength), 0.0, 1.0);

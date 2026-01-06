@@ -2,7 +2,7 @@ import { mat4, vec3, vec2, type Vec3, type Mat4, type Vec2 } from 'wgpu-matrix';
 import { instanceDataLength } from '../wgpu/common';
 
 export class Scene {
-  private viewDistance: number = 80;
+  private viewDistance: number = 15;
   public viewMatrix: Mat4 = mat4.lookAt([0, 0, this.viewDistance], [0, 0, 0], [0, 1, 0]);
   private viewAngles: Vec2 = vec2.create(0, 0);
 
@@ -42,16 +42,21 @@ export class Scene {
           
 
 
-          let pos = vec3.create(2*x-(side-1), 2*y-(side-1), 2*z-(side-1)) as Vec3;  // vec3.create(0, 2*y-(side-1), 2*z-(side-1))
-          pos = vec3.multiply(pos, vec3.create(15, 0.3, 0.3));
-          pos = vec3.add(pos, vec3.create(0, 50, 0));
+          // let pos = vec3.create(2*x-(side-1), 2*y-(side-1), 2*z-(side-1)) as Vec3;  // vec3.create(0, 2*y-(side-1), 2*z-(side-1))
+          // pos = vec3.multiply(pos, vec3.create(15, 0.3, 0.3));
+          // pos = vec3.add(pos, vec3.create(0, 50, 0));
+
+          const s = side - 1;
+          let pos = vec3.create(x/s, y/s, z/s);
+          pos = vec3.sub(pos, vec3.create(0.5, 0.5, 0.5)); // 1x1 cube centred at origin
+          pos = vec3.scale(pos, 4);
 
           // random velocity
           const startMaxSpeed = 5.0;
           const velocity = vec3.create((Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed);
           // const velocity = vec3.create(-1, -1, -1);
 
-          instanceData.set([pos[0], pos[1], pos[2], velocity[0], velocity[1], velocity[2], 0, 0], i * instanceDataLength);
+          instanceData.set([pos[0], pos[1], pos[2], 1, velocity[0], velocity[1], velocity[2], 1, 0, 0, 0, 0], i * instanceDataLength);
         }
       }
     }
