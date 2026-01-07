@@ -4,7 +4,7 @@ import { sphSrc } from "./sph"
 export const updateTemplate = (body: string) => /* wgsl */`
 
 
-const accelDeltaTime = 0.016; // hardcoded deltaTime for acceleration calculation to prevent explosion
+const accelDeltaTime = 0.01; // hardcoded deltaTime for acceleration calculation to prevent explosion
 
 struct Particle {
   position: vec4<f32>, // xyz used

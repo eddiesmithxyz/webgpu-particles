@@ -1,5 +1,5 @@
 const instanceDataLength = 12; // 12*f32 per instance
-const sideLength = 10; // number of instances per side in a cubic arrangement
+const sideLength = 16; // number of instances per side in a cubic arrangement
 
 
 const logInstanceData = (data: Float32Array, logCount = 10) => {

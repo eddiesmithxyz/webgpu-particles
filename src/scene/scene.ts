@@ -2,7 +2,7 @@ import { mat4, vec3, vec2, type Vec3, type Mat4, type Vec2 } from 'wgpu-matrix';
 import { instanceDataLength } from '../wgpu/common';
 
 export class Scene {
-  private viewDistance: number = 15;
+  private viewDistance: number = 30;
   public viewMatrix: Mat4 = mat4.lookAt([0, 0, this.viewDistance], [0, 0, 0], [0, 1, 0]);
   private viewAngles: Vec2 = vec2.create(0, 0);
 
@@ -49,12 +49,13 @@ export class Scene {
           const s = side - 1;
           let pos = vec3.create(x/s, y/s, z/s);
           pos = vec3.sub(pos, vec3.create(0.5, 0.5, 0.5)); // 1x1 cube centred at origin
-          pos = vec3.scale(pos, 4);
+          pos = vec3.scale(pos, 7);
+          pos = vec3.add(pos, vec3.create(0, 30, 0));
 
           // random velocity
-          const startMaxSpeed = 5.0;
-          const velocity = vec3.create((Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed);
-          // const velocity = vec3.create(-1, -1, -1);
+          const startMaxSpeed = 1.0;
+          let velocity = vec3.create((Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed);
+          velocity = vec3.add(velocity, vec3.create(8, -10, 0))
 
           instanceData.set([pos[0], pos[1], pos[2], 1, velocity[0], velocity[1], velocity[2], 1, 0, 0, 0, 0], i * instanceDataLength);
         }
