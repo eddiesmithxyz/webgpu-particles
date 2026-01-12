@@ -1,6 +1,6 @@
 // https://wickedengine.net/2018/05/scalabe-gpu-fluid-simulation/comment-page-1/
 
-import { wgslNumStr as str } from "../../../common";
+import { wgslNumStr as str } from "../../../common.ts";
 import { smoothingRadius, iterateNeighbours } from "../grid/gridAccess.ts";
 
 

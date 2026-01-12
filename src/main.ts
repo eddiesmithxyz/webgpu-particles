@@ -1,8 +1,8 @@
-import {WGPURenderer} from "./wgpu/render/renderer.ts"
-import { WGPUComputer } from "./wgpu/compute/computer.ts"
-import { Scene } from "./scene/scene.ts";
+import {WGPURenderer} from "./ts/render/renderer.ts"
+import { WGPUComputer } from "./ts/compute/computer.ts"
+import { Scene } from "./ts/scene.ts";
 import { mat4 } from "wgpu-matrix";
-import { workgroupSize } from "./wgpu/common.ts";
+import { workgroupSize } from "./ts/common.ts";
 
 
 const particleCount = 1024 * workgroupSize; // must be multiple of workgroupSize

@@ -1,5 +1,5 @@
 import { mat4, vec3, vec2, type Vec3, type Mat4, type Vec2 } from 'wgpu-matrix';
-import { instanceDataLength, logInstanceData } from '../wgpu/common';
+import { instanceDataLength, logInstanceData } from './common';
 
 export class Scene {
   private viewDistance: number = 100;
