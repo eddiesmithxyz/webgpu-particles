@@ -1,4 +1,4 @@
-import { updateTemplate } from "./updateTemplate"
+import { updateTemplate, numberedShaderLog } from "./updateTemplate"
 
 // compute pressure and viscosity forces
 
@@ -27,7 +27,7 @@ particles[id].lastDist = fieldDist;
 acceleration += fluidAccel(particle, id);
 
 velocity += acceleration * accelDeltaTime;
-position += velocity * accelDeltaTime;
+position += velocity * uniforms.deltaTime * uniforms.animSpeed;
 
 
 

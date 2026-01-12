@@ -1,15 +1,15 @@
 // https://wickedengine.net/2018/05/scalabe-gpu-fluid-simulation/comment-page-1/
 
 import { sideLength, wgslNumStr as str } from "../../../common";
+import { smoothingRadius, iterateNeighbours } from "../grid/gridAccess.ts";
 
 
 // PARAMETERS
-export const smoothingRadius = 1;
 
 const pressureConstant = 250;
 const referenceDensity = 1;
 
-const viscosityConstant = 0.218;
+const viscosityConstant = 0.118;
 
 const particleCount = sideLength * sideLength * sideLength;
 const particleMass = 1;
@@ -20,7 +20,6 @@ const particleMass = 1;
 const poly6const = str(315 / (64 * Math.PI * Math.pow(smoothingRadius, 9)));
 const spikyConst = str(-45 / (Math.PI * Math.pow(smoothingRadius, 6)));
 const viscConst = str(45 / (Math.PI * Math.pow(smoothingRadius, 6)));
-
 
 // ------ SHADER ------
 export const sphSrc = /* wgsl */`
@@ -36,17 +35,17 @@ const p0 = ${str(referenceDensity)};
 const K = ${str(pressureConstant)};
 const e = ${str(viscosityConstant)};
 
-fn particleDensity(pos: vec3<f32>) -> f32 {
+fn particleDensity(particle: Particle) -> f32 {
   var density = 0.0;
 
-  for (var i = 0; i < particleCount; i++) {
-    let diff = pos - particles[i].position.xyz;
+  ${iterateNeighbours(/* wgsl */`
+    let diff = particle.position.xyz - particleB.position.xyz;
     let r2 = dot(diff, diff);
     if (r2 < h2) {
       let W = ${poly6const} * pow(h2 - r2, 3.0);
       density += particleFluidMass * W;
     }
-  }
+  `)}
   return max(p0, density);
 }
 
@@ -58,9 +57,10 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
   var pressureForce = vec3<f32>(0.0);
   var viscosityForce = vec3<f32>(0.0);
 
-  for (var i: u32 = 0; i < particleCount; i++) {
-    if (i != id) {
-      let particleB = particles[i];
+  let pressureA = particlePressure(particle.density);
+  
+  ${iterateNeighbours(/* wgsl */`
+    if (particleBIndex != id) {
 
       let diff = particle.position.xyz - particleB.position.xyz;
       let r2 = dot(diff, diff);
@@ -74,7 +74,6 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
         // PRESSURE FORCE
         let W1 = ${spikyConst} * pow(h-r, 2.0);
 
-        let pressureA = particlePressure(particle.density);
         let pressureB = particlePressure(particleB.density);
 
         pressureForce += W1 * rNorm * (pressureA + pressureB) / (2.0 * particle.density * particleB.density);
@@ -86,7 +85,7 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
         viscosityForce += W2 * rNorm * (particleB.velocity.xyz - particle.velocity.xyz) / particleB.density;
       }
     }
-  }
+  `)}
 
   let force = (e*viscosityForce - pressureForce) / particle.density;
   return force / particleFluidMass;

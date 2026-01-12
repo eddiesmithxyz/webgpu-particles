@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "tslib": "^2.5.2",
+    "webgpu-radix-sort": "^1.0.7",
     "wgpu-matrix": "^3.4.0"
   },
   "devDependencies": {

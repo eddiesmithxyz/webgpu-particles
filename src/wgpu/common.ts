@@ -1,14 +1,14 @@
 import { vec3, type Vec3 } from "wgpu-matrix"
 
 const instanceDataLength = 12; // 12*f32 per instance
-const sideLength = 1; // number of instances per side in a cubic arrangement
-
+const sideLength = 32; // number of instances per side in a cubic arrangement
+const particleCount = sideLength * sideLength * sideLength;
 
 const logInstanceData = (data: Float32Array, logCount = 10) => {
   const uintView = new Uint32Array(data.buffer);
 
-  let table = [];
-  console.log(data);
+  let table: any = [];
+  // console.log(data);
   for (let instance = 0; instance < logCount; instance++) {
     let offset = instance * instanceDataLength;
     table = [...table,  {
@@ -21,6 +21,7 @@ const logInstanceData = (data: Float32Array, logCount = 10) => {
       dist: data[offset + 8],
       dens: data[offset + 9],
       cell: uintView[offset + 10],
+      test: uintView[offset + 11]
     }]
   }
   console.table(table);
@@ -37,4 +38,4 @@ function wgslIVec3Str(v: Vec3) {
   return `vec3<i32>(${str(v[0])}, ${str(v[1])}, ${str(v[2])})`;
 }
 
-export { instanceDataLength, logInstanceData, sideLength, wgslNumStr, wgslVec3Str, wgslIVec3Str };
+export { instanceDataLength, logInstanceData, sideLength, particleCount, wgslNumStr, wgslVec3Str, wgslIVec3Str };

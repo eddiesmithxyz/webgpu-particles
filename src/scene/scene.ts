@@ -2,7 +2,7 @@ import { mat4, vec3, vec2, type Vec3, type Mat4, type Vec2 } from 'wgpu-matrix';
 import { instanceDataLength, logInstanceData } from '../wgpu/common';
 
 export class Scene {
-  private viewDistance: number = 30;
+  private viewDistance: number = 100;
   public viewMatrix: Mat4 = mat4.lookAt([0, 0, this.viewDistance], [0, 0, 0], [0, 1, 0]);
   private viewAngles: Vec2 = vec2.create(0, 0);
 
@@ -11,7 +11,7 @@ export class Scene {
   private mouseDown = false;
   private lastMouseCoord = vec2.create(0, 0);
 
-  constructor(side = 9) {
+  constructor() {
     window.addEventListener('mousemove', (event) => {
       const rect = (event.target as HTMLCanvasElement).getBoundingClientRect();
       this.mouseCoord[0] = ((event.clientX - rect.left) / rect.width) * 2 - 1;
@@ -25,8 +25,8 @@ export class Scene {
     });
     window.addEventListener('wheel', (event) => {
       // event.preventDefault();
-      this.viewDistance += ((event as WheelEvent).deltaY > 0) ? 1 : -1;
-      this.viewDistance = Math.max(5, Math.min(100, this.viewDistance));
+      this.viewDistance += 0.1 * this.viewDistance * ((event as WheelEvent).deltaY > 0 ? 1 : -1);
+      this.viewDistance = Math.max(5, Math.min(200, this.viewDistance));
     });
   }
 
@@ -41,22 +41,26 @@ export class Scene {
           // const i = y * side + z;
           
 
-
-          // let pos = vec3.create(2*x-(side-1), 2*y-(side-1), 2*z-(side-1)) as Vec3;  // vec3.create(0, 2*y-(side-1), 2*z-(side-1))
-          // pos = vec3.multiply(pos, vec3.create(15, 0.3, 0.3));
-          // pos = vec3.add(pos, vec3.create(0, 50, 0));
-
-          
           let pos = vec3.create(x/side, y/side, z/side);
           pos = vec3.sub(pos, vec3.create(0.5, 0.5, 0.5)); // 1x1 cube centred at origin
-          pos = vec3.scale(pos, 7);
-          pos = vec3.add(pos, vec3.create(10, 20, 0));
+
+          pos = vec3.multiply(pos, vec3.create(300, 0.3, 0.3));
+          pos = vec3.add(pos, vec3.create(0, 60, 0));
+
+          
+          // pos = vec3.scale(pos, 7);
+          // pos = vec3.add(pos, vec3.create(10, 20, 0));
+
+          // start left of E
+          // pos = vec3.mul(pos, vec3.create(20, 50, 10));
+          // pos = vec3.add(pos, vec3.create(-200, 0, 0));
+
 
           // random velocity
-          // const startMaxSpeed = 1.0;
-          // let velocity = vec3.create((Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed);
+          const startMaxSpeed = 20.0;
+          let velocity = vec3.create((Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed, (Math.random()-0.5) * startMaxSpeed);
           // velocity = vec3.add(velocity, vec3.create(0, -20, 0))
-          const velocity = vec3.create(10, -10, 0);
+          velocity = vec3.add(velocity, vec3.create(0, 0, 0));
 
           instanceData.set([pos[0], pos[1], pos[2], 1, velocity[0], velocity[1], velocity[2], 1, 0, 0, 0, 0], i * instanceDataLength);
         }

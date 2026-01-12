@@ -2,6 +2,7 @@ import { instanceDataLength, sideLength } from "../../common"
 import { shaderInputLayoutSrc } from "./inputLayout";
 import { sdfSrc } from "./physics/sdf"
 import { sphSrc } from "./physics/sph"
+import { gridAccessFuncs } from "./grid/gridAccess";
 export const updateTemplate = (body: string) => /* wgsl */`
 
 
@@ -9,9 +10,14 @@ const accelDeltaTime = 0.01; // hardcoded deltaTime for acceleration calculation
 
 ${shaderInputLayoutSrc}
 
+${gridAccessFuncs}
+
+
 ${sdfSrc}
 
 ${sphSrc}
+
+
 
 
 @compute @workgroup_size(1, ${sideLength}, ${sideLength}) fn update(

@@ -1,0 +1,3 @@
+store normals for particles. lerp particle normals to sdf normal every frame
+
+particles begin on left side (or maybe both?). too many particles for each letter to be stable so particles are passed along and the word is spelled out

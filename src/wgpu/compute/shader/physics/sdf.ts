@@ -8,6 +8,8 @@ const gravityClamp = str(200); // limit gravity
 
 export const sdfSrc = /* wgsl */`
 
+const internalForceMultiplier = 0.2;
+
 fn sdCapsule(p: vec3<f32>, a: vec3<f32>, b: vec3<f32>, r: f32) -> f32 {
     let pa = p - a;
     let ba = b - a;
@@ -88,10 +90,10 @@ fn sdf(pos: vec3<f32>) -> f32 {
     var minDist: f32 = 1e20;
 
     // E
-    minDist = min(minDist, sdE(p - vec3<f32>(-2.1, 0.0, 0.0), r) * scale);
+    minDist = min(minDist, sdE(p - vec3<f32>(-2.3, 0.0, 0.0), r) * scale);
 
     // D D
-    minDist = min(minDist, sdD(p - vec3<f32>(-1.0, 0.0, 0.0), r) * scale);
+    minDist = min(minDist, sdD(p - vec3<f32>(-1.2, 0.0, 0.0), r) * scale);
     minDist = min(minDist, sdD(p - vec3<f32>( 0.0, 0.0, 0.0), r) * scale);
 
     // I
@@ -120,7 +122,11 @@ fn gravityAccel(pos: vec3<f32>, dist: f32, lastDist: f32) -> vec3<f32> {
   var gravityAmount = -${positionStiffness}*dist - ${velocityDamping}*dDistdt;
   gravityAmount = atan(gravityAmount / gravityClamp) * gravityClamp;
 
-  let gravity = -sdfNormal(pos) * gravityAmount;
+  var gravity = -sdfNormal(pos) * gravityAmount;
+  if (dist < 0.0) {
+    gravity *= internalForceMultiplier;
+  }
+
   return gravity / ${mass};
 
 }
