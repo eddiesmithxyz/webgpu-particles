@@ -38,4 +38,4 @@ function wgslIVec3Str(v: Vec3) {
   return `vec3<i32>(${str(v[0])}, ${str(v[1])}, ${str(v[2])})`;
 }
 
-export { instanceDataLength, logInstanceData, workgroupSize, particleCount, wgslNumStr, wgslVec3Str, wgslIVec3Str };
+export { instanceDataLength, logInstanceData, workgroupSize, wgslNumStr, wgslVec3Str, wgslIVec3Str };

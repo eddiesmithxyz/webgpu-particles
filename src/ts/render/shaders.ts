@@ -20,6 +20,10 @@ struct InstanceInput {
   @location(2) position : vec4f,
   @location(3) velocity : vec4f,
   @location(4) normal : vec4f,
+  @location(5) dist : f32,
+  @location(6) density : f32,
+  @location(7) cellIndex: u32,
+  @location(8) group: f32
 }
 
 
@@ -36,19 +40,30 @@ fn vertex_main(
   // let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize) * output.position.w;
 
   // WORLD SPACE SIZE PARTICLES
-  const particleSize = 0.15;
+  const particleSize = 0.4;
   let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize);
   
 
   output.position += vec4f(vertPos, 0., 0.);
 
-  const baseColor = vec4f(0.7, 0.7, 0.8, 1.0);
+  const baseColor1 = vec4f(0.7, 0.3, 0.8, 1.0);
+  const baseColor2 = vec4f(0.3, 0.7, 0.8, 1.0);
+  var colour = select(baseColor1, baseColor2, instance.group > 0);
 
-  const lightDir = normalize(vec3<f32>(1.0, 1.0, 1.0));
-  var intensity = 0.45*dot(lightDir, instance.normal.xyz) + 0.55;
-  // var distanceScalar = 0.5 + 0.5*smoothstep(-5,);
-  
-  output.colour = intensity*baseColor;
+  // // SHADE COLLISIONS
+  // const densityRange = 0.1; // density scalar will vary for density values in range [1, 1+densityRange]
+  // let densityScalar = saturate((instance.density - 1.1)/densityRange); // 0 for no collisions, 1 for big collision
+  // var colour = (1.0-densityScalar) * baseColor1 + densityScalar * baseColor2;
+
+  const lightDir = normalize(vec3<f32>(0.0, 0.2, 1.0));
+  var lightIntensity = dot(lightDir, instance.normal.xyz);
+  lightIntensity = 0.45*lightIntensity + 0.55;
+  colour *= lightIntensity;
+
+
+
+
+  output.colour = colour;
   output.uv = vertex.uv;
 
   return output;

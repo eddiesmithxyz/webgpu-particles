@@ -24,6 +24,8 @@ export class WGPURenderer {
   public multisampleCount = 4;
   
   async init(): Promise<boolean> {
+    const canvas = document.querySelector("#gpuCanvas") as HTMLCanvasElement;
+
     if (!navigator.gpu) {
       throw Error("WebGPU not supported.");
     }
@@ -35,8 +37,6 @@ export class WGPURenderer {
 
 
     this.device = await adapter.requestDevice();
-
-    const canvas = document.querySelector("#gpuCanvas") as HTMLCanvasElement;
     this.ctx = canvas.getContext("webgpu") as GPUCanvasContext;
 
     this.ctx.configure({
@@ -92,7 +92,26 @@ export class WGPURenderer {
             offset: 32,
             format: "float32x4"
           },
-          
+          { // field dist
+            shaderLocation: 5,
+            offset: 48,
+            format: "float32"
+          },
+          { // density
+            shaderLocation: 6,
+            offset: 52,
+            format: "float32"
+          },
+          { // density
+            shaderLocation: 7,
+            offset: 56,
+            format: "uint32"
+          },
+          { // density
+            shaderLocation: 8,
+            offset: 60,
+            format: "float32"
+          }
         ],
         arrayStride: instanceDataLength * 4,
         stepMode: "instance"

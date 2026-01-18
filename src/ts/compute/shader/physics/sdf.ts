@@ -1,9 +1,9 @@
 import { wgslNumStr as str } from "../../../common";
 
 const mass = str(0.05);
-const positionStiffness = str(-0.24);
+const positionStiffness = str(-2);
 const velocityDamping = str(-1);
-const gravityClamp = str(200); // limit gravity
+const gravityClamp = str(200); // limit gravity so it doesn't explode if we're far away
 
 
 export const sdfSrc = /* wgsl */`
@@ -74,12 +74,25 @@ fn sdE(p: vec3<f32>, r: f32) -> f32 {
 }
 
 fn sdI(p: vec3<f32>, r: f32) -> f32 {
-    return sdCapsule(
+    let c1 = sdCapsule(
         p,
         vec3<f32>(0.0, -0.5, 0.0),
         vec3<f32>(0.0,  0.5, 0.0),
         r
     );
+    let c2 = sdCapsule(
+        p,
+        vec3<f32>(-0.3, 0.5, 0.0),
+        vec3<f32>( 0.3, 0.5, 0.0),
+        r
+    );
+    let c3 = sdCapsule(
+        p,
+        vec3<f32>(-0.3, -0.5, 0.0),
+        vec3<f32>( 0.3, -0.5, 0.0),
+        r
+    );
+    return min(c1, min(c2, c3));
 }
 
 fn sdf(pos: vec3<f32>) -> f32 {
@@ -90,10 +103,10 @@ fn sdf(pos: vec3<f32>) -> f32 {
     var minDist: f32 = 1e20;
 
     // E
-    minDist = min(minDist, sdE(p - vec3<f32>(-2.3, 0.0, 0.0), r) * scale);
+    minDist = min(minDist, sdE(p - vec3<f32>(-2.05, 0.0, 0.0), r) * scale);
 
     // D D
-    minDist = min(minDist, sdD(p - vec3<f32>(-1.2, 0.0, 0.0), r) * scale);
+    minDist = min(minDist, sdD(p - vec3<f32>(-1.05, 0.0, 0.0), r) * scale);
     minDist = min(minDist, sdD(p - vec3<f32>( 0.0, 0.0, 0.0), r) * scale);
 
     // I
@@ -118,14 +131,14 @@ fn sdfNormal(pos: vec3<f32>) -> vec3<f32> {
 
 const gravityClamp = ${gravityClamp};
 fn gravityAccel(pos: vec3<f32>, dist: f32, fieldNormal: vec3<f32>, lastDist: f32) -> vec3<f32> {
-  let dDistdt = (dist - lastDist) / uniforms.deltaTime;
-  var gravityAmount = -${positionStiffness}*dist - ${velocityDamping}*dDistdt;
+  let dist2 = dist; // max(dist, 0.0);         // uncomment to allow particles inside volumes
+  let lastDist2 = lastDist; // max(lastDist, 0.0);
+
+  let dDistdt = (dist2 - lastDist2) / uniforms.deltaTime;
+  var gravityAmount = -${positionStiffness}*dist2 - ${velocityDamping}*dDistdt;
   gravityAmount = atan(gravityAmount / gravityClamp) * gravityClamp;
 
   var gravity = -fieldNormal * gravityAmount;
-  if (dist < 0.0) {
-    gravity *= internalForceMultiplier;
-  }
 
   return gravity / ${mass};
 

@@ -5,7 +5,7 @@ import { mat4 } from "wgpu-matrix";
 import { workgroupSize } from "./ts/common.ts";
 
 
-const particleCount = 1024 * workgroupSize; // must be multiple of workgroupSize
+const particleCount = 500 * workgroupSize; // must be multiple of workgroupSize
 const scene = new Scene();
 
 let lastTime = Date.now();
@@ -25,17 +25,10 @@ function render(renderer: WGPURenderer, computer: WGPUComputer) {
   
 
 
-  scene.update();
-
-  const projMatrix = mat4.perspective(
-    2.0,
-    renderer.ctx.canvas.width / renderer.ctx.canvas.height,
-    0.1,
-    1000.0
-  );
+  scene.update(renderer.ctx.canvas as HTMLCanvasElement);
 
   computer.run(Math.min(deltaTime, 0.1));
-  renderer.render(mat4.multiply(projMatrix, scene.viewMatrix));
+  renderer.render(scene.viewProjectionMatrix);
   requestAnimationFrame(() => render(renderer, computer));
 }
 

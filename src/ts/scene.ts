@@ -2,8 +2,9 @@ import { mat4, vec3, vec2, type Vec3, type Mat4, type Vec2 } from 'wgpu-matrix';
 import { instanceDataLength, logInstanceData } from './common';
 
 export class Scene {
-  private viewDistance: number = 100;
+  private viewDistance: number = 84;
   public viewMatrix: Mat4 = mat4.lookAt([0, 0, this.viewDistance], [0, 0, 0], [0, 1, 0]);
+  public viewProjectionMatrix: Mat4 = mat4.identity();
   private viewAngles: Vec2 = vec2.create(0, 0);
 
 
@@ -39,8 +40,10 @@ export class Scene {
       let pos = vec3.create(Math.random(), Math.random(), Math.random());
       pos = vec3.sub(pos, vec3.create(0.5, 0.5, 0.5)); // 1x1 cube centred at origin
 
-      pos = vec3.multiply(pos, vec3.create(300, 1, 10));
-      pos = vec3.add(pos, vec3.create(0, 60, 0));
+      pos = vec3.multiply(pos, vec3.create(200, 10, 10));
+
+      const side = Math.random() > 0.5 ? 1: -1;
+      pos = vec3.add(pos, vec3.create(0, 40 * side, 0));
 
       
       // pos = vec3.scale(pos, 7);
@@ -60,10 +63,11 @@ export class Scene {
       const normal = vec3.create(0, 1, 0);
 
       particleData.set([
-        pos[0], pos[1], pos[2], 1, 
-        velocity[0], velocity[1], velocity[2], 1, 
-        normal[0], normal[1], normal[2], 1,
-        0, 0, 0, 0], i * instanceDataLength);
+        pos[0],       pos[1],      pos[2],      1, 
+        velocity[0],  velocity[1], velocity[2], 1, 
+        normal[0],    normal[1],   normal[2],   1,
+        0, 0, 0, side
+      ], i * instanceDataLength);
       
     }
     // logInstanceData(particleData);
@@ -71,17 +75,51 @@ export class Scene {
   }
 
 
-  update() {
+  update(canvas: HTMLCanvasElement) {
+    console.log(this.mouseCoord);
     if (this.mouseDown) {
       const deltaMouse = vec2.subtract(this.mouseCoord, this.lastMouseCoord);
       this.viewAngles[0] += deltaMouse[0] * 1.5;
       this.viewAngles[1] += deltaMouse[1] * -1;
     }
+
+
     let eye = vec3.create(0, 0, this.viewDistance);
     eye = vec3.rotateX(eye, vec3.zero(), this.viewAngles[1]);
     eye = vec3.rotateY(eye, vec3.zero(), this.viewAngles[0]);
-    this.viewMatrix = mat4.lookAt(eye, [0, 0, 0], [0, 1, 0]);
+    const viewMatrix = mat4.lookAt(eye, [0, 0, 0], [0, 1, 0]);
 
+
+    // const near = 0.1;
+    // const far = 1000;
+    // const fovY = 2.0;
+    // const h = near * Math.tan(fovY / 2);
+    // const w = h * (canvas.width / canvas.height);
+
+    // const parallax = 0.2;
+    // const dx = this.mouseCoord[0] * w * parallax;
+    // const dy = this.mouseCoord[1] * w * parallax;
+
+    // const projMatrix = mat4.frustum(
+    //   -w + dx,
+    //    w ,
+    //   -h + dy,
+    //    h + dy,
+    //    near,
+    //    far
+    // )
+
+
+    const projMatrix = mat4.perspective(
+      1.0,
+      canvas.width / canvas.height,
+      0.1,
+      1000.0
+    );
+
+
+
+    this.viewProjectionMatrix = mat4.multiply(projMatrix, viewMatrix);
 
     this.lastMouseCoord = vec2.clone(this.mouseCoord);
   }

@@ -25,7 +25,7 @@ once cells have been sorted, we can create a new array of particles in cell orde
 export class WGPUComputer {
   private device: GPUDevice;
 
-  private computeShaders = [assignCellShaderSrc, genCellOffsetsSrc, update1Src, update2Src];
+  private computeShaders = [assignCellShaderSrc, genCellOffsetsSrc, update1Src, update2Src]; // run in order, with a sort between shader[0] and shader[1]
 
   private pipelines: GPUComputePipeline[] = [];
   private bindGroup: GPUBindGroup;

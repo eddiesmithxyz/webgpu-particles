@@ -6,7 +6,7 @@ struct Particle {
   lastDist: f32,
   density: f32,
   cellIndex: u32,
-  _pad: u32,
+  group: f32,
 }
 `;
 
@@ -30,7 +30,7 @@ struct Uniforms {
 
 import { workgroupSize } from "../../common";
 
-// main function dispatch size/id gen for shaders iterating over each particle once
+// main function dispatch size + id gen - for shaders iterating over each particle once
 export const mainFunc = /* wgsl */`
 @compute @workgroup_size(${workgroupSize}, 1, 1) fn update(
   @builtin(workgroup_id) workgroup_id : vec3<u32>,
