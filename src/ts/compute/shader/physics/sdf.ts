@@ -95,6 +95,27 @@ fn sdI(p: vec3<f32>, r: f32) -> f32 {
     return min(c1, min(c2, c3));
 }
 
+fn sdDistort(pos: vec3<f32>) -> f32 {
+    // const sharpness = 0.9;
+    // const period = 0.5;
+    // return max((sin(period*abs(pos.y) + uniforms.time)-sharpness)/(1.0-sharpness), 0.0);
+
+
+    // find closest point on line between mouseIntersection and lastMouseIntersection
+    let p1 = uniforms.mouseIntersection;
+    let p2 = uniforms.lastMouseIntersection;  
+    
+    let v = p2 - p1;
+    let w = pos.xy - p1;
+
+    let t = saturate(dot(w, v) / dot(v, v));
+    let closestPoint = p1 + t*v;
+
+    let dist = pos.xy - closestPoint;
+
+    return 30.0*exp(-0.5*dot(dist, dist));
+}
+
 fn sdf(pos: vec3<f32>) -> f32 {
     const r: f32 = 0.08;
     const scale: f32 = 40.0;
@@ -114,6 +135,8 @@ fn sdf(pos: vec3<f32>) -> f32 {
 
     // E
     minDist = min(minDist, sdE(p - vec3<f32>( 2.0, 0.0, 0.0), r) * scale);
+
+    minDist += sdDistort(pos);
 
     return minDist;
 }

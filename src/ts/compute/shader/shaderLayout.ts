@@ -17,7 +17,10 @@ ${particleStruct}
 @group(0) @binding(1) var<storage, read_write> particles1: array<Particle>;
 
 struct Uniforms {
+  time: f32,
   deltaTime: f32,
+  mouseIntersection: vec2<f32>,
+  lastMouseIntersection: vec2<f32>,
   animSpeed: f32,
   particleCount: u32,
 }

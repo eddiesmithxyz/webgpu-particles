@@ -10,6 +10,7 @@ import { update2Src } from "./shader/update2";
 
 import { RadixSortKernel } from 'webgpu-radix-sort';
 
+import { type Vec2 } from "wgpu-matrix";
 
 /* 
 TODO
@@ -46,13 +47,17 @@ export class WGPUComputer {
 
 
   private uniformBuffer: GPUBuffer;
+  private time = 0;
 
 
   // could auto-generate this list from the shader code but not necessary for a small number
   private uniforms = new Map<string, {length: number, value: Float32Array | Uint32Array}>([
-    ["deltaTime",       {length: 1, value: new Float32Array([0])}],
-    ["animSpeed",       {length: 1, value: new Float32Array([0])}],
-    ["particleCount",   {length: 1, value: new Uint32Array([0])}],
+    ["time",                  {length: 1, value: new Float32Array([0])}],
+    ["deltaTime",             {length: 1, value: new Float32Array([0])}],
+    ["mouseIntersection",     {length: 2, value: new Float32Array([0, 0])}],
+    ["lastMouseIntersection", {length: 2, value: new Float32Array([0, 0])}],
+    ["animSpeed",             {length: 1, value: new Float32Array([0])}],
+    ["particleCount",         {length: 1, value: new Uint32Array([0])}],
   ]);
   private uniformsLength = Array.from(this.uniforms.values()).reduce((acc, u) => acc + u.length, 0);
 
@@ -199,9 +204,14 @@ export class WGPUComputer {
     pass.end();
   }
 
-  async run(deltaTime: number) {
+  async run(deltaTime: number, mouseIntersection: Vec2, lastMouseIntersection: Vec2) {
+    this.time += deltaTime;
+
     // update uniforms
+    this.uniforms.get("time")!.value[0] = this.time;
     this.uniforms.get("deltaTime")!.value[0] = deltaTime;
+    this.uniforms.get("mouseIntersection")!.value = mouseIntersection;
+    this.uniforms.get("lastMouseIntersection")!.value = lastMouseIntersection;
     this.uniforms.get("animSpeed")!.value[0] = window.PAUSE_UPDATE ? 0 : 1;
     this.uniforms.get("particleCount")!.value[0] = this.particleCount;
 

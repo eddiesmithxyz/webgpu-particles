@@ -1,7 +1,8 @@
 export const renderShaders = /* wgsl */`
 struct Uniforms {
   viewProjectionMatrix : mat4x4<f32>,
-  aspectRatio : f32
+  backgroundColour: vec4<f32>,
+  aspectRatio : f32,
 }
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
 
@@ -61,6 +62,12 @@ fn vertex_main(
   colour *= lightIntensity;
 
 
+  // hide particles when they're coming in
+  const startFadeY = 40;
+  const endFadeY = 20;
+
+  let fadeFac = saturate((abs(instance.position.y)-startFadeY)/(endFadeY-startFadeY));
+  colour = mix(uniforms.backgroundColour, colour, fadeFac);
 
 
   output.colour = colour;

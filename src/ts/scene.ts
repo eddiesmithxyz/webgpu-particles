@@ -1,4 +1,4 @@
-import { mat4, vec3, vec2, type Vec3, type Mat4, type Vec2 } from 'wgpu-matrix';
+import { mat4, vec4, vec3, vec2, type Vec3, type Mat4, type Vec2 } from 'wgpu-matrix';
 import { instanceDataLength, logInstanceData } from './common';
 
 export class Scene {
@@ -8,9 +8,12 @@ export class Scene {
   private viewAngles: Vec2 = vec2.create(0, 0);
 
 
-  private mouseCoord = vec2.create(0, 0);
+  public mouseCoord = vec2.create(0, 0);
   private mouseDown = false;
   private lastMouseCoord = vec2.create(0, 0);
+
+  public mouseIntersection = vec3.create(0, 0, 0); // intersection of mouse ray with z=0 plane
+  public lastMouseIntersection = vec3.create(0, 0, 0);
 
   constructor() {
     window.addEventListener('mousemove', (event) => {
@@ -40,10 +43,14 @@ export class Scene {
       let pos = vec3.create(Math.random(), Math.random(), Math.random());
       pos = vec3.sub(pos, vec3.create(0.5, 0.5, 0.5)); // 1x1 cube centred at origin
 
-      pos = vec3.multiply(pos, vec3.create(180, 20, 5));
+      pos = vec3.multiply(pos, vec3.create(20, 100, 20));
+
+      const letterX = [-2.05, -1.05, 0, 1, 2].map(x => x*40);
+      const letter = Math.floor(Math.random() * letterX.length);
+
 
       const side = Math.random() > 0.5 ? 1: -1;
-      pos = vec3.add(pos, vec3.create(0, 40 * side + 0, 0));
+      pos = vec3.add(pos, vec3.create(letterX[letter], 110 * side, 0));
 
       
       // pos = vec3.scale(pos, 7);
@@ -89,25 +96,6 @@ export class Scene {
     const viewMatrix = mat4.lookAt(eye, [0, 0, 0], [0, 1, 0]);
 
 
-    // const near = 0.1;
-    // const far = 1000;
-    // const fovY = 2.0;
-    // const h = near * Math.tan(fovY / 2);
-    // const w = h * (canvas.width / canvas.height);
-
-    // const parallax = 0.2;
-    // const dx = this.mouseCoord[0] * w * parallax;
-    // const dy = this.mouseCoord[1] * w * parallax;
-
-    // const projMatrix = mat4.frustum(
-    //   -w + dx,
-    //    w ,
-    //   -h + dy,
-    //    h + dy,
-    //    near,
-    //    far
-    // )
-
 
     const projMatrix = mat4.perspective(
       1.0,
@@ -115,10 +103,33 @@ export class Scene {
       0.1,
       1000.0
     );
-
-
-
     this.viewProjectionMatrix = mat4.multiply(projMatrix, viewMatrix);
+
+
+
+    // find intersection of mouse ray with z=0 plane
+    const nearClip = vec4.create(this.mouseCoord[0], this.mouseCoord[1], -1, 1);
+    const farClip  = vec4.create(this.mouseCoord[0], this.mouseCoord[1],  1, 1);
+
+    const invVP = mat4.inverse(this.viewProjectionMatrix);
+    let nearWorld = vec4.transformMat4(nearClip, invVP);
+    let farWorld  = vec4.transformMat4(farClip, invVP);
+
+    nearWorld = vec3.create(nearWorld[0]/nearWorld[3], nearWorld[1]/nearWorld[3], nearWorld[2]/nearWorld[3] ); // perspective correction
+    farWorld  = vec3.create(farWorld[0]/farWorld[3], farWorld[1]/farWorld[3], farWorld[2]/farWorld[3] );
+
+    const rayOrigin = nearWorld;
+    const rayDir = vec3.normalize(vec3.sub(farWorld, nearWorld));
+    const t = -rayOrigin[2] / rayDir[2];
+    
+    this.lastMouseIntersection = this.mouseIntersection;
+    this.mouseIntersection = vec3.add(rayOrigin, vec3.scale(rayDir, t));
+
+
+
+
+
+
 
     this.lastMouseCoord = vec2.clone(this.mouseCoord);
   }

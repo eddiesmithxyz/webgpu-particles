@@ -164,8 +164,9 @@ export class WGPURenderer {
     // UNIFORMS
     const uniformSize =
       16 * 4 +  // view-proj matrix
-       1 * 4 +  // aspect ratio
-       3 * 4;   // padding (required by webgpu)
+      4 * 4 +   // background colour
+      1 * 4 +  // aspect ratio
+      3 * 4 // padding
     this.uniformBuffer = this.device.createBuffer({
       size: uniformSize,
       usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
@@ -189,7 +190,10 @@ export class WGPURenderer {
 
     const canvasTexture = this.ctx.getCurrentTexture();
 
-    const uniformData = new Float32Array([...viewProjectionMatrix, canvasTexture.width / canvasTexture.height])
+    const uniformData = new Float32Array([
+      ...viewProjectionMatrix, 
+      this.clearColour.r, this.clearColour.g, this.clearColour.b, this.clearColour.a,
+      canvasTexture.width / canvasTexture.height])
     this.device.queue.writeBuffer(this.uniformBuffer, 0, uniformData, 0);
 
     // create depth texture if needed
