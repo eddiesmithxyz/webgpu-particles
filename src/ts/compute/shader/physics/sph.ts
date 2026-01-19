@@ -103,7 +103,7 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
 
   let sameGroupCentroidDir = (sameGroupNeighbourPosSum.xyz / sameGroupNeighbourPosSum.w) - particle.position.xyz;
   let diffGroupCentroidDir = (diffGroupNeighbourPosSum.xyz / diffGroupNeighbourPosSum.w) - particle.position.xyz;
-  force += 0.3* sameGroupCentroidDir - 0.05*diffGroupCentroidDir;
+  force += 0.3* sameGroupCentroidDir - 0.0*diffGroupCentroidDir;
 
   return force / particleFluidMass;
 }

@@ -4,7 +4,7 @@ import { instanceDataLength, logInstanceData, workgroupSize } from "../common";
 import { gridSize } from "./shader/grid/gridAccess";
 
 import { assignCellShaderSrc } from "./shader/grid/assignCell";
-import { genCellOffsetsSrc } from "./shader/grid/cellOffsets";
+import { createStructureSrc } from "./shader/grid/createStructure";
 import { update1Src } from "./shader/update1";
 import { update2Src } from "./shader/update2";
 
@@ -25,7 +25,7 @@ once cells have been sorted, we can create a new array of particles in cell orde
 export class WGPUComputer {
   private device: GPUDevice;
 
-  private computeShaders = [assignCellShaderSrc, genCellOffsetsSrc, update1Src, update2Src]; // run in order, with a sort between shader[0] and shader[1]
+  private computeShaders = [assignCellShaderSrc, createStructureSrc, update1Src, update2Src]; // run in order, with a sort between shader[0] and shader[1]
 
   private pipelines: GPUComputePipeline[] = [];
   private bindGroup: GPUBindGroup;
@@ -132,6 +132,7 @@ export class WGPUComputer {
       usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
     });
     device.queue.writeBuffer(this.particleDataBuffer0, 0, initialInstanceData)
+    device.queue.writeBuffer(this.particleDataBuffer1, 0, initialInstanceData)
 
     this.cellIndexBuffer = device.createBuffer({
       size: particleCount * 4,
@@ -229,12 +230,17 @@ export class WGPUComputer {
     
     runPipeline(this.pipelines[0]); // assign cell
     this.sort(encoder);
-    runPipeline(this.pipelines[1]); // create cell offset list
+    runPipeline(this.pipelines[1]); // create offset list and reorder particle data
     runPipeline(this.pipelines[2]); // physics update 1
     runPipeline(this.pipelines[3]); // physics update 2
 
     encoder.copyBufferToBuffer(this.particleDataBuffer1, this.particleDataBuffer0);
     encoder.copyBufferToBuffer(this.particleDataBuffer1, 0, this.renderInstanceBuffer, 0);
+
+
+
+
+    // DEBUGGING
 
     const debugBuffer = 
       window.DEBUG_BUF === 3 ? this.cellOffsetBuffer : (

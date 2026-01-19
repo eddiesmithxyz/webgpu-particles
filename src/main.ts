@@ -5,7 +5,7 @@ import { mat4 } from "wgpu-matrix";
 import { workgroupSize } from "./ts/common.ts";
 
 
-const particleCount = 500 * workgroupSize; // must be multiple of workgroupSize
+const particleCount = 2000 * workgroupSize; // must be multiple of workgroupSize
 const scene = new Scene();
 const speed = 1;
 

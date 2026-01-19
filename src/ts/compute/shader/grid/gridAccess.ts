@@ -77,7 +77,8 @@ for (var i: i32 = -1; i <= 1; i++) {
 
       // iterate over particles in the neighbour cell
       while (neighbourIterator != 0xffffffff && neighbourIterator < uniforms.particleCount) {
-        let particleBIndex = particleIds[neighbourIterator]; 
+        // let particleBIndex = particleIds[neighbourIterator]; // if we haven't reordered the particle buffer by cellId
+        let particleBIndex = neighbourIterator;
         let particleB = particles0[particleBIndex];
 
         if (particleB.cellIndex != neighbourCellIndex) {

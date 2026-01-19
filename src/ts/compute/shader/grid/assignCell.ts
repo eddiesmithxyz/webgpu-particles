@@ -22,6 +22,7 @@ ${mainFunc} {
   let cellIdFlat = getCellIdFlat(cellId3D);
 
   particles0[id].cellIndex = cellIdFlat;
+  particles1[id].cellIndex = cellIdFlat;
 
   cellIds[id] = cellIdFlat;
   particleIds[id] = id;

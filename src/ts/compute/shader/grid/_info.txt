@@ -1,0 +1,31 @@
+Particles are segmented by a 3D grid. 
+
+The assignCell shader assigns a 1D cell ID to each particle. The cell width is determined by the SPH smoothing radius, as this is the largest bound we need to search.
+It also creates a list of (particle ID, cell ID), stored in the buffers particleIds and cellIds
+
+This list is then sorted by cell ID. 
+
+The createStructure shader then creates an offset list, with one element for each cell. This is the cellOffsets buffer. 
+If a cell does not contain any particles, it retains the default value 0xFFFFFFFF. If it contains any particles, the list element is given the first index of the cell within the sorted (particle ID, cell ID) list.
+
+The createStructure shader also reorders particles in the particle buffer to match the sorted (particle ID, cell ID) list. This means we don't have to index the list every time we search a cell, which results in a 3x speed up.
+
+Therefore when we wish to iterate over the particles in any given cell, we:
+1. Lookup the offset of that cell (and continue if not 0xFFFFFFFF)
+2. Loop over the (particle ID, cell ID) list. Start at the offset, continue until we reach a particle that is not in the cell.
+
+
+
+(particleId, cellId)
+(0, 6)
+(1, 8)
+(2, 4)
+(3, 6)
+
+   (2, 4)
+-> (0, 6)
+   (3, 6)
+   (1, 8)
+
+offsets:
+[0xF, 0xF, 0xF, 0xF, 0, 0xF, 1, 0xF, 3]
