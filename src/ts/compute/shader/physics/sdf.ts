@@ -113,9 +113,15 @@ fn sdDistort(pos: vec3<f32>) -> f32 {
     let t = saturate(dot(w, v) / dot(v, v));
     let closestPoint = p1 + t*v;
 
-    let dist = pos.xy - closestPoint;
 
-    return 30.0*exp(-0.5*dot(dist, dist));
+    const mouseDisturbRadius = 5.0;
+    const mouseDisturbSharpness = 30.0;
+
+    var dist = pos.xy - closestPoint;
+    dist *= 1.0/mouseDisturbRadius;
+    
+
+    return mouseDisturbSharpness*exp(-dot(dist, dist));
 }
 
 fn sdf(pos: vec3<f32>) -> f32 {

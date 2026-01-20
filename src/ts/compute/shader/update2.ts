@@ -58,7 +58,8 @@ ${mainFunc} {
     fieldDist,
     particle.density,
     particle.cellIndex, // not really necessary
-    particle.group
+    particle.group,
+    particle.groupCentroid
   );
 
 }

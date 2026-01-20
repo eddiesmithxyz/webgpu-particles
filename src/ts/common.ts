@@ -1,7 +1,7 @@
 import { vec3, type Vec3 } from "wgpu-matrix"
 
 const workgroupSize = 64; // number of threads per compute workgroup
-const instanceDataLength = 16; // n*f32 per instance
+const instanceDataLength = 20; // n*f32 per instance
 
 
 const logInstanceData = (data: Float32Array, logCount = 10) => {

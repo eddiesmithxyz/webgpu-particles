@@ -16,7 +16,10 @@ ${sphSrc}
 ${mainFunc} {
   let id = ${getID};
 
-  particles0[id].density = particleDensity(particles0[id]);
+  let densityAndCentroid = particleDensity(particles0[id]);
+
+  particles0[id].density = densityAndCentroid.x;
+  particles0[id].groupCentroid = vec4<f32>(densityAndCentroid.yzw, 1.0);
 }
 
 `;

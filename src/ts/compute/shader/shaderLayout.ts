@@ -7,6 +7,7 @@ struct Particle {
   density: f32,
   cellIndex: u32,
   group: f32,
+  groupCentroid: vec4<f32>
 }
 `;
 

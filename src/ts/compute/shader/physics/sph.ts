@@ -40,8 +40,12 @@ const p0 = ${str(referenceDensity)};
 const K = ${str(pressureConstant)};
 const e = ${str(viscosityConstant)};
 
-fn particleDensity(particle: Particle) -> f32 {
+fn particleDensity(particle: Particle) -> vec4<f32> {
+  // also finds group neighbour centroid (.yzw of return)
   var density = 0.0;
+
+  var groupCentroid = particle.position.xyz;
+  var groupNeighbourCount = 1.0;
 
   ${iterateNeighbours(/* wgsl */`
     let diff = particle.position.xyz - particleB.position.xyz;
@@ -49,9 +53,17 @@ fn particleDensity(particle: Particle) -> f32 {
     if (r2 < h2) {
       let W = ${poly6const} * pow(h2 - r2, 3.0);
       density += particleFluidMass * W;
+
+      let groupDist = 0.5*abs(particle.group - particleB.group); // 0 if the same, 1 if different
+      groupCentroid += (1.0-groupDist) * particleB.position.xyz; 
+      groupNeighbourCount += 1.0-groupDist;
     }
   `)}
-  return max(p0, density);
+
+  groupCentroid /= groupNeighbourCount;
+  
+
+  return vec4<f32>(max(p0, density), groupCentroid.x, groupCentroid.y, groupCentroid.z);
 }
 
 fn particlePressure(density: f32) -> f32 {
@@ -82,7 +94,7 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
 
         // PRESSURE FORCE
         let W1 = ${spikyConst} * pow(h-r, 2.0);
-        let pressureB = particlePressure(particleB.density);
+        let pressureB = (1.0 + 10.0*groupDist) * particlePressure(particleB.density);
         pressureForce += W1 * rNorm * (pressureA + pressureB) / (2.0 * particle.density * particleB.density);
 
 
@@ -94,7 +106,7 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
 
         // GROUP COHESION
         // move towards particles of same group
-        groupNeighbourPosSum += (1.0-groupDist) * particleB.position.xyz; 
+        groupNeighbourPosSum += (1.0-groupDist) * particleB.groupCentroid.xyz; 
         neighbourCount += 1.0-groupDist;
         
       }
@@ -103,10 +115,12 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
 
   var force = (e*viscosityForce - pressureForce) / particle.density;
 
-  // let sameGroupCentroidDir = (sameGroupNeighbourPosSum.xyz / sameGroupNeighbourPosSum.w) - particle.position.xyz;
-  // let diffGroupCentroidDir = (diffGroupNeighbourPosSum.xyz / diffGroupNeighbourPosSum.w) - particle.position.xyz;
-  // force += 0.3* sameGroupCentroidDir - 0.0*diffGroupCentroidDir;
-  force += 0.3 * (groupNeighbourPosSum / neighbourCount - particle.position.xyz);
+
+  // group cohesion force
+  // // let sameGroupCentroidDir = (sameGroupNeighbourPosSum.xyz / sameGroupNeighbourPosSum.w) - particle.position.xyz;
+  // // let diffGroupCentroidDir = (diffGroupNeighbourPosSum.xyz / diffGroupNeighbourPosSum.w) - particle.position.xyz;
+  // // force += 0.3* sameGroupCentroidDir - 0.0*diffGroupCentroidDir;
+  // force += 1.0 * (groupNeighbourPosSum / neighbourCount - particle.position.xyz);
 
   return force / particleFluidMass;
 }

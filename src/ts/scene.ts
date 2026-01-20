@@ -71,7 +71,7 @@ export class Scene {
         pos[0],       pos[1],      pos[2],      1, 
         velocity[0],  velocity[1], velocity[2], 1, 
         normal[0],    normal[1],   normal[2],   1,
-        0, 0, 0, side
+        0, 0, 0, side,
       ], i * instanceDataLength);
       
     }
