@@ -1,960 +1,580 @@
-new EventSource('/esbuild').addEventListener('change', () => location.reload());
-"use strict";
-(() => {
-  var __create = Object.create;
-  var __defProp = Object.defineProperty;
-  var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __getProtoOf = Object.getPrototypeOf;
-  var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __commonJS = (cb, mod) => function __require() {
-    return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-  };
-  var __copyProps = (to, from, except, desc) => {
-    if (from && typeof from === "object" || typeof from === "function") {
-      for (let key of __getOwnPropNames(from))
-        if (!__hasOwnProp.call(to, key) && key !== except)
-          __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-    }
-    return to;
-  };
-  var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-    // If the importer is in node compatibility mode or this is not an ESM
-    // file that has been converted to a CommonJS file using a Babel-
-    // compatible transform (i.e. "__esModule" has not been set), then set
-    // "default" to the CommonJS "module.exports" for node compatibility.
-    isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-    mod
-  ));
+"use strict";(()=>{var Ft=Object.create;var mt=Object.defineProperty;var qt=Object.getOwnPropertyDescriptor;var Yt=Object.getOwnPropertyNames;var $t=Object.getPrototypeOf,Ht=Object.prototype.hasOwnProperty;var Vt=(l,v)=>()=>(v||l((v={exports:{}}).exports,v),v.exports);var Zt=(l,v,T,R)=>{if(v&&typeof v=="object"||typeof v=="function")for(let A of Yt(v))!Ht.call(l,A)&&A!==T&&mt(l,A,{get:()=>v[A],enumerable:!(R=qt(v,A))||R.enumerable});return l};var jt=(l,v,T)=>(T=l!=null?Ft($t(l)):{},Zt(v||!l||!l.__esModule?mt(T,"default",{value:l,enumerable:!0}):T,l));var Wt=Vt((ct,Lt)=>{(function(l,v){typeof ct=="object"&&typeof Lt<"u"?v(ct):typeof define=="function"&&define.amd?define(["exports"],v):(l=typeof globalThis<"u"?globalThis:l||self,v(l.RadixSort={}))})(ct,(function(l){"use strict";function v(b,y){(y==null||y>b.length)&&(y=b.length);for(var x=0,O=Array(y);x<y;x++)O[x]=b[x];return O}function T(b){if(Array.isArray(b))return v(b)}function R(b,y,x){if(typeof b=="function"?b===y:b.has(y))return arguments.length<3?y:x;throw new TypeError("Private element is not present on this object")}function A(b,y){if(y.has(b))throw new TypeError("Cannot initialize the same private elements twice on an object")}function L(b,y){if(!(b instanceof y))throw new TypeError("Cannot call a class as a function")}function C(b,y){A(b,y),y.add(b)}function K(b,y){for(var x=0;x<y.length;x++){var O=y[x];O.enumerable=O.enumerable||!1,O.configurable=!0,"value"in O&&(O.writable=!0),Object.defineProperty(b,be(O.key),O)}}function F(b,y,x){return y&&K(b.prototype,y),x&&K(b,x),Object.defineProperty(b,"prototype",{writable:!1}),b}function Q(b,y,x){return(y=be(y))in b?Object.defineProperty(b,y,{value:x,enumerable:!0,configurable:!0,writable:!0}):b[y]=x,b}function V(b){if(typeof Symbol<"u"&&b[Symbol.iterator]!=null||b["@@iterator"]!=null)return Array.from(b)}function X(){throw new TypeError(`Invalid attempt to spread non-iterable instance.
+In order to be iterable, non-array objects must have a [Symbol.iterator]() method.`)}function ne(b,y){var x=Object.keys(b);if(Object.getOwnPropertySymbols){var O=Object.getOwnPropertySymbols(b);y&&(O=O.filter(function(U){return Object.getOwnPropertyDescriptor(b,U).enumerable})),x.push.apply(x,O)}return x}function he(b){for(var y=1;y<arguments.length;y++){var x=arguments[y]!=null?arguments[y]:{};y%2?ne(Object(x),!0).forEach(function(O){Q(b,O,x[O])}):Object.getOwnPropertyDescriptors?Object.defineProperties(b,Object.getOwnPropertyDescriptors(x)):ne(Object(x)).forEach(function(O){Object.defineProperty(b,O,Object.getOwnPropertyDescriptor(x,O))})}return b}function te(b){return T(b)||V(b)||Ue(b)||X()}function _e(b,y){if(typeof b!="object"||!b)return b;var x=b[Symbol.toPrimitive];if(x!==void 0){var O=x.call(b,y||"default");if(typeof O!="object")return O;throw new TypeError("@@toPrimitive must return a primitive value.")}return(y==="string"?String:Number)(b)}function be(b){var y=_e(b,"string");return typeof y=="symbol"?y:y+""}function Ue(b,y){if(b){if(typeof b=="string")return v(b,y);var x={}.toString.call(b).slice(8,-1);return x==="Object"&&b.constructor&&(x=b.constructor.name),x==="Map"||x==="Set"?Array.from(b):x==="Arguments"||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(x)?v(b,y):void 0}}var ge=`
 
-  // node_modules/webgpu-radix-sort/dist/umd/radix-sort-umd.js
-  var require_radix_sort_umd = __commonJS({
-    "node_modules/webgpu-radix-sort/dist/umd/radix-sort-umd.js"(exports, module) {
-      (function(global, factory) {
-        typeof exports === "object" && typeof module !== "undefined" ? factory(exports) : typeof define === "function" && define.amd ? define(["exports"], factory) : (global = typeof globalThis !== "undefined" ? globalThis : global || self, factory(global.RadixSort = {}));
-      })(exports, (function(exports2) {
-        "use strict";
-        function _arrayLikeToArray(r, a) {
-          (null == a || a > r.length) && (a = r.length);
-          for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e];
-          return n;
-        }
-        function _arrayWithoutHoles(r) {
-          if (Array.isArray(r)) return _arrayLikeToArray(r);
-        }
-        function _assertClassBrand(e, t, n) {
-          if ("function" == typeof e ? e === t : e.has(t)) return arguments.length < 3 ? t : n;
-          throw new TypeError("Private element is not present on this object");
-        }
-        function _checkPrivateRedeclaration(e, t) {
-          if (t.has(e)) throw new TypeError("Cannot initialize the same private elements twice on an object");
-        }
-        function _classCallCheck(a, n) {
-          if (!(a instanceof n)) throw new TypeError("Cannot call a class as a function");
-        }
-        function _classPrivateMethodInitSpec(e, a) {
-          _checkPrivateRedeclaration(e, a), a.add(e);
-        }
-        function _defineProperties(e, r) {
-          for (var t = 0; t < r.length; t++) {
-            var o = r[t];
-            o.enumerable = o.enumerable || false, o.configurable = true, "value" in o && (o.writable = true), Object.defineProperty(e, _toPropertyKey(o.key), o);
-          }
-        }
-        function _createClass(e, r, t) {
-          return r && _defineProperties(e.prototype, r), t && _defineProperties(e, t), Object.defineProperty(e, "prototype", {
-            writable: false
-          }), e;
-        }
-        function _defineProperty(e, r, t) {
-          return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, {
-            value: t,
-            enumerable: true,
-            configurable: true,
-            writable: true
-          }) : e[r] = t, e;
-        }
-        function _iterableToArray(r) {
-          if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r);
-        }
-        function _nonIterableSpread() {
-          throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-        }
-        function ownKeys(e, r) {
-          var t = Object.keys(e);
-          if (Object.getOwnPropertySymbols) {
-            var o = Object.getOwnPropertySymbols(e);
-            r && (o = o.filter(function(r2) {
-              return Object.getOwnPropertyDescriptor(e, r2).enumerable;
-            })), t.push.apply(t, o);
-          }
-          return t;
-        }
-        function _objectSpread2(e) {
-          for (var r = 1; r < arguments.length; r++) {
-            var t = null != arguments[r] ? arguments[r] : {};
-            r % 2 ? ownKeys(Object(t), true).forEach(function(r2) {
-              _defineProperty(e, r2, t[r2]);
-            }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function(r2) {
-              Object.defineProperty(e, r2, Object.getOwnPropertyDescriptor(t, r2));
-            });
-          }
-          return e;
-        }
-        function _toConsumableArray(r) {
-          return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread();
-        }
-        function _toPrimitive(t, r) {
-          if ("object" != typeof t || !t) return t;
-          var e = t[Symbol.toPrimitive];
-          if (void 0 !== e) {
-            var i = e.call(t, r || "default");
-            if ("object" != typeof i) return i;
-            throw new TypeError("@@toPrimitive must return a primitive value.");
-          }
-          return ("string" === r ? String : Number)(t);
-        }
-        function _toPropertyKey(t) {
-          var i = _toPrimitive(t, "string");
-          return "symbol" == typeof i ? i : i + "";
-        }
-        function _unsupportedIterableToArray(r, a) {
-          if (r) {
-            if ("string" == typeof r) return _arrayLikeToArray(r, a);
-            var t = {}.toString.call(r).slice(8, -1);
-            return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0;
-          }
-        }
-        var prefixSumSource = (
-          /* wgsl */
-          "\n\n@group(0) @binding(0) var<storage, read_write> items: array<u32>;\n@group(0) @binding(1) var<storage, read_write> blockSums: array<u32>;\n\noverride WORKGROUP_SIZE_X: u32;\noverride WORKGROUP_SIZE_Y: u32;\noverride THREADS_PER_WORKGROUP: u32;\noverride ITEMS_PER_WORKGROUP: u32;\noverride ELEMENT_COUNT: u32;\n\nvar<workgroup> temp: array<u32, ITEMS_PER_WORKGROUP*2>;\n\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn reduce_downsweep(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) {\n    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;\n    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;\n    let GID = WID + TID; // Global thread ID\n    \n    let ELM_TID = TID * 2; // Element pair local ID\n    let ELM_GID = GID * 2; // Element pair global ID\n    \n    // Load input to shared memory\n    temp[ELM_TID]     = select(items[ELM_GID], 0, ELM_GID >= ELEMENT_COUNT);\n    temp[ELM_TID + 1] = select(items[ELM_GID + 1], 0, ELM_GID + 1 >= ELEMENT_COUNT);\n\n    var offset: u32 = 1;\n\n    // Up-sweep (reduce) phase\n    for (var d: u32 = ITEMS_PER_WORKGROUP >> 1; d > 0; d >>= 1) {\n        workgroupBarrier();\n\n        if (TID < d) {\n            var ai: u32 = offset * (ELM_TID + 1) - 1;\n            var bi: u32 = offset * (ELM_TID + 2) - 1;\n            temp[bi] += temp[ai];\n        }\n\n        offset *= 2;\n    }\n\n    // Save workgroup sum and clear last element\n    if (TID == 0) {\n        let last_offset = ITEMS_PER_WORKGROUP - 1;\n\n        blockSums[WORKGROUP_ID] = temp[last_offset];\n        temp[last_offset] = 0;\n    }\n\n    // Down-sweep phase\n    for (var d: u32 = 1; d < ITEMS_PER_WORKGROUP; d *= 2) {\n        offset >>= 1;\n        workgroupBarrier();\n\n        if (TID < d) {\n            var ai: u32 = offset * (ELM_TID + 1) - 1;\n            var bi: u32 = offset * (ELM_TID + 2) - 1;\n\n            let t: u32 = temp[ai];\n            temp[ai] = temp[bi];\n            temp[bi] += t;\n        }\n    }\n    workgroupBarrier();\n\n    // Copy result from shared memory to global memory\n    if (ELM_GID >= ELEMENT_COUNT) {\n        return;\n    }\n    items[ELM_GID] = temp[ELM_TID];\n\n    if (ELM_GID + 1 >= ELEMENT_COUNT) {\n        return;\n    }\n    items[ELM_GID + 1] = temp[ELM_TID + 1];\n}\n\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn add_block_sums(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) {\n    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;\n    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;\n    let GID = WID + TID; // Global thread ID\n\n    let ELM_ID = GID * 2;\n\n    if (ELM_ID >= ELEMENT_COUNT) {\n        return;\n    }\n\n    let blockSum = blockSums[WORKGROUP_ID];\n\n    items[ELM_ID] += blockSum;\n\n    if (ELM_ID + 1 >= ELEMENT_COUNT) {\n        return;\n    }\n\n    items[ELM_ID + 1] += blockSum;\n}"
-        );
-        var prefixSumNoBankConflictSource = (
-          /* wgsl */
-          "\n\n@group(0) @binding(0) var<storage, read_write> items: array<u32>;\n@group(0) @binding(1) var<storage, read_write> blockSums: array<u32>;\n\noverride WORKGROUP_SIZE_X: u32;\noverride WORKGROUP_SIZE_Y: u32;\noverride THREADS_PER_WORKGROUP: u32;\noverride ITEMS_PER_WORKGROUP: u32;\noverride ELEMENT_COUNT: u32;\n\nconst NUM_BANKS: u32 = 32;\nconst LOG_NUM_BANKS: u32 = 5;\n\nfn get_offset(offset: u32) -> u32 {\n    // return offset >> LOG_NUM_BANKS; // Conflict-free\n    return (offset >> NUM_BANKS) + (offset >> (2 * LOG_NUM_BANKS)); // Zero bank conflict\n}\n\nvar<workgroup> temp: array<u32, ITEMS_PER_WORKGROUP*2>;\n\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn reduce_downsweep(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) {\n    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;\n    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;\n    let GID = WID + TID; // Global thread ID\n    \n    let ELM_TID = TID * 2; // Element pair local ID\n    let ELM_GID = GID * 2; // Element pair global ID\n    \n    // Load input to shared memory\n    let ai: u32 = TID;\n    let bi: u32 = TID + (ITEMS_PER_WORKGROUP >> 1);\n    let s_ai = ai + get_offset(ai);\n    let s_bi = bi + get_offset(bi);\n    let g_ai = ai + WID * 2;\n    let g_bi = bi + WID * 2;\n    temp[s_ai] = select(items[g_ai], 0, g_ai >= ELEMENT_COUNT);\n    temp[s_bi] = select(items[g_bi], 0, g_bi >= ELEMENT_COUNT);\n\n    var offset: u32 = 1;\n\n    // Up-sweep (reduce) phase\n    for (var d: u32 = ITEMS_PER_WORKGROUP >> 1; d > 0; d >>= 1) {\n        workgroupBarrier();\n\n        if (TID < d) {\n            var ai: u32 = offset * (ELM_TID + 1) - 1;\n            var bi: u32 = offset * (ELM_TID + 2) - 1;\n            ai += get_offset(ai);\n            bi += get_offset(bi);\n            temp[bi] += temp[ai];\n        }\n\n        offset *= 2;\n    }\n\n    // Save workgroup sum and clear last element\n    if (TID == 0) {\n        var last_offset = ITEMS_PER_WORKGROUP - 1;\n        last_offset += get_offset(last_offset);\n\n        blockSums[WORKGROUP_ID] = temp[last_offset];\n        temp[last_offset] = 0;\n    }\n\n    // Down-sweep phase\n    for (var d: u32 = 1; d < ITEMS_PER_WORKGROUP; d *= 2) {\n        offset >>= 1;\n        workgroupBarrier();\n\n        if (TID < d) {\n            var ai: u32 = offset * (ELM_TID + 1) - 1;\n            var bi: u32 = offset * (ELM_TID + 2) - 1;\n            ai += get_offset(ai);\n            bi += get_offset(bi);\n\n            let t: u32 = temp[ai];\n            temp[ai] = temp[bi];\n            temp[bi] += t;\n        }\n    }\n    workgroupBarrier();\n\n    // Copy result from shared memory to global memory\n    if (g_ai < ELEMENT_COUNT) {\n        items[g_ai] = temp[s_ai];\n    }\n    if (g_bi < ELEMENT_COUNT) {\n        items[g_bi] = temp[s_bi];\n    }\n}\n\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn add_block_sums(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) {\n    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;\n    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;\n    let GID = WID + TID; // Global thread ID\n\n    let ELM_ID = GID * 2;\n\n    if (ELM_ID >= ELEMENT_COUNT) {\n        return;\n    }\n\n    let blockSum = blockSums[WORKGROUP_ID];\n\n    items[ELM_ID] += blockSum;\n\n    if (ELM_ID + 1 >= ELEMENT_COUNT) {\n        return;\n    }\n\n    items[ELM_ID + 1] += blockSum;\n}"
-        );
-        function find_optimal_dispatch_size(device, workgroup_count) {
-          var dispatchSize = {
-            x: workgroup_count,
-            y: 1
-          };
-          if (workgroup_count > device.limits.maxComputeWorkgroupsPerDimension) {
-            var x = Math.floor(Math.sqrt(workgroup_count));
-            var y = Math.ceil(workgroup_count / x);
-            dispatchSize.x = x;
-            dispatchSize.y = y;
-          }
-          return dispatchSize;
-        }
-        function create_buffer_from_data(_ref) {
-          var device = _ref.device, label = _ref.label, data = _ref.data, _ref$usage = _ref.usage, usage = _ref$usage === void 0 ? 0 : _ref$usage;
-          var dispatchSizes = device.createBuffer({
-            label,
-            usage,
-            size: data.length * 4,
-            mappedAtCreation: true
-          });
-          var dispatchData = new Uint32Array(dispatchSizes.getMappedRange());
-          dispatchData.set(data);
-          dispatchSizes.unmap();
-          return dispatchSizes;
-        }
-        var PrefixSumKernel = /* @__PURE__ */ (function() {
-          function PrefixSumKernel2(_ref) {
-            var device = _ref.device, data = _ref.data, count = _ref.count, _ref$workgroup_size = _ref.workgroup_size, workgroup_size = _ref$workgroup_size === void 0 ? {
-              x: 16,
-              y: 16
-            } : _ref$workgroup_size, _ref$avoid_bank_confl = _ref.avoid_bank_conflicts, avoid_bank_conflicts = _ref$avoid_bank_confl === void 0 ? false : _ref$avoid_bank_confl;
-            _classCallCheck(this, PrefixSumKernel2);
-            this.device = device;
-            this.workgroup_size = workgroup_size;
-            this.threads_per_workgroup = workgroup_size.x * workgroup_size.y;
-            this.items_per_workgroup = 2 * this.threads_per_workgroup;
-            if (Math.log2(this.threads_per_workgroup) % 1 !== 0) throw new Error("workgroup_size.x * workgroup_size.y must be a power of two. (current: ".concat(this.threads_per_workgroup, ")"));
-            this.pipelines = [];
-            this.shaderModule = this.device.createShaderModule({
-              label: "prefix-sum",
-              code: avoid_bank_conflicts ? prefixSumNoBankConflictSource : prefixSumSource
-            });
-            this.create_pass_recursive(data, count);
-          }
-          return _createClass(PrefixSumKernel2, [{
-            key: "create_pass_recursive",
-            value: function create_pass_recursive(data, count) {
-              var workgroup_count = Math.ceil(count / this.items_per_workgroup);
-              var dispatchSize = find_optimal_dispatch_size(this.device, workgroup_count);
-              var blockSumBuffer = this.device.createBuffer({
-                label: "prefix-sum-block-sum",
-                size: workgroup_count * 4,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-              });
-              var bindGroupLayout = this.device.createBindGroupLayout({
-                entries: [{
-                  binding: 0,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }, {
-                  binding: 1,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }]
-              });
-              var bindGroup = this.device.createBindGroup({
-                label: "prefix-sum-bind-group",
-                layout: bindGroupLayout,
-                entries: [{
-                  binding: 0,
-                  resource: {
-                    buffer: data
-                  }
-                }, {
-                  binding: 1,
-                  resource: {
-                    buffer: blockSumBuffer
-                  }
-                }]
-              });
-              var pipelineLayout = this.device.createPipelineLayout({
-                bindGroupLayouts: [bindGroupLayout]
-              });
-              var scanPipeline = this.device.createComputePipeline({
-                label: "prefix-sum-scan-pipeline",
-                layout: pipelineLayout,
-                compute: {
-                  module: this.shaderModule,
-                  entryPoint: "reduce_downsweep",
-                  constants: {
-                    "WORKGROUP_SIZE_X": this.workgroup_size.x,
-                    "WORKGROUP_SIZE_Y": this.workgroup_size.y,
-                    "THREADS_PER_WORKGROUP": this.threads_per_workgroup,
-                    "ITEMS_PER_WORKGROUP": this.items_per_workgroup,
-                    "ELEMENT_COUNT": count
-                  }
-                }
-              });
-              this.pipelines.push({
-                pipeline: scanPipeline,
-                bindGroup,
-                dispatchSize
-              });
-              if (workgroup_count > 1) {
-                this.create_pass_recursive(blockSumBuffer, workgroup_count);
-                var blockSumPipeline = this.device.createComputePipeline({
-                  label: "prefix-sum-add-block-pipeline",
-                  layout: pipelineLayout,
-                  compute: {
-                    module: this.shaderModule,
-                    entryPoint: "add_block_sums",
-                    constants: {
-                      "WORKGROUP_SIZE_X": this.workgroup_size.x,
-                      "WORKGROUP_SIZE_Y": this.workgroup_size.y,
-                      "THREADS_PER_WORKGROUP": this.threads_per_workgroup,
-                      "ELEMENT_COUNT": count
-                    }
-                  }
-                });
-                this.pipelines.push({
-                  pipeline: blockSumPipeline,
-                  bindGroup,
-                  dispatchSize
-                });
-              }
-            }
-          }, {
-            key: "get_dispatch_chain",
-            value: function get_dispatch_chain() {
-              return this.pipelines.flatMap(function(p) {
-                return [p.dispatchSize.x, p.dispatchSize.y, 1];
-              });
-            }
-            /**
-             * Encode the prefix sum pipeline into the current pass.
-             * If dispatchSizeBuffer is provided, the dispatch will be indirect (dispatchWorkgroupsIndirect)
-             * 
-             * @param {GPUComputePassEncoder} pass 
-             * @param {GPUBuffer} dispatchSizeBuffer - (optional) Indirect dispatch buffer
-             * @param {int} offset - (optional) Offset in bytes in the dispatch buffer. Default: 0
-             */
-          }, {
-            key: "dispatch",
-            value: function dispatch(pass, dispatchSizeBuffer) {
-              var offset = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 0;
-              for (var i = 0; i < this.pipelines.length; i++) {
-                var _this$pipelines$i = this.pipelines[i], pipeline = _this$pipelines$i.pipeline, bindGroup = _this$pipelines$i.bindGroup, dispatchSize = _this$pipelines$i.dispatchSize;
-                pass.setPipeline(pipeline);
-                pass.setBindGroup(0, bindGroup);
-                if (dispatchSizeBuffer == null) pass.dispatchWorkgroups(dispatchSize.x, dispatchSize.y, 1);
-                else pass.dispatchWorkgroupsIndirect(dispatchSizeBuffer, offset + i * 3 * 4);
-              }
-            }
-          }]);
-        })();
-        var radixSortSource = (
-          /* wgsl */
-          "\n\n@group(0) @binding(0) var<storage, read> input: array<u32>;\n@group(0) @binding(1) var<storage, read_write> local_prefix_sums: array<u32>;\n@group(0) @binding(2) var<storage, read_write> block_sums: array<u32>;\n\noverride WORKGROUP_COUNT: u32;\noverride THREADS_PER_WORKGROUP: u32;\noverride WORKGROUP_SIZE_X: u32;\noverride WORKGROUP_SIZE_Y: u32;\noverride CURRENT_BIT: u32;\noverride ELEMENT_COUNT: u32;\n\nvar<workgroup> s_prefix_sum: array<u32, 2 * (THREADS_PER_WORKGROUP + 1)>;\n\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn radix_sort(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) {\n    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;\n    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;\n    let GID = WID + TID; // Global thread ID\n\n    // Extract 2 bits from the input\n    let elm = select(input[GID], 0, GID >= ELEMENT_COUNT);\n    let extract_bits: u32 = (elm >> CURRENT_BIT) & 0x3;\n\n    var bit_prefix_sums = array<u32, 4>(0, 0, 0, 0);\n\n    // If the workgroup is inactive, prevent block_sums buffer update\n    var LAST_THREAD: u32 = 0xffffffff; \n\n    if (WORKGROUP_ID < WORKGROUP_COUNT) {\n        // Otherwise store the index of the last active thread in the workgroup\n        LAST_THREAD = min(THREADS_PER_WORKGROUP, ELEMENT_COUNT - WID) - 1;\n    }\n\n    // Initialize parameters for double-buffering\n    let TPW = THREADS_PER_WORKGROUP + 1;\n    var swapOffset: u32 = 0;\n    var inOffset:  u32 = TID;\n    var outOffset: u32 = TID + TPW;\n\n    // 4-way prefix sum\n    for (var b: u32 = 0; b < 4; b++) {\n        // Initialize local prefix with bitmask\n        let bitmask = select(0u, 1u, extract_bits == b);\n        s_prefix_sum[inOffset + 1] = bitmask;\n        workgroupBarrier();\n\n        var prefix_sum: u32 = 0;\n\n        // Prefix sum\n        for (var offset: u32 = 1; offset < THREADS_PER_WORKGROUP; offset *= 2) {\n            if (TID >= offset) {\n                prefix_sum = s_prefix_sum[inOffset] + s_prefix_sum[inOffset - offset];\n            } else {\n                prefix_sum = s_prefix_sum[inOffset];\n            }\n\n            s_prefix_sum[outOffset] = prefix_sum;\n            \n            // Swap buffers\n            outOffset = inOffset;\n            swapOffset = TPW - swapOffset;\n            inOffset = TID + swapOffset;\n            \n            workgroupBarrier();\n        }\n\n        // Store prefix sum for current bit\n        bit_prefix_sums[b] = prefix_sum;\n\n        if (TID == LAST_THREAD) {\n            // Store block sum to global memory\n            let total_sum: u32 = prefix_sum + bitmask;\n            block_sums[b * WORKGROUP_COUNT + WORKGROUP_ID] = total_sum;\n        }\n\n        // Swap buffers\n        outOffset = inOffset;\n        swapOffset = TPW - swapOffset;\n        inOffset = TID + swapOffset;\n    }\n\n    if (GID < ELEMENT_COUNT) {\n        // Store local prefix sum to global memory\n        local_prefix_sums[GID] = bit_prefix_sums[extract_bits];\n    }\n}"
-        );
-        var radixSortCoalescedSource = (
-          /* wgsl */
-          "\n\n@group(0) @binding(0) var<storage, read_write> input: array<u32>;\n@group(0) @binding(1) var<storage, read_write> local_prefix_sums: array<u32>;\n@group(0) @binding(2) var<storage, read_write> block_sums: array<u32>;\n@group(0) @binding(3) var<storage, read_write> values: array<u32>;\n\noverride WORKGROUP_COUNT: u32;\noverride THREADS_PER_WORKGROUP: u32;\noverride WORKGROUP_SIZE_X: u32;\noverride WORKGROUP_SIZE_Y: u32;\noverride CURRENT_BIT: u32;\noverride ELEMENT_COUNT: u32;\n\nvar<workgroup> s_prefix_sum: array<u32, 2 * (THREADS_PER_WORKGROUP + 1)>;\nvar<workgroup> s_prefix_sum_scan: array<u32, 4>;\n\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn radix_sort(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) {\n    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;\n    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;\n    let GID = WID + TID; // Global thread ID\n\n    // Extract 2 bits from the input\n    var elm: u32 = 0;\n    var val: u32 = 0;\n    if (GID < ELEMENT_COUNT) {\n        elm = input[GID];\n        val = values[GID];\n    }\n    let extract_bits: u32 = (elm >> CURRENT_BIT) & 0x3;\n\n    var bit_prefix_sums = array<u32, 4>(0, 0, 0, 0);\n\n    // If the workgroup is inactive, prevent block_sums buffer update\n    var LAST_THREAD: u32 = 0xffffffff; \n\n    if (WORKGROUP_ID < WORKGROUP_COUNT) {\n        // Otherwise store the index of the last active thread in the workgroup\n        LAST_THREAD = min(THREADS_PER_WORKGROUP, ELEMENT_COUNT - WID) - 1;\n    }\n\n    // Initialize parameters for double-buffering\n    let TPW = THREADS_PER_WORKGROUP + 1;\n    var swapOffset: u32 = 0;\n    var inOffset:  u32 = TID;\n    var outOffset: u32 = TID + TPW;\n\n    // 4-way prefix sum\n    for (var b: u32 = 0; b < 4; b++) {\n        // Initialize local prefix with bitmask\n        let bitmask = select(0u, 1u, extract_bits == b);\n        s_prefix_sum[inOffset + 1] = bitmask;\n        workgroupBarrier();\n\n        var prefix_sum: u32 = 0;\n\n        // Prefix sum\n        for (var offset: u32 = 1; offset < THREADS_PER_WORKGROUP; offset *= 2) {\n            if (TID >= offset) {\n                prefix_sum = s_prefix_sum[inOffset] + s_prefix_sum[inOffset - offset];\n            } else {\n                prefix_sum = s_prefix_sum[inOffset];\n            }\n\n            s_prefix_sum[outOffset] = prefix_sum;\n\n            // Swap buffers\n            outOffset = inOffset;\n            swapOffset = TPW - swapOffset;\n            inOffset = TID + swapOffset;\n            \n            workgroupBarrier();\n        }\n\n        // Store prefix sum for current bit\n        bit_prefix_sums[b] = prefix_sum;\n\n        if (TID == LAST_THREAD) {\n            // Store block sum to global memory\n            let total_sum: u32 = prefix_sum + bitmask;\n            block_sums[b * WORKGROUP_COUNT + WORKGROUP_ID] = total_sum;\n        }\n\n        // Swap buffers\n        outOffset = inOffset;\n        swapOffset = TPW - swapOffset;\n        inOffset = TID + swapOffset;\n    }\n\n    let prefix_sum = bit_prefix_sums[extract_bits];   \n\n    // Scan bit prefix sums\n    if (TID == LAST_THREAD) {\n        var sum: u32 = 0;\n        bit_prefix_sums[extract_bits] += 1;\n        for (var i: u32 = 0; i < 4; i++) {\n            s_prefix_sum_scan[i] = sum;\n            sum += bit_prefix_sums[i];\n        }\n    }\n    workgroupBarrier();\n\n    if (GID < ELEMENT_COUNT) {\n        // Compute new position\n        let new_pos: u32 = prefix_sum + s_prefix_sum_scan[extract_bits];\n\n        // Shuffle elements locally\n        input[WID + new_pos] = elm;\n        values[WID + new_pos] = val;\n        local_prefix_sums[WID + new_pos] = prefix_sum;\n    }\n}"
-        );
-        var radixSortReorderSource = (
-          /* wgsl */
-          "\n\n@group(0) @binding(0) var<storage, read> inputKeys: array<u32>;\n@group(0) @binding(1) var<storage, read_write> outputKeys: array<u32>;\n@group(0) @binding(2) var<storage, read> local_prefix_sum: array<u32>;\n@group(0) @binding(3) var<storage, read> prefix_block_sum: array<u32>;\n@group(0) @binding(4) var<storage, read> inputValues: array<u32>;\n@group(0) @binding(5) var<storage, read_write> outputValues: array<u32>;\n\noverride WORKGROUP_COUNT: u32;\noverride THREADS_PER_WORKGROUP: u32;\noverride WORKGROUP_SIZE_X: u32;\noverride WORKGROUP_SIZE_Y: u32;\noverride CURRENT_BIT: u32;\noverride ELEMENT_COUNT: u32;\n\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn radix_sort_reorder(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) { \n    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;\n    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;\n    let GID = WID + TID; // Global thread ID\n\n    if (GID >= ELEMENT_COUNT) {\n        return;\n    }\n\n    let k = inputKeys[GID];\n    let v = inputValues[GID];\n\n    let local_prefix = local_prefix_sum[GID];\n\n    // Calculate new position\n    let extract_bits = (k >> CURRENT_BIT) & 0x3;\n    let pid = extract_bits * WORKGROUP_COUNT + WORKGROUP_ID;\n    let sorted_position = prefix_block_sum[pid] + local_prefix;\n    \n    outputKeys[sorted_position] = k;\n    outputValues[sorted_position] = v;\n}"
-        );
-        var checkSortSource = function checkSortSource2() {
-          var isFirstPass = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : false;
-          var isLastPass = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : false;
-          var kernelMode = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : "full";
-          return (
-            /* wgsl */
-            "\n\n@group(0) @binding(0) var<storage, read> input: array<u32>;\n@group(0) @binding(1) var<storage, read_write> output: array<u32>;\n@group(0) @binding(2) var<storage, read> original: array<u32>;\n@group(0) @binding(3) var<storage, read_write> is_sorted: u32;\n\noverride WORKGROUP_SIZE_X: u32;\noverride WORKGROUP_SIZE_Y: u32;\noverride THREADS_PER_WORKGROUP: u32;\noverride ELEMENT_COUNT: u32;\noverride START_ELEMENT: u32;\n\nvar<workgroup> s_data: array<u32, THREADS_PER_WORKGROUP>;\n\n// Reset dispatch buffer and is_sorted flag\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn reset(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) {\n    if (TID >= ELEMENT_COUNT) {\n        return;\n    }\n\n    if (TID == 0) {\n        is_sorted = 0u;\n    }\n\n    let ELM_ID = TID * 3;\n\n    output[ELM_ID] = original[ELM_ID];\n}\n\n@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)\nfn check_sort(\n    @builtin(workgroup_id) w_id: vec3<u32>,\n    @builtin(num_workgroups) w_dim: vec3<u32>,\n    @builtin(local_invocation_index) TID: u32, // Local thread ID\n) {\n    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;\n    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP + START_ELEMENT;\n    let GID = TID + WID; // Global thread ID\n\n    // Load data into shared memory\n    ".concat(isFirstPass ? first_pass_load_data : "s_data[TID] = select(0u, input[GID], GID < ELEMENT_COUNT);", "\n\n    // Perform parallel reduction\n    for (var d = 1u; d < THREADS_PER_WORKGROUP; d *= 2u) {      \n        workgroupBarrier();  \n        if (TID % (2u * d) == 0u) {\n            s_data[TID] += s_data[TID + d];\n        }\n    }\n    workgroupBarrier();\n\n    // Write reduction result\n    ").concat(isLastPass ? last_pass(kernelMode) : write_reduction_result, "\n}")
-          );
-        };
-        var write_reduction_result = (
-          /* wgsl */
-          "\n    if (TID == 0) {\n        output[WORKGROUP_ID] = s_data[0];\n    }\n"
-        );
-        var first_pass_load_data = (
-          /* wgsl */
-          "\n    let LAST_THREAD = min(THREADS_PER_WORKGROUP, ELEMENT_COUNT - WID) - 1;\n\n    // Load current element into shared memory\n    // Also load next element for comparison\n    let elm = select(0u, input[GID], GID < ELEMENT_COUNT);\n    let next = select(0u, input[GID + 1], GID < ELEMENT_COUNT-1);\n    s_data[TID] = elm;\n    workgroupBarrier();\n\n    s_data[TID] = select(0u, 1u, GID < ELEMENT_COUNT-1 && elm > next);\n"
-        );
-        var last_pass = function last_pass2(kernelMode) {
-          return (
-            /* wgsl */
-            "\n    let fullDispatchLength = arrayLength(&output);\n    let dispatchIndex = TID * 3;\n\n    if (dispatchIndex >= fullDispatchLength) {\n        return;\n    }\n\n    ".concat(kernelMode == "full" ? last_pass_full : last_pass_fast, "\n")
-          );
-        };
-        var last_pass_fast = (
-          /* wgsl */
-          "\n    output[dispatchIndex] = select(0, original[dispatchIndex], s_data[0] == 0 && is_sorted == 0u);\n"
-        );
-        var last_pass_full = (
-          /* wgsl */
-          "\n    if (TID == 0 && s_data[0] == 0) {\n        is_sorted = 1u;\n    }\n\n    output[dispatchIndex] = select(0, original[dispatchIndex], s_data[0] != 0);\n"
-        );
-        var CheckSortKernel = /* @__PURE__ */ (function() {
-          function CheckSortKernel2(_ref) {
-            var device = _ref.device, data = _ref.data, result = _ref.result, original = _ref.original, is_sorted = _ref.is_sorted, count = _ref.count, _ref$start = _ref.start, start = _ref$start === void 0 ? 0 : _ref$start, _ref$mode = _ref.mode, mode = _ref$mode === void 0 ? "full" : _ref$mode, _ref$workgroup_size = _ref.workgroup_size, workgroup_size = _ref$workgroup_size === void 0 ? {
-              x: 16,
-              y: 16
-            } : _ref$workgroup_size;
-            _classCallCheck(this, CheckSortKernel2);
-            this.device = device;
-            this.count = count;
-            this.start = start;
-            this.mode = mode;
-            this.workgroup_size = workgroup_size;
-            this.threads_per_workgroup = workgroup_size.x * workgroup_size.y;
-            this.pipelines = [];
-            this.buffers = {
-              data,
-              result,
-              original,
-              is_sorted,
-              outputs: []
-            };
-            this.create_passes_recursive(data, count);
-          }
-          return _createClass(CheckSortKernel2, [{
-            key: "create_passes_recursive",
-            value: function create_passes_recursive(buffer, count) {
-              var passIndex = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 0;
-              var workgroup_count = Math.ceil(count / this.threads_per_workgroup);
-              var isFirstPass = passIndex === 0;
-              var isLastPass = workgroup_count <= 1;
-              var label = "check-sort-".concat(this.mode, "-").concat(passIndex);
-              var outputBuffer = isLastPass ? this.buffers.result : this.device.createBuffer({
-                label,
-                size: workgroup_count * 4,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-              });
-              var bindGroupLayout = this.device.createBindGroupLayout({
-                entries: [{
-                  binding: 0,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "read-only-storage"
-                  }
-                }, {
-                  binding: 1,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }].concat(_toConsumableArray(isLastPass ? [{
-                  binding: 2,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "read-only-storage"
-                  }
-                }, {
-                  binding: 3,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }] : []))
-              });
-              var bindGroup = this.device.createBindGroup({
-                layout: bindGroupLayout,
-                entries: [{
-                  binding: 0,
-                  resource: {
-                    buffer
-                  }
-                }, {
-                  binding: 1,
-                  resource: {
-                    buffer: outputBuffer
-                  }
-                }].concat(_toConsumableArray(isLastPass ? [{
-                  binding: 2,
-                  resource: {
-                    buffer: this.buffers.original
-                  }
-                }, {
-                  binding: 3,
-                  resource: {
-                    buffer: this.buffers.is_sorted
-                  }
-                }] : []))
-              });
-              var pipelineLayout = this.device.createPipelineLayout({
-                bindGroupLayouts: [bindGroupLayout]
-              });
-              var element_count = isFirstPass ? this.start + count : count;
-              var start_element = isFirstPass ? this.start : 0;
-              var checkSortPipeline = this.device.createComputePipeline({
-                layout: pipelineLayout,
-                compute: {
-                  module: this.device.createShaderModule({
-                    label,
-                    code: checkSortSource(isFirstPass, isLastPass, this.mode)
-                  }),
-                  entryPoint: this.mode == "reset" ? "reset" : "check_sort",
-                  constants: _objectSpread2({
-                    "ELEMENT_COUNT": element_count,
-                    "WORKGROUP_SIZE_X": this.workgroup_size.x,
-                    "WORKGROUP_SIZE_Y": this.workgroup_size.y
-                  }, this.mode != "reset" && {
-                    "THREADS_PER_WORKGROUP": this.threads_per_workgroup,
-                    "START_ELEMENT": start_element
-                  })
-                }
-              });
-              this.buffers.outputs.push(outputBuffer);
-              this.pipelines.push({
-                pipeline: checkSortPipeline,
-                bindGroup
-              });
-              if (!isLastPass) {
-                this.create_passes_recursive(outputBuffer, workgroup_count, passIndex + 1);
-              }
-            }
-          }, {
-            key: "dispatch",
-            value: function dispatch(pass, dispatchSize) {
-              var offset = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 0;
-              for (var i = 0; i < this.pipelines.length; i++) {
-                var _this$pipelines$i = this.pipelines[i], pipeline = _this$pipelines$i.pipeline, bindGroup = _this$pipelines$i.bindGroup;
-                var dispatchIndirect = this.mode != "reset" && (this.mode == "full" || i < this.pipelines.length - 1);
-                pass.setPipeline(pipeline);
-                pass.setBindGroup(0, bindGroup);
-                if (dispatchIndirect) pass.dispatchWorkgroupsIndirect(dispatchSize, offset + i * 3 * 4);
-                else
-                  pass.dispatchWorkgroups(1, 1, 1);
-              }
-            }
-          }], [{
-            key: "find_optimal_dispatch_chain",
-            value: function find_optimal_dispatch_chain(device, item_count, workgroup_size) {
-              var threads_per_workgroup = workgroup_size.x * workgroup_size.y;
-              var sizes = [];
-              do {
-                var target_workgroup_count = Math.ceil(item_count / threads_per_workgroup);
-                var dispatchSize = find_optimal_dispatch_size(device, target_workgroup_count);
-                sizes.push(dispatchSize.x, dispatchSize.y, 1);
-                item_count = target_workgroup_count;
-              } while (item_count > 1);
-              return sizes;
-            }
-          }]);
-        })();
-        var _RadixSortKernel_brand = /* @__PURE__ */ new WeakSet();
-        var RadixSortKernel2 = /* @__PURE__ */ (function() {
-          function RadixSortKernel3() {
-            var _ref = arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : {}, device = _ref.device, keys = _ref.keys, values = _ref.values, count = _ref.count, _ref$bit_count = _ref.bit_count, bit_count = _ref$bit_count === void 0 ? 32 : _ref$bit_count, _ref$workgroup_size = _ref.workgroup_size, workgroup_size = _ref$workgroup_size === void 0 ? {
-              x: 16,
-              y: 16
-            } : _ref$workgroup_size, _ref$check_order = _ref.check_order, check_order = _ref$check_order === void 0 ? false : _ref$check_order, _ref$local_shuffle = _ref.local_shuffle, local_shuffle = _ref$local_shuffle === void 0 ? false : _ref$local_shuffle, _ref$avoid_bank_confl = _ref.avoid_bank_conflicts, avoid_bank_conflicts = _ref$avoid_bank_confl === void 0 ? false : _ref$avoid_bank_confl;
-            _classCallCheck(this, RadixSortKernel3);
-            _classPrivateMethodInitSpec(this, _RadixSortKernel_brand);
-            if (device == null) throw new Error("No device provided");
-            if (keys == null) throw new Error("No keys buffer provided");
-            if (!Number.isInteger(count) || count <= 0) throw new Error("Invalid count parameter");
-            if (!Number.isInteger(bit_count) || bit_count <= 0 || bit_count > 32) throw new Error("Invalid bit_count parameter: ".concat(bit_count));
-            if (!Number.isInteger(workgroup_size.x) || !Number.isInteger(workgroup_size.y)) throw new Error("Invalid workgroup_size parameter");
-            if (bit_count % 4 != 0) throw new Error("bit_count must be a multiple of 4");
-            this.device = device;
-            this.count = count;
-            this.bit_count = bit_count;
-            this.workgroup_size = workgroup_size;
-            this.check_order = check_order;
-            this.local_shuffle = local_shuffle;
-            this.avoid_bank_conflicts = avoid_bank_conflicts;
-            this.threads_per_workgroup = workgroup_size.x * workgroup_size.y;
-            this.workgroup_count = Math.ceil(count / this.threads_per_workgroup);
-            this.prefix_block_workgroup_count = 4 * this.workgroup_count;
-            this.has_values = values != null;
-            this.dispatchSize = {};
-            this.shaderModules = {};
-            this.kernels = {};
-            this.pipelines = [];
-            this.buffers = {
-              // GPUBuffers
-              keys,
-              values
-            };
-            this.create_shader_modules();
-            this.create_pipelines();
-          }
-          return _createClass(RadixSortKernel3, [{
-            key: "create_shader_modules",
-            value: function create_shader_modules() {
-              var remove_values = function remove_values2(source) {
-                return source.split("\n").filter(function(line) {
-                  return !line.toLowerCase().includes("values");
-                }).join("\n");
-              };
-              var blockSumSource = this.local_shuffle ? radixSortCoalescedSource : radixSortSource;
-              this.shaderModules = {
-                blockSum: this.device.createShaderModule({
-                  label: "radix-sort-block-sum",
-                  code: this.has_values ? blockSumSource : remove_values(blockSumSource)
-                }),
-                reorder: this.device.createShaderModule({
-                  label: "radix-sort-reorder",
-                  code: this.has_values ? radixSortReorderSource : remove_values(radixSortReorderSource)
-                })
-              };
-            }
-          }, {
-            key: "create_pipelines",
-            value: function create_pipelines() {
-              this.create_prefix_sum_kernel();
-              var dispatchData = this.calculate_dispatch_sizes();
-              this.create_buffers(dispatchData);
-              this.create_check_sort_kernels(dispatchData);
-              for (var bit = 0; bit < this.bit_count; bit += 2) {
-                var even = bit % 4 == 0;
-                var inKeys = even ? this.buffers.keys : this.buffers.tmpKeys;
-                var inValues = even ? this.buffers.values : this.buffers.tmpValues;
-                var outKeys = even ? this.buffers.tmpKeys : this.buffers.keys;
-                var outValues = even ? this.buffers.tmpValues : this.buffers.values;
-                var blockSumPipeline = this.create_block_sum_pipeline(inKeys, inValues, bit);
-                var reorderPipeline = this.create_reorder_pipeline(inKeys, inValues, outKeys, outValues, bit);
-                this.pipelines.push({
-                  blockSumPipeline,
-                  reorderPipeline
-                });
-              }
-            }
-          }, {
-            key: "create_prefix_sum_kernel",
-            value: function create_prefix_sum_kernel() {
-              var prefixBlockSumBuffer = this.device.createBuffer({
-                label: "radix-sort-prefix-block-sum",
-                size: this.prefix_block_workgroup_count * 4,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-              });
-              var prefixSumKernel = new PrefixSumKernel({
-                device: this.device,
-                data: prefixBlockSumBuffer,
-                count: this.prefix_block_workgroup_count,
-                workgroup_size: this.workgroup_size,
-                avoid_bank_conflicts: this.avoid_bank_conflicts
-              });
-              this.kernels.prefixSum = prefixSumKernel;
-              this.buffers.prefixBlockSum = prefixBlockSumBuffer;
-            }
-          }, {
-            key: "calculate_dispatch_sizes",
-            value: function calculate_dispatch_sizes() {
-              var dispatchSize = find_optimal_dispatch_size(this.device, this.workgroup_count);
-              var prefixSumDispatchSize = this.kernels.prefixSum.get_dispatch_chain();
-              var check_sort_fast_count = Math.min(this.count, this.threads_per_workgroup * 4);
-              var check_sort_full_count = this.count - check_sort_fast_count;
-              var start_full = check_sort_fast_count - 1;
-              var dispatchSizesFast = CheckSortKernel.find_optimal_dispatch_chain(this.device, check_sort_fast_count, this.workgroup_size);
-              var dispatchSizesFull = CheckSortKernel.find_optimal_dispatch_chain(this.device, check_sort_full_count, this.workgroup_size);
-              var initialDispatch = [dispatchSize.x, dispatchSize.y, 1].concat(_toConsumableArray(dispatchSizesFast.slice(0, 3)), _toConsumableArray(prefixSumDispatchSize));
-              this.dispatchOffsets = {
-                radix_sort: 0,
-                check_sort_fast: 3 * 4,
-                prefix_sum: 6 * 4
-              };
-              this.dispatchSize = dispatchSize;
-              this.initialDispatch = initialDispatch;
-              return {
-                initialDispatch,
-                dispatchSizesFull,
-                check_sort_fast_count,
-                check_sort_full_count,
-                start_full
-              };
-            }
-          }, {
-            key: "create_buffers",
-            value: function create_buffers(dispatchData) {
-              var tmpKeysBuffer = this.device.createBuffer({
-                label: "radix-sort-tmp-keys",
-                size: this.count * 4,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-              });
-              var tmpValuesBuffer = !this.has_values ? null : this.device.createBuffer({
-                label: "radix-sort-tmp-values",
-                size: this.count * 4,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-              });
-              var localPrefixSumBuffer = this.device.createBuffer({
-                label: "radix-sort-local-prefix-sum",
-                size: this.count * 4,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-              });
-              this.buffers.tmpKeys = tmpKeysBuffer;
-              this.buffers.tmpValues = tmpValuesBuffer;
-              this.buffers.localPrefixSum = localPrefixSumBuffer;
-              if (!this.check_order) {
-                return;
-              }
-              var dispatchBuffer = create_buffer_from_data({
-                device: this.device,
-                label: "radix-sort-dispatch-size",
-                data: dispatchData.initialDispatch,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.INDIRECT
-              });
-              var originalDispatchBuffer = create_buffer_from_data({
-                device: this.device,
-                label: "radix-sort-dispatch-size-original",
-                data: dispatchData.initialDispatch,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC
-              });
-              var checkSortFullDispatchBuffer = create_buffer_from_data({
-                label: "check-sort-full-dispatch-size",
-                device: this.device,
-                data: dispatchData.dispatchSizesFull,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.INDIRECT
-              });
-              var checkSortFullOriginalDispatchBuffer = create_buffer_from_data({
-                label: "check-sort-full-dispatch-size-original",
-                device: this.device,
-                data: dispatchData.dispatchSizesFull,
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC
-              });
-              var isSortedBuffer = create_buffer_from_data({
-                label: "is-sorted",
-                device: this.device,
-                data: new Uint32Array([0]),
-                usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-              });
-              this.buffers.dispatchSize = dispatchBuffer;
-              this.buffers.originalDispatchSize = originalDispatchBuffer;
-              this.buffers.checkSortFullDispatchSize = checkSortFullDispatchBuffer;
-              this.buffers.originalCheckSortFullDispatchSize = checkSortFullOriginalDispatchBuffer;
-              this.buffers.isSorted = isSortedBuffer;
-            }
-          }, {
-            key: "create_check_sort_kernels",
-            value: function create_check_sort_kernels(checkSortPartitionData) {
-              if (!this.check_order) {
-                return;
-              }
-              var check_sort_fast_count = checkSortPartitionData.check_sort_fast_count, check_sort_full_count = checkSortPartitionData.check_sort_full_count, start_full = checkSortPartitionData.start_full;
-              var checkSortFull = new CheckSortKernel({
-                mode: "full",
-                device: this.device,
-                data: this.buffers.keys,
-                result: this.buffers.dispatchSize,
-                original: this.buffers.originalDispatchSize,
-                is_sorted: this.buffers.isSorted,
-                count: check_sort_full_count,
-                start: start_full,
-                workgroup_size: this.workgroup_size
-              });
-              var checkSortFast = new CheckSortKernel({
-                mode: "fast",
-                device: this.device,
-                data: this.buffers.keys,
-                result: this.buffers.checkSortFullDispatchSize,
-                original: this.buffers.originalCheckSortFullDispatchSize,
-                is_sorted: this.buffers.isSorted,
-                count: check_sort_fast_count,
-                workgroup_size: this.workgroup_size
-              });
-              var initialDispatchElementCount = this.initialDispatch.length / 3;
-              if (checkSortFast.threads_per_workgroup < checkSortFull.pipelines.length || checkSortFull.threads_per_workgroup < initialDispatchElementCount) {
-                console.warn("Warning: workgroup size is too small to enable check sort optimization, disabling...");
-                this.check_order = false;
-                return;
-              }
-              var checkSortReset = new CheckSortKernel({
-                mode: "reset",
-                device: this.device,
-                data: this.buffers.keys,
-                original: this.buffers.originalDispatchSize,
-                result: this.buffers.dispatchSize,
-                is_sorted: this.buffers.isSorted,
-                count: initialDispatchElementCount,
-                workgroup_size: find_optimal_dispatch_size(this.device, initialDispatchElementCount)
-              });
-              this.kernels.checkSort = {
-                reset: checkSortReset,
-                fast: checkSortFast,
-                full: checkSortFull
-              };
-            }
-          }, {
-            key: "create_block_sum_pipeline",
-            value: function create_block_sum_pipeline(inKeys, inValues, bit) {
-              var bindGroupLayout = this.device.createBindGroupLayout({
-                label: "radix-sort-block-sum",
-                entries: [{
-                  binding: 0,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: this.local_shuffle ? "storage" : "read-only-storage"
-                  }
-                }, {
-                  binding: 1,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }, {
-                  binding: 2,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }].concat(_toConsumableArray(this.local_shuffle && this.has_values ? [{
-                  binding: 3,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }] : []))
-              });
-              var bindGroup = this.device.createBindGroup({
-                layout: bindGroupLayout,
-                entries: [{
-                  binding: 0,
-                  resource: {
-                    buffer: inKeys
-                  }
-                }, {
-                  binding: 1,
-                  resource: {
-                    buffer: this.buffers.localPrefixSum
-                  }
-                }, {
-                  binding: 2,
-                  resource: {
-                    buffer: this.buffers.prefixBlockSum
-                  }
-                }].concat(_toConsumableArray(this.local_shuffle && this.has_values ? [{
-                  binding: 3,
-                  resource: {
-                    buffer: inValues
-                  }
-                }] : []))
-              });
-              var pipelineLayout = this.device.createPipelineLayout({
-                bindGroupLayouts: [bindGroupLayout]
-              });
-              var blockSumPipeline = this.device.createComputePipeline({
-                label: "radix-sort-block-sum",
-                layout: pipelineLayout,
-                compute: {
-                  module: this.shaderModules.blockSum,
-                  entryPoint: "radix_sort",
-                  constants: {
-                    "WORKGROUP_SIZE_X": this.workgroup_size.x,
-                    "WORKGROUP_SIZE_Y": this.workgroup_size.y,
-                    "WORKGROUP_COUNT": this.workgroup_count,
-                    "THREADS_PER_WORKGROUP": this.threads_per_workgroup,
-                    "ELEMENT_COUNT": this.count,
-                    "CURRENT_BIT": bit
-                  }
-                }
-              });
-              return {
-                pipeline: blockSumPipeline,
-                bindGroup
-              };
-            }
-          }, {
-            key: "create_reorder_pipeline",
-            value: function create_reorder_pipeline(inKeys, inValues, outKeys, outValues, bit) {
-              var bindGroupLayout = this.device.createBindGroupLayout({
-                label: "radix-sort-reorder",
-                entries: [{
-                  binding: 0,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "read-only-storage"
-                  }
-                }, {
-                  binding: 1,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }, {
-                  binding: 2,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "read-only-storage"
-                  }
-                }, {
-                  binding: 3,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "read-only-storage"
-                  }
-                }].concat(_toConsumableArray(this.has_values ? [{
-                  binding: 4,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "read-only-storage"
-                  }
-                }, {
-                  binding: 5,
-                  visibility: GPUShaderStage.COMPUTE,
-                  buffer: {
-                    type: "storage"
-                  }
-                }] : []))
-              });
-              var bindGroup = this.device.createBindGroup({
-                layout: bindGroupLayout,
-                entries: [{
-                  binding: 0,
-                  resource: {
-                    buffer: inKeys
-                  }
-                }, {
-                  binding: 1,
-                  resource: {
-                    buffer: outKeys
-                  }
-                }, {
-                  binding: 2,
-                  resource: {
-                    buffer: this.buffers.localPrefixSum
-                  }
-                }, {
-                  binding: 3,
-                  resource: {
-                    buffer: this.buffers.prefixBlockSum
-                  }
-                }].concat(_toConsumableArray(this.has_values ? [{
-                  binding: 4,
-                  resource: {
-                    buffer: inValues
-                  }
-                }, {
-                  binding: 5,
-                  resource: {
-                    buffer: outValues
-                  }
-                }] : []))
-              });
-              var pipelineLayout = this.device.createPipelineLayout({
-                bindGroupLayouts: [bindGroupLayout]
-              });
-              var reorderPipeline = this.device.createComputePipeline({
-                label: "radix-sort-reorder",
-                layout: pipelineLayout,
-                compute: {
-                  module: this.shaderModules.reorder,
-                  entryPoint: "radix_sort_reorder",
-                  constants: {
-                    "WORKGROUP_SIZE_X": this.workgroup_size.x,
-                    "WORKGROUP_SIZE_Y": this.workgroup_size.y,
-                    "WORKGROUP_COUNT": this.workgroup_count,
-                    "THREADS_PER_WORKGROUP": this.threads_per_workgroup,
-                    "ELEMENT_COUNT": this.count,
-                    "CURRENT_BIT": bit
-                  }
-                }
-              });
-              return {
-                pipeline: reorderPipeline,
-                bindGroup
-              };
-            }
-            /**
-             * Encode all pipelines into the current pass
-             * 
-             * @param {GPUComputePassEncoder} pass 
-             */
-          }, {
-            key: "dispatch",
-            value: function dispatch(pass) {
-              if (!this.check_order) {
-                _assertClassBrand(_RadixSortKernel_brand, this, _dispatchPipelines).call(this, pass);
-              } else {
-                _assertClassBrand(_RadixSortKernel_brand, this, _dispatchPipelinesIndirect).call(this, pass);
-              }
-            }
-          }]);
-        })();
-        function _dispatchPipelines(pass) {
-          for (var i = 0; i < this.bit_count / 2; i++) {
-            var _this$pipelines$i = this.pipelines[i], blockSumPipeline = _this$pipelines$i.blockSumPipeline, reorderPipeline = _this$pipelines$i.reorderPipeline;
-            pass.setPipeline(blockSumPipeline.pipeline);
-            pass.setBindGroup(0, blockSumPipeline.bindGroup);
-            pass.dispatchWorkgroups(this.dispatchSize.x, this.dispatchSize.y, 1);
-            this.kernels.prefixSum.dispatch(pass);
-            pass.setPipeline(reorderPipeline.pipeline);
-            pass.setBindGroup(0, reorderPipeline.bindGroup);
-            pass.dispatchWorkgroups(this.dispatchSize.x, this.dispatchSize.y, 1);
-          }
-        }
-        function _dispatchPipelinesIndirect(pass) {
-          this.kernels.checkSort.reset.dispatch(pass);
-          for (var i = 0; i < this.bit_count / 2; i++) {
-            var _this$pipelines$i2 = this.pipelines[i], blockSumPipeline = _this$pipelines$i2.blockSumPipeline, reorderPipeline = _this$pipelines$i2.reorderPipeline;
-            if (i % 2 == 0) {
-              this.kernels.checkSort.fast.dispatch(pass, this.buffers.dispatchSize, this.dispatchOffsets.check_sort_fast);
-              this.kernels.checkSort.full.dispatch(pass, this.buffers.checkSortFullDispatchSize);
-            }
-            pass.setPipeline(blockSumPipeline.pipeline);
-            pass.setBindGroup(0, blockSumPipeline.bindGroup);
-            pass.dispatchWorkgroupsIndirect(this.buffers.dispatchSize, this.dispatchOffsets.radix_sort);
-            this.kernels.prefixSum.dispatch(pass, this.buffers.dispatchSize, this.dispatchOffsets.prefix_sum);
-            pass.setPipeline(reorderPipeline.pipeline);
-            pass.setBindGroup(0, reorderPipeline.bindGroup);
-            pass.dispatchWorkgroupsIndirect(this.buffers.dispatchSize, this.dispatchOffsets.radix_sort);
-          }
-        }
-        exports2.PrefixSumKernel = PrefixSumKernel;
-        exports2.RadixSortKernel = RadixSortKernel2;
-      }));
-    }
-  });
+@group(0) @binding(0) var<storage, read_write> items: array<u32>;
+@group(0) @binding(1) var<storage, read_write> blockSums: array<u32>;
 
-  // src/ts/render/shaders.ts
-  var renderShaders = (
-    /* wgsl */
-    `
+override WORKGROUP_SIZE_X: u32;
+override WORKGROUP_SIZE_Y: u32;
+override THREADS_PER_WORKGROUP: u32;
+override ITEMS_PER_WORKGROUP: u32;
+override ELEMENT_COUNT: u32;
+
+var<workgroup> temp: array<u32, ITEMS_PER_WORKGROUP*2>;
+
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn reduce_downsweep(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) {
+    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;
+    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;
+    let GID = WID + TID; // Global thread ID
+    
+    let ELM_TID = TID * 2; // Element pair local ID
+    let ELM_GID = GID * 2; // Element pair global ID
+    
+    // Load input to shared memory
+    temp[ELM_TID]     = select(items[ELM_GID], 0, ELM_GID >= ELEMENT_COUNT);
+    temp[ELM_TID + 1] = select(items[ELM_GID + 1], 0, ELM_GID + 1 >= ELEMENT_COUNT);
+
+    var offset: u32 = 1;
+
+    // Up-sweep (reduce) phase
+    for (var d: u32 = ITEMS_PER_WORKGROUP >> 1; d > 0; d >>= 1) {
+        workgroupBarrier();
+
+        if (TID < d) {
+            var ai: u32 = offset * (ELM_TID + 1) - 1;
+            var bi: u32 = offset * (ELM_TID + 2) - 1;
+            temp[bi] += temp[ai];
+        }
+
+        offset *= 2;
+    }
+
+    // Save workgroup sum and clear last element
+    if (TID == 0) {
+        let last_offset = ITEMS_PER_WORKGROUP - 1;
+
+        blockSums[WORKGROUP_ID] = temp[last_offset];
+        temp[last_offset] = 0;
+    }
+
+    // Down-sweep phase
+    for (var d: u32 = 1; d < ITEMS_PER_WORKGROUP; d *= 2) {
+        offset >>= 1;
+        workgroupBarrier();
+
+        if (TID < d) {
+            var ai: u32 = offset * (ELM_TID + 1) - 1;
+            var bi: u32 = offset * (ELM_TID + 2) - 1;
+
+            let t: u32 = temp[ai];
+            temp[ai] = temp[bi];
+            temp[bi] += t;
+        }
+    }
+    workgroupBarrier();
+
+    // Copy result from shared memory to global memory
+    if (ELM_GID >= ELEMENT_COUNT) {
+        return;
+    }
+    items[ELM_GID] = temp[ELM_TID];
+
+    if (ELM_GID + 1 >= ELEMENT_COUNT) {
+        return;
+    }
+    items[ELM_GID + 1] = temp[ELM_TID + 1];
+}
+
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn add_block_sums(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) {
+    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;
+    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;
+    let GID = WID + TID; // Global thread ID
+
+    let ELM_ID = GID * 2;
+
+    if (ELM_ID >= ELEMENT_COUNT) {
+        return;
+    }
+
+    let blockSum = blockSums[WORKGROUP_ID];
+
+    items[ELM_ID] += blockSum;
+
+    if (ELM_ID + 1 >= ELEMENT_COUNT) {
+        return;
+    }
+
+    items[ELM_ID + 1] += blockSum;
+}`,ae=`
+
+@group(0) @binding(0) var<storage, read_write> items: array<u32>;
+@group(0) @binding(1) var<storage, read_write> blockSums: array<u32>;
+
+override WORKGROUP_SIZE_X: u32;
+override WORKGROUP_SIZE_Y: u32;
+override THREADS_PER_WORKGROUP: u32;
+override ITEMS_PER_WORKGROUP: u32;
+override ELEMENT_COUNT: u32;
+
+const NUM_BANKS: u32 = 32;
+const LOG_NUM_BANKS: u32 = 5;
+
+fn get_offset(offset: u32) -> u32 {
+    // return offset >> LOG_NUM_BANKS; // Conflict-free
+    return (offset >> NUM_BANKS) + (offset >> (2 * LOG_NUM_BANKS)); // Zero bank conflict
+}
+
+var<workgroup> temp: array<u32, ITEMS_PER_WORKGROUP*2>;
+
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn reduce_downsweep(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) {
+    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;
+    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;
+    let GID = WID + TID; // Global thread ID
+    
+    let ELM_TID = TID * 2; // Element pair local ID
+    let ELM_GID = GID * 2; // Element pair global ID
+    
+    // Load input to shared memory
+    let ai: u32 = TID;
+    let bi: u32 = TID + (ITEMS_PER_WORKGROUP >> 1);
+    let s_ai = ai + get_offset(ai);
+    let s_bi = bi + get_offset(bi);
+    let g_ai = ai + WID * 2;
+    let g_bi = bi + WID * 2;
+    temp[s_ai] = select(items[g_ai], 0, g_ai >= ELEMENT_COUNT);
+    temp[s_bi] = select(items[g_bi], 0, g_bi >= ELEMENT_COUNT);
+
+    var offset: u32 = 1;
+
+    // Up-sweep (reduce) phase
+    for (var d: u32 = ITEMS_PER_WORKGROUP >> 1; d > 0; d >>= 1) {
+        workgroupBarrier();
+
+        if (TID < d) {
+            var ai: u32 = offset * (ELM_TID + 1) - 1;
+            var bi: u32 = offset * (ELM_TID + 2) - 1;
+            ai += get_offset(ai);
+            bi += get_offset(bi);
+            temp[bi] += temp[ai];
+        }
+
+        offset *= 2;
+    }
+
+    // Save workgroup sum and clear last element
+    if (TID == 0) {
+        var last_offset = ITEMS_PER_WORKGROUP - 1;
+        last_offset += get_offset(last_offset);
+
+        blockSums[WORKGROUP_ID] = temp[last_offset];
+        temp[last_offset] = 0;
+    }
+
+    // Down-sweep phase
+    for (var d: u32 = 1; d < ITEMS_PER_WORKGROUP; d *= 2) {
+        offset >>= 1;
+        workgroupBarrier();
+
+        if (TID < d) {
+            var ai: u32 = offset * (ELM_TID + 1) - 1;
+            var bi: u32 = offset * (ELM_TID + 2) - 1;
+            ai += get_offset(ai);
+            bi += get_offset(bi);
+
+            let t: u32 = temp[ai];
+            temp[ai] = temp[bi];
+            temp[bi] += t;
+        }
+    }
+    workgroupBarrier();
+
+    // Copy result from shared memory to global memory
+    if (g_ai < ELEMENT_COUNT) {
+        items[g_ai] = temp[s_ai];
+    }
+    if (g_bi < ELEMENT_COUNT) {
+        items[g_bi] = temp[s_bi];
+    }
+}
+
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn add_block_sums(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) {
+    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;
+    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;
+    let GID = WID + TID; // Global thread ID
+
+    let ELM_ID = GID * 2;
+
+    if (ELM_ID >= ELEMENT_COUNT) {
+        return;
+    }
+
+    let blockSum = blockSums[WORKGROUP_ID];
+
+    items[ELM_ID] += blockSum;
+
+    if (ELM_ID + 1 >= ELEMENT_COUNT) {
+        return;
+    }
+
+    items[ELM_ID + 1] += blockSum;
+}`;function fe(b,y){var x={x:y,y:1};if(y>b.limits.maxComputeWorkgroupsPerDimension){var O=Math.floor(Math.sqrt(y)),U=Math.ceil(y/O);x.x=O,x.y=U}return x}function re(b){var y=b.device,x=b.label,O=b.data,U=b.usage,G=U===void 0?0:U,w=y.createBuffer({label:x,usage:G,size:O.length*4,mappedAtCreation:!0}),D=new Uint32Array(w.getMappedRange());return D.set(O),w.unmap(),w}var we=(function(){function b(y){var x=y.device,O=y.data,U=y.count,G=y.workgroup_size,w=G===void 0?{x:16,y:16}:G,D=y.avoid_bank_conflicts,u=D===void 0?!1:D;if(L(this,b),this.device=x,this.workgroup_size=w,this.threads_per_workgroup=w.x*w.y,this.items_per_workgroup=2*this.threads_per_workgroup,Math.log2(this.threads_per_workgroup)%1!==0)throw new Error("workgroup_size.x * workgroup_size.y must be a power of two. (current: ".concat(this.threads_per_workgroup,")"));this.pipelines=[],this.shaderModule=this.device.createShaderModule({label:"prefix-sum",code:u?ae:ge}),this.create_pass_recursive(O,U)}return F(b,[{key:"create_pass_recursive",value:function(x,O){var U=Math.ceil(O/this.items_per_workgroup),G=fe(this.device,U),w=this.device.createBuffer({label:"prefix-sum-block-sum",size:U*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST}),D=this.device.createBindGroupLayout({entries:[{binding:0,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}},{binding:1,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}}]}),u=this.device.createBindGroup({label:"prefix-sum-bind-group",layout:D,entries:[{binding:0,resource:{buffer:x}},{binding:1,resource:{buffer:w}}]}),t=this.device.createPipelineLayout({bindGroupLayouts:[D]}),o=this.device.createComputePipeline({label:"prefix-sum-scan-pipeline",layout:t,compute:{module:this.shaderModule,entryPoint:"reduce_downsweep",constants:{WORKGROUP_SIZE_X:this.workgroup_size.x,WORKGROUP_SIZE_Y:this.workgroup_size.y,THREADS_PER_WORKGROUP:this.threads_per_workgroup,ITEMS_PER_WORKGROUP:this.items_per_workgroup,ELEMENT_COUNT:O}}});if(this.pipelines.push({pipeline:o,bindGroup:u,dispatchSize:G}),U>1){this.create_pass_recursive(w,U);var r=this.device.createComputePipeline({label:"prefix-sum-add-block-pipeline",layout:t,compute:{module:this.shaderModule,entryPoint:"add_block_sums",constants:{WORKGROUP_SIZE_X:this.workgroup_size.x,WORKGROUP_SIZE_Y:this.workgroup_size.y,THREADS_PER_WORKGROUP:this.threads_per_workgroup,ELEMENT_COUNT:O}}});this.pipelines.push({pipeline:r,bindGroup:u,dispatchSize:G})}}},{key:"get_dispatch_chain",value:function(){return this.pipelines.flatMap(function(x){return[x.dispatchSize.x,x.dispatchSize.y,1]})}},{key:"dispatch",value:function(x,O){for(var U=arguments.length>2&&arguments[2]!==void 0?arguments[2]:0,G=0;G<this.pipelines.length;G++){var w=this.pipelines[G],D=w.pipeline,u=w.bindGroup,t=w.dispatchSize;x.setPipeline(D),x.setBindGroup(0,u),O==null?x.dispatchWorkgroups(t.x,t.y,1):x.dispatchWorkgroupsIndirect(O,U+G*3*4)}}}])})(),Te=`
+
+@group(0) @binding(0) var<storage, read> input: array<u32>;
+@group(0) @binding(1) var<storage, read_write> local_prefix_sums: array<u32>;
+@group(0) @binding(2) var<storage, read_write> block_sums: array<u32>;
+
+override WORKGROUP_COUNT: u32;
+override THREADS_PER_WORKGROUP: u32;
+override WORKGROUP_SIZE_X: u32;
+override WORKGROUP_SIZE_Y: u32;
+override CURRENT_BIT: u32;
+override ELEMENT_COUNT: u32;
+
+var<workgroup> s_prefix_sum: array<u32, 2 * (THREADS_PER_WORKGROUP + 1)>;
+
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn radix_sort(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) {
+    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;
+    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;
+    let GID = WID + TID; // Global thread ID
+
+    // Extract 2 bits from the input
+    let elm = select(input[GID], 0, GID >= ELEMENT_COUNT);
+    let extract_bits: u32 = (elm >> CURRENT_BIT) & 0x3;
+
+    var bit_prefix_sums = array<u32, 4>(0, 0, 0, 0);
+
+    // If the workgroup is inactive, prevent block_sums buffer update
+    var LAST_THREAD: u32 = 0xffffffff; 
+
+    if (WORKGROUP_ID < WORKGROUP_COUNT) {
+        // Otherwise store the index of the last active thread in the workgroup
+        LAST_THREAD = min(THREADS_PER_WORKGROUP, ELEMENT_COUNT - WID) - 1;
+    }
+
+    // Initialize parameters for double-buffering
+    let TPW = THREADS_PER_WORKGROUP + 1;
+    var swapOffset: u32 = 0;
+    var inOffset:  u32 = TID;
+    var outOffset: u32 = TID + TPW;
+
+    // 4-way prefix sum
+    for (var b: u32 = 0; b < 4; b++) {
+        // Initialize local prefix with bitmask
+        let bitmask = select(0u, 1u, extract_bits == b);
+        s_prefix_sum[inOffset + 1] = bitmask;
+        workgroupBarrier();
+
+        var prefix_sum: u32 = 0;
+
+        // Prefix sum
+        for (var offset: u32 = 1; offset < THREADS_PER_WORKGROUP; offset *= 2) {
+            if (TID >= offset) {
+                prefix_sum = s_prefix_sum[inOffset] + s_prefix_sum[inOffset - offset];
+            } else {
+                prefix_sum = s_prefix_sum[inOffset];
+            }
+
+            s_prefix_sum[outOffset] = prefix_sum;
+            
+            // Swap buffers
+            outOffset = inOffset;
+            swapOffset = TPW - swapOffset;
+            inOffset = TID + swapOffset;
+            
+            workgroupBarrier();
+        }
+
+        // Store prefix sum for current bit
+        bit_prefix_sums[b] = prefix_sum;
+
+        if (TID == LAST_THREAD) {
+            // Store block sum to global memory
+            let total_sum: u32 = prefix_sum + bitmask;
+            block_sums[b * WORKGROUP_COUNT + WORKGROUP_ID] = total_sum;
+        }
+
+        // Swap buffers
+        outOffset = inOffset;
+        swapOffset = TPW - swapOffset;
+        inOffset = TID + swapOffset;
+    }
+
+    if (GID < ELEMENT_COUNT) {
+        // Store local prefix sum to global memory
+        local_prefix_sums[GID] = bit_prefix_sums[extract_bits];
+    }
+}`,Oe=`
+
+@group(0) @binding(0) var<storage, read_write> input: array<u32>;
+@group(0) @binding(1) var<storage, read_write> local_prefix_sums: array<u32>;
+@group(0) @binding(2) var<storage, read_write> block_sums: array<u32>;
+@group(0) @binding(3) var<storage, read_write> values: array<u32>;
+
+override WORKGROUP_COUNT: u32;
+override THREADS_PER_WORKGROUP: u32;
+override WORKGROUP_SIZE_X: u32;
+override WORKGROUP_SIZE_Y: u32;
+override CURRENT_BIT: u32;
+override ELEMENT_COUNT: u32;
+
+var<workgroup> s_prefix_sum: array<u32, 2 * (THREADS_PER_WORKGROUP + 1)>;
+var<workgroup> s_prefix_sum_scan: array<u32, 4>;
+
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn radix_sort(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) {
+    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;
+    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;
+    let GID = WID + TID; // Global thread ID
+
+    // Extract 2 bits from the input
+    var elm: u32 = 0;
+    var val: u32 = 0;
+    if (GID < ELEMENT_COUNT) {
+        elm = input[GID];
+        val = values[GID];
+    }
+    let extract_bits: u32 = (elm >> CURRENT_BIT) & 0x3;
+
+    var bit_prefix_sums = array<u32, 4>(0, 0, 0, 0);
+
+    // If the workgroup is inactive, prevent block_sums buffer update
+    var LAST_THREAD: u32 = 0xffffffff; 
+
+    if (WORKGROUP_ID < WORKGROUP_COUNT) {
+        // Otherwise store the index of the last active thread in the workgroup
+        LAST_THREAD = min(THREADS_PER_WORKGROUP, ELEMENT_COUNT - WID) - 1;
+    }
+
+    // Initialize parameters for double-buffering
+    let TPW = THREADS_PER_WORKGROUP + 1;
+    var swapOffset: u32 = 0;
+    var inOffset:  u32 = TID;
+    var outOffset: u32 = TID + TPW;
+
+    // 4-way prefix sum
+    for (var b: u32 = 0; b < 4; b++) {
+        // Initialize local prefix with bitmask
+        let bitmask = select(0u, 1u, extract_bits == b);
+        s_prefix_sum[inOffset + 1] = bitmask;
+        workgroupBarrier();
+
+        var prefix_sum: u32 = 0;
+
+        // Prefix sum
+        for (var offset: u32 = 1; offset < THREADS_PER_WORKGROUP; offset *= 2) {
+            if (TID >= offset) {
+                prefix_sum = s_prefix_sum[inOffset] + s_prefix_sum[inOffset - offset];
+            } else {
+                prefix_sum = s_prefix_sum[inOffset];
+            }
+
+            s_prefix_sum[outOffset] = prefix_sum;
+
+            // Swap buffers
+            outOffset = inOffset;
+            swapOffset = TPW - swapOffset;
+            inOffset = TID + swapOffset;
+            
+            workgroupBarrier();
+        }
+
+        // Store prefix sum for current bit
+        bit_prefix_sums[b] = prefix_sum;
+
+        if (TID == LAST_THREAD) {
+            // Store block sum to global memory
+            let total_sum: u32 = prefix_sum + bitmask;
+            block_sums[b * WORKGROUP_COUNT + WORKGROUP_ID] = total_sum;
+        }
+
+        // Swap buffers
+        outOffset = inOffset;
+        swapOffset = TPW - swapOffset;
+        inOffset = TID + swapOffset;
+    }
+
+    let prefix_sum = bit_prefix_sums[extract_bits];   
+
+    // Scan bit prefix sums
+    if (TID == LAST_THREAD) {
+        var sum: u32 = 0;
+        bit_prefix_sums[extract_bits] += 1;
+        for (var i: u32 = 0; i < 4; i++) {
+            s_prefix_sum_scan[i] = sum;
+            sum += bit_prefix_sums[i];
+        }
+    }
+    workgroupBarrier();
+
+    if (GID < ELEMENT_COUNT) {
+        // Compute new position
+        let new_pos: u32 = prefix_sum + s_prefix_sum_scan[extract_bits];
+
+        // Shuffle elements locally
+        input[WID + new_pos] = elm;
+        values[WID + new_pos] = val;
+        local_prefix_sums[WID + new_pos] = prefix_sum;
+    }
+}`,ve=`
+
+@group(0) @binding(0) var<storage, read> inputKeys: array<u32>;
+@group(0) @binding(1) var<storage, read_write> outputKeys: array<u32>;
+@group(0) @binding(2) var<storage, read> local_prefix_sum: array<u32>;
+@group(0) @binding(3) var<storage, read> prefix_block_sum: array<u32>;
+@group(0) @binding(4) var<storage, read> inputValues: array<u32>;
+@group(0) @binding(5) var<storage, read_write> outputValues: array<u32>;
+
+override WORKGROUP_COUNT: u32;
+override THREADS_PER_WORKGROUP: u32;
+override WORKGROUP_SIZE_X: u32;
+override WORKGROUP_SIZE_Y: u32;
+override CURRENT_BIT: u32;
+override ELEMENT_COUNT: u32;
+
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn radix_sort_reorder(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) { 
+    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;
+    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP;
+    let GID = WID + TID; // Global thread ID
+
+    if (GID >= ELEMENT_COUNT) {
+        return;
+    }
+
+    let k = inputKeys[GID];
+    let v = inputValues[GID];
+
+    let local_prefix = local_prefix_sum[GID];
+
+    // Calculate new position
+    let extract_bits = (k >> CURRENT_BIT) & 0x3;
+    let pid = extract_bits * WORKGROUP_COUNT + WORKGROUP_ID;
+    let sorted_position = prefix_block_sum[pid] + local_prefix;
+    
+    outputKeys[sorted_position] = k;
+    outputValues[sorted_position] = v;
+}`,se=function(){var y=arguments.length>0&&arguments[0]!==void 0?arguments[0]:!1,x=arguments.length>1&&arguments[1]!==void 0?arguments[1]:!1,O=arguments.length>2&&arguments[2]!==void 0?arguments[2]:"full";return`
+
+@group(0) @binding(0) var<storage, read> input: array<u32>;
+@group(0) @binding(1) var<storage, read_write> output: array<u32>;
+@group(0) @binding(2) var<storage, read> original: array<u32>;
+@group(0) @binding(3) var<storage, read_write> is_sorted: u32;
+
+override WORKGROUP_SIZE_X: u32;
+override WORKGROUP_SIZE_Y: u32;
+override THREADS_PER_WORKGROUP: u32;
+override ELEMENT_COUNT: u32;
+override START_ELEMENT: u32;
+
+var<workgroup> s_data: array<u32, THREADS_PER_WORKGROUP>;
+
+// Reset dispatch buffer and is_sorted flag
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn reset(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) {
+    if (TID >= ELEMENT_COUNT) {
+        return;
+    }
+
+    if (TID == 0) {
+        is_sorted = 0u;
+    }
+
+    let ELM_ID = TID * 3;
+
+    output[ELM_ID] = original[ELM_ID];
+}
+
+@compute @workgroup_size(WORKGROUP_SIZE_X, WORKGROUP_SIZE_Y, 1)
+fn check_sort(
+    @builtin(workgroup_id) w_id: vec3<u32>,
+    @builtin(num_workgroups) w_dim: vec3<u32>,
+    @builtin(local_invocation_index) TID: u32, // Local thread ID
+) {
+    let WORKGROUP_ID = w_id.x + w_id.y * w_dim.x;
+    let WID = WORKGROUP_ID * THREADS_PER_WORKGROUP + START_ELEMENT;
+    let GID = TID + WID; // Global thread ID
+
+    // Load data into shared memory
+    `.concat(y?le:"s_data[TID] = select(0u, input[GID], GID < ELEMENT_COUNT);",`
+
+    // Perform parallel reduction
+    for (var d = 1u; d < THREADS_PER_WORKGROUP; d *= 2u) {      
+        workgroupBarrier();  
+        if (TID % (2u * d) == 0u) {
+            s_data[TID] += s_data[TID + d];
+        }
+    }
+    workgroupBarrier();
+
+    // Write reduction result
+    `).concat(x?ke(O):Ge,`
+}`)},Ge=`
+    if (TID == 0) {
+        output[WORKGROUP_ID] = s_data[0];
+    }
+`,le=`
+    let LAST_THREAD = min(THREADS_PER_WORKGROUP, ELEMENT_COUNT - WID) - 1;
+
+    // Load current element into shared memory
+    // Also load next element for comparison
+    let elm = select(0u, input[GID], GID < ELEMENT_COUNT);
+    let next = select(0u, input[GID + 1], GID < ELEMENT_COUNT-1);
+    s_data[TID] = elm;
+    workgroupBarrier();
+
+    s_data[TID] = select(0u, 1u, GID < ELEMENT_COUNT-1 && elm > next);
+`,ke=function(y){return`
+    let fullDispatchLength = arrayLength(&output);
+    let dispatchIndex = TID * 3;
+
+    if (dispatchIndex >= fullDispatchLength) {
+        return;
+    }
+
+    `.concat(y=="full"?$:ue,`
+`)},ue=`
+    output[dispatchIndex] = select(0, original[dispatchIndex], s_data[0] == 0 && is_sorted == 0u);
+`,$=`
+    if (TID == 0 && s_data[0] == 0) {
+        is_sorted = 1u;
+    }
+
+    output[dispatchIndex] = select(0, original[dispatchIndex], s_data[0] != 0);
+`,q=(function(){function b(y){var x=y.device,O=y.data,U=y.result,G=y.original,w=y.is_sorted,D=y.count,u=y.start,t=u===void 0?0:u,o=y.mode,r=o===void 0?"full":o,f=y.workgroup_size,d=f===void 0?{x:16,y:16}:f;L(this,b),this.device=x,this.count=D,this.start=t,this.mode=r,this.workgroup_size=d,this.threads_per_workgroup=d.x*d.y,this.pipelines=[],this.buffers={data:O,result:U,original:G,is_sorted:w,outputs:[]},this.create_passes_recursive(O,D)}return F(b,[{key:"create_passes_recursive",value:function(x,O){var U=arguments.length>2&&arguments[2]!==void 0?arguments[2]:0,G=Math.ceil(O/this.threads_per_workgroup),w=U===0,D=G<=1,u="check-sort-".concat(this.mode,"-").concat(U),t=D?this.buffers.result:this.device.createBuffer({label:u,size:G*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST}),o=this.device.createBindGroupLayout({entries:[{binding:0,visibility:GPUShaderStage.COMPUTE,buffer:{type:"read-only-storage"}},{binding:1,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}}].concat(te(D?[{binding:2,visibility:GPUShaderStage.COMPUTE,buffer:{type:"read-only-storage"}},{binding:3,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}}]:[]))}),r=this.device.createBindGroup({layout:o,entries:[{binding:0,resource:{buffer:x}},{binding:1,resource:{buffer:t}}].concat(te(D?[{binding:2,resource:{buffer:this.buffers.original}},{binding:3,resource:{buffer:this.buffers.is_sorted}}]:[]))}),f=this.device.createPipelineLayout({bindGroupLayouts:[o]}),d=w?this.start+O:O,_=w?this.start:0,g=this.device.createComputePipeline({layout:f,compute:{module:this.device.createShaderModule({label:u,code:se(w,D,this.mode)}),entryPoint:this.mode=="reset"?"reset":"check_sort",constants:he({ELEMENT_COUNT:d,WORKGROUP_SIZE_X:this.workgroup_size.x,WORKGROUP_SIZE_Y:this.workgroup_size.y},this.mode!="reset"&&{THREADS_PER_WORKGROUP:this.threads_per_workgroup,START_ELEMENT:_})}});this.buffers.outputs.push(t),this.pipelines.push({pipeline:g,bindGroup:r}),D||this.create_passes_recursive(t,G,U+1)}},{key:"dispatch",value:function(x,O){for(var U=arguments.length>2&&arguments[2]!==void 0?arguments[2]:0,G=0;G<this.pipelines.length;G++){var w=this.pipelines[G],D=w.pipeline,u=w.bindGroup,t=this.mode!="reset"&&(this.mode=="full"||G<this.pipelines.length-1);x.setPipeline(D),x.setBindGroup(0,u),t?x.dispatchWorkgroupsIndirect(O,U+G*3*4):x.dispatchWorkgroups(1,1,1)}}}],[{key:"find_optimal_dispatch_chain",value:function(x,O,U){var G=U.x*U.y,w=[];do{var D=Math.ceil(O/G),u=fe(x,D);w.push(u.x,u.y,1),O=D}while(O>1);return w}}])})(),Y=new WeakSet,pe=(function(){function b(){var y=arguments.length>0&&arguments[0]!==void 0?arguments[0]:{},x=y.device,O=y.keys,U=y.values,G=y.count,w=y.bit_count,D=w===void 0?32:w,u=y.workgroup_size,t=u===void 0?{x:16,y:16}:u,o=y.check_order,r=o===void 0?!1:o,f=y.local_shuffle,d=f===void 0?!1:f,_=y.avoid_bank_conflicts,g=_===void 0?!1:_;if(L(this,b),C(this,Y),x==null)throw new Error("No device provided");if(O==null)throw new Error("No keys buffer provided");if(!Number.isInteger(G)||G<=0)throw new Error("Invalid count parameter");if(!Number.isInteger(D)||D<=0||D>32)throw new Error("Invalid bit_count parameter: ".concat(D));if(!Number.isInteger(t.x)||!Number.isInteger(t.y))throw new Error("Invalid workgroup_size parameter");if(D%4!=0)throw new Error("bit_count must be a multiple of 4");this.device=x,this.count=G,this.bit_count=D,this.workgroup_size=t,this.check_order=r,this.local_shuffle=d,this.avoid_bank_conflicts=g,this.threads_per_workgroup=t.x*t.y,this.workgroup_count=Math.ceil(G/this.threads_per_workgroup),this.prefix_block_workgroup_count=4*this.workgroup_count,this.has_values=U!=null,this.dispatchSize={},this.shaderModules={},this.kernels={},this.pipelines=[],this.buffers={keys:O,values:U},this.create_shader_modules(),this.create_pipelines()}return F(b,[{key:"create_shader_modules",value:function(){var x=function(G){return G.split(`
+`).filter(function(w){return!w.toLowerCase().includes("values")}).join(`
+`)},O=this.local_shuffle?Oe:Te;this.shaderModules={blockSum:this.device.createShaderModule({label:"radix-sort-block-sum",code:this.has_values?O:x(O)}),reorder:this.device.createShaderModule({label:"radix-sort-reorder",code:this.has_values?ve:x(ve)})}}},{key:"create_pipelines",value:function(){this.create_prefix_sum_kernel();var x=this.calculate_dispatch_sizes();this.create_buffers(x),this.create_check_sort_kernels(x);for(var O=0;O<this.bit_count;O+=2){var U=O%4==0,G=U?this.buffers.keys:this.buffers.tmpKeys,w=U?this.buffers.values:this.buffers.tmpValues,D=U?this.buffers.tmpKeys:this.buffers.keys,u=U?this.buffers.tmpValues:this.buffers.values,t=this.create_block_sum_pipeline(G,w,O),o=this.create_reorder_pipeline(G,w,D,u,O);this.pipelines.push({blockSumPipeline:t,reorderPipeline:o})}}},{key:"create_prefix_sum_kernel",value:function(){var x=this.device.createBuffer({label:"radix-sort-prefix-block-sum",size:this.prefix_block_workgroup_count*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST}),O=new we({device:this.device,data:x,count:this.prefix_block_workgroup_count,workgroup_size:this.workgroup_size,avoid_bank_conflicts:this.avoid_bank_conflicts});this.kernels.prefixSum=O,this.buffers.prefixBlockSum=x}},{key:"calculate_dispatch_sizes",value:function(){var x=fe(this.device,this.workgroup_count),O=this.kernels.prefixSum.get_dispatch_chain(),U=Math.min(this.count,this.threads_per_workgroup*4),G=this.count-U,w=U-1,D=q.find_optimal_dispatch_chain(this.device,U,this.workgroup_size),u=q.find_optimal_dispatch_chain(this.device,G,this.workgroup_size),t=[x.x,x.y,1].concat(te(D.slice(0,3)),te(O));return this.dispatchOffsets={radix_sort:0,check_sort_fast:12,prefix_sum:24},this.dispatchSize=x,this.initialDispatch=t,{initialDispatch:t,dispatchSizesFull:u,check_sort_fast_count:U,check_sort_full_count:G,start_full:w}}},{key:"create_buffers",value:function(x){var O=this.device.createBuffer({label:"radix-sort-tmp-keys",size:this.count*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST}),U=this.has_values?this.device.createBuffer({label:"radix-sort-tmp-values",size:this.count*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST}):null,G=this.device.createBuffer({label:"radix-sort-local-prefix-sum",size:this.count*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST});if(this.buffers.tmpKeys=O,this.buffers.tmpValues=U,this.buffers.localPrefixSum=G,!!this.check_order){var w=re({device:this.device,label:"radix-sort-dispatch-size",data:x.initialDispatch,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.INDIRECT}),D=re({device:this.device,label:"radix-sort-dispatch-size-original",data:x.initialDispatch,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC}),u=re({label:"check-sort-full-dispatch-size",device:this.device,data:x.dispatchSizesFull,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.INDIRECT}),t=re({label:"check-sort-full-dispatch-size-original",device:this.device,data:x.dispatchSizesFull,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC}),o=re({label:"is-sorted",device:this.device,data:new Uint32Array([0]),usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST});this.buffers.dispatchSize=w,this.buffers.originalDispatchSize=D,this.buffers.checkSortFullDispatchSize=u,this.buffers.originalCheckSortFullDispatchSize=t,this.buffers.isSorted=o}}},{key:"create_check_sort_kernels",value:function(x){if(this.check_order){var O=x.check_sort_fast_count,U=x.check_sort_full_count,G=x.start_full,w=new q({mode:"full",device:this.device,data:this.buffers.keys,result:this.buffers.dispatchSize,original:this.buffers.originalDispatchSize,is_sorted:this.buffers.isSorted,count:U,start:G,workgroup_size:this.workgroup_size}),D=new q({mode:"fast",device:this.device,data:this.buffers.keys,result:this.buffers.checkSortFullDispatchSize,original:this.buffers.originalCheckSortFullDispatchSize,is_sorted:this.buffers.isSorted,count:O,workgroup_size:this.workgroup_size}),u=this.initialDispatch.length/3;if(D.threads_per_workgroup<w.pipelines.length||w.threads_per_workgroup<u){console.warn("Warning: workgroup size is too small to enable check sort optimization, disabling..."),this.check_order=!1;return}var t=new q({mode:"reset",device:this.device,data:this.buffers.keys,original:this.buffers.originalDispatchSize,result:this.buffers.dispatchSize,is_sorted:this.buffers.isSorted,count:u,workgroup_size:fe(this.device,u)});this.kernels.checkSort={reset:t,fast:D,full:w}}}},{key:"create_block_sum_pipeline",value:function(x,O,U){var G=this.device.createBindGroupLayout({label:"radix-sort-block-sum",entries:[{binding:0,visibility:GPUShaderStage.COMPUTE,buffer:{type:this.local_shuffle?"storage":"read-only-storage"}},{binding:1,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}},{binding:2,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}}].concat(te(this.local_shuffle&&this.has_values?[{binding:3,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}}]:[]))}),w=this.device.createBindGroup({layout:G,entries:[{binding:0,resource:{buffer:x}},{binding:1,resource:{buffer:this.buffers.localPrefixSum}},{binding:2,resource:{buffer:this.buffers.prefixBlockSum}}].concat(te(this.local_shuffle&&this.has_values?[{binding:3,resource:{buffer:O}}]:[]))}),D=this.device.createPipelineLayout({bindGroupLayouts:[G]}),u=this.device.createComputePipeline({label:"radix-sort-block-sum",layout:D,compute:{module:this.shaderModules.blockSum,entryPoint:"radix_sort",constants:{WORKGROUP_SIZE_X:this.workgroup_size.x,WORKGROUP_SIZE_Y:this.workgroup_size.y,WORKGROUP_COUNT:this.workgroup_count,THREADS_PER_WORKGROUP:this.threads_per_workgroup,ELEMENT_COUNT:this.count,CURRENT_BIT:U}}});return{pipeline:u,bindGroup:w}}},{key:"create_reorder_pipeline",value:function(x,O,U,G,w){var D=this.device.createBindGroupLayout({label:"radix-sort-reorder",entries:[{binding:0,visibility:GPUShaderStage.COMPUTE,buffer:{type:"read-only-storage"}},{binding:1,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}},{binding:2,visibility:GPUShaderStage.COMPUTE,buffer:{type:"read-only-storage"}},{binding:3,visibility:GPUShaderStage.COMPUTE,buffer:{type:"read-only-storage"}}].concat(te(this.has_values?[{binding:4,visibility:GPUShaderStage.COMPUTE,buffer:{type:"read-only-storage"}},{binding:5,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}}]:[]))}),u=this.device.createBindGroup({layout:D,entries:[{binding:0,resource:{buffer:x}},{binding:1,resource:{buffer:U}},{binding:2,resource:{buffer:this.buffers.localPrefixSum}},{binding:3,resource:{buffer:this.buffers.prefixBlockSum}}].concat(te(this.has_values?[{binding:4,resource:{buffer:O}},{binding:5,resource:{buffer:G}}]:[]))}),t=this.device.createPipelineLayout({bindGroupLayouts:[D]}),o=this.device.createComputePipeline({label:"radix-sort-reorder",layout:t,compute:{module:this.shaderModules.reorder,entryPoint:"radix_sort_reorder",constants:{WORKGROUP_SIZE_X:this.workgroup_size.x,WORKGROUP_SIZE_Y:this.workgroup_size.y,WORKGROUP_COUNT:this.workgroup_count,THREADS_PER_WORKGROUP:this.threads_per_workgroup,ELEMENT_COUNT:this.count,CURRENT_BIT:w}}});return{pipeline:o,bindGroup:u}}},{key:"dispatch",value:function(x){this.check_order?R(Y,this,J).call(this,x):R(Y,this,ze).call(this,x)}}])})();function ze(b){for(var y=0;y<this.bit_count/2;y++){var x=this.pipelines[y],O=x.blockSumPipeline,U=x.reorderPipeline;b.setPipeline(O.pipeline),b.setBindGroup(0,O.bindGroup),b.dispatchWorkgroups(this.dispatchSize.x,this.dispatchSize.y,1),this.kernels.prefixSum.dispatch(b),b.setPipeline(U.pipeline),b.setBindGroup(0,U.bindGroup),b.dispatchWorkgroups(this.dispatchSize.x,this.dispatchSize.y,1)}}function J(b){this.kernels.checkSort.reset.dispatch(b);for(var y=0;y<this.bit_count/2;y++){var x=this.pipelines[y],O=x.blockSumPipeline,U=x.reorderPipeline;y%2==0&&(this.kernels.checkSort.fast.dispatch(b,this.buffers.dispatchSize,this.dispatchOffsets.check_sort_fast),this.kernels.checkSort.full.dispatch(b,this.buffers.checkSortFullDispatchSize)),b.setPipeline(O.pipeline),b.setBindGroup(0,O.bindGroup),b.dispatchWorkgroupsIndirect(this.buffers.dispatchSize,this.dispatchOffsets.radix_sort),this.kernels.prefixSum.dispatch(b,this.buffers.dispatchSize,this.dispatchOffsets.prefix_sum),b.setPipeline(U.pipeline),b.setBindGroup(0,U.bindGroup),b.dispatchWorkgroupsIndirect(this.buffers.dispatchSize,this.dispatchOffsets.radix_sort)}}l.PrefixSumKernel=we,l.RadixSortKernel=pe}))});var Dt=`
 struct Uniforms {
   viewProjectionMatrix : mat4x4<f32>,
+  invVPMatrix : mat4x4<f32>,
   backgroundColour: vec4<f32>,
+  camPos: vec3<f32>,
   aspectRatio : f32,
 }
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
@@ -962,7 +582,10 @@ struct Uniforms {
 struct VertexOut {
   @builtin(position) position : vec4f,
   @location(0) colour : vec4f,
-  @location(1) uv : vec2f
+  @location(1) uv : vec2f,
+  @location(2) worldPos: vec3f,
+  @location(3) normal: vec3f,
+  @location(4) fadeFac: f32,
 }
 
 struct VertexInput {
@@ -987,3878 +610,102 @@ fn vertex_main(
   instance: InstanceInput
 ) -> VertexOut {
   var output : VertexOut;
-  output.position = uniforms.viewProjectionMatrix * instance.position;
+  var position = instance.position;
+
+  // // WARP PARTICLE POSITION
+  // const R = 100.0;
+  // let theta = position.x / R;
+  
+  // // base arc point (radius R)
+  // let bx = R * sin(theta);
+  // let bz = R * (1.0 - cos(theta));
+
+  // // apply radial offset
+  // position.x = bx + position.z * sin(theta);
+  // position.z = bz + position.z * -cos(theta);
+
+
+  output.position = uniforms.viewProjectionMatrix * position;
 
   // SCREEN SPACE SIZE PARTICLES (zoom invariant)
   // const particleSize = 0.003;
   // let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize) * output.position.w;
 
   // WORLD SPACE SIZE PARTICLES
-  const particleSize = 0.5;
+  const particleSize = 1.0;
   let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize);
   
 
   output.position += vec4f(vertPos, 0., 0.);
+  output.worldPos = (uniforms.invVPMatrix * output.position).xyz;
 
-  const baseColor1 = vec4f(0.7, 0.3, 0.8, 1.0);
-  const baseColor2 = vec4f(0.3, 0.7, 0.8, 1.0);
-  var colour = select(baseColor1, baseColor2, instance.group > 0);
+  const baseColor1 = vec4f(0.3, 0.7, 0.8, 1.0);
+  const baseColor2 = vec4f(0.0, 0.3, 0.8, 1.0);
+  output.colour = mix(baseColor1, baseColor2, 0.5*instance.group + 0.5);
 
   // // SHADE COLLISIONS
   // const densityRange = 0.1; // density scalar will vary for density values in range [1, 1+densityRange]
   // let densityScalar = saturate((instance.density - 1.1)/densityRange); // 0 for no collisions, 1 for big collision
   // var colour = (1.0-densityScalar) * baseColor1 + densityScalar * baseColor2;
 
-  const lightDir = normalize(vec3<f32>(0.0, 0.2, 1.0));
-  var lightIntensity = dot(lightDir, instance.normal.xyz);
-  lightIntensity = 0.45*lightIntensity + 0.55;
-  colour *= lightIntensity;
 
-
-  // hide particles when they're coming in
+  // FADE PARTICLES IN AT THE START
   const startFadeY = 40;
   const endFadeY = 20;
-
-  let fadeFac = saturate((abs(instance.position.y)-startFadeY)/(endFadeY-startFadeY));
-  colour = mix(uniforms.backgroundColour, colour, fadeFac);
+  output.fadeFac = saturate((abs(instance.position.y)-startFadeY)/(endFadeY-startFadeY));
 
 
-  output.colour = colour;
   output.uv = vertex.uv;
+  output.normal = instance.normal.xyz; // could use improvement so normal is not constant across all fragments
 
   return output;
 }
 
 @fragment
 fn fragment_main(fragData: VertexOut) -> @location(0) vec4f {
-  // circle (need to switch on alpha blending)
+  let uvLength = length(fragData.uv - vec2f(0.5, 0.5)) * 2.0;
+  if (uvLength > 1.0) {
+    discard;
+  } 
+  // smooth circle edge (need to switch on alpha blending)
   // const falloff = 5.0;
-  // let uvLength = length(fragData.uv - vec2f(0.5, 0.5)) * 2.0;
   // let alpha = clamp(falloff * (1.0 - uvLength), 0.0, 1.0);
   // return vec4f(fragData.colour.rgb * alpha, fragData.colour.a * alpha);
 
-  return fragData.colour;
+
+  const lightDir = normalize(vec3<f32>(0.1, 0.8, 1.0));
+
+  // DIFFUSE SHADING
+  const diffuseStrength = 0.5;
+  let diffuseIntensity = diffuseStrength * dot(lightDir, fragData.normal) + 0.9 - diffuseStrength; 
+
+  // SPECULAR SHADING
+  let viewDir = normalize(uniforms.camPos - fragData.worldPos);
+  
+  const specularColour = vec4<f32>(1.0);
+  const specularExponent = 50.0;
+  let halfDir = normalize(normalize(lightDir) + viewDir);
+  let specularIntensity = 0.3*pow(max(dot(fragData.normal, halfDir), 0.0), specularExponent);
+
+
+
+
+  
+  var colour = saturate(diffuseIntensity*fragData.colour + specularIntensity*specularColour);
+
+
+  
+  colour = mix(uniforms.backgroundColour, colour, fragData.fadeFac);
+
+  return colour;
 }
 
-`
-  );
+`;var yt=()=>{let l=[-.5,-.5,0,.5,-.5,0,-.5,.5,0,.5,-.5,0,-.5,.5,0,.5,.5,0],v=[0,0,1,0,0,1,1,0,0,1,1,1],T=new Float32Array(l.length+v.length);for(let R=0;R<6;R++)T[5*R+0]=l[3*R+0],T[5*R+1]=l[3*R+1],T[5*R+2]=l[3*R+2],T[5*R+3]=v[2*R+0],T[5*R+4]=v[2*R+1];return T};function Xt(l,v){return class extends l{constructor(...T){super(...T),v(this)}}}var Qt=Xt(Array,l=>l.fill(0)),N=1e-6;function Jt(l){function v(d=0,_=0){let g=new l(2);return d!==void 0&&(g[0]=d,_!==void 0&&(g[1]=_)),g}let T=v;function R(d,_,g){let e=g??new l(2);return e[0]=d,e[1]=_,e}function A(d,_){let g=_??new l(2);return g[0]=Math.ceil(d[0]),g[1]=Math.ceil(d[1]),g}function L(d,_){let g=_??new l(2);return g[0]=Math.floor(d[0]),g[1]=Math.floor(d[1]),g}function C(d,_){let g=_??new l(2);return g[0]=Math.round(d[0]),g[1]=Math.round(d[1]),g}function K(d,_=0,g=1,e){let a=e??new l(2);return a[0]=Math.min(g,Math.max(_,d[0])),a[1]=Math.min(g,Math.max(_,d[1])),a}function F(d,_,g){let e=g??new l(2);return e[0]=d[0]+_[0],e[1]=d[1]+_[1],e}function Q(d,_,g,e){let a=e??new l(2);return a[0]=d[0]+_[0]*g,a[1]=d[1]+_[1]*g,a}function V(d,_){let g=d[0],e=d[1],a=_[0],s=_[1],i=Math.sqrt(g*g+e*e),n=Math.sqrt(a*a+s*s),c=i*n,h=c&&ve(d,_)/c;return Math.acos(h)}function X(d,_,g){let e=g??new l(2);return e[0]=d[0]-_[0],e[1]=d[1]-_[1],e}let ne=X;function he(d,_){return Math.abs(d[0]-_[0])<N&&Math.abs(d[1]-_[1])<N}function te(d,_){return d[0]===_[0]&&d[1]===_[1]}function _e(d,_,g,e){let a=e??new l(2);return a[0]=d[0]+g*(_[0]-d[0]),a[1]=d[1]+g*(_[1]-d[1]),a}function be(d,_,g,e){let a=e??new l(2);return a[0]=d[0]+g[0]*(_[0]-d[0]),a[1]=d[1]+g[1]*(_[1]-d[1]),a}function Ue(d,_,g){let e=g??new l(2);return e[0]=Math.max(d[0],_[0]),e[1]=Math.max(d[1],_[1]),e}function ge(d,_,g){let e=g??new l(2);return e[0]=Math.min(d[0],_[0]),e[1]=Math.min(d[1],_[1]),e}function ae(d,_,g){let e=g??new l(2);return e[0]=d[0]*_,e[1]=d[1]*_,e}let fe=ae;function re(d,_,g){let e=g??new l(2);return e[0]=d[0]/_,e[1]=d[1]/_,e}function we(d,_){let g=_??new l(2);return g[0]=1/d[0],g[1]=1/d[1],g}let Te=we;function Oe(d,_,g){let e=g??new l(3),a=d[0]*_[1]-d[1]*_[0];return e[0]=0,e[1]=0,e[2]=a,e}function ve(d,_){return d[0]*_[0]+d[1]*_[1]}function se(d){let _=d[0],g=d[1];return Math.sqrt(_*_+g*g)}let Ge=se;function le(d){let _=d[0],g=d[1];return _*_+g*g}let ke=le;function ue(d,_){let g=d[0]-_[0],e=d[1]-_[1];return Math.sqrt(g*g+e*e)}let $=ue;function q(d,_){let g=d[0]-_[0],e=d[1]-_[1];return g*g+e*e}let Y=q;function pe(d,_){let g=_??new l(2),e=d[0],a=d[1],s=Math.sqrt(e*e+a*a);return s>1e-5?(g[0]=e/s,g[1]=a/s):(g[0]=0,g[1]=0),g}function ze(d,_){let g=_??new l(2);return g[0]=-d[0],g[1]=-d[1],g}function J(d,_){let g=_??new l(2);return g[0]=d[0],g[1]=d[1],g}let b=J;function y(d,_,g){let e=g??new l(2);return e[0]=d[0]*_[0],e[1]=d[1]*_[1],e}let x=y;function O(d,_,g){let e=g??new l(2);return e[0]=d[0]/_[0],e[1]=d[1]/_[1],e}let U=O;function G(d=1,_){let g=_??new l(2),e=Math.random()*2*Math.PI;return g[0]=Math.cos(e)*d,g[1]=Math.sin(e)*d,g}function w(d){let _=d??new l(2);return _[0]=0,_[1]=0,_}function D(d,_,g){let e=g??new l(2),a=d[0],s=d[1];return e[0]=a*_[0]+s*_[4]+_[12],e[1]=a*_[1]+s*_[5]+_[13],e}function u(d,_,g){let e=g??new l(2),a=d[0],s=d[1];return e[0]=_[0]*a+_[4]*s+_[8],e[1]=_[1]*a+_[5]*s+_[9],e}function t(d,_,g,e){let a=e??new l(2),s=d[0]-_[0],i=d[1]-_[1],n=Math.sin(g),c=Math.cos(g);return a[0]=s*c-i*n+_[0],a[1]=s*n+i*c+_[1],a}function o(d,_,g){let e=g??new l(2);return pe(d,e),ae(e,_,e)}function r(d,_,g){let e=g??new l(2);return se(d)>_?o(d,_,e):J(d,e)}function f(d,_,g){let e=g??new l(2);return _e(d,_,.5,e)}return{create:v,fromValues:T,set:R,ceil:A,floor:L,round:C,clamp:K,add:F,addScaled:Q,angle:V,subtract:X,sub:ne,equalsApproximately:he,equals:te,lerp:_e,lerpV:be,max:Ue,min:ge,mulScalar:ae,scale:fe,divScalar:re,inverse:we,invert:Te,cross:Oe,dot:ve,length:se,len:Ge,lengthSq:le,lenSq:ke,distance:ue,dist:$,distanceSq:q,distSq:Y,normalize:pe,negate:ze,copy:J,clone:b,multiply:y,mul:x,divide:O,div:U,random:G,zero:w,transformMat4:D,transformMat3:u,rotate:t,setLength:o,truncate:r,midpoint:f}}var Pt=new Map;function Mt(l){let v=Pt.get(l);return v||(v=Jt(l),Pt.set(l,v)),v}function en(l){function v(n,c,h){let p=new l(3);return n!==void 0&&(p[0]=n,c!==void 0&&(p[1]=c,h!==void 0&&(p[2]=h))),p}let T=v;function R(n,c,h,p){let m=p??new l(3);return m[0]=n,m[1]=c,m[2]=h,m}function A(n,c){let h=c??new l(3);return h[0]=Math.ceil(n[0]),h[1]=Math.ceil(n[1]),h[2]=Math.ceil(n[2]),h}function L(n,c){let h=c??new l(3);return h[0]=Math.floor(n[0]),h[1]=Math.floor(n[1]),h[2]=Math.floor(n[2]),h}function C(n,c){let h=c??new l(3);return h[0]=Math.round(n[0]),h[1]=Math.round(n[1]),h[2]=Math.round(n[2]),h}function K(n,c=0,h=1,p){let m=p??new l(3);return m[0]=Math.min(h,Math.max(c,n[0])),m[1]=Math.min(h,Math.max(c,n[1])),m[2]=Math.min(h,Math.max(c,n[2])),m}function F(n,c,h){let p=h??new l(3);return p[0]=n[0]+c[0],p[1]=n[1]+c[1],p[2]=n[2]+c[2],p}function Q(n,c,h,p){let m=p??new l(3);return m[0]=n[0]+c[0]*h,m[1]=n[1]+c[1]*h,m[2]=n[2]+c[2]*h,m}function V(n,c){let h=n[0],p=n[1],m=n[2],P=c[0],S=c[1],E=c[2],I=Math.sqrt(h*h+p*p+m*m),M=Math.sqrt(P*P+S*S+E*E),k=I*M,W=k&&ve(n,c)/k;return Math.acos(W)}function X(n,c,h){let p=h??new l(3);return p[0]=n[0]-c[0],p[1]=n[1]-c[1],p[2]=n[2]-c[2],p}let ne=X;function he(n,c){return Math.abs(n[0]-c[0])<N&&Math.abs(n[1]-c[1])<N&&Math.abs(n[2]-c[2])<N}function te(n,c){return n[0]===c[0]&&n[1]===c[1]&&n[2]===c[2]}function _e(n,c,h,p){let m=p??new l(3);return m[0]=n[0]+h*(c[0]-n[0]),m[1]=n[1]+h*(c[1]-n[1]),m[2]=n[2]+h*(c[2]-n[2]),m}function be(n,c,h,p){let m=p??new l(3);return m[0]=n[0]+h[0]*(c[0]-n[0]),m[1]=n[1]+h[1]*(c[1]-n[1]),m[2]=n[2]+h[2]*(c[2]-n[2]),m}function Ue(n,c,h){let p=h??new l(3);return p[0]=Math.max(n[0],c[0]),p[1]=Math.max(n[1],c[1]),p[2]=Math.max(n[2],c[2]),p}function ge(n,c,h){let p=h??new l(3);return p[0]=Math.min(n[0],c[0]),p[1]=Math.min(n[1],c[1]),p[2]=Math.min(n[2],c[2]),p}function ae(n,c,h){let p=h??new l(3);return p[0]=n[0]*c,p[1]=n[1]*c,p[2]=n[2]*c,p}let fe=ae;function re(n,c,h){let p=h??new l(3);return p[0]=n[0]/c,p[1]=n[1]/c,p[2]=n[2]/c,p}function we(n,c){let h=c??new l(3);return h[0]=1/n[0],h[1]=1/n[1],h[2]=1/n[2],h}let Te=we;function Oe(n,c,h){let p=h??new l(3),m=n[2]*c[0]-n[0]*c[2],P=n[0]*c[1]-n[1]*c[0];return p[0]=n[1]*c[2]-n[2]*c[1],p[1]=m,p[2]=P,p}function ve(n,c){return n[0]*c[0]+n[1]*c[1]+n[2]*c[2]}function se(n){let c=n[0],h=n[1],p=n[2];return Math.sqrt(c*c+h*h+p*p)}let Ge=se;function le(n){let c=n[0],h=n[1],p=n[2];return c*c+h*h+p*p}let ke=le;function ue(n,c){let h=n[0]-c[0],p=n[1]-c[1],m=n[2]-c[2];return Math.sqrt(h*h+p*p+m*m)}let $=ue;function q(n,c){let h=n[0]-c[0],p=n[1]-c[1],m=n[2]-c[2];return h*h+p*p+m*m}let Y=q;function pe(n,c){let h=c??new l(3),p=n[0],m=n[1],P=n[2],S=Math.sqrt(p*p+m*m+P*P);return S>1e-5?(h[0]=p/S,h[1]=m/S,h[2]=P/S):(h[0]=0,h[1]=0,h[2]=0),h}function ze(n,c){let h=c??new l(3);return h[0]=-n[0],h[1]=-n[1],h[2]=-n[2],h}function J(n,c){let h=c??new l(3);return h[0]=n[0],h[1]=n[1],h[2]=n[2],h}let b=J;function y(n,c,h){let p=h??new l(3);return p[0]=n[0]*c[0],p[1]=n[1]*c[1],p[2]=n[2]*c[2],p}let x=y;function O(n,c,h){let p=h??new l(3);return p[0]=n[0]/c[0],p[1]=n[1]/c[1],p[2]=n[2]/c[2],p}let U=O;function G(n=1,c){let h=c??new l(3),p=Math.random()*2*Math.PI,m=Math.random()*2-1,P=Math.sqrt(1-m*m)*n;return h[0]=Math.cos(p)*P,h[1]=Math.sin(p)*P,h[2]=m*n,h}function w(n){let c=n??new l(3);return c[0]=0,c[1]=0,c[2]=0,c}function D(n,c,h){let p=h??new l(3),m=n[0],P=n[1],S=n[2],E=c[3]*m+c[7]*P+c[11]*S+c[15]||1;return p[0]=(c[0]*m+c[4]*P+c[8]*S+c[12])/E,p[1]=(c[1]*m+c[5]*P+c[9]*S+c[13])/E,p[2]=(c[2]*m+c[6]*P+c[10]*S+c[14])/E,p}function u(n,c,h){let p=h??new l(3),m=n[0],P=n[1],S=n[2];return p[0]=m*c[0]+P*c[4]+S*c[8],p[1]=m*c[1]+P*c[5]+S*c[9],p[2]=m*c[2]+P*c[6]+S*c[10],p}function t(n,c,h){let p=h??new l(3),m=n[0],P=n[1],S=n[2];return p[0]=m*c[0]+P*c[4]+S*c[8],p[1]=m*c[1]+P*c[5]+S*c[9],p[2]=m*c[2]+P*c[6]+S*c[10],p}function o(n,c,h){let p=h??new l(3),m=c[0],P=c[1],S=c[2],E=c[3]*2,I=n[0],M=n[1],k=n[2],W=P*k-S*M,z=S*I-m*k,B=m*M-P*I;return p[0]=I+W*E+(P*B-S*z)*2,p[1]=M+z*E+(S*W-m*B)*2,p[2]=k+B*E+(m*z-P*W)*2,p}function r(n,c){let h=c??new l(3);return h[0]=n[12],h[1]=n[13],h[2]=n[14],h}function f(n,c,h){let p=h??new l(3),m=c*4;return p[0]=n[m+0],p[1]=n[m+1],p[2]=n[m+2],p}function d(n,c){let h=c??new l(3),p=n[0],m=n[1],P=n[2],S=n[4],E=n[5],I=n[6],M=n[8],k=n[9],W=n[10];return h[0]=Math.sqrt(p*p+m*m+P*P),h[1]=Math.sqrt(S*S+E*E+I*I),h[2]=Math.sqrt(M*M+k*k+W*W),h}function _(n,c,h,p){let m=p??new l(3),P=[],S=[];return P[0]=n[0]-c[0],P[1]=n[1]-c[1],P[2]=n[2]-c[2],S[0]=P[0],S[1]=P[1]*Math.cos(h)-P[2]*Math.sin(h),S[2]=P[1]*Math.sin(h)+P[2]*Math.cos(h),m[0]=S[0]+c[0],m[1]=S[1]+c[1],m[2]=S[2]+c[2],m}function g(n,c,h,p){let m=p??new l(3),P=[],S=[];return P[0]=n[0]-c[0],P[1]=n[1]-c[1],P[2]=n[2]-c[2],S[0]=P[2]*Math.sin(h)+P[0]*Math.cos(h),S[1]=P[1],S[2]=P[2]*Math.cos(h)-P[0]*Math.sin(h),m[0]=S[0]+c[0],m[1]=S[1]+c[1],m[2]=S[2]+c[2],m}function e(n,c,h,p){let m=p??new l(3),P=[],S=[];return P[0]=n[0]-c[0],P[1]=n[1]-c[1],P[2]=n[2]-c[2],S[0]=P[0]*Math.cos(h)-P[1]*Math.sin(h),S[1]=P[0]*Math.sin(h)+P[1]*Math.cos(h),S[2]=P[2],m[0]=S[0]+c[0],m[1]=S[1]+c[1],m[2]=S[2]+c[2],m}function a(n,c,h){let p=h??new l(3);return pe(n,p),ae(p,c,p)}function s(n,c,h){let p=h??new l(3);return se(n)>c?a(n,c,p):J(n,p)}function i(n,c,h){let p=h??new l(3);return _e(n,c,.5,p)}return{create:v,fromValues:T,set:R,ceil:A,floor:L,round:C,clamp:K,add:F,addScaled:Q,angle:V,subtract:X,sub:ne,equalsApproximately:he,equals:te,lerp:_e,lerpV:be,max:Ue,min:ge,mulScalar:ae,scale:fe,divScalar:re,inverse:we,invert:Te,cross:Oe,dot:ve,length:se,len:Ge,lengthSq:le,lenSq:ke,distance:ue,dist:$,distanceSq:q,distSq:Y,normalize:pe,negate:ze,copy:J,clone:b,multiply:y,mul:x,divide:O,div:U,random:G,zero:w,transformMat4:D,transformMat4Upper3x3:u,transformMat3:t,transformQuat:o,getTranslation:r,getAxis:f,getScaling:d,rotateX:_,rotateY:g,rotateZ:e,setLength:a,truncate:s,midpoint:i}}var xt=new Map;function st(l){let v=xt.get(l);return v||(v=en(l),xt.set(l,v)),v}function tn(l){let v=Mt(l),T=st(l);function R(t,o,r,f,d,_,g,e,a){let s=new l(12);return s[3]=0,s[7]=0,s[11]=0,t!==void 0&&(s[0]=t,o!==void 0&&(s[1]=o,r!==void 0&&(s[2]=r,f!==void 0&&(s[4]=f,d!==void 0&&(s[5]=d,_!==void 0&&(s[6]=_,g!==void 0&&(s[8]=g,e!==void 0&&(s[9]=e,a!==void 0&&(s[10]=a))))))))),s}function A(t,o,r,f,d,_,g,e,a,s){let i=s??new l(12);return i[0]=t,i[1]=o,i[2]=r,i[3]=0,i[4]=f,i[5]=d,i[6]=_,i[7]=0,i[8]=g,i[9]=e,i[10]=a,i[11]=0,i}function L(t,o){let r=o??new l(12);return r[0]=t[0],r[1]=t[1],r[2]=t[2],r[3]=0,r[4]=t[4],r[5]=t[5],r[6]=t[6],r[7]=0,r[8]=t[8],r[9]=t[9],r[10]=t[10],r[11]=0,r}function C(t,o){let r=o??new l(12),f=t[0],d=t[1],_=t[2],g=t[3],e=f+f,a=d+d,s=_+_,i=f*e,n=d*e,c=d*a,h=_*e,p=_*a,m=_*s,P=g*e,S=g*a,E=g*s;return r[0]=1-c-m,r[1]=n+E,r[2]=h-S,r[3]=0,r[4]=n-E,r[5]=1-i-m,r[6]=p+P,r[7]=0,r[8]=h+S,r[9]=p-P,r[10]=1-i-c,r[11]=0,r}function K(t,o){let r=o??new l(12);return r[0]=-t[0],r[1]=-t[1],r[2]=-t[2],r[4]=-t[4],r[5]=-t[5],r[6]=-t[6],r[8]=-t[8],r[9]=-t[9],r[10]=-t[10],r}function F(t,o,r){let f=r??new l(12);return f[0]=t[0]*o,f[1]=t[1]*o,f[2]=t[2]*o,f[4]=t[4]*o,f[5]=t[5]*o,f[6]=t[6]*o,f[8]=t[8]*o,f[9]=t[9]*o,f[10]=t[10]*o,f}let Q=F;function V(t,o,r){let f=r??new l(12);return f[0]=t[0]+o[0],f[1]=t[1]+o[1],f[2]=t[2]+o[2],f[4]=t[4]+o[4],f[5]=t[5]+o[5],f[6]=t[6]+o[6],f[8]=t[8]+o[8],f[9]=t[9]+o[9],f[10]=t[10]+o[10],f}function X(t,o){let r=o??new l(12);return r[0]=t[0],r[1]=t[1],r[2]=t[2],r[4]=t[4],r[5]=t[5],r[6]=t[6],r[8]=t[8],r[9]=t[9],r[10]=t[10],r}let ne=X;function he(t,o){return Math.abs(t[0]-o[0])<N&&Math.abs(t[1]-o[1])<N&&Math.abs(t[2]-o[2])<N&&Math.abs(t[4]-o[4])<N&&Math.abs(t[5]-o[5])<N&&Math.abs(t[6]-o[6])<N&&Math.abs(t[8]-o[8])<N&&Math.abs(t[9]-o[9])<N&&Math.abs(t[10]-o[10])<N}function te(t,o){return t[0]===o[0]&&t[1]===o[1]&&t[2]===o[2]&&t[4]===o[4]&&t[5]===o[5]&&t[6]===o[6]&&t[8]===o[8]&&t[9]===o[9]&&t[10]===o[10]}function _e(t){let o=t??new l(12);return o[0]=1,o[1]=0,o[2]=0,o[4]=0,o[5]=1,o[6]=0,o[8]=0,o[9]=0,o[10]=1,o}function be(t,o){let r=o??new l(12);if(r===t){let c;return c=t[1],t[1]=t[4],t[4]=c,c=t[2],t[2]=t[8],t[8]=c,c=t[6],t[6]=t[9],t[9]=c,r}let f=t[0],d=t[1],_=t[2],g=t[4],e=t[5],a=t[6],s=t[8],i=t[9],n=t[10];return r[0]=f,r[1]=g,r[2]=s,r[4]=d,r[5]=e,r[6]=i,r[8]=_,r[9]=a,r[10]=n,r}function Ue(t,o){let r=o??new l(12),f=t[0],d=t[1],_=t[2],g=t[4],e=t[5],a=t[6],s=t[8],i=t[9],n=t[10],c=n*e-a*i,h=-n*g+a*s,p=i*g-e*s,m=1/(f*c+d*h+_*p);return r[0]=c*m,r[1]=(-n*d+_*i)*m,r[2]=(a*d-_*e)*m,r[4]=h*m,r[5]=(n*f-_*s)*m,r[6]=(-a*f+_*g)*m,r[8]=p*m,r[9]=(-i*f+d*s)*m,r[10]=(e*f-d*g)*m,r}function ge(t){let o=t[0],r=t[1],f=t[2],d=t[4],_=t[5],g=t[6],e=t[8],a=t[9],s=t[10];return o*(_*s-a*g)-d*(r*s-a*f)+e*(r*g-_*f)}let ae=Ue;function fe(t,o,r){let f=r??new l(12),d=t[0],_=t[1],g=t[2],e=t[4],a=t[5],s=t[6],i=t[8],n=t[9],c=t[10],h=o[0],p=o[1],m=o[2],P=o[4],S=o[5],E=o[6],I=o[8],M=o[9],k=o[10];return f[0]=d*h+e*p+i*m,f[1]=_*h+a*p+n*m,f[2]=g*h+s*p+c*m,f[4]=d*P+e*S+i*E,f[5]=_*P+a*S+n*E,f[6]=g*P+s*S+c*E,f[8]=d*I+e*M+i*k,f[9]=_*I+a*M+n*k,f[10]=g*I+s*M+c*k,f}let re=fe;function we(t,o,r){let f=r??_e();return t!==f&&(f[0]=t[0],f[1]=t[1],f[2]=t[2],f[4]=t[4],f[5]=t[5],f[6]=t[6]),f[8]=o[0],f[9]=o[1],f[10]=1,f}function Te(t,o){let r=o??v.create();return r[0]=t[8],r[1]=t[9],r}function Oe(t,o,r){let f=r??v.create(),d=o*4;return f[0]=t[d+0],f[1]=t[d+1],f}function ve(t,o,r,f){let d=f===t?t:X(t,f),_=r*4;return d[_+0]=o[0],d[_+1]=o[1],d}function se(t,o){let r=o??v.create(),f=t[0],d=t[1],_=t[4],g=t[5];return r[0]=Math.sqrt(f*f+d*d),r[1]=Math.sqrt(_*_+g*g),r}function Ge(t,o){let r=o??T.create(),f=t[0],d=t[1],_=t[2],g=t[4],e=t[5],a=t[6],s=t[8],i=t[9],n=t[10];return r[0]=Math.sqrt(f*f+d*d+_*_),r[1]=Math.sqrt(g*g+e*e+a*a),r[2]=Math.sqrt(s*s+i*i+n*n),r}function le(t,o){let r=o??new l(12);return r[0]=1,r[1]=0,r[2]=0,r[4]=0,r[5]=1,r[6]=0,r[8]=t[0],r[9]=t[1],r[10]=1,r}function ke(t,o,r){let f=r??new l(12),d=o[0],_=o[1],g=t[0],e=t[1],a=t[2],s=t[4],i=t[5],n=t[6],c=t[8],h=t[9],p=t[10];return t!==f&&(f[0]=g,f[1]=e,f[2]=a,f[4]=s,f[5]=i,f[6]=n),f[8]=g*d+s*_+c,f[9]=e*d+i*_+h,f[10]=a*d+n*_+p,f}function ue(t,o){let r=o??new l(12),f=Math.cos(t),d=Math.sin(t);return r[0]=f,r[1]=d,r[2]=0,r[4]=-d,r[5]=f,r[6]=0,r[8]=0,r[9]=0,r[10]=1,r}function $(t,o,r){let f=r??new l(12),d=t[0],_=t[1],g=t[2],e=t[4],a=t[5],s=t[6],i=Math.cos(o),n=Math.sin(o);return f[0]=i*d+n*e,f[1]=i*_+n*a,f[2]=i*g+n*s,f[4]=i*e-n*d,f[5]=i*a-n*_,f[6]=i*s-n*g,t!==f&&(f[8]=t[8],f[9]=t[9],f[10]=t[10]),f}function q(t,o){let r=o??new l(12),f=Math.cos(t),d=Math.sin(t);return r[0]=1,r[1]=0,r[2]=0,r[4]=0,r[5]=f,r[6]=d,r[8]=0,r[9]=-d,r[10]=f,r}function Y(t,o,r){let f=r??new l(12),d=t[4],_=t[5],g=t[6],e=t[8],a=t[9],s=t[10],i=Math.cos(o),n=Math.sin(o);return f[4]=i*d+n*e,f[5]=i*_+n*a,f[6]=i*g+n*s,f[8]=i*e-n*d,f[9]=i*a-n*_,f[10]=i*s-n*g,t!==f&&(f[0]=t[0],f[1]=t[1],f[2]=t[2]),f}function pe(t,o){let r=o??new l(12),f=Math.cos(t),d=Math.sin(t);return r[0]=f,r[1]=0,r[2]=-d,r[4]=0,r[5]=1,r[6]=0,r[8]=d,r[9]=0,r[10]=f,r}function ze(t,o,r){let f=r??new l(12),d=t[0],_=t[1],g=t[2],e=t[8],a=t[9],s=t[10],i=Math.cos(o),n=Math.sin(o);return f[0]=i*d-n*e,f[1]=i*_-n*a,f[2]=i*g-n*s,f[8]=i*e+n*d,f[9]=i*a+n*_,f[10]=i*s+n*g,t!==f&&(f[4]=t[4],f[5]=t[5],f[6]=t[6]),f}let J=ue,b=$;function y(t,o){let r=o??new l(12);return r[0]=t[0],r[1]=0,r[2]=0,r[4]=0,r[5]=t[1],r[6]=0,r[8]=0,r[9]=0,r[10]=1,r}function x(t,o,r){let f=r??new l(12),d=o[0],_=o[1];return f[0]=d*t[0],f[1]=d*t[1],f[2]=d*t[2],f[4]=_*t[4],f[5]=_*t[5],f[6]=_*t[6],t!==f&&(f[8]=t[8],f[9]=t[9],f[10]=t[10]),f}function O(t,o){let r=o??new l(12);return r[0]=t[0],r[1]=0,r[2]=0,r[4]=0,r[5]=t[1],r[6]=0,r[8]=0,r[9]=0,r[10]=t[2],r}function U(t,o,r){let f=r??new l(12),d=o[0],_=o[1],g=o[2];return f[0]=d*t[0],f[1]=d*t[1],f[2]=d*t[2],f[4]=_*t[4],f[5]=_*t[5],f[6]=_*t[6],f[8]=g*t[8],f[9]=g*t[9],f[10]=g*t[10],f}function G(t,o){let r=o??new l(12);return r[0]=t,r[1]=0,r[2]=0,r[4]=0,r[5]=t,r[6]=0,r[8]=0,r[9]=0,r[10]=1,r}function w(t,o,r){let f=r??new l(12);return f[0]=o*t[0],f[1]=o*t[1],f[2]=o*t[2],f[4]=o*t[4],f[5]=o*t[5],f[6]=o*t[6],t!==f&&(f[8]=t[8],f[9]=t[9],f[10]=t[10]),f}function D(t,o){let r=o??new l(12);return r[0]=t,r[1]=0,r[2]=0,r[4]=0,r[5]=t,r[6]=0,r[8]=0,r[9]=0,r[10]=t,r}function u(t,o,r){let f=r??new l(12);return f[0]=o*t[0],f[1]=o*t[1],f[2]=o*t[2],f[4]=o*t[4],f[5]=o*t[5],f[6]=o*t[6],f[8]=o*t[8],f[9]=o*t[9],f[10]=o*t[10],f}return{add:V,clone:ne,copy:X,create:R,determinant:ge,equals:te,equalsApproximately:he,fromMat4:L,fromQuat:C,get3DScaling:Ge,getAxis:Oe,getScaling:se,getTranslation:Te,identity:_e,inverse:Ue,invert:ae,mul:re,mulScalar:Q,multiply:fe,multiplyScalar:F,negate:K,rotate:$,rotateX:Y,rotateY:ze,rotateZ:b,rotation:ue,rotationX:q,rotationY:pe,rotationZ:J,scale:x,scale3D:U,scaling:y,scaling3D:O,set:A,setAxis:ve,setTranslation:we,translate:ke,translation:le,transpose:be,uniformScale:w,uniformScale3D:u,uniformScaling:G,uniformScaling3D:D}}var St=new Map;function nn(l){let v=St.get(l);return v||(v=tn(l),St.set(l,v)),v}function rn(l){let v=st(l);function T(e,a,s,i,n,c,h,p,m,P,S,E,I,M,k,W){let z=new l(16);return e!==void 0&&(z[0]=e,a!==void 0&&(z[1]=a,s!==void 0&&(z[2]=s,i!==void 0&&(z[3]=i,n!==void 0&&(z[4]=n,c!==void 0&&(z[5]=c,h!==void 0&&(z[6]=h,p!==void 0&&(z[7]=p,m!==void 0&&(z[8]=m,P!==void 0&&(z[9]=P,S!==void 0&&(z[10]=S,E!==void 0&&(z[11]=E,I!==void 0&&(z[12]=I,M!==void 0&&(z[13]=M,k!==void 0&&(z[14]=k,W!==void 0&&(z[15]=W)))))))))))))))),z}function R(e,a,s,i,n,c,h,p,m,P,S,E,I,M,k,W,z){let B=z??new l(16);return B[0]=e,B[1]=a,B[2]=s,B[3]=i,B[4]=n,B[5]=c,B[6]=h,B[7]=p,B[8]=m,B[9]=P,B[10]=S,B[11]=E,B[12]=I,B[13]=M,B[14]=k,B[15]=W,B}function A(e,a){let s=a??new l(16);return s[0]=e[0],s[1]=e[1],s[2]=e[2],s[3]=0,s[4]=e[4],s[5]=e[5],s[6]=e[6],s[7]=0,s[8]=e[8],s[9]=e[9],s[10]=e[10],s[11]=0,s[12]=0,s[13]=0,s[14]=0,s[15]=1,s}function L(e,a){let s=a??new l(16),i=e[0],n=e[1],c=e[2],h=e[3],p=i+i,m=n+n,P=c+c,S=i*p,E=n*p,I=n*m,M=c*p,k=c*m,W=c*P,z=h*p,B=h*m,Z=h*P;return s[0]=1-I-W,s[1]=E+Z,s[2]=M-B,s[3]=0,s[4]=E-Z,s[5]=1-S-W,s[6]=k+z,s[7]=0,s[8]=M+B,s[9]=k-z,s[10]=1-S-I,s[11]=0,s[12]=0,s[13]=0,s[14]=0,s[15]=1,s}function C(e,a){let s=a??new l(16);return s[0]=-e[0],s[1]=-e[1],s[2]=-e[2],s[3]=-e[3],s[4]=-e[4],s[5]=-e[5],s[6]=-e[6],s[7]=-e[7],s[8]=-e[8],s[9]=-e[9],s[10]=-e[10],s[11]=-e[11],s[12]=-e[12],s[13]=-e[13],s[14]=-e[14],s[15]=-e[15],s}function K(e,a,s){let i=s??new l(16);return i[0]=e[0]+a[0],i[1]=e[1]+a[1],i[2]=e[2]+a[2],i[3]=e[3]+a[3],i[4]=e[4]+a[4],i[5]=e[5]+a[5],i[6]=e[6]+a[6],i[7]=e[7]+a[7],i[8]=e[8]+a[8],i[9]=e[9]+a[9],i[10]=e[10]+a[10],i[11]=e[11]+a[11],i[12]=e[12]+a[12],i[13]=e[13]+a[13],i[14]=e[14]+a[14],i[15]=e[15]+a[15],i}function F(e,a,s){let i=s??new l(16);return i[0]=e[0]*a,i[1]=e[1]*a,i[2]=e[2]*a,i[3]=e[3]*a,i[4]=e[4]*a,i[5]=e[5]*a,i[6]=e[6]*a,i[7]=e[7]*a,i[8]=e[8]*a,i[9]=e[9]*a,i[10]=e[10]*a,i[11]=e[11]*a,i[12]=e[12]*a,i[13]=e[13]*a,i[14]=e[14]*a,i[15]=e[15]*a,i}let Q=F;function V(e,a){let s=a??new l(16);return s[0]=e[0],s[1]=e[1],s[2]=e[2],s[3]=e[3],s[4]=e[4],s[5]=e[5],s[6]=e[6],s[7]=e[7],s[8]=e[8],s[9]=e[9],s[10]=e[10],s[11]=e[11],s[12]=e[12],s[13]=e[13],s[14]=e[14],s[15]=e[15],s}let X=V;function ne(e,a){return Math.abs(e[0]-a[0])<N&&Math.abs(e[1]-a[1])<N&&Math.abs(e[2]-a[2])<N&&Math.abs(e[3]-a[3])<N&&Math.abs(e[4]-a[4])<N&&Math.abs(e[5]-a[5])<N&&Math.abs(e[6]-a[6])<N&&Math.abs(e[7]-a[7])<N&&Math.abs(e[8]-a[8])<N&&Math.abs(e[9]-a[9])<N&&Math.abs(e[10]-a[10])<N&&Math.abs(e[11]-a[11])<N&&Math.abs(e[12]-a[12])<N&&Math.abs(e[13]-a[13])<N&&Math.abs(e[14]-a[14])<N&&Math.abs(e[15]-a[15])<N}function he(e,a){return e[0]===a[0]&&e[1]===a[1]&&e[2]===a[2]&&e[3]===a[3]&&e[4]===a[4]&&e[5]===a[5]&&e[6]===a[6]&&e[7]===a[7]&&e[8]===a[8]&&e[9]===a[9]&&e[10]===a[10]&&e[11]===a[11]&&e[12]===a[12]&&e[13]===a[13]&&e[14]===a[14]&&e[15]===a[15]}function te(e){let a=e??new l(16);return a[0]=1,a[1]=0,a[2]=0,a[3]=0,a[4]=0,a[5]=1,a[6]=0,a[7]=0,a[8]=0,a[9]=0,a[10]=1,a[11]=0,a[12]=0,a[13]=0,a[14]=0,a[15]=1,a}function _e(e,a){let s=a??new l(16);if(s===e){let H;return H=e[1],e[1]=e[4],e[4]=H,H=e[2],e[2]=e[8],e[8]=H,H=e[3],e[3]=e[12],e[12]=H,H=e[6],e[6]=e[9],e[9]=H,H=e[7],e[7]=e[13],e[13]=H,H=e[11],e[11]=e[14],e[14]=H,s}let i=e[0],n=e[1],c=e[2],h=e[3],p=e[4],m=e[5],P=e[6],S=e[7],E=e[8],I=e[9],M=e[10],k=e[11],W=e[12],z=e[13],B=e[14],Z=e[15];return s[0]=i,s[1]=p,s[2]=E,s[3]=W,s[4]=n,s[5]=m,s[6]=I,s[7]=z,s[8]=c,s[9]=P,s[10]=M,s[11]=B,s[12]=h,s[13]=S,s[14]=k,s[15]=Z,s}function be(e,a){let s=a??new l(16),i=e[0],n=e[1],c=e[2],h=e[3],p=e[4],m=e[5],P=e[6],S=e[7],E=e[8],I=e[9],M=e[10],k=e[11],W=e[12],z=e[13],B=e[14],Z=e[15],H=M*Z,ie=B*k,oe=P*Z,ce=B*S,de=P*k,me=M*S,De=c*Z,ye=B*h,Pe=c*k,xe=M*h,Ie=c*S,Me=P*h,Ee=E*z,Re=W*I,Be=p*z,Ae=W*m,Le=p*I,Xe=E*m,Qe=i*z,Je=W*n,et=i*I,tt=E*n,nt=i*m,rt=p*n,_t=H*m+ce*I+de*z-(ie*m+oe*I+me*z),gt=ie*n+De*I+xe*z-(H*n+ye*I+Pe*z),wt=oe*n+ye*m+Ie*z-(ce*n+De*m+Me*z),vt=me*n+Pe*m+Me*I-(de*n+xe*m+Ie*I),Se=1/(i*_t+p*gt+E*wt+W*vt);return s[0]=Se*_t,s[1]=Se*gt,s[2]=Se*wt,s[3]=Se*vt,s[4]=Se*(ie*p+oe*E+me*W-(H*p+ce*E+de*W)),s[5]=Se*(H*i+ye*E+Pe*W-(ie*i+De*E+xe*W)),s[6]=Se*(ce*i+De*p+Me*W-(oe*i+ye*p+Ie*W)),s[7]=Se*(de*i+xe*p+Ie*E-(me*i+Pe*p+Me*E)),s[8]=Se*(Ee*S+Ae*k+Le*Z-(Re*S+Be*k+Xe*Z)),s[9]=Se*(Re*h+Qe*k+tt*Z-(Ee*h+Je*k+et*Z)),s[10]=Se*(Be*h+Je*S+nt*Z-(Ae*h+Qe*S+rt*Z)),s[11]=Se*(Xe*h+et*S+rt*k-(Le*h+tt*S+nt*k)),s[12]=Se*(Be*M+Xe*B+Re*P-(Le*B+Ee*P+Ae*M)),s[13]=Se*(et*B+Ee*c+Je*M-(Qe*M+tt*B+Re*c)),s[14]=Se*(Qe*P+rt*B+Ae*c-(nt*B+Be*c+Je*P)),s[15]=Se*(nt*M+Le*c+tt*P-(et*P+rt*M+Xe*c)),s}function Ue(e){let a=e[0],s=e[1],i=e[2],n=e[3],c=e[4],h=e[5],p=e[6],m=e[7],P=e[8],S=e[9],E=e[10],I=e[11],M=e[12],k=e[13],W=e[14],z=e[15],B=E*z,Z=W*I,H=p*z,ie=W*m,oe=p*I,ce=E*m,de=i*z,me=W*n,De=i*I,ye=E*n,Pe=i*m,xe=p*n,Ie=B*h+ie*S+oe*k-(Z*h+H*S+ce*k),Me=Z*s+de*S+ye*k-(B*s+me*S+De*k),Ee=H*s+me*h+Pe*k-(ie*s+de*h+xe*k),Re=ce*s+De*h+xe*S-(oe*s+ye*h+Pe*S);return a*Ie+c*Me+P*Ee+M*Re}let ge=be;function ae(e,a,s){let i=s??new l(16),n=e[0],c=e[1],h=e[2],p=e[3],m=e[4],P=e[5],S=e[6],E=e[7],I=e[8],M=e[9],k=e[10],W=e[11],z=e[12],B=e[13],Z=e[14],H=e[15],ie=a[0],oe=a[1],ce=a[2],de=a[3],me=a[4],De=a[5],ye=a[6],Pe=a[7],xe=a[8],Ie=a[9],Me=a[10],Ee=a[11],Re=a[12],Be=a[13],Ae=a[14],Le=a[15];return i[0]=n*ie+m*oe+I*ce+z*de,i[1]=c*ie+P*oe+M*ce+B*de,i[2]=h*ie+S*oe+k*ce+Z*de,i[3]=p*ie+E*oe+W*ce+H*de,i[4]=n*me+m*De+I*ye+z*Pe,i[5]=c*me+P*De+M*ye+B*Pe,i[6]=h*me+S*De+k*ye+Z*Pe,i[7]=p*me+E*De+W*ye+H*Pe,i[8]=n*xe+m*Ie+I*Me+z*Ee,i[9]=c*xe+P*Ie+M*Me+B*Ee,i[10]=h*xe+S*Ie+k*Me+Z*Ee,i[11]=p*xe+E*Ie+W*Me+H*Ee,i[12]=n*Re+m*Be+I*Ae+z*Le,i[13]=c*Re+P*Be+M*Ae+B*Le,i[14]=h*Re+S*Be+k*Ae+Z*Le,i[15]=p*Re+E*Be+W*Ae+H*Le,i}let fe=ae;function re(e,a,s){let i=s??te();return e!==i&&(i[0]=e[0],i[1]=e[1],i[2]=e[2],i[3]=e[3],i[4]=e[4],i[5]=e[5],i[6]=e[6],i[7]=e[7],i[8]=e[8],i[9]=e[9],i[10]=e[10],i[11]=e[11]),i[12]=a[0],i[13]=a[1],i[14]=a[2],i[15]=1,i}function we(e,a){let s=a??v.create();return s[0]=e[12],s[1]=e[13],s[2]=e[14],s}function Te(e,a,s){let i=s??v.create(),n=a*4;return i[0]=e[n+0],i[1]=e[n+1],i[2]=e[n+2],i}function Oe(e,a,s,i){let n=i===e?i:V(e,i),c=s*4;return n[c+0]=a[0],n[c+1]=a[1],n[c+2]=a[2],n}function ve(e,a){let s=a??v.create(),i=e[0],n=e[1],c=e[2],h=e[4],p=e[5],m=e[6],P=e[8],S=e[9],E=e[10];return s[0]=Math.sqrt(i*i+n*n+c*c),s[1]=Math.sqrt(h*h+p*p+m*m),s[2]=Math.sqrt(P*P+S*S+E*E),s}function se(e,a,s,i,n){let c=n??new l(16),h=Math.tan(Math.PI*.5-.5*e);if(c[0]=h/a,c[1]=0,c[2]=0,c[3]=0,c[4]=0,c[5]=h,c[6]=0,c[7]=0,c[8]=0,c[9]=0,c[11]=-1,c[12]=0,c[13]=0,c[15]=0,Number.isFinite(i)){let p=1/(s-i);c[10]=i*p,c[14]=i*s*p}else c[10]=-1,c[14]=-s;return c}function Ge(e,a,s,i=1/0,n){let c=n??new l(16),h=1/Math.tan(e*.5);if(c[0]=h/a,c[1]=0,c[2]=0,c[3]=0,c[4]=0,c[5]=h,c[6]=0,c[7]=0,c[8]=0,c[9]=0,c[11]=-1,c[12]=0,c[13]=0,c[15]=0,i===1/0)c[10]=0,c[14]=s;else{let p=1/(i-s);c[10]=s*p,c[14]=i*s*p}return c}function le(e,a,s,i,n,c,h){let p=h??new l(16);return p[0]=2/(a-e),p[1]=0,p[2]=0,p[3]=0,p[4]=0,p[5]=2/(i-s),p[6]=0,p[7]=0,p[8]=0,p[9]=0,p[10]=1/(n-c),p[11]=0,p[12]=(a+e)/(e-a),p[13]=(i+s)/(s-i),p[14]=n/(n-c),p[15]=1,p}function ke(e,a,s,i,n,c,h){let p=h??new l(16),m=a-e,P=i-s,S=n-c;return p[0]=2*n/m,p[1]=0,p[2]=0,p[3]=0,p[4]=0,p[5]=2*n/P,p[6]=0,p[7]=0,p[8]=(e+a)/m,p[9]=(i+s)/P,p[10]=c/S,p[11]=-1,p[12]=0,p[13]=0,p[14]=n*c/S,p[15]=0,p}function ue(e,a,s,i,n,c=1/0,h){let p=h??new l(16),m=a-e,P=i-s;if(p[0]=2*n/m,p[1]=0,p[2]=0,p[3]=0,p[4]=0,p[5]=2*n/P,p[6]=0,p[7]=0,p[8]=(e+a)/m,p[9]=(i+s)/P,p[11]=-1,p[12]=0,p[13]=0,p[15]=0,c===1/0)p[10]=0,p[14]=n;else{let S=1/(c-n);p[10]=n*S,p[14]=c*n*S}return p}let $=v.create(),q=v.create(),Y=v.create();function pe(e,a,s,i){let n=i??new l(16);return v.normalize(v.subtract(a,e,Y),Y),v.normalize(v.cross(s,Y,$),$),v.normalize(v.cross(Y,$,q),q),n[0]=$[0],n[1]=$[1],n[2]=$[2],n[3]=0,n[4]=q[0],n[5]=q[1],n[6]=q[2],n[7]=0,n[8]=Y[0],n[9]=Y[1],n[10]=Y[2],n[11]=0,n[12]=e[0],n[13]=e[1],n[14]=e[2],n[15]=1,n}function ze(e,a,s,i){let n=i??new l(16);return v.normalize(v.subtract(e,a,Y),Y),v.normalize(v.cross(s,Y,$),$),v.normalize(v.cross(Y,$,q),q),n[0]=$[0],n[1]=$[1],n[2]=$[2],n[3]=0,n[4]=q[0],n[5]=q[1],n[6]=q[2],n[7]=0,n[8]=Y[0],n[9]=Y[1],n[10]=Y[2],n[11]=0,n[12]=e[0],n[13]=e[1],n[14]=e[2],n[15]=1,n}function J(e,a,s,i){let n=i??new l(16);return v.normalize(v.subtract(e,a,Y),Y),v.normalize(v.cross(s,Y,$),$),v.normalize(v.cross(Y,$,q),q),n[0]=$[0],n[1]=q[0],n[2]=Y[0],n[3]=0,n[4]=$[1],n[5]=q[1],n[6]=Y[1],n[7]=0,n[8]=$[2],n[9]=q[2],n[10]=Y[2],n[11]=0,n[12]=-($[0]*e[0]+$[1]*e[1]+$[2]*e[2]),n[13]=-(q[0]*e[0]+q[1]*e[1]+q[2]*e[2]),n[14]=-(Y[0]*e[0]+Y[1]*e[1]+Y[2]*e[2]),n[15]=1,n}function b(e,a){let s=a??new l(16);return s[0]=1,s[1]=0,s[2]=0,s[3]=0,s[4]=0,s[5]=1,s[6]=0,s[7]=0,s[8]=0,s[9]=0,s[10]=1,s[11]=0,s[12]=e[0],s[13]=e[1],s[14]=e[2],s[15]=1,s}function y(e,a,s){let i=s??new l(16),n=a[0],c=a[1],h=a[2],p=e[0],m=e[1],P=e[2],S=e[3],E=e[4],I=e[5],M=e[6],k=e[7],W=e[8],z=e[9],B=e[10],Z=e[11],H=e[12],ie=e[13],oe=e[14],ce=e[15];return e!==i&&(i[0]=p,i[1]=m,i[2]=P,i[3]=S,i[4]=E,i[5]=I,i[6]=M,i[7]=k,i[8]=W,i[9]=z,i[10]=B,i[11]=Z),i[12]=p*n+E*c+W*h+H,i[13]=m*n+I*c+z*h+ie,i[14]=P*n+M*c+B*h+oe,i[15]=S*n+k*c+Z*h+ce,i}function x(e,a){let s=a??new l(16),i=Math.cos(e),n=Math.sin(e);return s[0]=1,s[1]=0,s[2]=0,s[3]=0,s[4]=0,s[5]=i,s[6]=n,s[7]=0,s[8]=0,s[9]=-n,s[10]=i,s[11]=0,s[12]=0,s[13]=0,s[14]=0,s[15]=1,s}function O(e,a,s){let i=s??new l(16),n=e[4],c=e[5],h=e[6],p=e[7],m=e[8],P=e[9],S=e[10],E=e[11],I=Math.cos(a),M=Math.sin(a);return i[4]=I*n+M*m,i[5]=I*c+M*P,i[6]=I*h+M*S,i[7]=I*p+M*E,i[8]=I*m-M*n,i[9]=I*P-M*c,i[10]=I*S-M*h,i[11]=I*E-M*p,e!==i&&(i[0]=e[0],i[1]=e[1],i[2]=e[2],i[3]=e[3],i[12]=e[12],i[13]=e[13],i[14]=e[14],i[15]=e[15]),i}function U(e,a){let s=a??new l(16),i=Math.cos(e),n=Math.sin(e);return s[0]=i,s[1]=0,s[2]=-n,s[3]=0,s[4]=0,s[5]=1,s[6]=0,s[7]=0,s[8]=n,s[9]=0,s[10]=i,s[11]=0,s[12]=0,s[13]=0,s[14]=0,s[15]=1,s}function G(e,a,s){let i=s??new l(16),n=e[0],c=e[1],h=e[2],p=e[3],m=e[8],P=e[9],S=e[10],E=e[11],I=Math.cos(a),M=Math.sin(a);return i[0]=I*n-M*m,i[1]=I*c-M*P,i[2]=I*h-M*S,i[3]=I*p-M*E,i[8]=I*m+M*n,i[9]=I*P+M*c,i[10]=I*S+M*h,i[11]=I*E+M*p,e!==i&&(i[4]=e[4],i[5]=e[5],i[6]=e[6],i[7]=e[7],i[12]=e[12],i[13]=e[13],i[14]=e[14],i[15]=e[15]),i}function w(e,a){let s=a??new l(16),i=Math.cos(e),n=Math.sin(e);return s[0]=i,s[1]=n,s[2]=0,s[3]=0,s[4]=-n,s[5]=i,s[6]=0,s[7]=0,s[8]=0,s[9]=0,s[10]=1,s[11]=0,s[12]=0,s[13]=0,s[14]=0,s[15]=1,s}function D(e,a,s){let i=s??new l(16),n=e[0],c=e[1],h=e[2],p=e[3],m=e[4],P=e[5],S=e[6],E=e[7],I=Math.cos(a),M=Math.sin(a);return i[0]=I*n+M*m,i[1]=I*c+M*P,i[2]=I*h+M*S,i[3]=I*p+M*E,i[4]=I*m-M*n,i[5]=I*P-M*c,i[6]=I*S-M*h,i[7]=I*E-M*p,e!==i&&(i[8]=e[8],i[9]=e[9],i[10]=e[10],i[11]=e[11],i[12]=e[12],i[13]=e[13],i[14]=e[14],i[15]=e[15]),i}function u(e,a,s){let i=s??new l(16),n=e[0],c=e[1],h=e[2],p=Math.sqrt(n*n+c*c+h*h);n/=p,c/=p,h/=p;let m=n*n,P=c*c,S=h*h,E=Math.cos(a),I=Math.sin(a),M=1-E;return i[0]=m+(1-m)*E,i[1]=n*c*M+h*I,i[2]=n*h*M-c*I,i[3]=0,i[4]=n*c*M-h*I,i[5]=P+(1-P)*E,i[6]=c*h*M+n*I,i[7]=0,i[8]=n*h*M+c*I,i[9]=c*h*M-n*I,i[10]=S+(1-S)*E,i[11]=0,i[12]=0,i[13]=0,i[14]=0,i[15]=1,i}let t=u;function o(e,a,s,i){let n=i??new l(16),c=a[0],h=a[1],p=a[2],m=Math.sqrt(c*c+h*h+p*p);c/=m,h/=m,p/=m;let P=c*c,S=h*h,E=p*p,I=Math.cos(s),M=Math.sin(s),k=1-I,W=P+(1-P)*I,z=c*h*k+p*M,B=c*p*k-h*M,Z=c*h*k-p*M,H=S+(1-S)*I,ie=h*p*k+c*M,oe=c*p*k+h*M,ce=h*p*k-c*M,de=E+(1-E)*I,me=e[0],De=e[1],ye=e[2],Pe=e[3],xe=e[4],Ie=e[5],Me=e[6],Ee=e[7],Re=e[8],Be=e[9],Ae=e[10],Le=e[11];return n[0]=W*me+z*xe+B*Re,n[1]=W*De+z*Ie+B*Be,n[2]=W*ye+z*Me+B*Ae,n[3]=W*Pe+z*Ee+B*Le,n[4]=Z*me+H*xe+ie*Re,n[5]=Z*De+H*Ie+ie*Be,n[6]=Z*ye+H*Me+ie*Ae,n[7]=Z*Pe+H*Ee+ie*Le,n[8]=oe*me+ce*xe+de*Re,n[9]=oe*De+ce*Ie+de*Be,n[10]=oe*ye+ce*Me+de*Ae,n[11]=oe*Pe+ce*Ee+de*Le,e!==n&&(n[12]=e[12],n[13]=e[13],n[14]=e[14],n[15]=e[15]),n}let r=o;function f(e,a){let s=a??new l(16);return s[0]=e[0],s[1]=0,s[2]=0,s[3]=0,s[4]=0,s[5]=e[1],s[6]=0,s[7]=0,s[8]=0,s[9]=0,s[10]=e[2],s[11]=0,s[12]=0,s[13]=0,s[14]=0,s[15]=1,s}function d(e,a,s){let i=s??new l(16),n=a[0],c=a[1],h=a[2];return i[0]=n*e[0],i[1]=n*e[1],i[2]=n*e[2],i[3]=n*e[3],i[4]=c*e[4],i[5]=c*e[5],i[6]=c*e[6],i[7]=c*e[7],i[8]=h*e[8],i[9]=h*e[9],i[10]=h*e[10],i[11]=h*e[11],e!==i&&(i[12]=e[12],i[13]=e[13],i[14]=e[14],i[15]=e[15]),i}function _(e,a){let s=a??new l(16);return s[0]=e,s[1]=0,s[2]=0,s[3]=0,s[4]=0,s[5]=e,s[6]=0,s[7]=0,s[8]=0,s[9]=0,s[10]=e,s[11]=0,s[12]=0,s[13]=0,s[14]=0,s[15]=1,s}function g(e,a,s){let i=s??new l(16);return i[0]=a*e[0],i[1]=a*e[1],i[2]=a*e[2],i[3]=a*e[3],i[4]=a*e[4],i[5]=a*e[5],i[6]=a*e[6],i[7]=a*e[7],i[8]=a*e[8],i[9]=a*e[9],i[10]=a*e[10],i[11]=a*e[11],e!==i&&(i[12]=e[12],i[13]=e[13],i[14]=e[14],i[15]=e[15]),i}return{add:K,aim:pe,axisRotate:o,axisRotation:u,cameraAim:ze,clone:X,copy:V,create:T,determinant:Ue,equals:he,equalsApproximately:ne,fromMat3:A,fromQuat:L,frustum:ke,frustumReverseZ:ue,getAxis:Te,getScaling:ve,getTranslation:we,identity:te,inverse:be,invert:ge,lookAt:J,mul:fe,mulScalar:Q,multiply:ae,multiplyScalar:F,negate:C,ortho:le,perspective:se,perspectiveReverseZ:Ge,rotate:r,rotateX:O,rotateY:G,rotateZ:D,rotation:t,rotationX:x,rotationY:U,rotationZ:w,scale:d,scaling:f,set:R,setAxis:Oe,setTranslation:re,translate:y,translation:b,transpose:_e,uniformScale:g,uniformScaling:_}}var bt=new Map;function sn(l){let v=bt.get(l);return v||(v=rn(l),bt.set(l,v)),v}function on(l){let v=st(l);function T(w,D,u,t){let o=new l(4);return w!==void 0&&(o[0]=w,D!==void 0&&(o[1]=D,u!==void 0&&(o[2]=u,t!==void 0&&(o[3]=t)))),o}let R=T;function A(w,D,u,t,o){let r=o??new l(4);return r[0]=w,r[1]=D,r[2]=u,r[3]=t,r}function L(w,D,u){let t=u??new l(4),o=D*.5,r=Math.sin(o);return t[0]=r*w[0],t[1]=r*w[1],t[2]=r*w[2],t[3]=Math.cos(o),t}function C(w,D){let u=D??v.create(3),t=Math.acos(w[3])*2,o=Math.sin(t*.5);return o>N?(u[0]=w[0]/o,u[1]=w[1]/o,u[2]=w[2]/o):(u[0]=1,u[1]=0,u[2]=0),{angle:t,axis:u}}function K(w,D){let u=se(w,D);return Math.acos(2*u*u-1)}function F(w,D,u){let t=u??new l(4),o=w[0],r=w[1],f=w[2],d=w[3],_=D[0],g=D[1],e=D[2],a=D[3];return t[0]=o*a+d*_+r*e-f*g,t[1]=r*a+d*g+f*_-o*e,t[2]=f*a+d*e+o*g-r*_,t[3]=d*a-o*_-r*g-f*e,t}let Q=F;function V(w,D,u){let t=u??new l(4),o=D*.5,r=w[0],f=w[1],d=w[2],_=w[3],g=Math.sin(o),e=Math.cos(o);return t[0]=r*e+_*g,t[1]=f*e+d*g,t[2]=d*e-f*g,t[3]=_*e-r*g,t}function X(w,D,u){let t=u??new l(4),o=D*.5,r=w[0],f=w[1],d=w[2],_=w[3],g=Math.sin(o),e=Math.cos(o);return t[0]=r*e-d*g,t[1]=f*e+_*g,t[2]=d*e+r*g,t[3]=_*e-f*g,t}function ne(w,D,u){let t=u??new l(4),o=D*.5,r=w[0],f=w[1],d=w[2],_=w[3],g=Math.sin(o),e=Math.cos(o);return t[0]=r*e+f*g,t[1]=f*e-r*g,t[2]=d*e+_*g,t[3]=_*e-d*g,t}function he(w,D,u,t){let o=t??new l(4),r=w[0],f=w[1],d=w[2],_=w[3],g=D[0],e=D[1],a=D[2],s=D[3],i=r*g+f*e+d*a+_*s;i<0&&(i=-i,g=-g,e=-e,a=-a,s=-s);let n,c;if(1-i>N){let h=Math.acos(i),p=Math.sin(h);n=Math.sin((1-u)*h)/p,c=Math.sin(u*h)/p}else n=1-u,c=u;return o[0]=n*r+c*g,o[1]=n*f+c*e,o[2]=n*d+c*a,o[3]=n*_+c*s,o}function te(w,D){let u=D??new l(4),t=w[0],o=w[1],r=w[2],f=w[3],d=t*t+o*o+r*r+f*f,_=d?1/d:0;return u[0]=-t*_,u[1]=-o*_,u[2]=-r*_,u[3]=f*_,u}function _e(w,D){let u=D??new l(4);return u[0]=-w[0],u[1]=-w[1],u[2]=-w[2],u[3]=w[3],u}function be(w,D){let u=D??new l(4),t=w[0]+w[5]+w[10];if(t>0){let o=Math.sqrt(t+1);u[3]=.5*o;let r=.5/o;u[0]=(w[6]-w[9])*r,u[1]=(w[8]-w[2])*r,u[2]=(w[1]-w[4])*r}else{let o=0;w[5]>w[0]&&(o=1),w[10]>w[o*4+o]&&(o=2);let r=(o+1)%3,f=(o+2)%3,d=Math.sqrt(w[o*4+o]-w[r*4+r]-w[f*4+f]+1);u[o]=.5*d;let _=.5/d;u[3]=(w[r*4+f]-w[f*4+r])*_,u[r]=(w[r*4+o]+w[o*4+r])*_,u[f]=(w[f*4+o]+w[o*4+f])*_}return u}function Ue(w,D,u,t,o){let r=o??new l(4),f=w*.5,d=D*.5,_=u*.5,g=Math.sin(f),e=Math.cos(f),a=Math.sin(d),s=Math.cos(d),i=Math.sin(_),n=Math.cos(_);switch(t){case"xyz":r[0]=g*s*n+e*a*i,r[1]=e*a*n-g*s*i,r[2]=e*s*i+g*a*n,r[3]=e*s*n-g*a*i;break;case"xzy":r[0]=g*s*n-e*a*i,r[1]=e*a*n-g*s*i,r[2]=e*s*i+g*a*n,r[3]=e*s*n+g*a*i;break;case"yxz":r[0]=g*s*n+e*a*i,r[1]=e*a*n-g*s*i,r[2]=e*s*i-g*a*n,r[3]=e*s*n+g*a*i;break;case"yzx":r[0]=g*s*n+e*a*i,r[1]=e*a*n+g*s*i,r[2]=e*s*i-g*a*n,r[3]=e*s*n-g*a*i;break;case"zxy":r[0]=g*s*n-e*a*i,r[1]=e*a*n+g*s*i,r[2]=e*s*i+g*a*n,r[3]=e*s*n-g*a*i;break;case"zyx":r[0]=g*s*n-e*a*i,r[1]=e*a*n+g*s*i,r[2]=e*s*i-g*a*n,r[3]=e*s*n+g*a*i;break;default:throw new Error(`Unknown rotation order: ${t}`)}return r}function ge(w,D){let u=D??new l(4);return u[0]=w[0],u[1]=w[1],u[2]=w[2],u[3]=w[3],u}let ae=ge;function fe(w,D,u){let t=u??new l(4);return t[0]=w[0]+D[0],t[1]=w[1]+D[1],t[2]=w[2]+D[2],t[3]=w[3]+D[3],t}function re(w,D,u){let t=u??new l(4);return t[0]=w[0]-D[0],t[1]=w[1]-D[1],t[2]=w[2]-D[2],t[3]=w[3]-D[3],t}let we=re;function Te(w,D,u){let t=u??new l(4);return t[0]=w[0]*D,t[1]=w[1]*D,t[2]=w[2]*D,t[3]=w[3]*D,t}let Oe=Te;function ve(w,D,u){let t=u??new l(4);return t[0]=w[0]/D,t[1]=w[1]/D,t[2]=w[2]/D,t[3]=w[3]/D,t}function se(w,D){return w[0]*D[0]+w[1]*D[1]+w[2]*D[2]+w[3]*D[3]}function Ge(w,D,u,t){let o=t??new l(4);return o[0]=w[0]+u*(D[0]-w[0]),o[1]=w[1]+u*(D[1]-w[1]),o[2]=w[2]+u*(D[2]-w[2]),o[3]=w[3]+u*(D[3]-w[3]),o}function le(w){let D=w[0],u=w[1],t=w[2],o=w[3];return Math.sqrt(D*D+u*u+t*t+o*o)}let ke=le;function ue(w){let D=w[0],u=w[1],t=w[2],o=w[3];return D*D+u*u+t*t+o*o}let $=ue;function q(w,D){let u=D??new l(4),t=w[0],o=w[1],r=w[2],f=w[3],d=Math.sqrt(t*t+o*o+r*r+f*f);return d>1e-5?(u[0]=t/d,u[1]=o/d,u[2]=r/d,u[3]=f/d):(u[0]=0,u[1]=0,u[2]=0,u[3]=1),u}function Y(w,D){return Math.abs(w[0]-D[0])<N&&Math.abs(w[1]-D[1])<N&&Math.abs(w[2]-D[2])<N&&Math.abs(w[3]-D[3])<N}function pe(w,D){return w[0]===D[0]&&w[1]===D[1]&&w[2]===D[2]&&w[3]===D[3]}function ze(w){let D=w??new l(4);return D[0]=0,D[1]=0,D[2]=0,D[3]=1,D}let J=v.create(),b=v.create(),y=v.create();function x(w,D,u){let t=u??new l(4),o=v.dot(w,D);return o<-.999999?(v.cross(b,w,J),v.len(J)<1e-6&&v.cross(y,w,J),v.normalize(J,J),L(J,Math.PI,t),t):o>.999999?(t[0]=0,t[1]=0,t[2]=0,t[3]=1,t):(v.cross(w,D,J),t[0]=J[0],t[1]=J[1],t[2]=J[2],t[3]=1+o,q(t,t))}let O=new l(4),U=new l(4);function G(w,D,u,t,o,r){let f=r??new l(4);return he(w,t,o,O),he(D,u,o,U),he(O,U,2*o*(1-o),f),f}return{create:T,fromValues:R,set:A,fromAxisAngle:L,toAxisAngle:C,angle:K,multiply:F,mul:Q,rotateX:V,rotateY:X,rotateZ:ne,slerp:he,inverse:te,conjugate:_e,fromMat:be,fromEuler:Ue,copy:ge,clone:ae,add:fe,subtract:re,sub:we,mulScalar:Te,scale:Oe,divScalar:ve,dot:se,lerp:Ge,length:le,len:ke,lengthSq:ue,lenSq:$,normalize:q,equalsApproximately:Y,equals:pe,identity:ze,rotationTo:x,sqlerp:G}}var Ot=new Map;function cn(l){let v=Ot.get(l);return v||(v=on(l),Ot.set(l,v)),v}function an(l){function v(u,t,o,r){let f=new l(4);return u!==void 0&&(f[0]=u,t!==void 0&&(f[1]=t,o!==void 0&&(f[2]=o,r!==void 0&&(f[3]=r)))),f}let T=v;function R(u,t,o,r,f){let d=f??new l(4);return d[0]=u,d[1]=t,d[2]=o,d[3]=r,d}function A(u,t){let o=t??new l(4);return o[0]=Math.ceil(u[0]),o[1]=Math.ceil(u[1]),o[2]=Math.ceil(u[2]),o[3]=Math.ceil(u[3]),o}function L(u,t){let o=t??new l(4);return o[0]=Math.floor(u[0]),o[1]=Math.floor(u[1]),o[2]=Math.floor(u[2]),o[3]=Math.floor(u[3]),o}function C(u,t){let o=t??new l(4);return o[0]=Math.round(u[0]),o[1]=Math.round(u[1]),o[2]=Math.round(u[2]),o[3]=Math.round(u[3]),o}function K(u,t=0,o=1,r){let f=r??new l(4);return f[0]=Math.min(o,Math.max(t,u[0])),f[1]=Math.min(o,Math.max(t,u[1])),f[2]=Math.min(o,Math.max(t,u[2])),f[3]=Math.min(o,Math.max(t,u[3])),f}function F(u,t,o){let r=o??new l(4);return r[0]=u[0]+t[0],r[1]=u[1]+t[1],r[2]=u[2]+t[2],r[3]=u[3]+t[3],r}function Q(u,t,o,r){let f=r??new l(4);return f[0]=u[0]+t[0]*o,f[1]=u[1]+t[1]*o,f[2]=u[2]+t[2]*o,f[3]=u[3]+t[3]*o,f}function V(u,t,o){let r=o??new l(4);return r[0]=u[0]-t[0],r[1]=u[1]-t[1],r[2]=u[2]-t[2],r[3]=u[3]-t[3],r}let X=V;function ne(u,t){return Math.abs(u[0]-t[0])<N&&Math.abs(u[1]-t[1])<N&&Math.abs(u[2]-t[2])<N&&Math.abs(u[3]-t[3])<N}function he(u,t){return u[0]===t[0]&&u[1]===t[1]&&u[2]===t[2]&&u[3]===t[3]}function te(u,t,o,r){let f=r??new l(4);return f[0]=u[0]+o*(t[0]-u[0]),f[1]=u[1]+o*(t[1]-u[1]),f[2]=u[2]+o*(t[2]-u[2]),f[3]=u[3]+o*(t[3]-u[3]),f}function _e(u,t,o,r){let f=r??new l(4);return f[0]=u[0]+o[0]*(t[0]-u[0]),f[1]=u[1]+o[1]*(t[1]-u[1]),f[2]=u[2]+o[2]*(t[2]-u[2]),f[3]=u[3]+o[3]*(t[3]-u[3]),f}function be(u,t,o){let r=o??new l(4);return r[0]=Math.max(u[0],t[0]),r[1]=Math.max(u[1],t[1]),r[2]=Math.max(u[2],t[2]),r[3]=Math.max(u[3],t[3]),r}function Ue(u,t,o){let r=o??new l(4);return r[0]=Math.min(u[0],t[0]),r[1]=Math.min(u[1],t[1]),r[2]=Math.min(u[2],t[2]),r[3]=Math.min(u[3],t[3]),r}function ge(u,t,o){let r=o??new l(4);return r[0]=u[0]*t,r[1]=u[1]*t,r[2]=u[2]*t,r[3]=u[3]*t,r}let ae=ge;function fe(u,t,o){let r=o??new l(4);return r[0]=u[0]/t,r[1]=u[1]/t,r[2]=u[2]/t,r[3]=u[3]/t,r}function re(u,t){let o=t??new l(4);return o[0]=1/u[0],o[1]=1/u[1],o[2]=1/u[2],o[3]=1/u[3],o}let we=re;function Te(u,t){return u[0]*t[0]+u[1]*t[1]+u[2]*t[2]+u[3]*t[3]}function Oe(u){let t=u[0],o=u[1],r=u[2],f=u[3];return Math.sqrt(t*t+o*o+r*r+f*f)}let ve=Oe;function se(u){let t=u[0],o=u[1],r=u[2],f=u[3];return t*t+o*o+r*r+f*f}let Ge=se;function le(u,t){let o=u[0]-t[0],r=u[1]-t[1],f=u[2]-t[2],d=u[3]-t[3];return Math.sqrt(o*o+r*r+f*f+d*d)}let ke=le;function ue(u,t){let o=u[0]-t[0],r=u[1]-t[1],f=u[2]-t[2],d=u[3]-t[3];return o*o+r*r+f*f+d*d}let $=ue;function q(u,t){let o=t??new l(4),r=u[0],f=u[1],d=u[2],_=u[3],g=Math.sqrt(r*r+f*f+d*d+_*_);return g>1e-5?(o[0]=r/g,o[1]=f/g,o[2]=d/g,o[3]=_/g):(o[0]=0,o[1]=0,o[2]=0,o[3]=0),o}function Y(u,t){let o=t??new l(4);return o[0]=-u[0],o[1]=-u[1],o[2]=-u[2],o[3]=-u[3],o}function pe(u,t){let o=t??new l(4);return o[0]=u[0],o[1]=u[1],o[2]=u[2],o[3]=u[3],o}let ze=pe;function J(u,t,o){let r=o??new l(4);return r[0]=u[0]*t[0],r[1]=u[1]*t[1],r[2]=u[2]*t[2],r[3]=u[3]*t[3],r}let b=J;function y(u,t,o){let r=o??new l(4);return r[0]=u[0]/t[0],r[1]=u[1]/t[1],r[2]=u[2]/t[2],r[3]=u[3]/t[3],r}let x=y;function O(u){let t=u??new l(4);return t[0]=0,t[1]=0,t[2]=0,t[3]=0,t}function U(u,t,o){let r=o??new l(4),f=u[0],d=u[1],_=u[2],g=u[3];return r[0]=t[0]*f+t[4]*d+t[8]*_+t[12]*g,r[1]=t[1]*f+t[5]*d+t[9]*_+t[13]*g,r[2]=t[2]*f+t[6]*d+t[10]*_+t[14]*g,r[3]=t[3]*f+t[7]*d+t[11]*_+t[15]*g,r}function G(u,t,o){let r=o??new l(4);return q(u,r),ge(r,t,r)}function w(u,t,o){let r=o??new l(4);return Oe(u)>t?G(u,t,r):pe(u,r)}function D(u,t,o){let r=o??new l(4);return te(u,t,.5,r)}return{create:v,fromValues:T,set:R,ceil:A,floor:L,round:C,clamp:K,add:F,addScaled:Q,subtract:V,sub:X,equalsApproximately:ne,equals:he,lerp:te,lerpV:_e,max:be,min:Ue,mulScalar:ge,scale:ae,divScalar:fe,inverse:re,invert:we,dot:Te,length:Oe,len:ve,lengthSq:se,lenSq:Ge,distance:le,dist:ke,distanceSq:ue,distSq:$,normalize:q,negate:Y,copy:pe,clone:ze,multiply:J,mul:b,divide:y,div:x,zero:O,transformMat4:U,setLength:G,truncate:w,midpoint:D}}var It=new Map;function un(l){let v=It.get(l);return v||(v=an(l),It.set(l,v)),v}function ft(l,v,T,R,A,L){return{mat3:nn(l),mat4:sn(v),quat:cn(T),vec2:Mt(R),vec3:st(A),vec4:un(L)}}var{mat3:Mn,mat4:Ce,quat:En,vec2:$e,vec3:j,vec4:je}=ft(Float32Array,Float32Array,Float32Array,Float32Array,Float32Array,Float32Array),{mat3:Rn,mat4:Un,quat:Tn,vec2:Gn,vec3:kn,vec4:zn}=ft(Float64Array,Float64Array,Float64Array,Float64Array,Float64Array,Float64Array),{mat3:Bn,mat4:An,quat:Ln,vec2:Wn,vec3:Nn,vec4:Cn}=ft(Qt,Array,Array,Array,Array,Array);var Ye=64,Ne=20,Et=(l,v=10)=>{let T=new Uint32Array(l.buffer),R=[];for(let A=0;A<v;A++){let L=A*Ne;R=[...R,{xPos:l[L+0],yPos:l[L+1],zPos:l[L+2],xVel:l[L+4],yVel:l[L+5],zVel:l[L+6],dist:l[L+8],dens:l[L+9],cell:T[L+10],test:T[L+11]}]}console.table(R)};function ee(l){return Number.isInteger(l)?l.toFixed(1):l.toString()}function Rt(l){return`vec3<f32>(${ee(l[0])}, ${ee(l[1])}, ${ee(l[2])})`}function Ut(l){let v=T=>T.toFixed(0);return`vec3<i32>(${v(l[0])}, ${v(l[1])}, ${v(l[2])})`}var it=class{initialised=!1;device={};canvas={};ctx={};renderPipeline={};instanceCount=0;vertexCount=0;vertexBuffer={};instanceBuffer={};uniformBuffer={};bindGroup={};depthTexture=null;multisampleTexture=null;clearColour={r:.1,g:.1,b:.1,a:1};multisampleCount=4;async init(){if(this.canvas=document.querySelector("#gpuCanvas"),!navigator.gpu)throw Error("WebGPU not supported.");let v=await navigator.gpu.requestAdapter();if(!v)throw Error("Couldn't request WebGPU adapter.");return this.device=await v.requestDevice(),this.ctx=this.canvas.getContext("webgpu"),this.ctx.configure({device:this.device,format:navigator.gpu.getPreferredCanvasFormat(),alphaMode:"opaque"}),this.initialised=!0,!0}createBuffersAndPipeline(v){let T=yt();this.vertexCount=T.length/5,this.instanceCount=v;let R=[{attributes:[{shaderLocation:0,offset:0,format:"float32x3"},{shaderLocation:1,offset:12,format:"float32x2"}],arrayStride:20,stepMode:"vertex"},{attributes:[{shaderLocation:2,offset:0,format:"float32x4"},{shaderLocation:3,offset:16,format:"float32x4"},{shaderLocation:4,offset:32,format:"float32x4"},{shaderLocation:5,offset:48,format:"float32"},{shaderLocation:6,offset:52,format:"float32"},{shaderLocation:7,offset:56,format:"uint32"},{shaderLocation:8,offset:60,format:"float32"}],arrayStride:Ne*4,stepMode:"instance"}],A=this.device.createShaderModule({code:Dt});this.renderPipeline=this.device.createRenderPipeline({vertex:{module:A,entryPoint:"vertex_main",buffers:R},fragment:{module:A,entryPoint:"fragment_main",targets:[{format:navigator.gpu.getPreferredCanvasFormat()}]},primitive:{topology:"triangle-list",cullMode:"none"},depthStencil:{depthWriteEnabled:!0,depthCompare:"less",format:"depth24plus"},layout:"auto",multisample:{count:this.multisampleCount}}),this.vertexBuffer=this.device.createBuffer({size:T.byteLength,usage:GPUBufferUsage.VERTEX|GPUBufferUsage.COPY_DST}),this.device.queue.writeBuffer(this.vertexBuffer,0,T,0,T.length),this.instanceBuffer=this.device.createBuffer({size:this.instanceCount*4*Ne,usage:GPUBufferUsage.VERTEX|GPUBufferUsage.COPY_DST});let L=160;this.uniformBuffer=this.device.createBuffer({size:L,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST}),this.bindGroup=this.device.createBindGroup({layout:this.renderPipeline.getBindGroupLayout(0),entries:[{binding:0,resource:{buffer:this.uniformBuffer}}]})}render(v,T){if(!this.initialised)throw"WebGPU not initialised";let R=this.ctx.getCurrentTexture(),A=new Float32Array([...v,...Ce.inverse(v),this.clearColour.r,this.clearColour.g,this.clearColour.b,this.clearColour.a,...T,R.width/R.height]);this.device.queue.writeBuffer(this.uniformBuffer,0,A,0),(!this.depthTexture||this.depthTexture.width!==R.width||this.depthTexture.height!==R.height)&&(this.depthTexture?.destroy(),this.depthTexture=this.device.createTexture({size:R,format:"depth24plus",usage:GPUTextureUsage.RENDER_ATTACHMENT,sampleCount:this.multisampleCount})),(!this.multisampleTexture||this.multisampleTexture.width!==R.width||this.multisampleTexture.height!==R.height)&&(this.multisampleTexture&&this.multisampleTexture.destroy(),this.multisampleTexture=this.device.createTexture({format:R.format,usage:GPUTextureUsage.RENDER_ATTACHMENT,size:[R.width,R.height],sampleCount:this.multisampleCount}));let L=this.device.createCommandEncoder(),C=L.beginRenderPass({colorAttachments:[{clearValue:this.clearColour,loadOp:"clear",storeOp:"store",view:this.multisampleTexture.createView(),resolveTarget:R.createView()}],depthStencilAttachment:{depthClearValue:1,depthLoadOp:"clear",depthStoreOp:"store",view:this.depthTexture.createView()}});C.setPipeline(this.renderPipeline),C.setVertexBuffer(0,this.vertexBuffer),C.setVertexBuffer(1,this.instanceBuffer),C.setBindGroup(0,this.bindGroup),C.draw(this.vertexCount,this.instanceCount,0,0),C.end(),this.device.queue.submit([L.finish()])}};var We=1,fn=j.create(200,100,25),He=j.floor(j.divScalar(fn,We)),ln=j.mulScalar(He,We),Ve=`
 
-  // src/ts/render/square.ts
-  var createSquareData = () => {
-    const positions = [
-      -0.5,
-      -0.5,
-      0,
-      0.5,
-      -0.5,
-      0,
-      -0.5,
-      0.5,
-      0,
-      0.5,
-      -0.5,
-      0,
-      -0.5,
-      0.5,
-      0,
-      0.5,
-      0.5,
-      0
-    ];
-    const uvs = [
-      0,
-      0,
-      1,
-      0,
-      0,
-      1,
-      1,
-      0,
-      0,
-      1,
-      1,
-      1
-    ];
-    const data = new Float32Array(positions.length + uvs.length);
-    for (let i = 0; i < 6; i++) {
-      data[5 * i + 0] = positions[3 * i + 0];
-      data[5 * i + 1] = positions[3 * i + 1];
-      data[5 * i + 2] = positions[3 * i + 2];
-      data[5 * i + 3] = uvs[2 * i + 0];
-      data[5 * i + 4] = uvs[2 * i + 1];
-    }
-    return data;
-  };
+const gridSize = ${Ut(He)};
+const bounds = ${Rt(ln)};
 
-  // node_modules/wgpu-matrix/dist/3.x/wgpu-matrix.module.js
-  function wrapConstructor(OriginalConstructor, modifier) {
-    return class extends OriginalConstructor {
-      constructor(...args) {
-        super(...args);
-        modifier(this);
-      }
-    };
-  }
-  var ZeroArray = wrapConstructor(Array, (a) => a.fill(0));
-  var EPSILON = 1e-6;
-  function getAPIImpl$5(Ctor) {
-    function create(x = 0, y = 0) {
-      const newDst = new Ctor(2);
-      if (x !== void 0) {
-        newDst[0] = x;
-        if (y !== void 0) {
-          newDst[1] = y;
-        }
-      }
-      return newDst;
-    }
-    const fromValues = create;
-    function set(x, y, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = x;
-      newDst[1] = y;
-      return newDst;
-    }
-    function ceil(v, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = Math.ceil(v[0]);
-      newDst[1] = Math.ceil(v[1]);
-      return newDst;
-    }
-    function floor(v, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = Math.floor(v[0]);
-      newDst[1] = Math.floor(v[1]);
-      return newDst;
-    }
-    function round(v, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = Math.round(v[0]);
-      newDst[1] = Math.round(v[1]);
-      return newDst;
-    }
-    function clamp(v, min2 = 0, max2 = 1, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = Math.min(max2, Math.max(min2, v[0]));
-      newDst[1] = Math.min(max2, Math.max(min2, v[1]));
-      return newDst;
-    }
-    function add(a, b, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = a[0] + b[0];
-      newDst[1] = a[1] + b[1];
-      return newDst;
-    }
-    function addScaled(a, b, scale2, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = a[0] + b[0] * scale2;
-      newDst[1] = a[1] + b[1] * scale2;
-      return newDst;
-    }
-    function angle(a, b) {
-      const ax = a[0];
-      const ay = a[1];
-      const bx = b[0];
-      const by = b[1];
-      const mag1 = Math.sqrt(ax * ax + ay * ay);
-      const mag2 = Math.sqrt(bx * bx + by * by);
-      const mag = mag1 * mag2;
-      const cosine = mag && dot(a, b) / mag;
-      return Math.acos(cosine);
-    }
-    function subtract(a, b, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = a[0] - b[0];
-      newDst[1] = a[1] - b[1];
-      return newDst;
-    }
-    const sub = subtract;
-    function equalsApproximately(a, b) {
-      return Math.abs(a[0] - b[0]) < EPSILON && Math.abs(a[1] - b[1]) < EPSILON;
-    }
-    function equals(a, b) {
-      return a[0] === b[0] && a[1] === b[1];
-    }
-    function lerp(a, b, t, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = a[0] + t * (b[0] - a[0]);
-      newDst[1] = a[1] + t * (b[1] - a[1]);
-      return newDst;
-    }
-    function lerpV(a, b, t, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = a[0] + t[0] * (b[0] - a[0]);
-      newDst[1] = a[1] + t[1] * (b[1] - a[1]);
-      return newDst;
-    }
-    function max(a, b, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = Math.max(a[0], b[0]);
-      newDst[1] = Math.max(a[1], b[1]);
-      return newDst;
-    }
-    function min(a, b, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = Math.min(a[0], b[0]);
-      newDst[1] = Math.min(a[1], b[1]);
-      return newDst;
-    }
-    function mulScalar(v, k, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = v[0] * k;
-      newDst[1] = v[1] * k;
-      return newDst;
-    }
-    const scale = mulScalar;
-    function divScalar(v, k, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = v[0] / k;
-      newDst[1] = v[1] / k;
-      return newDst;
-    }
-    function inverse(v, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = 1 / v[0];
-      newDst[1] = 1 / v[1];
-      return newDst;
-    }
-    const invert = inverse;
-    function cross(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const z = a[0] * b[1] - a[1] * b[0];
-      newDst[0] = 0;
-      newDst[1] = 0;
-      newDst[2] = z;
-      return newDst;
-    }
-    function dot(a, b) {
-      return a[0] * b[0] + a[1] * b[1];
-    }
-    function length(v) {
-      const v0 = v[0];
-      const v1 = v[1];
-      return Math.sqrt(v0 * v0 + v1 * v1);
-    }
-    const len = length;
-    function lengthSq(v) {
-      const v0 = v[0];
-      const v1 = v[1];
-      return v0 * v0 + v1 * v1;
-    }
-    const lenSq = lengthSq;
-    function distance(a, b) {
-      const dx = a[0] - b[0];
-      const dy = a[1] - b[1];
-      return Math.sqrt(dx * dx + dy * dy);
-    }
-    const dist = distance;
-    function distanceSq(a, b) {
-      const dx = a[0] - b[0];
-      const dy = a[1] - b[1];
-      return dx * dx + dy * dy;
-    }
-    const distSq = distanceSq;
-    function normalize(v, dst) {
-      const newDst = dst ?? new Ctor(2);
-      const v0 = v[0];
-      const v1 = v[1];
-      const len2 = Math.sqrt(v0 * v0 + v1 * v1);
-      if (len2 > 1e-5) {
-        newDst[0] = v0 / len2;
-        newDst[1] = v1 / len2;
-      } else {
-        newDst[0] = 0;
-        newDst[1] = 0;
-      }
-      return newDst;
-    }
-    function negate(v, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = -v[0];
-      newDst[1] = -v[1];
-      return newDst;
-    }
-    function copy(v, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = v[0];
-      newDst[1] = v[1];
-      return newDst;
-    }
-    const clone = copy;
-    function multiply(a, b, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = a[0] * b[0];
-      newDst[1] = a[1] * b[1];
-      return newDst;
-    }
-    const mul = multiply;
-    function divide(a, b, dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = a[0] / b[0];
-      newDst[1] = a[1] / b[1];
-      return newDst;
-    }
-    const div = divide;
-    function random(scale2 = 1, dst) {
-      const newDst = dst ?? new Ctor(2);
-      const angle2 = Math.random() * 2 * Math.PI;
-      newDst[0] = Math.cos(angle2) * scale2;
-      newDst[1] = Math.sin(angle2) * scale2;
-      return newDst;
-    }
-    function zero(dst) {
-      const newDst = dst ?? new Ctor(2);
-      newDst[0] = 0;
-      newDst[1] = 0;
-      return newDst;
-    }
-    function transformMat4(v, m, dst) {
-      const newDst = dst ?? new Ctor(2);
-      const x = v[0];
-      const y = v[1];
-      newDst[0] = x * m[0] + y * m[4] + m[12];
-      newDst[1] = x * m[1] + y * m[5] + m[13];
-      return newDst;
-    }
-    function transformMat3(v, m, dst) {
-      const newDst = dst ?? new Ctor(2);
-      const x = v[0];
-      const y = v[1];
-      newDst[0] = m[0] * x + m[4] * y + m[8];
-      newDst[1] = m[1] * x + m[5] * y + m[9];
-      return newDst;
-    }
-    function rotate(a, b, rad, dst) {
-      const newDst = dst ?? new Ctor(2);
-      const p0 = a[0] - b[0];
-      const p1 = a[1] - b[1];
-      const sinC = Math.sin(rad);
-      const cosC = Math.cos(rad);
-      newDst[0] = p0 * cosC - p1 * sinC + b[0];
-      newDst[1] = p0 * sinC + p1 * cosC + b[1];
-      return newDst;
-    }
-    function setLength(a, len2, dst) {
-      const newDst = dst ?? new Ctor(2);
-      normalize(a, newDst);
-      return mulScalar(newDst, len2, newDst);
-    }
-    function truncate(a, maxLen, dst) {
-      const newDst = dst ?? new Ctor(2);
-      if (length(a) > maxLen) {
-        return setLength(a, maxLen, newDst);
-      }
-      return copy(a, newDst);
-    }
-    function midpoint(a, b, dst) {
-      const newDst = dst ?? new Ctor(2);
-      return lerp(a, b, 0.5, newDst);
-    }
-    return {
-      create,
-      fromValues,
-      set,
-      ceil,
-      floor,
-      round,
-      clamp,
-      add,
-      addScaled,
-      angle,
-      subtract,
-      sub,
-      equalsApproximately,
-      equals,
-      lerp,
-      lerpV,
-      max,
-      min,
-      mulScalar,
-      scale,
-      divScalar,
-      inverse,
-      invert,
-      cross,
-      dot,
-      length,
-      len,
-      lengthSq,
-      lenSq,
-      distance,
-      dist,
-      distanceSq,
-      distSq,
-      normalize,
-      negate,
-      copy,
-      clone,
-      multiply,
-      mul,
-      divide,
-      div,
-      random,
-      zero,
-      transformMat4,
-      transformMat3,
-      rotate,
-      setLength,
-      truncate,
-      midpoint
-    };
-  }
-  var cache$5 = /* @__PURE__ */ new Map();
-  function getAPI$5(Ctor) {
-    let api = cache$5.get(Ctor);
-    if (!api) {
-      api = getAPIImpl$5(Ctor);
-      cache$5.set(Ctor, api);
-    }
-    return api;
-  }
-  function getAPIImpl$4(Ctor) {
-    function create(x, y, z) {
-      const newDst = new Ctor(3);
-      if (x !== void 0) {
-        newDst[0] = x;
-        if (y !== void 0) {
-          newDst[1] = y;
-          if (z !== void 0) {
-            newDst[2] = z;
-          }
-        }
-      }
-      return newDst;
-    }
-    const fromValues = create;
-    function set(x, y, z, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = x;
-      newDst[1] = y;
-      newDst[2] = z;
-      return newDst;
-    }
-    function ceil(v, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = Math.ceil(v[0]);
-      newDst[1] = Math.ceil(v[1]);
-      newDst[2] = Math.ceil(v[2]);
-      return newDst;
-    }
-    function floor(v, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = Math.floor(v[0]);
-      newDst[1] = Math.floor(v[1]);
-      newDst[2] = Math.floor(v[2]);
-      return newDst;
-    }
-    function round(v, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = Math.round(v[0]);
-      newDst[1] = Math.round(v[1]);
-      newDst[2] = Math.round(v[2]);
-      return newDst;
-    }
-    function clamp(v, min2 = 0, max2 = 1, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = Math.min(max2, Math.max(min2, v[0]));
-      newDst[1] = Math.min(max2, Math.max(min2, v[1]));
-      newDst[2] = Math.min(max2, Math.max(min2, v[2]));
-      return newDst;
-    }
-    function add(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = a[0] + b[0];
-      newDst[1] = a[1] + b[1];
-      newDst[2] = a[2] + b[2];
-      return newDst;
-    }
-    function addScaled(a, b, scale2, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = a[0] + b[0] * scale2;
-      newDst[1] = a[1] + b[1] * scale2;
-      newDst[2] = a[2] + b[2] * scale2;
-      return newDst;
-    }
-    function angle(a, b) {
-      const ax = a[0];
-      const ay = a[1];
-      const az = a[2];
-      const bx = b[0];
-      const by = b[1];
-      const bz = b[2];
-      const mag1 = Math.sqrt(ax * ax + ay * ay + az * az);
-      const mag2 = Math.sqrt(bx * bx + by * by + bz * bz);
-      const mag = mag1 * mag2;
-      const cosine = mag && dot(a, b) / mag;
-      return Math.acos(cosine);
-    }
-    function subtract(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = a[0] - b[0];
-      newDst[1] = a[1] - b[1];
-      newDst[2] = a[2] - b[2];
-      return newDst;
-    }
-    const sub = subtract;
-    function equalsApproximately(a, b) {
-      return Math.abs(a[0] - b[0]) < EPSILON && Math.abs(a[1] - b[1]) < EPSILON && Math.abs(a[2] - b[2]) < EPSILON;
-    }
-    function equals(a, b) {
-      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2];
-    }
-    function lerp(a, b, t, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = a[0] + t * (b[0] - a[0]);
-      newDst[1] = a[1] + t * (b[1] - a[1]);
-      newDst[2] = a[2] + t * (b[2] - a[2]);
-      return newDst;
-    }
-    function lerpV(a, b, t, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = a[0] + t[0] * (b[0] - a[0]);
-      newDst[1] = a[1] + t[1] * (b[1] - a[1]);
-      newDst[2] = a[2] + t[2] * (b[2] - a[2]);
-      return newDst;
-    }
-    function max(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = Math.max(a[0], b[0]);
-      newDst[1] = Math.max(a[1], b[1]);
-      newDst[2] = Math.max(a[2], b[2]);
-      return newDst;
-    }
-    function min(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = Math.min(a[0], b[0]);
-      newDst[1] = Math.min(a[1], b[1]);
-      newDst[2] = Math.min(a[2], b[2]);
-      return newDst;
-    }
-    function mulScalar(v, k, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = v[0] * k;
-      newDst[1] = v[1] * k;
-      newDst[2] = v[2] * k;
-      return newDst;
-    }
-    const scale = mulScalar;
-    function divScalar(v, k, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = v[0] / k;
-      newDst[1] = v[1] / k;
-      newDst[2] = v[2] / k;
-      return newDst;
-    }
-    function inverse(v, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = 1 / v[0];
-      newDst[1] = 1 / v[1];
-      newDst[2] = 1 / v[2];
-      return newDst;
-    }
-    const invert = inverse;
-    function cross(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const t1 = a[2] * b[0] - a[0] * b[2];
-      const t2 = a[0] * b[1] - a[1] * b[0];
-      newDst[0] = a[1] * b[2] - a[2] * b[1];
-      newDst[1] = t1;
-      newDst[2] = t2;
-      return newDst;
-    }
-    function dot(a, b) {
-      return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
-    }
-    function length(v) {
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      return Math.sqrt(v0 * v0 + v1 * v1 + v2 * v2);
-    }
-    const len = length;
-    function lengthSq(v) {
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      return v0 * v0 + v1 * v1 + v2 * v2;
-    }
-    const lenSq = lengthSq;
-    function distance(a, b) {
-      const dx = a[0] - b[0];
-      const dy = a[1] - b[1];
-      const dz = a[2] - b[2];
-      return Math.sqrt(dx * dx + dy * dy + dz * dz);
-    }
-    const dist = distance;
-    function distanceSq(a, b) {
-      const dx = a[0] - b[0];
-      const dy = a[1] - b[1];
-      const dz = a[2] - b[2];
-      return dx * dx + dy * dy + dz * dz;
-    }
-    const distSq = distanceSq;
-    function normalize(v, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      const len2 = Math.sqrt(v0 * v0 + v1 * v1 + v2 * v2);
-      if (len2 > 1e-5) {
-        newDst[0] = v0 / len2;
-        newDst[1] = v1 / len2;
-        newDst[2] = v2 / len2;
-      } else {
-        newDst[0] = 0;
-        newDst[1] = 0;
-        newDst[2] = 0;
-      }
-      return newDst;
-    }
-    function negate(v, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = -v[0];
-      newDst[1] = -v[1];
-      newDst[2] = -v[2];
-      return newDst;
-    }
-    function copy(v, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = v[0];
-      newDst[1] = v[1];
-      newDst[2] = v[2];
-      return newDst;
-    }
-    const clone = copy;
-    function multiply(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = a[0] * b[0];
-      newDst[1] = a[1] * b[1];
-      newDst[2] = a[2] * b[2];
-      return newDst;
-    }
-    const mul = multiply;
-    function divide(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = a[0] / b[0];
-      newDst[1] = a[1] / b[1];
-      newDst[2] = a[2] / b[2];
-      return newDst;
-    }
-    const div = divide;
-    function random(scale2 = 1, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const angle2 = Math.random() * 2 * Math.PI;
-      const z = Math.random() * 2 - 1;
-      const zScale = Math.sqrt(1 - z * z) * scale2;
-      newDst[0] = Math.cos(angle2) * zScale;
-      newDst[1] = Math.sin(angle2) * zScale;
-      newDst[2] = z * scale2;
-      return newDst;
-    }
-    function zero(dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = 0;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      return newDst;
-    }
-    function transformMat4(v, m, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const x = v[0];
-      const y = v[1];
-      const z = v[2];
-      const w = m[3] * x + m[7] * y + m[11] * z + m[15] || 1;
-      newDst[0] = (m[0] * x + m[4] * y + m[8] * z + m[12]) / w;
-      newDst[1] = (m[1] * x + m[5] * y + m[9] * z + m[13]) / w;
-      newDst[2] = (m[2] * x + m[6] * y + m[10] * z + m[14]) / w;
-      return newDst;
-    }
-    function transformMat4Upper3x3(v, m, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      newDst[0] = v0 * m[0 * 4 + 0] + v1 * m[1 * 4 + 0] + v2 * m[2 * 4 + 0];
-      newDst[1] = v0 * m[0 * 4 + 1] + v1 * m[1 * 4 + 1] + v2 * m[2 * 4 + 1];
-      newDst[2] = v0 * m[0 * 4 + 2] + v1 * m[1 * 4 + 2] + v2 * m[2 * 4 + 2];
-      return newDst;
-    }
-    function transformMat3(v, m, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const x = v[0];
-      const y = v[1];
-      const z = v[2];
-      newDst[0] = x * m[0] + y * m[4] + z * m[8];
-      newDst[1] = x * m[1] + y * m[5] + z * m[9];
-      newDst[2] = x * m[2] + y * m[6] + z * m[10];
-      return newDst;
-    }
-    function transformQuat(v, q, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const qx = q[0];
-      const qy = q[1];
-      const qz = q[2];
-      const w2 = q[3] * 2;
-      const x = v[0];
-      const y = v[1];
-      const z = v[2];
-      const uvX = qy * z - qz * y;
-      const uvY = qz * x - qx * z;
-      const uvZ = qx * y - qy * x;
-      newDst[0] = x + uvX * w2 + (qy * uvZ - qz * uvY) * 2;
-      newDst[1] = y + uvY * w2 + (qz * uvX - qx * uvZ) * 2;
-      newDst[2] = z + uvZ * w2 + (qx * uvY - qy * uvX) * 2;
-      return newDst;
-    }
-    function getTranslation(m, dst) {
-      const newDst = dst ?? new Ctor(3);
-      newDst[0] = m[12];
-      newDst[1] = m[13];
-      newDst[2] = m[14];
-      return newDst;
-    }
-    function getAxis(m, axis, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const off = axis * 4;
-      newDst[0] = m[off + 0];
-      newDst[1] = m[off + 1];
-      newDst[2] = m[off + 2];
-      return newDst;
-    }
-    function getScaling(m, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const xx = m[0];
-      const xy = m[1];
-      const xz = m[2];
-      const yx = m[4];
-      const yy = m[5];
-      const yz = m[6];
-      const zx = m[8];
-      const zy = m[9];
-      const zz = m[10];
-      newDst[0] = Math.sqrt(xx * xx + xy * xy + xz * xz);
-      newDst[1] = Math.sqrt(yx * yx + yy * yy + yz * yz);
-      newDst[2] = Math.sqrt(zx * zx + zy * zy + zz * zz);
-      return newDst;
-    }
-    function rotateX(a, b, rad, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const p = [];
-      const r = [];
-      p[0] = a[0] - b[0];
-      p[1] = a[1] - b[1];
-      p[2] = a[2] - b[2];
-      r[0] = p[0];
-      r[1] = p[1] * Math.cos(rad) - p[2] * Math.sin(rad);
-      r[2] = p[1] * Math.sin(rad) + p[2] * Math.cos(rad);
-      newDst[0] = r[0] + b[0];
-      newDst[1] = r[1] + b[1];
-      newDst[2] = r[2] + b[2];
-      return newDst;
-    }
-    function rotateY(a, b, rad, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const p = [];
-      const r = [];
-      p[0] = a[0] - b[0];
-      p[1] = a[1] - b[1];
-      p[2] = a[2] - b[2];
-      r[0] = p[2] * Math.sin(rad) + p[0] * Math.cos(rad);
-      r[1] = p[1];
-      r[2] = p[2] * Math.cos(rad) - p[0] * Math.sin(rad);
-      newDst[0] = r[0] + b[0];
-      newDst[1] = r[1] + b[1];
-      newDst[2] = r[2] + b[2];
-      return newDst;
-    }
-    function rotateZ(a, b, rad, dst) {
-      const newDst = dst ?? new Ctor(3);
-      const p = [];
-      const r = [];
-      p[0] = a[0] - b[0];
-      p[1] = a[1] - b[1];
-      p[2] = a[2] - b[2];
-      r[0] = p[0] * Math.cos(rad) - p[1] * Math.sin(rad);
-      r[1] = p[0] * Math.sin(rad) + p[1] * Math.cos(rad);
-      r[2] = p[2];
-      newDst[0] = r[0] + b[0];
-      newDst[1] = r[1] + b[1];
-      newDst[2] = r[2] + b[2];
-      return newDst;
-    }
-    function setLength(a, len2, dst) {
-      const newDst = dst ?? new Ctor(3);
-      normalize(a, newDst);
-      return mulScalar(newDst, len2, newDst);
-    }
-    function truncate(a, maxLen, dst) {
-      const newDst = dst ?? new Ctor(3);
-      if (length(a) > maxLen) {
-        return setLength(a, maxLen, newDst);
-      }
-      return copy(a, newDst);
-    }
-    function midpoint(a, b, dst) {
-      const newDst = dst ?? new Ctor(3);
-      return lerp(a, b, 0.5, newDst);
-    }
-    return {
-      create,
-      fromValues,
-      set,
-      ceil,
-      floor,
-      round,
-      clamp,
-      add,
-      addScaled,
-      angle,
-      subtract,
-      sub,
-      equalsApproximately,
-      equals,
-      lerp,
-      lerpV,
-      max,
-      min,
-      mulScalar,
-      scale,
-      divScalar,
-      inverse,
-      invert,
-      cross,
-      dot,
-      length,
-      len,
-      lengthSq,
-      lenSq,
-      distance,
-      dist,
-      distanceSq,
-      distSq,
-      normalize,
-      negate,
-      copy,
-      clone,
-      multiply,
-      mul,
-      divide,
-      div,
-      random,
-      zero,
-      transformMat4,
-      transformMat4Upper3x3,
-      transformMat3,
-      transformQuat,
-      getTranslation,
-      getAxis,
-      getScaling,
-      rotateX,
-      rotateY,
-      rotateZ,
-      setLength,
-      truncate,
-      midpoint
-    };
-  }
-  var cache$4 = /* @__PURE__ */ new Map();
-  function getAPI$4(Ctor) {
-    let api = cache$4.get(Ctor);
-    if (!api) {
-      api = getAPIImpl$4(Ctor);
-      cache$4.set(Ctor, api);
-    }
-    return api;
-  }
-  function getAPIImpl$3(Ctor) {
-    const vec22 = getAPI$5(Ctor);
-    const vec32 = getAPI$4(Ctor);
-    function create(v0, v1, v2, v3, v4, v5, v6, v7, v8) {
-      const newDst = new Ctor(12);
-      newDst[3] = 0;
-      newDst[7] = 0;
-      newDst[11] = 0;
-      if (v0 !== void 0) {
-        newDst[0] = v0;
-        if (v1 !== void 0) {
-          newDst[1] = v1;
-          if (v2 !== void 0) {
-            newDst[2] = v2;
-            if (v3 !== void 0) {
-              newDst[4] = v3;
-              if (v4 !== void 0) {
-                newDst[5] = v4;
-                if (v5 !== void 0) {
-                  newDst[6] = v5;
-                  if (v6 !== void 0) {
-                    newDst[8] = v6;
-                    if (v7 !== void 0) {
-                      newDst[9] = v7;
-                      if (v8 !== void 0) {
-                        newDst[10] = v8;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      return newDst;
-    }
-    function set(v0, v1, v2, v3, v4, v5, v6, v7, v8, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = v0;
-      newDst[1] = v1;
-      newDst[2] = v2;
-      newDst[3] = 0;
-      newDst[4] = v3;
-      newDst[5] = v4;
-      newDst[6] = v5;
-      newDst[7] = 0;
-      newDst[8] = v6;
-      newDst[9] = v7;
-      newDst[10] = v8;
-      newDst[11] = 0;
-      return newDst;
-    }
-    function fromMat4(m4, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = m4[0];
-      newDst[1] = m4[1];
-      newDst[2] = m4[2];
-      newDst[3] = 0;
-      newDst[4] = m4[4];
-      newDst[5] = m4[5];
-      newDst[6] = m4[6];
-      newDst[7] = 0;
-      newDst[8] = m4[8];
-      newDst[9] = m4[9];
-      newDst[10] = m4[10];
-      newDst[11] = 0;
-      return newDst;
-    }
-    function fromQuat(q, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const x = q[0];
-      const y = q[1];
-      const z = q[2];
-      const w = q[3];
-      const x2 = x + x;
-      const y2 = y + y;
-      const z2 = z + z;
-      const xx = x * x2;
-      const yx = y * x2;
-      const yy = y * y2;
-      const zx = z * x2;
-      const zy = z * y2;
-      const zz = z * z2;
-      const wx = w * x2;
-      const wy = w * y2;
-      const wz = w * z2;
-      newDst[0] = 1 - yy - zz;
-      newDst[1] = yx + wz;
-      newDst[2] = zx - wy;
-      newDst[3] = 0;
-      newDst[4] = yx - wz;
-      newDst[5] = 1 - xx - zz;
-      newDst[6] = zy + wx;
-      newDst[7] = 0;
-      newDst[8] = zx + wy;
-      newDst[9] = zy - wx;
-      newDst[10] = 1 - xx - yy;
-      newDst[11] = 0;
-      return newDst;
-    }
-    function negate(m, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = -m[0];
-      newDst[1] = -m[1];
-      newDst[2] = -m[2];
-      newDst[4] = -m[4];
-      newDst[5] = -m[5];
-      newDst[6] = -m[6];
-      newDst[8] = -m[8];
-      newDst[9] = -m[9];
-      newDst[10] = -m[10];
-      return newDst;
-    }
-    function multiplyScalar(m, s, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = m[0] * s;
-      newDst[1] = m[1] * s;
-      newDst[2] = m[2] * s;
-      newDst[4] = m[4] * s;
-      newDst[5] = m[5] * s;
-      newDst[6] = m[6] * s;
-      newDst[8] = m[8] * s;
-      newDst[9] = m[9] * s;
-      newDst[10] = m[10] * s;
-      return newDst;
-    }
-    const mulScalar = multiplyScalar;
-    function add(a, b, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = a[0] + b[0];
-      newDst[1] = a[1] + b[1];
-      newDst[2] = a[2] + b[2];
-      newDst[4] = a[4] + b[4];
-      newDst[5] = a[5] + b[5];
-      newDst[6] = a[6] + b[6];
-      newDst[8] = a[8] + b[8];
-      newDst[9] = a[9] + b[9];
-      newDst[10] = a[10] + b[10];
-      return newDst;
-    }
-    function copy(m, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = m[0];
-      newDst[1] = m[1];
-      newDst[2] = m[2];
-      newDst[4] = m[4];
-      newDst[5] = m[5];
-      newDst[6] = m[6];
-      newDst[8] = m[8];
-      newDst[9] = m[9];
-      newDst[10] = m[10];
-      return newDst;
-    }
-    const clone = copy;
-    function equalsApproximately(a, b) {
-      return Math.abs(a[0] - b[0]) < EPSILON && Math.abs(a[1] - b[1]) < EPSILON && Math.abs(a[2] - b[2]) < EPSILON && Math.abs(a[4] - b[4]) < EPSILON && Math.abs(a[5] - b[5]) < EPSILON && Math.abs(a[6] - b[6]) < EPSILON && Math.abs(a[8] - b[8]) < EPSILON && Math.abs(a[9] - b[9]) < EPSILON && Math.abs(a[10] - b[10]) < EPSILON;
-    }
-    function equals(a, b) {
-      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[4] === b[4] && a[5] === b[5] && a[6] === b[6] && a[8] === b[8] && a[9] === b[9] && a[10] === b[10];
-    }
-    function identity(dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = 1;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[4] = 0;
-      newDst[5] = 1;
-      newDst[6] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = 1;
-      return newDst;
-    }
-    function transpose(m, dst) {
-      const newDst = dst ?? new Ctor(12);
-      if (newDst === m) {
-        let t;
-        t = m[1];
-        m[1] = m[4];
-        m[4] = t;
-        t = m[2];
-        m[2] = m[8];
-        m[8] = t;
-        t = m[6];
-        m[6] = m[9];
-        m[9] = t;
-        return newDst;
-      }
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      newDst[0] = m00;
-      newDst[1] = m10;
-      newDst[2] = m20;
-      newDst[4] = m01;
-      newDst[5] = m11;
-      newDst[6] = m21;
-      newDst[8] = m02;
-      newDst[9] = m12;
-      newDst[10] = m22;
-      return newDst;
-    }
-    function inverse(m, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      const b01 = m22 * m11 - m12 * m21;
-      const b11 = -m22 * m10 + m12 * m20;
-      const b21 = m21 * m10 - m11 * m20;
-      const invDet = 1 / (m00 * b01 + m01 * b11 + m02 * b21);
-      newDst[0] = b01 * invDet;
-      newDst[1] = (-m22 * m01 + m02 * m21) * invDet;
-      newDst[2] = (m12 * m01 - m02 * m11) * invDet;
-      newDst[4] = b11 * invDet;
-      newDst[5] = (m22 * m00 - m02 * m20) * invDet;
-      newDst[6] = (-m12 * m00 + m02 * m10) * invDet;
-      newDst[8] = b21 * invDet;
-      newDst[9] = (-m21 * m00 + m01 * m20) * invDet;
-      newDst[10] = (m11 * m00 - m01 * m10) * invDet;
-      return newDst;
-    }
-    function determinant(m) {
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      return m00 * (m11 * m22 - m21 * m12) - m10 * (m01 * m22 - m21 * m02) + m20 * (m01 * m12 - m11 * m02);
-    }
-    const invert = inverse;
-    function multiply(a, b, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const a00 = a[0];
-      const a01 = a[1];
-      const a02 = a[2];
-      const a10 = a[4 + 0];
-      const a11 = a[4 + 1];
-      const a12 = a[4 + 2];
-      const a20 = a[8 + 0];
-      const a21 = a[8 + 1];
-      const a22 = a[8 + 2];
-      const b00 = b[0];
-      const b01 = b[1];
-      const b02 = b[2];
-      const b10 = b[4 + 0];
-      const b11 = b[4 + 1];
-      const b12 = b[4 + 2];
-      const b20 = b[8 + 0];
-      const b21 = b[8 + 1];
-      const b22 = b[8 + 2];
-      newDst[0] = a00 * b00 + a10 * b01 + a20 * b02;
-      newDst[1] = a01 * b00 + a11 * b01 + a21 * b02;
-      newDst[2] = a02 * b00 + a12 * b01 + a22 * b02;
-      newDst[4] = a00 * b10 + a10 * b11 + a20 * b12;
-      newDst[5] = a01 * b10 + a11 * b11 + a21 * b12;
-      newDst[6] = a02 * b10 + a12 * b11 + a22 * b12;
-      newDst[8] = a00 * b20 + a10 * b21 + a20 * b22;
-      newDst[9] = a01 * b20 + a11 * b21 + a21 * b22;
-      newDst[10] = a02 * b20 + a12 * b21 + a22 * b22;
-      return newDst;
-    }
-    const mul = multiply;
-    function setTranslation(a, v, dst) {
-      const newDst = dst ?? identity();
-      if (a !== newDst) {
-        newDst[0] = a[0];
-        newDst[1] = a[1];
-        newDst[2] = a[2];
-        newDst[4] = a[4];
-        newDst[5] = a[5];
-        newDst[6] = a[6];
-      }
-      newDst[8] = v[0];
-      newDst[9] = v[1];
-      newDst[10] = 1;
-      return newDst;
-    }
-    function getTranslation(m, dst) {
-      const newDst = dst ?? vec22.create();
-      newDst[0] = m[8];
-      newDst[1] = m[9];
-      return newDst;
-    }
-    function getAxis(m, axis, dst) {
-      const newDst = dst ?? vec22.create();
-      const off = axis * 4;
-      newDst[0] = m[off + 0];
-      newDst[1] = m[off + 1];
-      return newDst;
-    }
-    function setAxis(m, v, axis, dst) {
-      const newDst = dst === m ? m : copy(m, dst);
-      const off = axis * 4;
-      newDst[off + 0] = v[0];
-      newDst[off + 1] = v[1];
-      return newDst;
-    }
-    function getScaling(m, dst) {
-      const newDst = dst ?? vec22.create();
-      const xx = m[0];
-      const xy = m[1];
-      const yx = m[4];
-      const yy = m[5];
-      newDst[0] = Math.sqrt(xx * xx + xy * xy);
-      newDst[1] = Math.sqrt(yx * yx + yy * yy);
-      return newDst;
-    }
-    function get3DScaling(m, dst) {
-      const newDst = dst ?? vec32.create();
-      const xx = m[0];
-      const xy = m[1];
-      const xz = m[2];
-      const yx = m[4];
-      const yy = m[5];
-      const yz = m[6];
-      const zx = m[8];
-      const zy = m[9];
-      const zz = m[10];
-      newDst[0] = Math.sqrt(xx * xx + xy * xy + xz * xz);
-      newDst[1] = Math.sqrt(yx * yx + yy * yy + yz * yz);
-      newDst[2] = Math.sqrt(zx * zx + zy * zy + zz * zz);
-      return newDst;
-    }
-    function translation(v, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = 1;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[4] = 0;
-      newDst[5] = 1;
-      newDst[6] = 0;
-      newDst[8] = v[0];
-      newDst[9] = v[1];
-      newDst[10] = 1;
-      return newDst;
-    }
-    function translate(m, v, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const v0 = v[0];
-      const v1 = v[1];
-      const m00 = m[0];
-      const m01 = m[1];
-      const m02 = m[2];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      if (m !== newDst) {
-        newDst[0] = m00;
-        newDst[1] = m01;
-        newDst[2] = m02;
-        newDst[4] = m10;
-        newDst[5] = m11;
-        newDst[6] = m12;
-      }
-      newDst[8] = m00 * v0 + m10 * v1 + m20;
-      newDst[9] = m01 * v0 + m11 * v1 + m21;
-      newDst[10] = m02 * v0 + m12 * v1 + m22;
-      return newDst;
-    }
-    function rotation(angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = c;
-      newDst[1] = s;
-      newDst[2] = 0;
-      newDst[4] = -s;
-      newDst[5] = c;
-      newDst[6] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = 1;
-      return newDst;
-    }
-    function rotate(m, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = c * m00 + s * m10;
-      newDst[1] = c * m01 + s * m11;
-      newDst[2] = c * m02 + s * m12;
-      newDst[4] = c * m10 - s * m00;
-      newDst[5] = c * m11 - s * m01;
-      newDst[6] = c * m12 - s * m02;
-      if (m !== newDst) {
-        newDst[8] = m[8];
-        newDst[9] = m[9];
-        newDst[10] = m[10];
-      }
-      return newDst;
-    }
-    function rotationX(angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = 1;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[4] = 0;
-      newDst[5] = c;
-      newDst[6] = s;
-      newDst[8] = 0;
-      newDst[9] = -s;
-      newDst[10] = c;
-      return newDst;
-    }
-    function rotateX(m, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const m10 = m[4];
-      const m11 = m[5];
-      const m12 = m[6];
-      const m20 = m[8];
-      const m21 = m[9];
-      const m22 = m[10];
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[4] = c * m10 + s * m20;
-      newDst[5] = c * m11 + s * m21;
-      newDst[6] = c * m12 + s * m22;
-      newDst[8] = c * m20 - s * m10;
-      newDst[9] = c * m21 - s * m11;
-      newDst[10] = c * m22 - s * m12;
-      if (m !== newDst) {
-        newDst[0] = m[0];
-        newDst[1] = m[1];
-        newDst[2] = m[2];
-      }
-      return newDst;
-    }
-    function rotationY(angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = c;
-      newDst[1] = 0;
-      newDst[2] = -s;
-      newDst[4] = 0;
-      newDst[5] = 1;
-      newDst[6] = 0;
-      newDst[8] = s;
-      newDst[9] = 0;
-      newDst[10] = c;
-      return newDst;
-    }
-    function rotateY(m, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = c * m00 - s * m20;
-      newDst[1] = c * m01 - s * m21;
-      newDst[2] = c * m02 - s * m22;
-      newDst[8] = c * m20 + s * m00;
-      newDst[9] = c * m21 + s * m01;
-      newDst[10] = c * m22 + s * m02;
-      if (m !== newDst) {
-        newDst[4] = m[4];
-        newDst[5] = m[5];
-        newDst[6] = m[6];
-      }
-      return newDst;
-    }
-    const rotationZ = rotation;
-    const rotateZ = rotate;
-    function scaling(v, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = v[0];
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[4] = 0;
-      newDst[5] = v[1];
-      newDst[6] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = 1;
-      return newDst;
-    }
-    function scale(m, v, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const v0 = v[0];
-      const v1 = v[1];
-      newDst[0] = v0 * m[0 * 4 + 0];
-      newDst[1] = v0 * m[0 * 4 + 1];
-      newDst[2] = v0 * m[0 * 4 + 2];
-      newDst[4] = v1 * m[1 * 4 + 0];
-      newDst[5] = v1 * m[1 * 4 + 1];
-      newDst[6] = v1 * m[1 * 4 + 2];
-      if (m !== newDst) {
-        newDst[8] = m[8];
-        newDst[9] = m[9];
-        newDst[10] = m[10];
-      }
-      return newDst;
-    }
-    function scaling3D(v, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = v[0];
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[4] = 0;
-      newDst[5] = v[1];
-      newDst[6] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = v[2];
-      return newDst;
-    }
-    function scale3D(m, v, dst) {
-      const newDst = dst ?? new Ctor(12);
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      newDst[0] = v0 * m[0 * 4 + 0];
-      newDst[1] = v0 * m[0 * 4 + 1];
-      newDst[2] = v0 * m[0 * 4 + 2];
-      newDst[4] = v1 * m[1 * 4 + 0];
-      newDst[5] = v1 * m[1 * 4 + 1];
-      newDst[6] = v1 * m[1 * 4 + 2];
-      newDst[8] = v2 * m[2 * 4 + 0];
-      newDst[9] = v2 * m[2 * 4 + 1];
-      newDst[10] = v2 * m[2 * 4 + 2];
-      return newDst;
-    }
-    function uniformScaling(s, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = s;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[4] = 0;
-      newDst[5] = s;
-      newDst[6] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = 1;
-      return newDst;
-    }
-    function uniformScale(m, s, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = s * m[0 * 4 + 0];
-      newDst[1] = s * m[0 * 4 + 1];
-      newDst[2] = s * m[0 * 4 + 2];
-      newDst[4] = s * m[1 * 4 + 0];
-      newDst[5] = s * m[1 * 4 + 1];
-      newDst[6] = s * m[1 * 4 + 2];
-      if (m !== newDst) {
-        newDst[8] = m[8];
-        newDst[9] = m[9];
-        newDst[10] = m[10];
-      }
-      return newDst;
-    }
-    function uniformScaling3D(s, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = s;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[4] = 0;
-      newDst[5] = s;
-      newDst[6] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = s;
-      return newDst;
-    }
-    function uniformScale3D(m, s, dst) {
-      const newDst = dst ?? new Ctor(12);
-      newDst[0] = s * m[0 * 4 + 0];
-      newDst[1] = s * m[0 * 4 + 1];
-      newDst[2] = s * m[0 * 4 + 2];
-      newDst[4] = s * m[1 * 4 + 0];
-      newDst[5] = s * m[1 * 4 + 1];
-      newDst[6] = s * m[1 * 4 + 2];
-      newDst[8] = s * m[2 * 4 + 0];
-      newDst[9] = s * m[2 * 4 + 1];
-      newDst[10] = s * m[2 * 4 + 2];
-      return newDst;
-    }
-    return {
-      add,
-      clone,
-      copy,
-      create,
-      determinant,
-      equals,
-      equalsApproximately,
-      fromMat4,
-      fromQuat,
-      get3DScaling,
-      getAxis,
-      getScaling,
-      getTranslation,
-      identity,
-      inverse,
-      invert,
-      mul,
-      mulScalar,
-      multiply,
-      multiplyScalar,
-      negate,
-      rotate,
-      rotateX,
-      rotateY,
-      rotateZ,
-      rotation,
-      rotationX,
-      rotationY,
-      rotationZ,
-      scale,
-      scale3D,
-      scaling,
-      scaling3D,
-      set,
-      setAxis,
-      setTranslation,
-      translate,
-      translation,
-      transpose,
-      uniformScale,
-      uniformScale3D,
-      uniformScaling,
-      uniformScaling3D
-    };
-  }
-  var cache$3 = /* @__PURE__ */ new Map();
-  function getAPI$3(Ctor) {
-    let api = cache$3.get(Ctor);
-    if (!api) {
-      api = getAPIImpl$3(Ctor);
-      cache$3.set(Ctor, api);
-    }
-    return api;
-  }
-  function getAPIImpl$2(Ctor) {
-    const vec32 = getAPI$4(Ctor);
-    function create(v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15) {
-      const newDst = new Ctor(16);
-      if (v0 !== void 0) {
-        newDst[0] = v0;
-        if (v1 !== void 0) {
-          newDst[1] = v1;
-          if (v2 !== void 0) {
-            newDst[2] = v2;
-            if (v3 !== void 0) {
-              newDst[3] = v3;
-              if (v4 !== void 0) {
-                newDst[4] = v4;
-                if (v5 !== void 0) {
-                  newDst[5] = v5;
-                  if (v6 !== void 0) {
-                    newDst[6] = v6;
-                    if (v7 !== void 0) {
-                      newDst[7] = v7;
-                      if (v8 !== void 0) {
-                        newDst[8] = v8;
-                        if (v9 !== void 0) {
-                          newDst[9] = v9;
-                          if (v10 !== void 0) {
-                            newDst[10] = v10;
-                            if (v11 !== void 0) {
-                              newDst[11] = v11;
-                              if (v12 !== void 0) {
-                                newDst[12] = v12;
-                                if (v13 !== void 0) {
-                                  newDst[13] = v13;
-                                  if (v14 !== void 0) {
-                                    newDst[14] = v14;
-                                    if (v15 !== void 0) {
-                                      newDst[15] = v15;
-                                    }
-                                  }
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-      return newDst;
-    }
-    function set(v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = v0;
-      newDst[1] = v1;
-      newDst[2] = v2;
-      newDst[3] = v3;
-      newDst[4] = v4;
-      newDst[5] = v5;
-      newDst[6] = v6;
-      newDst[7] = v7;
-      newDst[8] = v8;
-      newDst[9] = v9;
-      newDst[10] = v10;
-      newDst[11] = v11;
-      newDst[12] = v12;
-      newDst[13] = v13;
-      newDst[14] = v14;
-      newDst[15] = v15;
-      return newDst;
-    }
-    function fromMat3(m3, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = m3[0];
-      newDst[1] = m3[1];
-      newDst[2] = m3[2];
-      newDst[3] = 0;
-      newDst[4] = m3[4];
-      newDst[5] = m3[5];
-      newDst[6] = m3[6];
-      newDst[7] = 0;
-      newDst[8] = m3[8];
-      newDst[9] = m3[9];
-      newDst[10] = m3[10];
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    function fromQuat(q, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const x = q[0];
-      const y = q[1];
-      const z = q[2];
-      const w = q[3];
-      const x2 = x + x;
-      const y2 = y + y;
-      const z2 = z + z;
-      const xx = x * x2;
-      const yx = y * x2;
-      const yy = y * y2;
-      const zx = z * x2;
-      const zy = z * y2;
-      const zz = z * z2;
-      const wx = w * x2;
-      const wy = w * y2;
-      const wz = w * z2;
-      newDst[0] = 1 - yy - zz;
-      newDst[1] = yx + wz;
-      newDst[2] = zx - wy;
-      newDst[3] = 0;
-      newDst[4] = yx - wz;
-      newDst[5] = 1 - xx - zz;
-      newDst[6] = zy + wx;
-      newDst[7] = 0;
-      newDst[8] = zx + wy;
-      newDst[9] = zy - wx;
-      newDst[10] = 1 - xx - yy;
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    function negate(m, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = -m[0];
-      newDst[1] = -m[1];
-      newDst[2] = -m[2];
-      newDst[3] = -m[3];
-      newDst[4] = -m[4];
-      newDst[5] = -m[5];
-      newDst[6] = -m[6];
-      newDst[7] = -m[7];
-      newDst[8] = -m[8];
-      newDst[9] = -m[9];
-      newDst[10] = -m[10];
-      newDst[11] = -m[11];
-      newDst[12] = -m[12];
-      newDst[13] = -m[13];
-      newDst[14] = -m[14];
-      newDst[15] = -m[15];
-      return newDst;
-    }
-    function add(a, b, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = a[0] + b[0];
-      newDst[1] = a[1] + b[1];
-      newDst[2] = a[2] + b[2];
-      newDst[3] = a[3] + b[3];
-      newDst[4] = a[4] + b[4];
-      newDst[5] = a[5] + b[5];
-      newDst[6] = a[6] + b[6];
-      newDst[7] = a[7] + b[7];
-      newDst[8] = a[8] + b[8];
-      newDst[9] = a[9] + b[9];
-      newDst[10] = a[10] + b[10];
-      newDst[11] = a[11] + b[11];
-      newDst[12] = a[12] + b[12];
-      newDst[13] = a[13] + b[13];
-      newDst[14] = a[14] + b[14];
-      newDst[15] = a[15] + b[15];
-      return newDst;
-    }
-    function multiplyScalar(m, s, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = m[0] * s;
-      newDst[1] = m[1] * s;
-      newDst[2] = m[2] * s;
-      newDst[3] = m[3] * s;
-      newDst[4] = m[4] * s;
-      newDst[5] = m[5] * s;
-      newDst[6] = m[6] * s;
-      newDst[7] = m[7] * s;
-      newDst[8] = m[8] * s;
-      newDst[9] = m[9] * s;
-      newDst[10] = m[10] * s;
-      newDst[11] = m[11] * s;
-      newDst[12] = m[12] * s;
-      newDst[13] = m[13] * s;
-      newDst[14] = m[14] * s;
-      newDst[15] = m[15] * s;
-      return newDst;
-    }
-    const mulScalar = multiplyScalar;
-    function copy(m, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = m[0];
-      newDst[1] = m[1];
-      newDst[2] = m[2];
-      newDst[3] = m[3];
-      newDst[4] = m[4];
-      newDst[5] = m[5];
-      newDst[6] = m[6];
-      newDst[7] = m[7];
-      newDst[8] = m[8];
-      newDst[9] = m[9];
-      newDst[10] = m[10];
-      newDst[11] = m[11];
-      newDst[12] = m[12];
-      newDst[13] = m[13];
-      newDst[14] = m[14];
-      newDst[15] = m[15];
-      return newDst;
-    }
-    const clone = copy;
-    function equalsApproximately(a, b) {
-      return Math.abs(a[0] - b[0]) < EPSILON && Math.abs(a[1] - b[1]) < EPSILON && Math.abs(a[2] - b[2]) < EPSILON && Math.abs(a[3] - b[3]) < EPSILON && Math.abs(a[4] - b[4]) < EPSILON && Math.abs(a[5] - b[5]) < EPSILON && Math.abs(a[6] - b[6]) < EPSILON && Math.abs(a[7] - b[7]) < EPSILON && Math.abs(a[8] - b[8]) < EPSILON && Math.abs(a[9] - b[9]) < EPSILON && Math.abs(a[10] - b[10]) < EPSILON && Math.abs(a[11] - b[11]) < EPSILON && Math.abs(a[12] - b[12]) < EPSILON && Math.abs(a[13] - b[13]) < EPSILON && Math.abs(a[14] - b[14]) < EPSILON && Math.abs(a[15] - b[15]) < EPSILON;
-    }
-    function equals(a, b) {
-      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3] && a[4] === b[4] && a[5] === b[5] && a[6] === b[6] && a[7] === b[7] && a[8] === b[8] && a[9] === b[9] && a[10] === b[10] && a[11] === b[11] && a[12] === b[12] && a[13] === b[13] && a[14] === b[14] && a[15] === b[15];
-    }
-    function identity(dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = 1;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = 1;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = 1;
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    function transpose(m, dst) {
-      const newDst = dst ?? new Ctor(16);
-      if (newDst === m) {
-        let t;
-        t = m[1];
-        m[1] = m[4];
-        m[4] = t;
-        t = m[2];
-        m[2] = m[8];
-        m[8] = t;
-        t = m[3];
-        m[3] = m[12];
-        m[12] = t;
-        t = m[6];
-        m[6] = m[9];
-        m[9] = t;
-        t = m[7];
-        m[7] = m[13];
-        m[13] = t;
-        t = m[11];
-        m[11] = m[14];
-        m[14] = t;
-        return newDst;
-      }
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m03 = m[0 * 4 + 3];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m13 = m[1 * 4 + 3];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      const m23 = m[2 * 4 + 3];
-      const m30 = m[3 * 4 + 0];
-      const m31 = m[3 * 4 + 1];
-      const m32 = m[3 * 4 + 2];
-      const m33 = m[3 * 4 + 3];
-      newDst[0] = m00;
-      newDst[1] = m10;
-      newDst[2] = m20;
-      newDst[3] = m30;
-      newDst[4] = m01;
-      newDst[5] = m11;
-      newDst[6] = m21;
-      newDst[7] = m31;
-      newDst[8] = m02;
-      newDst[9] = m12;
-      newDst[10] = m22;
-      newDst[11] = m32;
-      newDst[12] = m03;
-      newDst[13] = m13;
-      newDst[14] = m23;
-      newDst[15] = m33;
-      return newDst;
-    }
-    function inverse(m, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m03 = m[0 * 4 + 3];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m13 = m[1 * 4 + 3];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      const m23 = m[2 * 4 + 3];
-      const m30 = m[3 * 4 + 0];
-      const m31 = m[3 * 4 + 1];
-      const m32 = m[3 * 4 + 2];
-      const m33 = m[3 * 4 + 3];
-      const tmp0 = m22 * m33;
-      const tmp1 = m32 * m23;
-      const tmp2 = m12 * m33;
-      const tmp3 = m32 * m13;
-      const tmp4 = m12 * m23;
-      const tmp5 = m22 * m13;
-      const tmp6 = m02 * m33;
-      const tmp7 = m32 * m03;
-      const tmp8 = m02 * m23;
-      const tmp9 = m22 * m03;
-      const tmp10 = m02 * m13;
-      const tmp11 = m12 * m03;
-      const tmp12 = m20 * m31;
-      const tmp13 = m30 * m21;
-      const tmp14 = m10 * m31;
-      const tmp15 = m30 * m11;
-      const tmp16 = m10 * m21;
-      const tmp17 = m20 * m11;
-      const tmp18 = m00 * m31;
-      const tmp19 = m30 * m01;
-      const tmp20 = m00 * m21;
-      const tmp21 = m20 * m01;
-      const tmp22 = m00 * m11;
-      const tmp23 = m10 * m01;
-      const t0 = tmp0 * m11 + tmp3 * m21 + tmp4 * m31 - (tmp1 * m11 + tmp2 * m21 + tmp5 * m31);
-      const t1 = tmp1 * m01 + tmp6 * m21 + tmp9 * m31 - (tmp0 * m01 + tmp7 * m21 + tmp8 * m31);
-      const t2 = tmp2 * m01 + tmp7 * m11 + tmp10 * m31 - (tmp3 * m01 + tmp6 * m11 + tmp11 * m31);
-      const t3 = tmp5 * m01 + tmp8 * m11 + tmp11 * m21 - (tmp4 * m01 + tmp9 * m11 + tmp10 * m21);
-      const d = 1 / (m00 * t0 + m10 * t1 + m20 * t2 + m30 * t3);
-      newDst[0] = d * t0;
-      newDst[1] = d * t1;
-      newDst[2] = d * t2;
-      newDst[3] = d * t3;
-      newDst[4] = d * (tmp1 * m10 + tmp2 * m20 + tmp5 * m30 - (tmp0 * m10 + tmp3 * m20 + tmp4 * m30));
-      newDst[5] = d * (tmp0 * m00 + tmp7 * m20 + tmp8 * m30 - (tmp1 * m00 + tmp6 * m20 + tmp9 * m30));
-      newDst[6] = d * (tmp3 * m00 + tmp6 * m10 + tmp11 * m30 - (tmp2 * m00 + tmp7 * m10 + tmp10 * m30));
-      newDst[7] = d * (tmp4 * m00 + tmp9 * m10 + tmp10 * m20 - (tmp5 * m00 + tmp8 * m10 + tmp11 * m20));
-      newDst[8] = d * (tmp12 * m13 + tmp15 * m23 + tmp16 * m33 - (tmp13 * m13 + tmp14 * m23 + tmp17 * m33));
-      newDst[9] = d * (tmp13 * m03 + tmp18 * m23 + tmp21 * m33 - (tmp12 * m03 + tmp19 * m23 + tmp20 * m33));
-      newDst[10] = d * (tmp14 * m03 + tmp19 * m13 + tmp22 * m33 - (tmp15 * m03 + tmp18 * m13 + tmp23 * m33));
-      newDst[11] = d * (tmp17 * m03 + tmp20 * m13 + tmp23 * m23 - (tmp16 * m03 + tmp21 * m13 + tmp22 * m23));
-      newDst[12] = d * (tmp14 * m22 + tmp17 * m32 + tmp13 * m12 - (tmp16 * m32 + tmp12 * m12 + tmp15 * m22));
-      newDst[13] = d * (tmp20 * m32 + tmp12 * m02 + tmp19 * m22 - (tmp18 * m22 + tmp21 * m32 + tmp13 * m02));
-      newDst[14] = d * (tmp18 * m12 + tmp23 * m32 + tmp15 * m02 - (tmp22 * m32 + tmp14 * m02 + tmp19 * m12));
-      newDst[15] = d * (tmp22 * m22 + tmp16 * m02 + tmp21 * m12 - (tmp20 * m12 + tmp23 * m22 + tmp17 * m02));
-      return newDst;
-    }
-    function determinant(m) {
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m03 = m[0 * 4 + 3];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m13 = m[1 * 4 + 3];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      const m23 = m[2 * 4 + 3];
-      const m30 = m[3 * 4 + 0];
-      const m31 = m[3 * 4 + 1];
-      const m32 = m[3 * 4 + 2];
-      const m33 = m[3 * 4 + 3];
-      const tmp0 = m22 * m33;
-      const tmp1 = m32 * m23;
-      const tmp2 = m12 * m33;
-      const tmp3 = m32 * m13;
-      const tmp4 = m12 * m23;
-      const tmp5 = m22 * m13;
-      const tmp6 = m02 * m33;
-      const tmp7 = m32 * m03;
-      const tmp8 = m02 * m23;
-      const tmp9 = m22 * m03;
-      const tmp10 = m02 * m13;
-      const tmp11 = m12 * m03;
-      const t0 = tmp0 * m11 + tmp3 * m21 + tmp4 * m31 - (tmp1 * m11 + tmp2 * m21 + tmp5 * m31);
-      const t1 = tmp1 * m01 + tmp6 * m21 + tmp9 * m31 - (tmp0 * m01 + tmp7 * m21 + tmp8 * m31);
-      const t2 = tmp2 * m01 + tmp7 * m11 + tmp10 * m31 - (tmp3 * m01 + tmp6 * m11 + tmp11 * m31);
-      const t3 = tmp5 * m01 + tmp8 * m11 + tmp11 * m21 - (tmp4 * m01 + tmp9 * m11 + tmp10 * m21);
-      return m00 * t0 + m10 * t1 + m20 * t2 + m30 * t3;
-    }
-    const invert = inverse;
-    function multiply(a, b, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const a00 = a[0];
-      const a01 = a[1];
-      const a02 = a[2];
-      const a03 = a[3];
-      const a10 = a[4 + 0];
-      const a11 = a[4 + 1];
-      const a12 = a[4 + 2];
-      const a13 = a[4 + 3];
-      const a20 = a[8 + 0];
-      const a21 = a[8 + 1];
-      const a22 = a[8 + 2];
-      const a23 = a[8 + 3];
-      const a30 = a[12 + 0];
-      const a31 = a[12 + 1];
-      const a32 = a[12 + 2];
-      const a33 = a[12 + 3];
-      const b00 = b[0];
-      const b01 = b[1];
-      const b02 = b[2];
-      const b03 = b[3];
-      const b10 = b[4 + 0];
-      const b11 = b[4 + 1];
-      const b12 = b[4 + 2];
-      const b13 = b[4 + 3];
-      const b20 = b[8 + 0];
-      const b21 = b[8 + 1];
-      const b22 = b[8 + 2];
-      const b23 = b[8 + 3];
-      const b30 = b[12 + 0];
-      const b31 = b[12 + 1];
-      const b32 = b[12 + 2];
-      const b33 = b[12 + 3];
-      newDst[0] = a00 * b00 + a10 * b01 + a20 * b02 + a30 * b03;
-      newDst[1] = a01 * b00 + a11 * b01 + a21 * b02 + a31 * b03;
-      newDst[2] = a02 * b00 + a12 * b01 + a22 * b02 + a32 * b03;
-      newDst[3] = a03 * b00 + a13 * b01 + a23 * b02 + a33 * b03;
-      newDst[4] = a00 * b10 + a10 * b11 + a20 * b12 + a30 * b13;
-      newDst[5] = a01 * b10 + a11 * b11 + a21 * b12 + a31 * b13;
-      newDst[6] = a02 * b10 + a12 * b11 + a22 * b12 + a32 * b13;
-      newDst[7] = a03 * b10 + a13 * b11 + a23 * b12 + a33 * b13;
-      newDst[8] = a00 * b20 + a10 * b21 + a20 * b22 + a30 * b23;
-      newDst[9] = a01 * b20 + a11 * b21 + a21 * b22 + a31 * b23;
-      newDst[10] = a02 * b20 + a12 * b21 + a22 * b22 + a32 * b23;
-      newDst[11] = a03 * b20 + a13 * b21 + a23 * b22 + a33 * b23;
-      newDst[12] = a00 * b30 + a10 * b31 + a20 * b32 + a30 * b33;
-      newDst[13] = a01 * b30 + a11 * b31 + a21 * b32 + a31 * b33;
-      newDst[14] = a02 * b30 + a12 * b31 + a22 * b32 + a32 * b33;
-      newDst[15] = a03 * b30 + a13 * b31 + a23 * b32 + a33 * b33;
-      return newDst;
-    }
-    const mul = multiply;
-    function setTranslation(a, v, dst) {
-      const newDst = dst ?? identity();
-      if (a !== newDst) {
-        newDst[0] = a[0];
-        newDst[1] = a[1];
-        newDst[2] = a[2];
-        newDst[3] = a[3];
-        newDst[4] = a[4];
-        newDst[5] = a[5];
-        newDst[6] = a[6];
-        newDst[7] = a[7];
-        newDst[8] = a[8];
-        newDst[9] = a[9];
-        newDst[10] = a[10];
-        newDst[11] = a[11];
-      }
-      newDst[12] = v[0];
-      newDst[13] = v[1];
-      newDst[14] = v[2];
-      newDst[15] = 1;
-      return newDst;
-    }
-    function getTranslation(m, dst) {
-      const newDst = dst ?? vec32.create();
-      newDst[0] = m[12];
-      newDst[1] = m[13];
-      newDst[2] = m[14];
-      return newDst;
-    }
-    function getAxis(m, axis, dst) {
-      const newDst = dst ?? vec32.create();
-      const off = axis * 4;
-      newDst[0] = m[off + 0];
-      newDst[1] = m[off + 1];
-      newDst[2] = m[off + 2];
-      return newDst;
-    }
-    function setAxis(m, v, axis, dst) {
-      const newDst = dst === m ? dst : copy(m, dst);
-      const off = axis * 4;
-      newDst[off + 0] = v[0];
-      newDst[off + 1] = v[1];
-      newDst[off + 2] = v[2];
-      return newDst;
-    }
-    function getScaling(m, dst) {
-      const newDst = dst ?? vec32.create();
-      const xx = m[0];
-      const xy = m[1];
-      const xz = m[2];
-      const yx = m[4];
-      const yy = m[5];
-      const yz = m[6];
-      const zx = m[8];
-      const zy = m[9];
-      const zz = m[10];
-      newDst[0] = Math.sqrt(xx * xx + xy * xy + xz * xz);
-      newDst[1] = Math.sqrt(yx * yx + yy * yy + yz * yz);
-      newDst[2] = Math.sqrt(zx * zx + zy * zy + zz * zz);
-      return newDst;
-    }
-    function perspective(fieldOfViewYInRadians, aspect, zNear, zFar, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const f = Math.tan(Math.PI * 0.5 - 0.5 * fieldOfViewYInRadians);
-      newDst[0] = f / aspect;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = f;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[11] = -1;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[15] = 0;
-      if (Number.isFinite(zFar)) {
-        const rangeInv = 1 / (zNear - zFar);
-        newDst[10] = zFar * rangeInv;
-        newDst[14] = zFar * zNear * rangeInv;
-      } else {
-        newDst[10] = -1;
-        newDst[14] = -zNear;
-      }
-      return newDst;
-    }
-    function perspectiveReverseZ(fieldOfViewYInRadians, aspect, zNear, zFar = Infinity, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const f = 1 / Math.tan(fieldOfViewYInRadians * 0.5);
-      newDst[0] = f / aspect;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = f;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[11] = -1;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[15] = 0;
-      if (zFar === Infinity) {
-        newDst[10] = 0;
-        newDst[14] = zNear;
-      } else {
-        const rangeInv = 1 / (zFar - zNear);
-        newDst[10] = zNear * rangeInv;
-        newDst[14] = zFar * zNear * rangeInv;
-      }
-      return newDst;
-    }
-    function ortho(left, right, bottom, top, near, far, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = 2 / (right - left);
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = 2 / (top - bottom);
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = 1 / (near - far);
-      newDst[11] = 0;
-      newDst[12] = (right + left) / (left - right);
-      newDst[13] = (top + bottom) / (bottom - top);
-      newDst[14] = near / (near - far);
-      newDst[15] = 1;
-      return newDst;
-    }
-    function frustum(left, right, bottom, top, near, far, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const dx = right - left;
-      const dy = top - bottom;
-      const dz = near - far;
-      newDst[0] = 2 * near / dx;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = 2 * near / dy;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = (left + right) / dx;
-      newDst[9] = (top + bottom) / dy;
-      newDst[10] = far / dz;
-      newDst[11] = -1;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = near * far / dz;
-      newDst[15] = 0;
-      return newDst;
-    }
-    function frustumReverseZ(left, right, bottom, top, near, far = Infinity, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const dx = right - left;
-      const dy = top - bottom;
-      newDst[0] = 2 * near / dx;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = 2 * near / dy;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = (left + right) / dx;
-      newDst[9] = (top + bottom) / dy;
-      newDst[11] = -1;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[15] = 0;
-      if (far === Infinity) {
-        newDst[10] = 0;
-        newDst[14] = near;
-      } else {
-        const rangeInv = 1 / (far - near);
-        newDst[10] = near * rangeInv;
-        newDst[14] = far * near * rangeInv;
-      }
-      return newDst;
-    }
-    const xAxis = vec32.create();
-    const yAxis = vec32.create();
-    const zAxis = vec32.create();
-    function aim(position, target, up, dst) {
-      const newDst = dst ?? new Ctor(16);
-      vec32.normalize(vec32.subtract(target, position, zAxis), zAxis);
-      vec32.normalize(vec32.cross(up, zAxis, xAxis), xAxis);
-      vec32.normalize(vec32.cross(zAxis, xAxis, yAxis), yAxis);
-      newDst[0] = xAxis[0];
-      newDst[1] = xAxis[1];
-      newDst[2] = xAxis[2];
-      newDst[3] = 0;
-      newDst[4] = yAxis[0];
-      newDst[5] = yAxis[1];
-      newDst[6] = yAxis[2];
-      newDst[7] = 0;
-      newDst[8] = zAxis[0];
-      newDst[9] = zAxis[1];
-      newDst[10] = zAxis[2];
-      newDst[11] = 0;
-      newDst[12] = position[0];
-      newDst[13] = position[1];
-      newDst[14] = position[2];
-      newDst[15] = 1;
-      return newDst;
-    }
-    function cameraAim(eye, target, up, dst) {
-      const newDst = dst ?? new Ctor(16);
-      vec32.normalize(vec32.subtract(eye, target, zAxis), zAxis);
-      vec32.normalize(vec32.cross(up, zAxis, xAxis), xAxis);
-      vec32.normalize(vec32.cross(zAxis, xAxis, yAxis), yAxis);
-      newDst[0] = xAxis[0];
-      newDst[1] = xAxis[1];
-      newDst[2] = xAxis[2];
-      newDst[3] = 0;
-      newDst[4] = yAxis[0];
-      newDst[5] = yAxis[1];
-      newDst[6] = yAxis[2];
-      newDst[7] = 0;
-      newDst[8] = zAxis[0];
-      newDst[9] = zAxis[1];
-      newDst[10] = zAxis[2];
-      newDst[11] = 0;
-      newDst[12] = eye[0];
-      newDst[13] = eye[1];
-      newDst[14] = eye[2];
-      newDst[15] = 1;
-      return newDst;
-    }
-    function lookAt(eye, target, up, dst) {
-      const newDst = dst ?? new Ctor(16);
-      vec32.normalize(vec32.subtract(eye, target, zAxis), zAxis);
-      vec32.normalize(vec32.cross(up, zAxis, xAxis), xAxis);
-      vec32.normalize(vec32.cross(zAxis, xAxis, yAxis), yAxis);
-      newDst[0] = xAxis[0];
-      newDst[1] = yAxis[0];
-      newDst[2] = zAxis[0];
-      newDst[3] = 0;
-      newDst[4] = xAxis[1];
-      newDst[5] = yAxis[1];
-      newDst[6] = zAxis[1];
-      newDst[7] = 0;
-      newDst[8] = xAxis[2];
-      newDst[9] = yAxis[2];
-      newDst[10] = zAxis[2];
-      newDst[11] = 0;
-      newDst[12] = -(xAxis[0] * eye[0] + xAxis[1] * eye[1] + xAxis[2] * eye[2]);
-      newDst[13] = -(yAxis[0] * eye[0] + yAxis[1] * eye[1] + yAxis[2] * eye[2]);
-      newDst[14] = -(zAxis[0] * eye[0] + zAxis[1] * eye[1] + zAxis[2] * eye[2]);
-      newDst[15] = 1;
-      return newDst;
-    }
-    function translation(v, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = 1;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = 1;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = 1;
-      newDst[11] = 0;
-      newDst[12] = v[0];
-      newDst[13] = v[1];
-      newDst[14] = v[2];
-      newDst[15] = 1;
-      return newDst;
-    }
-    function translate(m, v, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      const m00 = m[0];
-      const m01 = m[1];
-      const m02 = m[2];
-      const m03 = m[3];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m13 = m[1 * 4 + 3];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      const m23 = m[2 * 4 + 3];
-      const m30 = m[3 * 4 + 0];
-      const m31 = m[3 * 4 + 1];
-      const m32 = m[3 * 4 + 2];
-      const m33 = m[3 * 4 + 3];
-      if (m !== newDst) {
-        newDst[0] = m00;
-        newDst[1] = m01;
-        newDst[2] = m02;
-        newDst[3] = m03;
-        newDst[4] = m10;
-        newDst[5] = m11;
-        newDst[6] = m12;
-        newDst[7] = m13;
-        newDst[8] = m20;
-        newDst[9] = m21;
-        newDst[10] = m22;
-        newDst[11] = m23;
-      }
-      newDst[12] = m00 * v0 + m10 * v1 + m20 * v2 + m30;
-      newDst[13] = m01 * v0 + m11 * v1 + m21 * v2 + m31;
-      newDst[14] = m02 * v0 + m12 * v1 + m22 * v2 + m32;
-      newDst[15] = m03 * v0 + m13 * v1 + m23 * v2 + m33;
-      return newDst;
-    }
-    function rotationX(angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = 1;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = c;
-      newDst[6] = s;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = -s;
-      newDst[10] = c;
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    function rotateX(m, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const m10 = m[4];
-      const m11 = m[5];
-      const m12 = m[6];
-      const m13 = m[7];
-      const m20 = m[8];
-      const m21 = m[9];
-      const m22 = m[10];
-      const m23 = m[11];
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[4] = c * m10 + s * m20;
-      newDst[5] = c * m11 + s * m21;
-      newDst[6] = c * m12 + s * m22;
-      newDst[7] = c * m13 + s * m23;
-      newDst[8] = c * m20 - s * m10;
-      newDst[9] = c * m21 - s * m11;
-      newDst[10] = c * m22 - s * m12;
-      newDst[11] = c * m23 - s * m13;
-      if (m !== newDst) {
-        newDst[0] = m[0];
-        newDst[1] = m[1];
-        newDst[2] = m[2];
-        newDst[3] = m[3];
-        newDst[12] = m[12];
-        newDst[13] = m[13];
-        newDst[14] = m[14];
-        newDst[15] = m[15];
-      }
-      return newDst;
-    }
-    function rotationY(angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = c;
-      newDst[1] = 0;
-      newDst[2] = -s;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = 1;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = s;
-      newDst[9] = 0;
-      newDst[10] = c;
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    function rotateY(m, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m03 = m[0 * 4 + 3];
-      const m20 = m[2 * 4 + 0];
-      const m21 = m[2 * 4 + 1];
-      const m22 = m[2 * 4 + 2];
-      const m23 = m[2 * 4 + 3];
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = c * m00 - s * m20;
-      newDst[1] = c * m01 - s * m21;
-      newDst[2] = c * m02 - s * m22;
-      newDst[3] = c * m03 - s * m23;
-      newDst[8] = c * m20 + s * m00;
-      newDst[9] = c * m21 + s * m01;
-      newDst[10] = c * m22 + s * m02;
-      newDst[11] = c * m23 + s * m03;
-      if (m !== newDst) {
-        newDst[4] = m[4];
-        newDst[5] = m[5];
-        newDst[6] = m[6];
-        newDst[7] = m[7];
-        newDst[12] = m[12];
-        newDst[13] = m[13];
-        newDst[14] = m[14];
-        newDst[15] = m[15];
-      }
-      return newDst;
-    }
-    function rotationZ(angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = c;
-      newDst[1] = s;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = -s;
-      newDst[5] = c;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = 1;
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    function rotateZ(m, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const m00 = m[0 * 4 + 0];
-      const m01 = m[0 * 4 + 1];
-      const m02 = m[0 * 4 + 2];
-      const m03 = m[0 * 4 + 3];
-      const m10 = m[1 * 4 + 0];
-      const m11 = m[1 * 4 + 1];
-      const m12 = m[1 * 4 + 2];
-      const m13 = m[1 * 4 + 3];
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      newDst[0] = c * m00 + s * m10;
-      newDst[1] = c * m01 + s * m11;
-      newDst[2] = c * m02 + s * m12;
-      newDst[3] = c * m03 + s * m13;
-      newDst[4] = c * m10 - s * m00;
-      newDst[5] = c * m11 - s * m01;
-      newDst[6] = c * m12 - s * m02;
-      newDst[7] = c * m13 - s * m03;
-      if (m !== newDst) {
-        newDst[8] = m[8];
-        newDst[9] = m[9];
-        newDst[10] = m[10];
-        newDst[11] = m[11];
-        newDst[12] = m[12];
-        newDst[13] = m[13];
-        newDst[14] = m[14];
-        newDst[15] = m[15];
-      }
-      return newDst;
-    }
-    function axisRotation(axis, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(16);
-      let x = axis[0];
-      let y = axis[1];
-      let z = axis[2];
-      const n = Math.sqrt(x * x + y * y + z * z);
-      x /= n;
-      y /= n;
-      z /= n;
-      const xx = x * x;
-      const yy = y * y;
-      const zz = z * z;
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      const oneMinusCosine = 1 - c;
-      newDst[0] = xx + (1 - xx) * c;
-      newDst[1] = x * y * oneMinusCosine + z * s;
-      newDst[2] = x * z * oneMinusCosine - y * s;
-      newDst[3] = 0;
-      newDst[4] = x * y * oneMinusCosine - z * s;
-      newDst[5] = yy + (1 - yy) * c;
-      newDst[6] = y * z * oneMinusCosine + x * s;
-      newDst[7] = 0;
-      newDst[8] = x * z * oneMinusCosine + y * s;
-      newDst[9] = y * z * oneMinusCosine - x * s;
-      newDst[10] = zz + (1 - zz) * c;
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    const rotation = axisRotation;
-    function axisRotate(m, axis, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(16);
-      let x = axis[0];
-      let y = axis[1];
-      let z = axis[2];
-      const n = Math.sqrt(x * x + y * y + z * z);
-      x /= n;
-      y /= n;
-      z /= n;
-      const xx = x * x;
-      const yy = y * y;
-      const zz = z * z;
-      const c = Math.cos(angleInRadians);
-      const s = Math.sin(angleInRadians);
-      const oneMinusCosine = 1 - c;
-      const r00 = xx + (1 - xx) * c;
-      const r01 = x * y * oneMinusCosine + z * s;
-      const r02 = x * z * oneMinusCosine - y * s;
-      const r10 = x * y * oneMinusCosine - z * s;
-      const r11 = yy + (1 - yy) * c;
-      const r12 = y * z * oneMinusCosine + x * s;
-      const r20 = x * z * oneMinusCosine + y * s;
-      const r21 = y * z * oneMinusCosine - x * s;
-      const r22 = zz + (1 - zz) * c;
-      const m00 = m[0];
-      const m01 = m[1];
-      const m02 = m[2];
-      const m03 = m[3];
-      const m10 = m[4];
-      const m11 = m[5];
-      const m12 = m[6];
-      const m13 = m[7];
-      const m20 = m[8];
-      const m21 = m[9];
-      const m22 = m[10];
-      const m23 = m[11];
-      newDst[0] = r00 * m00 + r01 * m10 + r02 * m20;
-      newDst[1] = r00 * m01 + r01 * m11 + r02 * m21;
-      newDst[2] = r00 * m02 + r01 * m12 + r02 * m22;
-      newDst[3] = r00 * m03 + r01 * m13 + r02 * m23;
-      newDst[4] = r10 * m00 + r11 * m10 + r12 * m20;
-      newDst[5] = r10 * m01 + r11 * m11 + r12 * m21;
-      newDst[6] = r10 * m02 + r11 * m12 + r12 * m22;
-      newDst[7] = r10 * m03 + r11 * m13 + r12 * m23;
-      newDst[8] = r20 * m00 + r21 * m10 + r22 * m20;
-      newDst[9] = r20 * m01 + r21 * m11 + r22 * m21;
-      newDst[10] = r20 * m02 + r21 * m12 + r22 * m22;
-      newDst[11] = r20 * m03 + r21 * m13 + r22 * m23;
-      if (m !== newDst) {
-        newDst[12] = m[12];
-        newDst[13] = m[13];
-        newDst[14] = m[14];
-        newDst[15] = m[15];
-      }
-      return newDst;
-    }
-    const rotate = axisRotate;
-    function scaling(v, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = v[0];
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = v[1];
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = v[2];
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    function scale(m, v, dst) {
-      const newDst = dst ?? new Ctor(16);
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      newDst[0] = v0 * m[0 * 4 + 0];
-      newDst[1] = v0 * m[0 * 4 + 1];
-      newDst[2] = v0 * m[0 * 4 + 2];
-      newDst[3] = v0 * m[0 * 4 + 3];
-      newDst[4] = v1 * m[1 * 4 + 0];
-      newDst[5] = v1 * m[1 * 4 + 1];
-      newDst[6] = v1 * m[1 * 4 + 2];
-      newDst[7] = v1 * m[1 * 4 + 3];
-      newDst[8] = v2 * m[2 * 4 + 0];
-      newDst[9] = v2 * m[2 * 4 + 1];
-      newDst[10] = v2 * m[2 * 4 + 2];
-      newDst[11] = v2 * m[2 * 4 + 3];
-      if (m !== newDst) {
-        newDst[12] = m[12];
-        newDst[13] = m[13];
-        newDst[14] = m[14];
-        newDst[15] = m[15];
-      }
-      return newDst;
-    }
-    function uniformScaling(s, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = s;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      newDst[4] = 0;
-      newDst[5] = s;
-      newDst[6] = 0;
-      newDst[7] = 0;
-      newDst[8] = 0;
-      newDst[9] = 0;
-      newDst[10] = s;
-      newDst[11] = 0;
-      newDst[12] = 0;
-      newDst[13] = 0;
-      newDst[14] = 0;
-      newDst[15] = 1;
-      return newDst;
-    }
-    function uniformScale(m, s, dst) {
-      const newDst = dst ?? new Ctor(16);
-      newDst[0] = s * m[0 * 4 + 0];
-      newDst[1] = s * m[0 * 4 + 1];
-      newDst[2] = s * m[0 * 4 + 2];
-      newDst[3] = s * m[0 * 4 + 3];
-      newDst[4] = s * m[1 * 4 + 0];
-      newDst[5] = s * m[1 * 4 + 1];
-      newDst[6] = s * m[1 * 4 + 2];
-      newDst[7] = s * m[1 * 4 + 3];
-      newDst[8] = s * m[2 * 4 + 0];
-      newDst[9] = s * m[2 * 4 + 1];
-      newDst[10] = s * m[2 * 4 + 2];
-      newDst[11] = s * m[2 * 4 + 3];
-      if (m !== newDst) {
-        newDst[12] = m[12];
-        newDst[13] = m[13];
-        newDst[14] = m[14];
-        newDst[15] = m[15];
-      }
-      return newDst;
-    }
-    return {
-      add,
-      aim,
-      axisRotate,
-      axisRotation,
-      cameraAim,
-      clone,
-      copy,
-      create,
-      determinant,
-      equals,
-      equalsApproximately,
-      fromMat3,
-      fromQuat,
-      frustum,
-      frustumReverseZ,
-      getAxis,
-      getScaling,
-      getTranslation,
-      identity,
-      inverse,
-      invert,
-      lookAt,
-      mul,
-      mulScalar,
-      multiply,
-      multiplyScalar,
-      negate,
-      ortho,
-      perspective,
-      perspectiveReverseZ,
-      rotate,
-      rotateX,
-      rotateY,
-      rotateZ,
-      rotation,
-      rotationX,
-      rotationY,
-      rotationZ,
-      scale,
-      scaling,
-      set,
-      setAxis,
-      setTranslation,
-      translate,
-      translation,
-      transpose,
-      uniformScale,
-      uniformScaling
-    };
-  }
-  var cache$2 = /* @__PURE__ */ new Map();
-  function getAPI$2(Ctor) {
-    let api = cache$2.get(Ctor);
-    if (!api) {
-      api = getAPIImpl$2(Ctor);
-      cache$2.set(Ctor, api);
-    }
-    return api;
-  }
-  function getAPIImpl$1(Ctor) {
-    const vec32 = getAPI$4(Ctor);
-    function create(x, y, z, w) {
-      const newDst = new Ctor(4);
-      if (x !== void 0) {
-        newDst[0] = x;
-        if (y !== void 0) {
-          newDst[1] = y;
-          if (z !== void 0) {
-            newDst[2] = z;
-            if (w !== void 0) {
-              newDst[3] = w;
-            }
-          }
-        }
-      }
-      return newDst;
-    }
-    const fromValues = create;
-    function set(x, y, z, w, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = x;
-      newDst[1] = y;
-      newDst[2] = z;
-      newDst[3] = w;
-      return newDst;
-    }
-    function fromAxisAngle(axis, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const halfAngle = angleInRadians * 0.5;
-      const s = Math.sin(halfAngle);
-      newDst[0] = s * axis[0];
-      newDst[1] = s * axis[1];
-      newDst[2] = s * axis[2];
-      newDst[3] = Math.cos(halfAngle);
-      return newDst;
-    }
-    function toAxisAngle(q, dst) {
-      const newDst = dst ?? vec32.create(3);
-      const angle2 = Math.acos(q[3]) * 2;
-      const s = Math.sin(angle2 * 0.5);
-      if (s > EPSILON) {
-        newDst[0] = q[0] / s;
-        newDst[1] = q[1] / s;
-        newDst[2] = q[2] / s;
-      } else {
-        newDst[0] = 1;
-        newDst[1] = 0;
-        newDst[2] = 0;
-      }
-      return { angle: angle2, axis: newDst };
-    }
-    function angle(a, b) {
-      const d = dot(a, b);
-      return Math.acos(2 * d * d - 1);
-    }
-    function multiply(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const ax = a[0];
-      const ay = a[1];
-      const az = a[2];
-      const aw = a[3];
-      const bx = b[0];
-      const by = b[1];
-      const bz = b[2];
-      const bw = b[3];
-      newDst[0] = ax * bw + aw * bx + ay * bz - az * by;
-      newDst[1] = ay * bw + aw * by + az * bx - ax * bz;
-      newDst[2] = az * bw + aw * bz + ax * by - ay * bx;
-      newDst[3] = aw * bw - ax * bx - ay * by - az * bz;
-      return newDst;
-    }
-    const mul = multiply;
-    function rotateX(q, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const halfAngle = angleInRadians * 0.5;
-      const qx = q[0];
-      const qy = q[1];
-      const qz = q[2];
-      const qw = q[3];
-      const bx = Math.sin(halfAngle);
-      const bw = Math.cos(halfAngle);
-      newDst[0] = qx * bw + qw * bx;
-      newDst[1] = qy * bw + qz * bx;
-      newDst[2] = qz * bw - qy * bx;
-      newDst[3] = qw * bw - qx * bx;
-      return newDst;
-    }
-    function rotateY(q, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const halfAngle = angleInRadians * 0.5;
-      const qx = q[0];
-      const qy = q[1];
-      const qz = q[2];
-      const qw = q[3];
-      const by = Math.sin(halfAngle);
-      const bw = Math.cos(halfAngle);
-      newDst[0] = qx * bw - qz * by;
-      newDst[1] = qy * bw + qw * by;
-      newDst[2] = qz * bw + qx * by;
-      newDst[3] = qw * bw - qy * by;
-      return newDst;
-    }
-    function rotateZ(q, angleInRadians, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const halfAngle = angleInRadians * 0.5;
-      const qx = q[0];
-      const qy = q[1];
-      const qz = q[2];
-      const qw = q[3];
-      const bz = Math.sin(halfAngle);
-      const bw = Math.cos(halfAngle);
-      newDst[0] = qx * bw + qy * bz;
-      newDst[1] = qy * bw - qx * bz;
-      newDst[2] = qz * bw + qw * bz;
-      newDst[3] = qw * bw - qz * bz;
-      return newDst;
-    }
-    function slerp(a, b, t, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const ax = a[0];
-      const ay = a[1];
-      const az = a[2];
-      const aw = a[3];
-      let bx = b[0];
-      let by = b[1];
-      let bz = b[2];
-      let bw = b[3];
-      let cosOmega = ax * bx + ay * by + az * bz + aw * bw;
-      if (cosOmega < 0) {
-        cosOmega = -cosOmega;
-        bx = -bx;
-        by = -by;
-        bz = -bz;
-        bw = -bw;
-      }
-      let scale0;
-      let scale1;
-      if (1 - cosOmega > EPSILON) {
-        const omega = Math.acos(cosOmega);
-        const sinOmega = Math.sin(omega);
-        scale0 = Math.sin((1 - t) * omega) / sinOmega;
-        scale1 = Math.sin(t * omega) / sinOmega;
-      } else {
-        scale0 = 1 - t;
-        scale1 = t;
-      }
-      newDst[0] = scale0 * ax + scale1 * bx;
-      newDst[1] = scale0 * ay + scale1 * by;
-      newDst[2] = scale0 * az + scale1 * bz;
-      newDst[3] = scale0 * aw + scale1 * bw;
-      return newDst;
-    }
-    function inverse(q, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const a0 = q[0];
-      const a1 = q[1];
-      const a2 = q[2];
-      const a3 = q[3];
-      const dot2 = a0 * a0 + a1 * a1 + a2 * a2 + a3 * a3;
-      const invDot = dot2 ? 1 / dot2 : 0;
-      newDst[0] = -a0 * invDot;
-      newDst[1] = -a1 * invDot;
-      newDst[2] = -a2 * invDot;
-      newDst[3] = a3 * invDot;
-      return newDst;
-    }
-    function conjugate(q, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = -q[0];
-      newDst[1] = -q[1];
-      newDst[2] = -q[2];
-      newDst[3] = q[3];
-      return newDst;
-    }
-    function fromMat(m, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const trace = m[0] + m[5] + m[10];
-      if (trace > 0) {
-        const root = Math.sqrt(trace + 1);
-        newDst[3] = 0.5 * root;
-        const invRoot = 0.5 / root;
-        newDst[0] = (m[6] - m[9]) * invRoot;
-        newDst[1] = (m[8] - m[2]) * invRoot;
-        newDst[2] = (m[1] - m[4]) * invRoot;
-      } else {
-        let i = 0;
-        if (m[5] > m[0]) {
-          i = 1;
-        }
-        if (m[10] > m[i * 4 + i]) {
-          i = 2;
-        }
-        const j = (i + 1) % 3;
-        const k = (i + 2) % 3;
-        const root = Math.sqrt(m[i * 4 + i] - m[j * 4 + j] - m[k * 4 + k] + 1);
-        newDst[i] = 0.5 * root;
-        const invRoot = 0.5 / root;
-        newDst[3] = (m[j * 4 + k] - m[k * 4 + j]) * invRoot;
-        newDst[j] = (m[j * 4 + i] + m[i * 4 + j]) * invRoot;
-        newDst[k] = (m[k * 4 + i] + m[i * 4 + k]) * invRoot;
-      }
-      return newDst;
-    }
-    function fromEuler(xAngleInRadians, yAngleInRadians, zAngleInRadians, order, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const xHalfAngle = xAngleInRadians * 0.5;
-      const yHalfAngle = yAngleInRadians * 0.5;
-      const zHalfAngle = zAngleInRadians * 0.5;
-      const sx = Math.sin(xHalfAngle);
-      const cx = Math.cos(xHalfAngle);
-      const sy = Math.sin(yHalfAngle);
-      const cy = Math.cos(yHalfAngle);
-      const sz = Math.sin(zHalfAngle);
-      const cz = Math.cos(zHalfAngle);
-      switch (order) {
-        case "xyz":
-          newDst[0] = sx * cy * cz + cx * sy * sz;
-          newDst[1] = cx * sy * cz - sx * cy * sz;
-          newDst[2] = cx * cy * sz + sx * sy * cz;
-          newDst[3] = cx * cy * cz - sx * sy * sz;
-          break;
-        case "xzy":
-          newDst[0] = sx * cy * cz - cx * sy * sz;
-          newDst[1] = cx * sy * cz - sx * cy * sz;
-          newDst[2] = cx * cy * sz + sx * sy * cz;
-          newDst[3] = cx * cy * cz + sx * sy * sz;
-          break;
-        case "yxz":
-          newDst[0] = sx * cy * cz + cx * sy * sz;
-          newDst[1] = cx * sy * cz - sx * cy * sz;
-          newDst[2] = cx * cy * sz - sx * sy * cz;
-          newDst[3] = cx * cy * cz + sx * sy * sz;
-          break;
-        case "yzx":
-          newDst[0] = sx * cy * cz + cx * sy * sz;
-          newDst[1] = cx * sy * cz + sx * cy * sz;
-          newDst[2] = cx * cy * sz - sx * sy * cz;
-          newDst[3] = cx * cy * cz - sx * sy * sz;
-          break;
-        case "zxy":
-          newDst[0] = sx * cy * cz - cx * sy * sz;
-          newDst[1] = cx * sy * cz + sx * cy * sz;
-          newDst[2] = cx * cy * sz + sx * sy * cz;
-          newDst[3] = cx * cy * cz - sx * sy * sz;
-          break;
-        case "zyx":
-          newDst[0] = sx * cy * cz - cx * sy * sz;
-          newDst[1] = cx * sy * cz + sx * cy * sz;
-          newDst[2] = cx * cy * sz - sx * sy * cz;
-          newDst[3] = cx * cy * cz + sx * sy * sz;
-          break;
-        default:
-          throw new Error(`Unknown rotation order: ${order}`);
-      }
-      return newDst;
-    }
-    function copy(q, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = q[0];
-      newDst[1] = q[1];
-      newDst[2] = q[2];
-      newDst[3] = q[3];
-      return newDst;
-    }
-    const clone = copy;
-    function add(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] + b[0];
-      newDst[1] = a[1] + b[1];
-      newDst[2] = a[2] + b[2];
-      newDst[3] = a[3] + b[3];
-      return newDst;
-    }
-    function subtract(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] - b[0];
-      newDst[1] = a[1] - b[1];
-      newDst[2] = a[2] - b[2];
-      newDst[3] = a[3] - b[3];
-      return newDst;
-    }
-    const sub = subtract;
-    function mulScalar(v, k, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = v[0] * k;
-      newDst[1] = v[1] * k;
-      newDst[2] = v[2] * k;
-      newDst[3] = v[3] * k;
-      return newDst;
-    }
-    const scale = mulScalar;
-    function divScalar(v, k, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = v[0] / k;
-      newDst[1] = v[1] / k;
-      newDst[2] = v[2] / k;
-      newDst[3] = v[3] / k;
-      return newDst;
-    }
-    function dot(a, b) {
-      return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-    }
-    function lerp(a, b, t, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] + t * (b[0] - a[0]);
-      newDst[1] = a[1] + t * (b[1] - a[1]);
-      newDst[2] = a[2] + t * (b[2] - a[2]);
-      newDst[3] = a[3] + t * (b[3] - a[3]);
-      return newDst;
-    }
-    function length(v) {
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      const v3 = v[3];
-      return Math.sqrt(v0 * v0 + v1 * v1 + v2 * v2 + v3 * v3);
-    }
-    const len = length;
-    function lengthSq(v) {
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      const v3 = v[3];
-      return v0 * v0 + v1 * v1 + v2 * v2 + v3 * v3;
-    }
-    const lenSq = lengthSq;
-    function normalize(v, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      const v3 = v[3];
-      const len2 = Math.sqrt(v0 * v0 + v1 * v1 + v2 * v2 + v3 * v3);
-      if (len2 > 1e-5) {
-        newDst[0] = v0 / len2;
-        newDst[1] = v1 / len2;
-        newDst[2] = v2 / len2;
-        newDst[3] = v3 / len2;
-      } else {
-        newDst[0] = 0;
-        newDst[1] = 0;
-        newDst[2] = 0;
-        newDst[3] = 1;
-      }
-      return newDst;
-    }
-    function equalsApproximately(a, b) {
-      return Math.abs(a[0] - b[0]) < EPSILON && Math.abs(a[1] - b[1]) < EPSILON && Math.abs(a[2] - b[2]) < EPSILON && Math.abs(a[3] - b[3]) < EPSILON;
-    }
-    function equals(a, b) {
-      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
-    }
-    function identity(dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = 0;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 1;
-      return newDst;
-    }
-    const tempVec3 = vec32.create();
-    const xUnitVec3 = vec32.create();
-    const yUnitVec3 = vec32.create();
-    function rotationTo(aUnit, bUnit, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const dot2 = vec32.dot(aUnit, bUnit);
-      if (dot2 < -0.999999) {
-        vec32.cross(xUnitVec3, aUnit, tempVec3);
-        if (vec32.len(tempVec3) < 1e-6) {
-          vec32.cross(yUnitVec3, aUnit, tempVec3);
-        }
-        vec32.normalize(tempVec3, tempVec3);
-        fromAxisAngle(tempVec3, Math.PI, newDst);
-        return newDst;
-      } else if (dot2 > 0.999999) {
-        newDst[0] = 0;
-        newDst[1] = 0;
-        newDst[2] = 0;
-        newDst[3] = 1;
-        return newDst;
-      } else {
-        vec32.cross(aUnit, bUnit, tempVec3);
-        newDst[0] = tempVec3[0];
-        newDst[1] = tempVec3[1];
-        newDst[2] = tempVec3[2];
-        newDst[3] = 1 + dot2;
-        return normalize(newDst, newDst);
-      }
-    }
-    const tempQuat1 = new Ctor(4);
-    const tempQuat2 = new Ctor(4);
-    function sqlerp(a, b, c, d, t, dst) {
-      const newDst = dst ?? new Ctor(4);
-      slerp(a, d, t, tempQuat1);
-      slerp(b, c, t, tempQuat2);
-      slerp(tempQuat1, tempQuat2, 2 * t * (1 - t), newDst);
-      return newDst;
-    }
-    return {
-      create,
-      fromValues,
-      set,
-      fromAxisAngle,
-      toAxisAngle,
-      angle,
-      multiply,
-      mul,
-      rotateX,
-      rotateY,
-      rotateZ,
-      slerp,
-      inverse,
-      conjugate,
-      fromMat,
-      fromEuler,
-      copy,
-      clone,
-      add,
-      subtract,
-      sub,
-      mulScalar,
-      scale,
-      divScalar,
-      dot,
-      lerp,
-      length,
-      len,
-      lengthSq,
-      lenSq,
-      normalize,
-      equalsApproximately,
-      equals,
-      identity,
-      rotationTo,
-      sqlerp
-    };
-  }
-  var cache$1 = /* @__PURE__ */ new Map();
-  function getAPI$1(Ctor) {
-    let api = cache$1.get(Ctor);
-    if (!api) {
-      api = getAPIImpl$1(Ctor);
-      cache$1.set(Ctor, api);
-    }
-    return api;
-  }
-  function getAPIImpl(Ctor) {
-    function create(x, y, z, w) {
-      const newDst = new Ctor(4);
-      if (x !== void 0) {
-        newDst[0] = x;
-        if (y !== void 0) {
-          newDst[1] = y;
-          if (z !== void 0) {
-            newDst[2] = z;
-            if (w !== void 0) {
-              newDst[3] = w;
-            }
-          }
-        }
-      }
-      return newDst;
-    }
-    const fromValues = create;
-    function set(x, y, z, w, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = x;
-      newDst[1] = y;
-      newDst[2] = z;
-      newDst[3] = w;
-      return newDst;
-    }
-    function ceil(v, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = Math.ceil(v[0]);
-      newDst[1] = Math.ceil(v[1]);
-      newDst[2] = Math.ceil(v[2]);
-      newDst[3] = Math.ceil(v[3]);
-      return newDst;
-    }
-    function floor(v, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = Math.floor(v[0]);
-      newDst[1] = Math.floor(v[1]);
-      newDst[2] = Math.floor(v[2]);
-      newDst[3] = Math.floor(v[3]);
-      return newDst;
-    }
-    function round(v, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = Math.round(v[0]);
-      newDst[1] = Math.round(v[1]);
-      newDst[2] = Math.round(v[2]);
-      newDst[3] = Math.round(v[3]);
-      return newDst;
-    }
-    function clamp(v, min2 = 0, max2 = 1, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = Math.min(max2, Math.max(min2, v[0]));
-      newDst[1] = Math.min(max2, Math.max(min2, v[1]));
-      newDst[2] = Math.min(max2, Math.max(min2, v[2]));
-      newDst[3] = Math.min(max2, Math.max(min2, v[3]));
-      return newDst;
-    }
-    function add(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] + b[0];
-      newDst[1] = a[1] + b[1];
-      newDst[2] = a[2] + b[2];
-      newDst[3] = a[3] + b[3];
-      return newDst;
-    }
-    function addScaled(a, b, scale2, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] + b[0] * scale2;
-      newDst[1] = a[1] + b[1] * scale2;
-      newDst[2] = a[2] + b[2] * scale2;
-      newDst[3] = a[3] + b[3] * scale2;
-      return newDst;
-    }
-    function subtract(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] - b[0];
-      newDst[1] = a[1] - b[1];
-      newDst[2] = a[2] - b[2];
-      newDst[3] = a[3] - b[3];
-      return newDst;
-    }
-    const sub = subtract;
-    function equalsApproximately(a, b) {
-      return Math.abs(a[0] - b[0]) < EPSILON && Math.abs(a[1] - b[1]) < EPSILON && Math.abs(a[2] - b[2]) < EPSILON && Math.abs(a[3] - b[3]) < EPSILON;
-    }
-    function equals(a, b) {
-      return a[0] === b[0] && a[1] === b[1] && a[2] === b[2] && a[3] === b[3];
-    }
-    function lerp(a, b, t, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] + t * (b[0] - a[0]);
-      newDst[1] = a[1] + t * (b[1] - a[1]);
-      newDst[2] = a[2] + t * (b[2] - a[2]);
-      newDst[3] = a[3] + t * (b[3] - a[3]);
-      return newDst;
-    }
-    function lerpV(a, b, t, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] + t[0] * (b[0] - a[0]);
-      newDst[1] = a[1] + t[1] * (b[1] - a[1]);
-      newDst[2] = a[2] + t[2] * (b[2] - a[2]);
-      newDst[3] = a[3] + t[3] * (b[3] - a[3]);
-      return newDst;
-    }
-    function max(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = Math.max(a[0], b[0]);
-      newDst[1] = Math.max(a[1], b[1]);
-      newDst[2] = Math.max(a[2], b[2]);
-      newDst[3] = Math.max(a[3], b[3]);
-      return newDst;
-    }
-    function min(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = Math.min(a[0], b[0]);
-      newDst[1] = Math.min(a[1], b[1]);
-      newDst[2] = Math.min(a[2], b[2]);
-      newDst[3] = Math.min(a[3], b[3]);
-      return newDst;
-    }
-    function mulScalar(v, k, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = v[0] * k;
-      newDst[1] = v[1] * k;
-      newDst[2] = v[2] * k;
-      newDst[3] = v[3] * k;
-      return newDst;
-    }
-    const scale = mulScalar;
-    function divScalar(v, k, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = v[0] / k;
-      newDst[1] = v[1] / k;
-      newDst[2] = v[2] / k;
-      newDst[3] = v[3] / k;
-      return newDst;
-    }
-    function inverse(v, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = 1 / v[0];
-      newDst[1] = 1 / v[1];
-      newDst[2] = 1 / v[2];
-      newDst[3] = 1 / v[3];
-      return newDst;
-    }
-    const invert = inverse;
-    function dot(a, b) {
-      return a[0] * b[0] + a[1] * b[1] + a[2] * b[2] + a[3] * b[3];
-    }
-    function length(v) {
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      const v3 = v[3];
-      return Math.sqrt(v0 * v0 + v1 * v1 + v2 * v2 + v3 * v3);
-    }
-    const len = length;
-    function lengthSq(v) {
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      const v3 = v[3];
-      return v0 * v0 + v1 * v1 + v2 * v2 + v3 * v3;
-    }
-    const lenSq = lengthSq;
-    function distance(a, b) {
-      const dx = a[0] - b[0];
-      const dy = a[1] - b[1];
-      const dz = a[2] - b[2];
-      const dw = a[3] - b[3];
-      return Math.sqrt(dx * dx + dy * dy + dz * dz + dw * dw);
-    }
-    const dist = distance;
-    function distanceSq(a, b) {
-      const dx = a[0] - b[0];
-      const dy = a[1] - b[1];
-      const dz = a[2] - b[2];
-      const dw = a[3] - b[3];
-      return dx * dx + dy * dy + dz * dz + dw * dw;
-    }
-    const distSq = distanceSq;
-    function normalize(v, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const v0 = v[0];
-      const v1 = v[1];
-      const v2 = v[2];
-      const v3 = v[3];
-      const len2 = Math.sqrt(v0 * v0 + v1 * v1 + v2 * v2 + v3 * v3);
-      if (len2 > 1e-5) {
-        newDst[0] = v0 / len2;
-        newDst[1] = v1 / len2;
-        newDst[2] = v2 / len2;
-        newDst[3] = v3 / len2;
-      } else {
-        newDst[0] = 0;
-        newDst[1] = 0;
-        newDst[2] = 0;
-        newDst[3] = 0;
-      }
-      return newDst;
-    }
-    function negate(v, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = -v[0];
-      newDst[1] = -v[1];
-      newDst[2] = -v[2];
-      newDst[3] = -v[3];
-      return newDst;
-    }
-    function copy(v, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = v[0];
-      newDst[1] = v[1];
-      newDst[2] = v[2];
-      newDst[3] = v[3];
-      return newDst;
-    }
-    const clone = copy;
-    function multiply(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] * b[0];
-      newDst[1] = a[1] * b[1];
-      newDst[2] = a[2] * b[2];
-      newDst[3] = a[3] * b[3];
-      return newDst;
-    }
-    const mul = multiply;
-    function divide(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = a[0] / b[0];
-      newDst[1] = a[1] / b[1];
-      newDst[2] = a[2] / b[2];
-      newDst[3] = a[3] / b[3];
-      return newDst;
-    }
-    const div = divide;
-    function zero(dst) {
-      const newDst = dst ?? new Ctor(4);
-      newDst[0] = 0;
-      newDst[1] = 0;
-      newDst[2] = 0;
-      newDst[3] = 0;
-      return newDst;
-    }
-    function transformMat4(v, m, dst) {
-      const newDst = dst ?? new Ctor(4);
-      const x = v[0];
-      const y = v[1];
-      const z = v[2];
-      const w = v[3];
-      newDst[0] = m[0] * x + m[4] * y + m[8] * z + m[12] * w;
-      newDst[1] = m[1] * x + m[5] * y + m[9] * z + m[13] * w;
-      newDst[2] = m[2] * x + m[6] * y + m[10] * z + m[14] * w;
-      newDst[3] = m[3] * x + m[7] * y + m[11] * z + m[15] * w;
-      return newDst;
-    }
-    function setLength(a, len2, dst) {
-      const newDst = dst ?? new Ctor(4);
-      normalize(a, newDst);
-      return mulScalar(newDst, len2, newDst);
-    }
-    function truncate(a, maxLen, dst) {
-      const newDst = dst ?? new Ctor(4);
-      if (length(a) > maxLen) {
-        return setLength(a, maxLen, newDst);
-      }
-      return copy(a, newDst);
-    }
-    function midpoint(a, b, dst) {
-      const newDst = dst ?? new Ctor(4);
-      return lerp(a, b, 0.5, newDst);
-    }
-    return {
-      create,
-      fromValues,
-      set,
-      ceil,
-      floor,
-      round,
-      clamp,
-      add,
-      addScaled,
-      subtract,
-      sub,
-      equalsApproximately,
-      equals,
-      lerp,
-      lerpV,
-      max,
-      min,
-      mulScalar,
-      scale,
-      divScalar,
-      inverse,
-      invert,
-      dot,
-      length,
-      len,
-      lengthSq,
-      lenSq,
-      distance,
-      dist,
-      distanceSq,
-      distSq,
-      normalize,
-      negate,
-      copy,
-      clone,
-      multiply,
-      mul,
-      divide,
-      div,
-      zero,
-      transformMat4,
-      setLength,
-      truncate,
-      midpoint
-    };
-  }
-  var cache = /* @__PURE__ */ new Map();
-  function getAPI(Ctor) {
-    let api = cache.get(Ctor);
-    if (!api) {
-      api = getAPIImpl(Ctor);
-      cache.set(Ctor, api);
-    }
-    return api;
-  }
-  function wgpuMatrixAPI(Mat3Ctor, Mat4Ctor, QuatCtor, Vec2Ctor, Vec3Ctor, Vec4Ctor) {
-    return {
-      /** @namespace mat3 */
-      mat3: getAPI$3(Mat3Ctor),
-      /** @namespace mat4 */
-      mat4: getAPI$2(Mat4Ctor),
-      /** @namespace quat */
-      quat: getAPI$1(QuatCtor),
-      /** @namespace vec2 */
-      vec2: getAPI$5(Vec2Ctor),
-      /** @namespace vec3 */
-      vec3: getAPI$4(Vec3Ctor),
-      /** @namespace vec4 */
-      vec4: getAPI(Vec4Ctor)
-    };
-  }
-  var {
-    /**
-     * 3x3 Matrix functions that default to returning `Float32Array`
-     * @namespace
-     */
-    mat3,
-    /**
-     * 4x4 Matrix functions that default to returning `Float32Array`
-     * @namespace
-     */
-    mat4,
-    /**
-     * Quaternion functions that default to returning `Float32Array`
-     * @namespace
-     */
-    quat,
-    /**
-     * Vec2 functions that default to returning `Float32Array`
-     * @namespace
-     */
-    vec2,
-    /**
-     * Vec3 functions that default to returning `Float32Array`
-     * @namespace
-     */
-    vec3,
-    /**
-     * Vec3 functions that default to returning `Float32Array`
-     * @namespace
-     */
-    vec4
-  } = wgpuMatrixAPI(Float32Array, Float32Array, Float32Array, Float32Array, Float32Array, Float32Array);
-  var {
-    /**
-     * 3x3 Matrix functions that default to returning `Float64Array`
-     * @namespace
-     */
-    mat3: mat3d,
-    /**
-     * 4x4 Matrix functions that default to returning `Float64Array`
-     * @namespace
-     */
-    mat4: mat4d,
-    /**
-     * Quaternion functions that default to returning `Float64Array`
-     * @namespace
-     */
-    quat: quatd,
-    /**
-     * Vec2 functions that default to returning `Float64Array`
-     * @namespace
-     */
-    vec2: vec2d,
-    /**
-     * Vec3 functions that default to returning `Float64Array`
-     * @namespace
-     */
-    vec3: vec3d,
-    /**
-     * Vec3 functions that default to returning `Float64Array`
-     * @namespace
-     */
-    vec4: vec4d
-  } = wgpuMatrixAPI(Float64Array, Float64Array, Float64Array, Float64Array, Float64Array, Float64Array);
-  var {
-    /**
-     * 3x3 Matrix functions that default to returning `number[]`
-     * @namespace
-     */
-    mat3: mat3n,
-    /**
-     * 4x4 Matrix functions that default to returning `number[]`
-     * @namespace
-     */
-    mat4: mat4n,
-    /**
-     * Quaternion functions that default to returning `number[]`
-     * @namespace
-     */
-    quat: quatn,
-    /**
-     * Vec2 functions that default to returning `number[]`
-     * @namespace
-     */
-    vec2: vec2n,
-    /**
-     * Vec3 functions that default to returning `number[]`
-     * @namespace
-     */
-    vec3: vec3n,
-    /**
-     * Vec3 functions that default to returning `number[]`
-     * @namespace
-     */
-    vec4: vec4n
-  } = wgpuMatrixAPI(ZeroArray, Array, Array, Array, Array, Array);
-
-  // src/ts/common.ts
-  var workgroupSize = 64;
-  var instanceDataLength = 16;
-  var logInstanceData = (data, logCount = 10) => {
-    const uintView = new Uint32Array(data.buffer);
-    let table = [];
-    for (let instance = 0; instance < logCount; instance++) {
-      let offset = instance * instanceDataLength;
-      table = [...table, {
-        xPos: data[offset + 0],
-        yPos: data[offset + 1],
-        zPos: data[offset + 2],
-        xVel: data[offset + 4],
-        yVel: data[offset + 5],
-        zVel: data[offset + 6],
-        dist: data[offset + 8],
-        dens: data[offset + 9],
-        cell: uintView[offset + 10],
-        test: uintView[offset + 11]
-      }];
-    }
-    console.table(table);
-  };
-  function wgslNumStr(n) {
-    return Number.isInteger(n) ? n.toFixed(1) : n.toString();
-  }
-  function wgslVec3Str(v) {
-    return `vec3<f32>(${wgslNumStr(v[0])}, ${wgslNumStr(v[1])}, ${wgslNumStr(v[2])})`;
-  }
-  function wgslIVec3Str(v) {
-    const str = (n) => n.toFixed(0);
-    return `vec3<i32>(${str(v[0])}, ${str(v[1])}, ${str(v[2])})`;
-  }
-
-  // src/ts/render/renderer.ts
-  var WGPURenderer = class {
-    initialised = false;
-    device = {};
-    ctx = {};
-    renderPipeline = {};
-    instanceCount = 0;
-    vertexCount = 0;
-    vertexBuffer = {};
-    instanceBuffer = {};
-    uniformBuffer = {};
-    bindGroup = {};
-    depthTexture = null;
-    multisampleTexture = null;
-    clearColour = { r: 0.1, g: 0.1, b: 0.1, a: 1 };
-    multisampleCount = 4;
-    async init() {
-      const canvas = document.querySelector("#gpuCanvas");
-      if (!navigator.gpu) {
-        throw Error("WebGPU not supported.");
-      }
-      const adapter = await navigator.gpu.requestAdapter();
-      if (!adapter) {
-        throw Error("Couldn't request WebGPU adapter.");
-      }
-      this.device = await adapter.requestDevice();
-      this.ctx = canvas.getContext("webgpu");
-      this.ctx.configure({
-        device: this.device,
-        format: navigator.gpu.getPreferredCanvasFormat(),
-        alphaMode: "opaque"
-      });
-      this.initialised = true;
-      return true;
-    }
-    createBuffersAndPipeline(instanceCount) {
-      const vertData = createSquareData();
-      this.vertexCount = vertData.length / 5;
-      this.instanceCount = instanceCount;
-      const bufferLayouts = [
-        // VERTEX
-        {
-          attributes: [
-            {
-              shaderLocation: 0,
-              offset: 0,
-              format: "float32x3"
-            },
-            {
-              shaderLocation: 1,
-              offset: 12,
-              format: "float32x2"
-            }
-          ],
-          arrayStride: 20,
-          stepMode: "vertex"
-        },
-        // INSTANCE
-        {
-          attributes: [
-            {
-              // position
-              shaderLocation: 2,
-              offset: 0,
-              format: "float32x4"
-            },
-            {
-              // velocity
-              shaderLocation: 3,
-              offset: 16,
-              format: "float32x4"
-            },
-            {
-              // normal
-              shaderLocation: 4,
-              offset: 32,
-              format: "float32x4"
-            },
-            {
-              // field dist
-              shaderLocation: 5,
-              offset: 48,
-              format: "float32"
-            },
-            {
-              // density
-              shaderLocation: 6,
-              offset: 52,
-              format: "float32"
-            },
-            {
-              // density
-              shaderLocation: 7,
-              offset: 56,
-              format: "uint32"
-            },
-            {
-              // density
-              shaderLocation: 8,
-              offset: 60,
-              format: "float32"
-            }
-          ],
-          arrayStride: instanceDataLength * 4,
-          stepMode: "instance"
-        }
-      ];
-      const shaderModule = this.device.createShaderModule({ code: renderShaders });
-      this.renderPipeline = this.device.createRenderPipeline({
-        vertex: {
-          module: shaderModule,
-          entryPoint: "vertex_main",
-          buffers: bufferLayouts
-        },
-        fragment: {
-          module: shaderModule,
-          entryPoint: "fragment_main",
-          targets: [{ format: navigator.gpu.getPreferredCanvasFormat() }]
-        },
-        primitive: {
-          topology: "triangle-list",
-          // frontFace: "ccw",
-          // cullMode: "back"
-          cullMode: "none"
-        },
-        depthStencil: {
-          depthWriteEnabled: true,
-          depthCompare: "less",
-          format: "depth24plus"
-        },
-        layout: "auto",
-        multisample: {
-          count: this.multisampleCount
-        }
-      });
-      this.vertexBuffer = this.device.createBuffer({
-        size: vertData.byteLength,
-        usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
-      });
-      this.device.queue.writeBuffer(this.vertexBuffer, 0, vertData, 0, vertData.length);
-      this.instanceBuffer = this.device.createBuffer({
-        size: this.instanceCount * 4 * instanceDataLength,
-        usage: GPUBufferUsage.VERTEX | GPUBufferUsage.COPY_DST
-      });
-      const uniformSize = 16 * 4 + // view-proj matrix
-      4 * 4 + // background colour
-      1 * 4 + // aspect ratio
-      3 * 4;
-      this.uniformBuffer = this.device.createBuffer({
-        size: uniformSize,
-        usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
-      });
-      this.bindGroup = this.device.createBindGroup({
-        layout: this.renderPipeline.getBindGroupLayout(0),
-        entries: [
-          { binding: 0, resource: { buffer: this.uniformBuffer } }
-        ]
-      });
-    }
-    render(viewProjectionMatrix) {
-      if (!this.initialised) {
-        throw "WebGPU not initialised";
-      }
-      const canvasTexture = this.ctx.getCurrentTexture();
-      const uniformData = new Float32Array([
-        ...viewProjectionMatrix,
-        this.clearColour.r,
-        this.clearColour.g,
-        this.clearColour.b,
-        this.clearColour.a,
-        canvasTexture.width / canvasTexture.height
-      ]);
-      this.device.queue.writeBuffer(this.uniformBuffer, 0, uniformData, 0);
-      if (!this.depthTexture || this.depthTexture.width !== canvasTexture.width || this.depthTexture.height !== canvasTexture.height) {
-        this.depthTexture?.destroy();
-        this.depthTexture = this.device.createTexture({
-          size: canvasTexture,
-          // canvasTexture has width, height, and depthOrArrayLayers properties
-          format: "depth24plus",
-          usage: GPUTextureUsage.RENDER_ATTACHMENT,
-          sampleCount: this.multisampleCount
-        });
-      }
-      if (!this.multisampleTexture || this.multisampleTexture.width !== canvasTexture.width || this.multisampleTexture.height !== canvasTexture.height) {
-        if (this.multisampleTexture) this.multisampleTexture.destroy();
-        this.multisampleTexture = this.device.createTexture({
-          format: canvasTexture.format,
-          usage: GPUTextureUsage.RENDER_ATTACHMENT,
-          size: [canvasTexture.width, canvasTexture.height],
-          sampleCount: this.multisampleCount
-        });
-      }
-      const commandEncoder = this.device.createCommandEncoder();
-      const passEncoder = commandEncoder.beginRenderPass({
-        colorAttachments: [
-          {
-            clearValue: this.clearColour,
-            loadOp: "clear",
-            storeOp: "store",
-            view: this.multisampleTexture.createView(),
-            resolveTarget: canvasTexture.createView()
-          }
-        ],
-        depthStencilAttachment: {
-          depthClearValue: 1,
-          depthLoadOp: "clear",
-          depthStoreOp: "store",
-          view: this.depthTexture.createView()
-        }
-      });
-      passEncoder.setPipeline(this.renderPipeline);
-      passEncoder.setVertexBuffer(0, this.vertexBuffer);
-      passEncoder.setVertexBuffer(1, this.instanceBuffer);
-      passEncoder.setBindGroup(0, this.bindGroup);
-      passEncoder.draw(this.vertexCount, this.instanceCount, 0, 0);
-      passEncoder.end();
-      this.device.queue.submit([commandEncoder.finish()]);
-    }
-  };
-
-  // src/ts/compute/shader/grid/gridAccess.ts
-  var smoothingRadius = 1;
-  var bound = vec3.create(200, 100, 25);
-  var gridSize = vec3.floor(vec3.divScalar(bound, smoothingRadius));
-  var trueBound = vec3.mulScalar(gridSize, smoothingRadius);
-  var gridAccessFuncs = (
-    /* wgsl */
-    `
-
-const gridSize = ${wgslIVec3Str(gridSize)};
-const bounds = ${wgslVec3Str(trueBound)};
-
-const cellWidth = ${wgslNumStr(smoothingRadius)};
+const cellWidth = ${ee(We)};
 
 
 fn imod3(a: vec3<i32>, b: vec3<i32>) -> vec3<i32> {
@@ -4892,11 +739,7 @@ fn getCellId3d(cellIdFlat: u32) -> vec3<i32> {
 
     return vec3<i32>(x, y, z);
 }
-`
-  );
-  var iterateNeighbours = (body) => (
-    /* wgsl */
-    `
+`,lt=l=>`
 // requires including gridAccessFuncs
 // assumes "particle" is defined as the particle we are finding neighbours of
 // loops over all "particleB" in this cell and neighbour cells
@@ -4923,20 +766,14 @@ for (var i: i32 = -1; i <= 1; i++) {
           break;
         }
 
-        ${body};
+        ${l};
 
         neighbourIterator++;
       }
     }
   }
 }
-`
-  );
-
-  // src/ts/compute/shader/shaderLayout.ts
-  var particleStruct = (
-    /* wgsl */
-    `
+`;var pn=`
 struct Particle {
   position: vec4<f32>, // xyz used
   velocity: vec4<f32>, // xyz used
@@ -4945,13 +782,11 @@ struct Particle {
   density: f32,
   cellIndex: u32,
   group: f32,
+  groupCentroid: vec4<f32>
 }
-`
-  );
-  var shaderInputLayoutSrc = (
-    /* wgsl */
-    `
-${particleStruct}
+const UNSPAWNED_PARTICLE: u32 = 0xFFFFFFFF;
+`,Ke=`
+${pn}
 @group(0) @binding(0) var<storage, read_write> particles0: array<Particle>;
 @group(0) @binding(1) var<storage, read_write> particles1: array<Particle>;
 
@@ -4968,41 +803,29 @@ struct Uniforms {
 @group(0) @binding(4) var<storage, read_write> particleIds: array<u32>;
 @group(0) @binding(5) var<storage, read_write> cellOffsets: array<u32>;
 
-`
-  );
-  var mainFunc = (
-    /* wgsl */
-    `
-@compute @workgroup_size(${workgroupSize}, 1, 1) fn update(
+`,Fe=`
+@compute @workgroup_size(${Ye}, 1, 1) fn update(
   @builtin(workgroup_id) workgroup_id : vec3<u32>,
   @builtin(local_invocation_id) local_invocation_id : vec3<u32>
 )
-`
-  );
-  var getID = (
-    /* wgsl */
-    `workgroup_id.x * ${workgroupSize} + local_invocation_id.x`
-  );
+`,qe=`workgroup_id.x * ${Ye} + local_invocation_id.x`;var Tt=`
 
-  // src/ts/compute/shader/grid/assignCell.ts
-  var assignCellShaderSrc = (
-    /* wgsl */
-    `
-
-${shaderInputLayoutSrc}
+${Ke}
 
 
-${gridAccessFuncs}
+${Ve}
 
 
-${mainFunc} {
-  let id = ${getID};
+${Fe} {
+  let id = ${qe};
 
   var position = particles0[id].position.xyz;
   position += bounds * 0.5; // offset so grid bounding box applies from [-0.5*bound, +0.5*bound]
   
   var cellId3D = vec3<i32>(floor(position / cellWidth));
-  let cellIdFlat = getCellIdFlat(cellId3D);
+  var cellIdFlat = getCellIdFlat(cellId3D);
+
+  // cellIdFlat = select(cellIdFlat, UNSPAWNED_PARTICLE, id >= uniforms.particleCount);
 
   particles0[id].cellIndex = cellIdFlat;
   particles1[id].cellIndex = cellIdFlat;
@@ -5011,18 +834,12 @@ ${mainFunc} {
   particleIds[id] = id;
 }
 
-`
-  );
+`;var Gt=`
 
-  // src/ts/compute/shader/grid/createStructure.ts
-  var createStructureSrc = (
-    /* wgsl */
-    `
+${Ke.replace("cellOffsets: array<u32>","cellOffsets: array<atomic<u32>>")}
 
-${shaderInputLayoutSrc.replace("cellOffsets: array<u32>", "cellOffsets: array<atomic<u32>>")}
-
-${mainFunc} {
-  let id = ${getID};
+${Fe} {
+  let id = ${qe};
 
   let particleId = particleIds[id]; // index of this cell within the particles buffer
   let cellId = cellIds[id];
@@ -5035,49 +852,44 @@ ${mainFunc} {
   // the offset to the first appearance of each cell within the sorted cellId list is the minimum of ids
   atomicMin(&cellOffsets[cellId], id);
 }
-`
-  );
+`;var kt=.8,dn=250,hn=1,_n=.118,gn=1,wn=ee(315/(64*Math.PI*Math.pow(We,9))),vn=ee(-45/(Math.PI*Math.pow(We,6))),mn=ee(45/(Math.PI*Math.pow(We,6))),ot=`
 
-  // src/ts/compute/shader/physics/sph.ts
-  var densityNeighbourFraction = 0.8;
-  var pressureConstant = 250;
-  var referenceDensity = 1;
-  var viscosityConstant = 0.118;
-  var particleMass = 1;
-  var poly6const = wgslNumStr(315 / (64 * Math.PI * Math.pow(smoothingRadius, 9)));
-  var spikyConst = wgslNumStr(-45 / (Math.PI * Math.pow(smoothingRadius, 6)));
-  var viscConst = wgslNumStr(45 / (Math.PI * Math.pow(smoothingRadius, 6)));
-  var sphSrc = (
-    /* wgsl */
-    `
+const h = ${ee(We)};
+const h2 = ${ee(Math.pow(We,2))};
+const h3 = ${ee(Math.pow(We,3))};
 
-const h = ${wgslNumStr(smoothingRadius)};
-const h2 = ${wgslNumStr(Math.pow(smoothingRadius, 2))};
-const h3 = ${wgslNumStr(Math.pow(smoothingRadius, 3))};
+const densityH = ${ee(We*kt)};
+const densityH2 = ${ee(Math.pow(We*kt,2))};
 
-const densityH = ${wgslNumStr(smoothingRadius * densityNeighbourFraction)};
-const densityH2 = ${wgslNumStr(Math.pow(smoothingRadius * densityNeighbourFraction, 2))};
+const particleFluidMass = ${ee(gn)};
+const p0 = ${ee(hn)};
+const K = ${ee(dn)};
+const e = ${ee(_n)};
 
-const particleFluidMass = ${wgslNumStr(particleMass)};
-const p0 = ${wgslNumStr(referenceDensity)};
-const K = ${wgslNumStr(pressureConstant)};
-const e = ${wgslNumStr(viscosityConstant)};
-
-fn particleDensity(particle: Particle) -> f32 {
+fn particleDensity(particle: Particle) -> vec4<f32> {
+  // also finds group neighbour centroid (.yzw of return)
   var density = 0.0;
 
-  ${iterateNeighbours(
-      /* wgsl */
-      `
+  var groupCentroid = particle.position.xyz;
+  var groupNeighbourCount = 1.0;
+
+  ${lt(`
     let diff = particle.position.xyz - particleB.position.xyz;
     let r2 = dot(diff, diff);
     if (r2 < h2) {
-      let W = ${poly6const} * pow(h2 - r2, 3.0);
+      let W = ${wn} * pow(h2 - r2, 3.0);
       density += particleFluidMass * W;
+
+      let groupDist = 0.5*abs(particle.group - particleB.group); // 0 if the same, 1 if different
+      groupCentroid += (1.0-groupDist) * particleB.position.xyz; 
+      groupNeighbourCount += 1.0-groupDist;
     }
-  `
-    )}
-  return max(p0, density);
+  `)}
+
+  groupCentroid /= groupNeighbourCount;
+  
+
+  return vec4<f32>(max(p0, density), groupCentroid.x, groupCentroid.y, groupCentroid.z);
 }
 
 fn particlePressure(density: f32) -> f32 {
@@ -5090,12 +902,10 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
 
   let pressureA = particlePressure(particle.density);
 
-  var sameGroupNeighbourPosSum = vec4<f32>(0.0, 0.0, 0.0, 0.01); // z component stores count
-  var diffGroupNeighbourPosSum = vec4<f32>(0.0, 0.0, 0.0, 0.01);
+  var groupNeighbourPosSum = vec3<f32>(0.0);
+  var neighbourCount = 0.01;
   
-  ${iterateNeighbours(
-      /* wgsl */
-      `
+  ${lt(`
     if (particleBIndex != id) {
 
       let diff = particle.position.xyz - particleB.position.xyz;
@@ -5109,65 +919,56 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
         let groupDist = 0.5*abs(particle.group - particleB.group); // 0 if the same, 1 if different
 
         // PRESSURE FORCE
-        let W1 = ${spikyConst} * pow(h-r, 2.0);
-        let pressureB = particlePressure(particleB.density);
+        let W1 = ${vn} * pow(h-r, 2.0);
+        let pressureB = (1.0 + 10.0*groupDist) * particlePressure(particleB.density);
         pressureForce += W1 * rNorm * (pressureA + pressureB) / (2.0 * particle.density * particleB.density);
 
 
         // VISCOSITY FORCE
         // let W2 = -(r3 / (2.0 * h3)) + (r2 / h2) + (h / (2.0 * r)) - 1;
-        var W2 = ${viscConst} * (h - r);
+        var W2 = ${mn} * (h - r);
         viscosityForce += (1.0-2.0*groupDist) * W2 * rNorm * (particleB.velocity.xyz - particle.velocity.xyz) / particleB.density;
 
 
         // GROUP COHESION
-        sameGroupNeighbourPosSum += select(vec4<f32>(particleB.position.xyz, 1.0), vec4<f32>(0.0), groupDist > 0.5);
-        diffGroupNeighbourPosSum += select(vec4<f32>(particleB.position.xyz, 1.0), vec4<f32>(0.0), groupDist < 0.5);
+        // move towards particles of same group
+        groupNeighbourPosSum += (1.0-groupDist) * particleB.groupCentroid.xyz; 
+        neighbourCount += 1.0-groupDist;
+        
       }
     }
-  `
-    )}
+  `)}
 
   var force = (e*viscosityForce - pressureForce) / particle.density;
 
-  let sameGroupCentroidDir = (sameGroupNeighbourPosSum.xyz / sameGroupNeighbourPosSum.w) - particle.position.xyz;
-  let diffGroupCentroidDir = (diffGroupNeighbourPosSum.xyz / diffGroupNeighbourPosSum.w) - particle.position.xyz;
-  force += 0.3* sameGroupCentroidDir - 0.0*diffGroupCentroidDir;
+
+  // group cohesion force (disabled)
+  // // let sameGroupCentroidDir = (sameGroupNeighbourPosSum.xyz / sameGroupNeighbourPosSum.w) - particle.position.xyz;
+  // // let diffGroupCentroidDir = (diffGroupNeighbourPosSum.xyz / diffGroupNeighbourPosSum.w) - particle.position.xyz;
+  // // force += 0.3* sameGroupCentroidDir - 0.0*diffGroupCentroidDir;
+  // force += 1.0 * (groupNeighbourPosSum / neighbourCount - particle.position.xyz);
 
   return force / particleFluidMass;
 }
 
 
-`
-  );
+`;var zt=`
 
-  // src/ts/compute/shader/update1.ts
-  var update1Src = (
-    /* wgsl */
-    `
-
-${shaderInputLayoutSrc}
-${gridAccessFuncs}
-${sphSrc}
+${Ke}
+${Ve}
+${ot}
 
 
-${mainFunc} {
-  let id = ${getID};
+${Fe} {
+  let id = ${qe};
 
-  particles0[id].density = particleDensity(particles0[id]);
+  let densityAndCentroid = particleDensity(particles0[id]);
+
+  particles0[id].density = densityAndCentroid.x;
+  particles0[id].groupCentroid = vec4<f32>(densityAndCentroid.yzw, 1.0);
 }
 
-`
-  );
-
-  // src/ts/compute/shader/physics/sdf.ts
-  var mass = wgslNumStr(0.05);
-  var positionStiffness = wgslNumStr(-2);
-  var velocityDamping = wgslNumStr(-1);
-  var gravityClamp = wgslNumStr(200);
-  var sdfSrc = (
-    /* wgsl */
-    `
+`;var Dn=ee(.05),yn=ee(-2),Pn=ee(-1),xn=ee(200),Bt=`
 
 const internalForceMultiplier = 1.0; // scale the force when particle is inside field (currently not working i think)
 
@@ -5262,6 +1063,8 @@ fn sdDistort(pos: vec3<f32>) -> f32 {
     // return max((sin(period*abs(pos.y) + uniforms.time)-sharpness)/(1.0-sharpness), 0.0);
 
 
+    // MOUSE INTERACTION
+
     // find closest point on line between mouseIntersection and lastMouseIntersection
     let p1 = uniforms.mouseIntersection;
     let p2 = uniforms.lastMouseIntersection;  
@@ -5272,9 +1075,15 @@ fn sdDistort(pos: vec3<f32>) -> f32 {
     let t = saturate(dot(w, v) / dot(v, v));
     let closestPoint = p1 + t*v;
 
-    let dist = pos.xy - closestPoint;
 
-    return 30.0*exp(-0.5*dot(dist, dist));
+    const mouseDisturbRadius = 5.0;
+    const mouseDisturbSharpness = 18.0;
+
+    var dist = pos.xy - closestPoint;
+    dist *= 1.0/mouseDisturbRadius;
+    
+
+    return mouseDisturbSharpness*exp(-dot(dist, dist));
 }
 
 fn sdf(pos: vec3<f32>) -> f32 {
@@ -5313,41 +1122,35 @@ fn sdfNormal(pos: vec3<f32>) -> vec3<f32> {
     return normalize(vec3<f32>(dx, dy, dz));
 }
 
-const gravityClamp = ${gravityClamp};
+const gravityClamp = ${xn};
 fn gravityAccel(pos: vec3<f32>, dist: f32, fieldNormal: vec3<f32>, lastDist: f32) -> vec3<f32> {
   let dist2 = dist; // max(dist, 0.0);         // uncomment to allow particles inside volumes
   let lastDist2 = lastDist; // max(lastDist, 0.0);
 
   let dDistdt = (dist2 - lastDist2) / uniforms.deltaTime;
-  var gravityAmount = -${positionStiffness}*dist2 - ${velocityDamping}*dDistdt;
+  var gravityAmount = -${yn}*dist2 - ${Pn}*dDistdt;
   gravityAmount = atan(gravityAmount / gravityClamp) * gravityClamp;
 
   var gravity = -fieldNormal * gravityAmount;
 
-  return gravity / ${mass};
+  return gravity / ${Dn};
 
 }
 
 
-`
-  );
+`;var At=`
 
-  // src/ts/compute/shader/update2.ts
-  var update2Src = (
-    /* wgsl */
-    `
-
-${shaderInputLayoutSrc}
-${gridAccessFuncs}
-${sphSrc}
-${sdfSrc}
+${Ke}
+${Ve}
+${ot}
+${Bt}
 
 const accelDeltaTime = 0.01; // hardcoded deltaTime for acceleration calculation to prevent explosion
 const velocityClamp = 100.0;
 
 
-${mainFunc} {
-  let id = ${getID};
+${Fe} {
+  let id = ${qe};
   let particle = particles0[id];
 
   var position = particle.position.xyz;
@@ -5362,6 +1165,9 @@ ${mainFunc} {
   let fieldDist = sdf(position);
   let fieldNormal = sdfNormal(position);
   acceleration += gravityAccel(position, fieldDist, fieldNormal, particle.lastDist);
+
+  // group move to top/bottom
+  acceleration += vec3<f32>(0.0, -3.0*particle.group, 0.0);
   
   // apply forces
   velocity += acceleration * accelDeltaTime;
@@ -5384,344 +1190,9 @@ ${mainFunc} {
     fieldDist,
     particle.density,
     particle.cellIndex, // not really necessary
-    particle.group
+    particle.group,
+    particle.groupCentroid
   );
 
 }
-`
-  );
-
-  // src/ts/compute/computer.ts
-  var import_webgpu_radix_sort = __toESM(require_radix_sort_umd(), 1);
-  var WGPUComputer = class {
-    device;
-    computeShaders = [assignCellShaderSrc, createStructureSrc, update1Src, update2Src];
-    // run in order, with a sort between shader[0] and shader[1]
-    pipelines = [];
-    bindGroup;
-    particleCount;
-    particleDataBuffer0;
-    // used as read/write for all but the final shader. used as read for final shader
-    particleDataBuffer1;
-    // used as write for final shader (to avoid race conditions)
-    renderInstanceBuffer;
-    // particles are given in a tuple (cellIndex, particleIndex in particleDataBuffer)
-    // we sort these tuples by cellIndex, creating sublists in the list of tuples for each cell
-    cellIndexBuffer;
-    particleIdBuffer;
-    cellOffsetBuffer;
-    // stores the offset each cell has in the sorted cellIndex array (0xffffffff if cell is empty)
-    cellOffsetStartBuffer;
-    // buffer of 0xffffffff to reset cellOffset every frame - currently no encoder.fillBuffer :(
-    uniformBuffer;
-    time = 0;
-    // could auto-generate this list from the shader code but not necessary for a small number
-    uniforms = /* @__PURE__ */ new Map([
-      ["time", { length: 1, value: new Float32Array([0]) }],
-      ["deltaTime", { length: 1, value: new Float32Array([0]) }],
-      ["mouseIntersection", { length: 2, value: new Float32Array([0, 0]) }],
-      ["lastMouseIntersection", { length: 2, value: new Float32Array([0, 0]) }],
-      ["animSpeed", { length: 1, value: new Float32Array([0]) }],
-      ["particleCount", { length: 1, value: new Uint32Array([0]) }]
-    ]);
-    uniformsLength = Array.from(this.uniforms.values()).reduce((acc, u) => acc + u.length, 0);
-    resultBuffer;
-    // for debug
-    constructor(device, particleCount2, initialInstanceData, renderInstanceBuffer) {
-      this.device = device;
-      this.particleCount = particleCount2;
-      this.renderInstanceBuffer = renderInstanceBuffer;
-      const bindGroupLayout = this.device.createBindGroupLayout({
-        entries: [
-          {
-            binding: 0,
-            visibility: GPUShaderStage.COMPUTE,
-            buffer: { type: "storage" }
-          },
-          {
-            binding: 1,
-            visibility: GPUShaderStage.COMPUTE,
-            buffer: { type: "storage" }
-          },
-          {
-            binding: 2,
-            visibility: GPUShaderStage.COMPUTE,
-            buffer: { type: "uniform" }
-          },
-          {
-            binding: 3,
-            visibility: GPUShaderStage.COMPUTE,
-            buffer: { type: "storage" }
-          },
-          {
-            binding: 4,
-            visibility: GPUShaderStage.COMPUTE,
-            buffer: { type: "storage" }
-          },
-          {
-            binding: 5,
-            visibility: GPUShaderStage.COMPUTE,
-            buffer: { type: "storage" }
-          }
-        ]
-      });
-      const pipelineLayout = this.device.createPipelineLayout({
-        bindGroupLayouts: [bindGroupLayout]
-      });
-      for (let i = 0; i < this.computeShaders.length; i++) {
-        const module = this.device.createShaderModule({
-          label: `particle update ${i}`,
-          code: this.computeShaders[i]
-        });
-        this.pipelines.push(device.createComputePipeline({
-          label: `particle update ${i} pipeline`,
-          layout: pipelineLayout,
-          compute: {
-            module
-          }
-        }));
-      }
-      this.particleDataBuffer0 = device.createBuffer({
-        size: particleCount2 * 4 * instanceDataLength,
-        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-      });
-      this.particleDataBuffer1 = device.createBuffer({
-        size: particleCount2 * 4 * instanceDataLength,
-        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
-      });
-      device.queue.writeBuffer(this.particleDataBuffer0, 0, initialInstanceData);
-      device.queue.writeBuffer(this.particleDataBuffer1, 0, initialInstanceData);
-      this.cellIndexBuffer = device.createBuffer({
-        size: particleCount2 * 4,
-        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC
-      });
-      this.particleIdBuffer = device.createBuffer({
-        size: particleCount2 * 4,
-        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC
-      });
-      const cellOffsetBufSize = gridSize[0] * gridSize[1] * gridSize[2];
-      this.cellOffsetBuffer = device.createBuffer({
-        size: cellOffsetBufSize * 4,
-        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST | GPUBufferUsage.COPY_SRC
-      });
-      this.cellOffsetStartBuffer = device.createBuffer({
-        size: cellOffsetBufSize * 4,
-        usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_DST | GPUBufferUsage.COPY_SRC
-      });
-      device.queue.writeBuffer(this.cellOffsetStartBuffer, 0, new Uint32Array(cellOffsetBufSize).fill(4294967295));
-      this.uniformBuffer = device.createBuffer({
-        size: this.uniformsLength * 4,
-        usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
-      });
-      this.resultBuffer = device.createBuffer({
-        size: this.particleDataBuffer0.size,
-        usage: GPUBufferUsage.MAP_READ | GPUBufferUsage.COPY_DST
-      });
-      this.bindGroup = device.createBindGroup({
-        layout: bindGroupLayout,
-        entries: [
-          { binding: 0, resource: { buffer: this.particleDataBuffer0 } },
-          { binding: 1, resource: { buffer: this.particleDataBuffer1 } },
-          { binding: 2, resource: { buffer: this.uniformBuffer } },
-          { binding: 3, resource: { buffer: this.cellIndexBuffer } },
-          { binding: 4, resource: { buffer: this.particleIdBuffer } },
-          { binding: 5, resource: { buffer: this.cellOffsetBuffer } }
-        ]
-      });
-    }
-    sort(encoder) {
-      const radixSortKernel = new import_webgpu_radix_sort.RadixSortKernel({
-        device: this.device,
-        keys: this.cellIndexBuffer,
-        values: this.particleIdBuffer,
-        count: this.particleCount,
-        check_order: false,
-        bit_count: 32,
-        workgroup_size: { x: 16, y: 16 }
-        // Workgroup size in x and y dimensions. (x * y) must be a power of two
-      });
-      const pass = encoder.beginComputePass();
-      radixSortKernel.dispatch(pass);
-      pass.end();
-    }
-    async run(deltaTime, mouseIntersection, lastMouseIntersection) {
-      this.time += deltaTime;
-      this.uniforms.get("time").value[0] = this.time;
-      this.uniforms.get("deltaTime").value[0] = deltaTime;
-      this.uniforms.get("mouseIntersection").value = mouseIntersection;
-      this.uniforms.get("lastMouseIntersection").value = lastMouseIntersection;
-      this.uniforms.get("animSpeed").value[0] = window.PAUSE_UPDATE ? 0 : 1;
-      this.uniforms.get("particleCount").value[0] = this.particleCount;
-      const uniformData = new Float32Array(this.uniformsLength);
-      let i = 0;
-      for (const [_, { length, value }] of this.uniforms) {
-        uniformData.set(value, i);
-        i += length;
-      }
-      this.device.queue.writeBuffer(this.uniformBuffer, 0, uniformData, 0);
-      const encoder = this.device.createCommandEncoder();
-      encoder.copyBufferToBuffer(this.cellOffsetStartBuffer, this.cellOffsetBuffer);
-      const runPipeline = (pipeline) => {
-        const pass = encoder.beginComputePass();
-        pass.setPipeline(pipeline);
-        pass.setBindGroup(0, this.bindGroup);
-        pass.dispatchWorkgroups(this.particleCount / workgroupSize, 1, 1);
-        pass.end();
-      };
-      runPipeline(this.pipelines[0]);
-      this.sort(encoder);
-      runPipeline(this.pipelines[1]);
-      runPipeline(this.pipelines[2]);
-      runPipeline(this.pipelines[3]);
-      encoder.copyBufferToBuffer(this.particleDataBuffer1, this.particleDataBuffer0);
-      encoder.copyBufferToBuffer(this.particleDataBuffer1, 0, this.renderInstanceBuffer, 0);
-      const debugBuffer = window.DEBUG_BUF === 3 ? this.cellOffsetBuffer : window.DEBUG_BUF === 2 ? this.particleIdBuffer : window.DEBUG_BUF === 1 ? this.cellIndexBuffer : this.particleDataBuffer0;
-      encoder.copyBufferToBuffer(debugBuffer, 0, this.resultBuffer, 0);
-      const commandBuffer = encoder.finish();
-      this.device.queue.submit([commandBuffer]);
-      if (window.LOG_INSTANCE_DATA) {
-        window.LOG_INSTANCE_DATA = false;
-        await this.resultBuffer.mapAsync(GPUMapMode.READ);
-        if (!window.DEBUG_BUF) {
-          const result = new Float32Array(this.resultBuffer.getMappedRange());
-          logInstanceData(result);
-        } else {
-          const result = new Uint32Array(this.resultBuffer.getMappedRange());
-          console.log(result);
-        }
-        this.resultBuffer.unmap();
-      }
-    }
-  };
-
-  // src/ts/scene.ts
-  var Scene = class {
-    viewDistance = 84;
-    viewMatrix = mat4.lookAt([0, 0, this.viewDistance], [0, 0, 0], [0, 1, 0]);
-    viewProjectionMatrix = mat4.identity();
-    viewAngles = vec2.create(0, 0);
-    mouseCoord = vec2.create(0, 0);
-    mouseDown = false;
-    lastMouseCoord = vec2.create(0, 0);
-    mouseIntersection = vec3.create(0, 0, 0);
-    // intersection of mouse ray with z=0 plane
-    lastMouseIntersection = vec3.create(0, 0, 0);
-    constructor() {
-      window.addEventListener("mousemove", (event) => {
-        const rect = event.target.getBoundingClientRect();
-        this.mouseCoord[0] = (event.clientX - rect.left) / rect.width * 2 - 1;
-        this.mouseCoord[1] = -((event.clientY - rect.top) / rect.height * 2 - 1);
-      });
-      window.addEventListener("mousedown", (event) => {
-        this.mouseDown = true;
-      });
-      window.addEventListener("mouseup", (event) => {
-        this.mouseDown = false;
-      });
-      window.addEventListener("wheel", (event) => {
-        this.viewDistance += 0.1 * this.viewDistance * (event.deltaY > 0 ? 1 : -1);
-        this.viewDistance = Math.max(5, Math.min(200, this.viewDistance));
-      });
-    }
-    createInitialParticleData(particleCount2) {
-      const particleData = new Float32Array(particleCount2 * instanceDataLength);
-      for (let i = 0; i < particleCount2; i++) {
-        let pos = vec3.create(Math.random(), Math.random(), Math.random());
-        pos = vec3.sub(pos, vec3.create(0.5, 0.5, 0.5));
-        pos = vec3.multiply(pos, vec3.create(20, 100, 20));
-        const letterX = [-2.05, -1.05, 0, 1, 2].map((x) => x * 40);
-        const letter = Math.floor(Math.random() * letterX.length);
-        const side = Math.random() > 0.5 ? 1 : -1;
-        pos = vec3.add(pos, vec3.create(letterX[letter], 110 * side, 0));
-        const startMaxSpeed = 20;
-        let velocity = vec3.create(0, -20, 0);
-        const normal = vec3.create(0, 1, 0);
-        particleData.set([
-          pos[0],
-          pos[1],
-          pos[2],
-          1,
-          velocity[0],
-          velocity[1],
-          velocity[2],
-          1,
-          normal[0],
-          normal[1],
-          normal[2],
-          1,
-          0,
-          0,
-          0,
-          side
-        ], i * instanceDataLength);
-      }
-      return particleData;
-    }
-    update(canvas) {
-      if (this.mouseDown) {
-        const deltaMouse = vec2.subtract(this.mouseCoord, this.lastMouseCoord);
-        this.viewAngles[0] += deltaMouse[0] * 1.5;
-        this.viewAngles[1] += deltaMouse[1] * -1;
-      }
-      let eye = vec3.create(0, 0, this.viewDistance);
-      eye = vec3.rotateX(eye, vec3.zero(), this.viewAngles[1]);
-      eye = vec3.rotateY(eye, vec3.zero(), this.viewAngles[0]);
-      const viewMatrix = mat4.lookAt(eye, [0, 0, 0], [0, 1, 0]);
-      const projMatrix = mat4.perspective(
-        1,
-        canvas.width / canvas.height,
-        0.1,
-        1e3
-      );
-      this.viewProjectionMatrix = mat4.multiply(projMatrix, viewMatrix);
-      const nearClip = vec4.create(this.mouseCoord[0], this.mouseCoord[1], -1, 1);
-      const farClip = vec4.create(this.mouseCoord[0], this.mouseCoord[1], 1, 1);
-      const invVP = mat4.inverse(this.viewProjectionMatrix);
-      let nearWorld = vec4.transformMat4(nearClip, invVP);
-      let farWorld = vec4.transformMat4(farClip, invVP);
-      nearWorld = vec3.create(nearWorld[0] / nearWorld[3], nearWorld[1] / nearWorld[3], nearWorld[2] / nearWorld[3]);
-      farWorld = vec3.create(farWorld[0] / farWorld[3], farWorld[1] / farWorld[3], farWorld[2] / farWorld[3]);
-      const rayOrigin = nearWorld;
-      const rayDir = vec3.normalize(vec3.sub(farWorld, nearWorld));
-      const t = -rayOrigin[2] / rayDir[2];
-      this.lastMouseIntersection = this.mouseIntersection;
-      this.mouseIntersection = vec3.add(rayOrigin, vec3.scale(rayDir, t));
-      this.lastMouseCoord = vec2.clone(this.mouseCoord);
-    }
-  };
-
-  // src/main.ts
-  var particleCount = 1600 * workgroupSize;
-  var scene = new Scene();
-  var lastTime = Date.now();
-  var frameCount = 0;
-  var frameTimeSum = 0;
-  function render(renderer, computer) {
-    const currentTime = Date.now();
-    const deltaTime = (currentTime - lastTime) / 1e3;
-    lastTime = currentTime;
-    frameCount++;
-    frameTimeSum += deltaTime;
-    if (window.LOG_FPS && frameCount % 100 == 0) {
-      console.log("FPS ", 1 / (frameTimeSum / 100));
-      frameTimeSum = 0;
-    }
-    scene.update(renderer.ctx.canvas);
-    computer.run(Math.min(deltaTime, 0.1), scene.mouseIntersection, scene.lastMouseIntersection);
-    renderer.render(scene.viewProjectionMatrix);
-    requestAnimationFrame(() => render(renderer, computer));
-  }
-  async function main() {
-    const renderer = new WGPURenderer();
-    const success = await renderer.init();
-    if (!success)
-      return;
-    const particleData = scene.createInitialParticleData(particleCount);
-    renderer.createBuffersAndPipeline(particleCount);
-    const computer = new WGPUComputer(renderer.device, particleCount, particleData, renderer.instanceBuffer);
-    lastTime = Date.now();
-    requestAnimationFrame(() => render(renderer, computer));
-  }
-  main();
-})();
-//# sourceMappingURL=bundle.js.map
+`;var Nt=jt(Wt(),1);var at=class{device;computeShaders=[Tt,Gt,zt,At];pipelines=[];bindGroup;particleCount=0;maxParticleCount;spawnPeriod=3;particleDataBuffer0;particleDataBuffer1;renderInstanceBuffer;cellIndexBuffer;particleIdBuffer;cellOffsetBuffer;cellOffsetStartBuffer;uniformBuffer;time=0;uniforms=new Map([["time",{length:1,value:new Float32Array([0])}],["deltaTime",{length:1,value:new Float32Array([0])}],["mouseIntersection",{length:2,value:new Float32Array([0,0])}],["lastMouseIntersection",{length:2,value:new Float32Array([0,0])}],["animSpeed",{length:1,value:new Float32Array([0])}],["particleCount",{length:1,value:new Uint32Array([0])}]]);uniformsLength=Array.from(this.uniforms.values()).reduce((v,T)=>v+T.length,0);resultBuffer;constructor(v,T,R,A){this.device=v,this.maxParticleCount=T,this.particleCount=0,this.renderInstanceBuffer=A;let L=this.device.createBindGroupLayout({entries:[{binding:0,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}},{binding:1,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}},{binding:2,visibility:GPUShaderStage.COMPUTE,buffer:{type:"uniform"}},{binding:3,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}},{binding:4,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}},{binding:5,visibility:GPUShaderStage.COMPUTE,buffer:{type:"storage"}}]}),C=this.device.createPipelineLayout({bindGroupLayouts:[L]});for(let F=0;F<this.computeShaders.length;F++){let Q=this.device.createShaderModule({label:`particle update ${F}`,code:this.computeShaders[F]});this.pipelines.push(v.createComputePipeline({label:`particle update ${F} pipeline`,layout:C,compute:{module:Q}}))}this.particleDataBuffer0=v.createBuffer({size:this.maxParticleCount*4*Ne,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST}),this.particleDataBuffer1=v.createBuffer({size:this.maxParticleCount*4*Ne,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC|GPUBufferUsage.COPY_DST}),v.queue.writeBuffer(this.particleDataBuffer0,0,R),v.queue.writeBuffer(this.particleDataBuffer1,0,R),this.cellIndexBuffer=v.createBuffer({size:this.maxParticleCount*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC}),this.particleIdBuffer=v.createBuffer({size:this.maxParticleCount*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_SRC});let K=He[0]*He[1]*He[2];this.cellOffsetBuffer=v.createBuffer({size:K*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_DST|GPUBufferUsage.COPY_SRC}),this.cellOffsetStartBuffer=v.createBuffer({size:K*4,usage:GPUBufferUsage.STORAGE|GPUBufferUsage.COPY_DST|GPUBufferUsage.COPY_SRC}),v.queue.writeBuffer(this.cellOffsetStartBuffer,0,new Uint32Array(K).fill(4294967295)),this.uniformBuffer=v.createBuffer({size:this.uniformsLength*4,usage:GPUBufferUsage.UNIFORM|GPUBufferUsage.COPY_DST}),this.resultBuffer=v.createBuffer({size:this.particleDataBuffer0.size,usage:GPUBufferUsage.MAP_READ|GPUBufferUsage.COPY_DST}),this.bindGroup=v.createBindGroup({layout:L,entries:[{binding:0,resource:{buffer:this.particleDataBuffer0}},{binding:1,resource:{buffer:this.particleDataBuffer1}},{binding:2,resource:{buffer:this.uniformBuffer}},{binding:3,resource:{buffer:this.cellIndexBuffer}},{binding:4,resource:{buffer:this.particleIdBuffer}},{binding:5,resource:{buffer:this.cellOffsetBuffer}}]})}sort(v){let T=new Nt.RadixSortKernel({device:this.device,keys:this.cellIndexBuffer,values:this.particleIdBuffer,count:this.maxParticleCount,check_order:!1,bit_count:32,workgroup_size:{x:16,y:16}}),R=v.beginComputePass();T.dispatch(R),R.end()}async run(v,T,R){this.time+=v,this.particleCount+=this.maxParticleCount*(v/this.spawnPeriod),this.particleCount=Math.min(this.particleCount,this.maxParticleCount),this.uniforms.get("time").value[0]=this.time,this.uniforms.get("deltaTime").value[0]=v,this.uniforms.get("mouseIntersection").value=T,this.uniforms.get("lastMouseIntersection").value=R,this.uniforms.get("animSpeed").value[0]=window.PAUSE_UPDATE?0:1,this.uniforms.get("particleCount").value[0]=this.particleCount;let A=new Float32Array(this.uniformsLength),L=0;for(let[V,{length:X,value:ne}]of this.uniforms)A.set(ne,L),L+=X;this.device.queue.writeBuffer(this.uniformBuffer,0,A,0);let C=this.device.createCommandEncoder();C.copyBufferToBuffer(this.cellOffsetStartBuffer,this.cellOffsetBuffer);let K=V=>{let X=C.beginComputePass();X.setPipeline(V),X.setBindGroup(0,this.bindGroup),X.dispatchWorkgroups(this.maxParticleCount/Ye,1,1),X.end()};K(this.pipelines[0]),this.sort(C),K(this.pipelines[1]),K(this.pipelines[2]),K(this.pipelines[3]),C.copyBufferToBuffer(this.particleDataBuffer1,this.particleDataBuffer0),C.copyBufferToBuffer(this.particleDataBuffer1,0,this.renderInstanceBuffer,0);let F=window.DEBUG_BUF===3?this.cellOffsetBuffer:window.DEBUG_BUF===2?this.particleIdBuffer:window.DEBUG_BUF===1?this.cellIndexBuffer:this.particleDataBuffer0;C.copyBufferToBuffer(F,0,this.resultBuffer,0);let Q=C.finish();if(this.device.queue.submit([Q]),window.LOG_INSTANCE_DATA){if(window.LOG_INSTANCE_DATA=!1,await this.resultBuffer.mapAsync(GPUMapMode.READ),window.DEBUG_BUF){let V=new Uint32Array(this.resultBuffer.getMappedRange());console.log(V)}else{let V=new Float32Array(this.resultBuffer.getMappedRange());Et(V)}this.resultBuffer.unmap()}}};var ut=class{viewDistance=84;camPos=j.create(0,0,this.viewDistance);viewMatrix=Ce.lookAt(this.camPos,[0,0,0],[0,1,0]);viewProjectionMatrix=Ce.identity();viewAngles=$e.create(0,0);mouseCoord=$e.create(0,0);mouseDown=!1;lastMouseCoord=$e.create(0,0);mouseIntersection=j.create(0,0,0);lastMouseIntersection=j.create(0,0,0);constructor(){window.addEventListener("mousemove",v=>{let T=v.target.getBoundingClientRect();this.mouseCoord[0]=(v.clientX-T.left)/T.width*2-1,this.mouseCoord[1]=-((v.clientY-T.top)/T.height*2-1)}),window.addEventListener("mousedown",v=>{this.mouseDown=!0}),window.addEventListener("mouseup",v=>{this.mouseDown=!1}),window.addEventListener("wheel",v=>{this.viewDistance+=.1*this.viewDistance*(v.deltaY>0?1:-1),this.viewDistance=Math.max(5,Math.min(200,this.viewDistance))})}createInitialParticleData(v){let T=new Float32Array(v*Ne);for(let R=0;R<v;R++){let A=j.create(Math.random(),Math.random(),Math.random());A=j.sub(A,j.create(.5,.5,.5)),A=j.multiply(A,j.create(20,50,20));let L=[-2.05,-1.05,0,1,2].map(X=>X*40),C=Math.floor(Math.random()*L.length),K=Math.random()>.5?1:-1;A=j.add(A,j.create(L[C],80*K,0));let F=20,Q=j.create(0,-20,0),V=j.create(0,1,0);T.set([A[0],A[1],A[2],1,Q[0],Q[1],Q[2],1,V[0],V[1],V[2],1,0,0,0,K],R*Ne)}return T}update(v){if(this.mouseDown){let ne=$e.subtract(this.mouseCoord,this.lastMouseCoord);this.viewAngles[0]+=ne[0]*1.5,this.viewAngles[1]+=ne[1]*-1}this.camPos=j.create(0,0,this.viewDistance),this.camPos=j.rotateX(this.camPos,j.zero(),this.viewAngles[1]),this.camPos=j.rotateY(this.camPos,j.zero(),this.viewAngles[0]);let T=Ce.lookAt(this.camPos,[0,0,0],[0,1,0]),R=Ce.perspective(1,v.width/v.height,.1,1e3);this.viewProjectionMatrix=Ce.multiply(R,T);let A=je.create(this.mouseCoord[0],this.mouseCoord[1],-1,1),L=je.create(this.mouseCoord[0],this.mouseCoord[1],1,1),C=Ce.inverse(this.viewProjectionMatrix),K=je.transformMat4(A,C),F=je.transformMat4(L,C);K=j.create(K[0]/K[3],K[1]/K[3],K[2]/K[3]),F=j.create(F[0]/F[3],F[1]/F[3],F[2]/F[3]);let Q=K,V=j.normalize(j.sub(F,K)),X=-Q[2]/V[2];this.lastMouseIntersection=this.mouseIntersection,this.mouseIntersection=j.add(Q,j.scale(V,X)),this.lastMouseCoord=$e.clone(this.mouseCoord)}};var pt=1600*Ye,Ze=new ut,ht=Date.now(),Ct=0,dt=0;function Kt(l,v){let T=Date.now(),R=(T-ht)/1e3;ht=T,Ct++,dt+=R,window.LOG_FPS&&Ct%100==0&&(console.log("FPS ",1/(dt/100)),dt=0),Ze.update(l.ctx.canvas),v.run(Math.min(R,.1),Ze.mouseIntersection,Ze.lastMouseIntersection),l.render(Ze.viewProjectionMatrix,Ze.camPos),requestAnimationFrame(()=>Kt(l,v))}async function Sn(){let l=new it;if(!await l.init())return;new ResizeObserver(L=>{for(let C of L){let K=C.contentBoxSize[0].inlineSize,F=C.contentBoxSize[0].blockSize,Q=C.target;Q.width=Math.max(1,Math.min(K,l.device.limits.maxTextureDimension2D)),Q.height=Math.max(1,Math.min(F,l.device.limits.maxTextureDimension2D))}}).observe(l.canvas);let R=Ze.createInitialParticleData(pt);l.createBuffersAndPipeline(pt);let A=new at(l.device,pt,R,l.instanceBuffer);ht=Date.now(),requestAnimationFrame(()=>Kt(l,A))}Sn();})();
