@@ -12,16 +12,6 @@ import { RadixSortKernel } from 'webgpu-radix-sort';
 
 import { type Vec2 } from "wgpu-matrix";
 
-/* 
-TODO
-
-use ping pong buffering to improve performance - each shader reads from one buffer and writes to another
-once cells have been sorted, we can create a new array of particles in cell order. 
-  this will remove lookup delays and also should improve cache locality 
-
-
-*/
-
 
 export class WGPUComputer {
   private device: GPUDevice;
@@ -31,7 +21,11 @@ export class WGPUComputer {
   private pipelines: GPUComputePipeline[] = [];
   private bindGroup: GPUBindGroup;
   
-  private particleCount: number;
+  private particleCount = 0;
+  private maxParticleCount: number;
+  private readonly spawnPeriod = 3; // duration (seconds) of initial period where particles spawn in
+
+
   private particleDataBuffer0: GPUBuffer; // used as read/write for all but the final shader. used as read for final shader
   private particleDataBuffer1: GPUBuffer; // used as write for final shader (to avoid race conditions)
 
@@ -50,7 +44,6 @@ export class WGPUComputer {
   private time = 0;
 
 
-  // could auto-generate this list from the shader code but not necessary for a small number
   private uniforms = new Map<string, {length: number, value: Float32Array | Uint32Array}>([
     ["time",                  {length: 1, value: new Float32Array([0])}],
     ["deltaTime",             {length: 1, value: new Float32Array([0])}],
@@ -66,7 +59,8 @@ export class WGPUComputer {
 
   constructor(device: GPUDevice, particleCount: number, initialInstanceData: Float32Array<ArrayBuffer>, renderInstanceBuffer: GPUBuffer) {
     this.device = device;
-    this.particleCount = particleCount;
+    this.maxParticleCount = particleCount;
+    this.particleCount = 0;
     this.renderInstanceBuffer = renderInstanceBuffer;
 
     
@@ -129,22 +123,22 @@ export class WGPUComputer {
     // BUFFERS
 
     this.particleDataBuffer0 = device.createBuffer({
-      size: particleCount * 4 * instanceDataLength,
+      size: this.maxParticleCount * 4 * instanceDataLength,
       usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
     });
     this.particleDataBuffer1 = device.createBuffer({
-      size: particleCount * 4 * instanceDataLength,
+      size: this.maxParticleCount * 4 * instanceDataLength,
       usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC | GPUBufferUsage.COPY_DST
     });
     device.queue.writeBuffer(this.particleDataBuffer0, 0, initialInstanceData)
     device.queue.writeBuffer(this.particleDataBuffer1, 0, initialInstanceData)
 
     this.cellIndexBuffer = device.createBuffer({
-      size: particleCount * 4,
+      size: this.maxParticleCount * 4,
       usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC
     })
     this.particleIdBuffer = device.createBuffer({
-      size: particleCount * 4,
+      size: this.maxParticleCount * 4,
       usage: GPUBufferUsage.STORAGE | GPUBufferUsage.COPY_SRC
     })
 
@@ -194,7 +188,7 @@ export class WGPUComputer {
       device: this.device,
       keys: this.cellIndexBuffer,
       values: this.particleIdBuffer,
-      count: this.particleCount,
+      count: this.maxParticleCount,
       check_order: false, 
       bit_count: 32,
       workgroup_size: { x: 16, y: 16 },  // Workgroup size in x and y dimensions. (x * y) must be a power of two
@@ -206,6 +200,11 @@ export class WGPUComputer {
 
   async run(deltaTime: number, mouseIntersection: Vec2, lastMouseIntersection: Vec2) {
     this.time += deltaTime;
+
+    // spawn more particles
+    this.particleCount += this.maxParticleCount * (deltaTime / this.spawnPeriod);
+    this.particleCount = Math.min(this.particleCount, this.maxParticleCount);
+    
 
     // update uniforms
     this.uniforms.get("time")!.value[0] = this.time;
@@ -234,7 +233,7 @@ export class WGPUComputer {
       const pass = encoder.beginComputePass();
       pass.setPipeline(pipeline);
       pass.setBindGroup(0, this.bindGroup);
-      pass.dispatchWorkgroups(this.particleCount / workgroupSize, 1, 1);
+      pass.dispatchWorkgroups(this.maxParticleCount / workgroupSize, 1, 1);
       pass.end();
     }
     

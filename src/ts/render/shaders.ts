@@ -1,7 +1,9 @@
 export const renderShaders = /* wgsl */`
 struct Uniforms {
   viewProjectionMatrix : mat4x4<f32>,
+  invVPMatrix : mat4x4<f32>,
   backgroundColour: vec4<f32>,
+  camPos: vec3<f32>,
   aspectRatio : f32,
 }
 @group(0) @binding(0) var<uniform> uniforms: Uniforms;
@@ -9,7 +11,10 @@ struct Uniforms {
 struct VertexOut {
   @builtin(position) position : vec4f,
   @location(0) colour : vec4f,
-  @location(1) uv : vec2f
+  @location(1) uv : vec2f,
+  @location(2) worldPos: vec3f,
+  @location(3) normal: vec3f,
+  @location(4) fadeFac: f32,
 }
 
 struct VertexInput {
@@ -34,40 +39,38 @@ fn vertex_main(
   instance: InstanceInput
 ) -> VertexOut {
   var output : VertexOut;
-
-  // WARP PARTICLE POSITION
-  const R = 100.0;
   var position = instance.position;
-  let theta = position.x / R;
-  
-  // base arc point (radius R)
-  let bx = R * sin(theta);
-  let bz = R * (1.0 - cos(theta));
 
-  // apply radial offset
+  // // WARP PARTICLE POSITION
+  // const R = 100.0;
+  // let theta = position.x / R;
+  
+  // // base arc point (radius R)
+  // let bx = R * sin(theta);
+  // let bz = R * (1.0 - cos(theta));
+
+  // // apply radial offset
   // position.x = bx + position.z * sin(theta);
   // position.z = bz + position.z * -cos(theta);
 
-  output.position = uniforms.viewProjectionMatrix * position;
 
-  let vp = uniforms.viewProjectionMatrix;
-  let eye = vec3<f32>(vp[0][3], vp[1][3], vp[2][3]); // not sure if this is right
-  let viewDir = normalize(instance.position.xyz - eye); 
+  output.position = uniforms.viewProjectionMatrix * position;
 
   // SCREEN SPACE SIZE PARTICLES (zoom invariant)
   // const particleSize = 0.003;
   // let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize) * output.position.w;
 
   // WORLD SPACE SIZE PARTICLES
-  const particleSize = 0.5;
+  const particleSize = 1.0;
   let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize);
   
 
   output.position += vec4f(vertPos, 0., 0.);
+  output.worldPos = (uniforms.invVPMatrix * output.position).xyz;
 
   const baseColor1 = vec4f(0.3, 0.7, 0.8, 1.0);
   const baseColor2 = vec4f(0.0, 0.3, 0.8, 1.0);
-  let baseColour = mix(baseColor1, baseColor2, 0.5*instance.group + 0.5);
+  output.colour = mix(baseColor1, baseColor2, 0.5*instance.group + 0.5);
 
   // // SHADE COLLISIONS
   // const densityRange = 0.1; // density scalar will vary for density values in range [1, 1+densityRange]
@@ -75,41 +78,55 @@ fn vertex_main(
   // var colour = (1.0-densityScalar) * baseColor1 + densityScalar * baseColor2;
 
 
-  // DIFFUSE SHADING
-  const lightDir = normalize(vec3<f32>(0.0, 0.5, 1.0));
-  const diffuseStrength = 0.6;
-  let diffuseIntensity = diffuseStrength * dot(lightDir, instance.normal.xyz) + 1.0 - diffuseStrength;
- 
-  // SPECULAR SHADING 
-  // const specularColour = vec4<f32>(1.0);
-  // const specularExponent = 7.0;
-  // let specularIntensity = 0.7 * pow(max(dot(instance.normal.xyz, viewDir), 0), specularExponent);
-
-  var colour = saturate(diffuseIntensity*baseColour);// + specularIntensity*specularColour);
-
-
   // FADE PARTICLES IN AT THE START
   const startFadeY = 40;
   const endFadeY = 20;
-  let fadeFac = saturate((abs(instance.position.y)-startFadeY)/(endFadeY-startFadeY));
-  colour = mix(uniforms.backgroundColour, colour, fadeFac);
+  output.fadeFac = saturate((abs(instance.position.y)-startFadeY)/(endFadeY-startFadeY));
 
 
-  output.colour = colour;
   output.uv = vertex.uv;
+  output.normal = instance.normal.xyz; // could use improvement so normal is not constant across all fragments
 
   return output;
 }
 
 @fragment
 fn fragment_main(fragData: VertexOut) -> @location(0) vec4f {
-  // circle (need to switch on alpha blending)
+  let uvLength = length(fragData.uv - vec2f(0.5, 0.5)) * 2.0;
+  if (uvLength > 1.0) {
+    discard;
+  } 
+  // smooth circle edge (need to switch on alpha blending)
   // const falloff = 5.0;
-  // let uvLength = length(fragData.uv - vec2f(0.5, 0.5)) * 2.0;
   // let alpha = clamp(falloff * (1.0 - uvLength), 0.0, 1.0);
   // return vec4f(fragData.colour.rgb * alpha, fragData.colour.a * alpha);
 
-  return fragData.colour;
+
+  const lightDir = normalize(vec3<f32>(0.1, 0.8, 1.0));
+
+  // DIFFUSE SHADING
+  const diffuseStrength = 0.5;
+  let diffuseIntensity = diffuseStrength * dot(lightDir, fragData.normal) + 0.9 - diffuseStrength; 
+
+  // SPECULAR SHADING
+  let viewDir = normalize(uniforms.camPos - fragData.worldPos);
+  
+  const specularColour = vec4<f32>(1.0);
+  const specularExponent = 50.0;
+  let halfDir = normalize(normalize(lightDir) + viewDir);
+  let specularIntensity = 0.3*pow(max(dot(fragData.normal, halfDir), 0.0), specularExponent);
+
+
+
+
+  
+  var colour = saturate(diffuseIntensity*fragData.colour + specularIntensity*specularColour);
+
+
+  
+  colour = mix(uniforms.backgroundColour, colour, fragData.fadeFac);
+
+  return colour;
 }
 
 `;

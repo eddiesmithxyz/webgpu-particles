@@ -30,7 +30,7 @@ function render(renderer: WGPURenderer, computer: WGPUComputer) {
   scene.update(renderer.ctx.canvas as HTMLCanvasElement);
 
   computer.run(Math.min(deltaTime, 0.1), scene.mouseIntersection, scene.lastMouseIntersection);
-  renderer.render(scene.viewProjectionMatrix);
+  renderer.render(scene.viewProjectionMatrix, scene.camPos);
   requestAnimationFrame(() => render(renderer, computer));
 }
 
@@ -40,6 +40,20 @@ async function main() {
   const success = await renderer.init()
   if (!success) 
     return;
+
+
+  // resize oberserver
+  const observer = new ResizeObserver(entries => {
+    for (const entry of entries) {
+      const width = entry.contentBoxSize[0].inlineSize;
+      const height = entry.contentBoxSize[0].blockSize;
+      const canvas = entry.target as HTMLCanvasElement;
+      canvas.width = Math.max(1, Math.min(width, renderer.device.limits.maxTextureDimension2D));
+      canvas.height = Math.max(1, Math.min(height, renderer.device.limits.maxTextureDimension2D));
+    }
+  });
+  observer.observe(renderer.canvas);
+
 
   const particleData = scene.createInitialParticleData(particleCount);
   renderer.createBuffersAndPipeline(particleCount);

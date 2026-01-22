@@ -115,7 +115,7 @@ fn sdDistort(pos: vec3<f32>) -> f32 {
 
 
     const mouseDisturbRadius = 5.0;
-    const mouseDisturbSharpness = 30.0;
+    const mouseDisturbSharpness = 18.0;
 
     var dist = pos.xy - closestPoint;
     dist *= 1.0/mouseDisturbRadius;

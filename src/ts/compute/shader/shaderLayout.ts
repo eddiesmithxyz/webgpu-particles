@@ -9,6 +9,7 @@ struct Particle {
   group: f32,
   groupCentroid: vec4<f32>
 }
+const UNSPAWNED_PARTICLE: u32 = 0xFFFFFFFF;
 `;
 
 

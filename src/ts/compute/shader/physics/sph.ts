@@ -116,7 +116,7 @@ fn fluidAccel(particle: Particle, id: u32) -> vec3<f32> {
   var force = (e*viscosityForce - pressureForce) / particle.density;
 
 
-  // group cohesion force
+  // group cohesion force (disabled)
   // // let sameGroupCentroidDir = (sameGroupNeighbourPosSum.xyz / sameGroupNeighbourPosSum.w) - particle.position.xyz;
   // // let diffGroupCentroidDir = (diffGroupNeighbourPosSum.xyz / diffGroupNeighbourPosSum.w) - particle.position.xyz;
   // // force += 0.3* sameGroupCentroidDir - 0.0*diffGroupCentroidDir;

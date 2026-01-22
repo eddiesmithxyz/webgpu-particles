@@ -3,7 +3,8 @@ import { instanceDataLength, logInstanceData } from './common';
 
 export class Scene {
   private viewDistance: number = 84;
-  public viewMatrix: Mat4 = mat4.lookAt([0, 0, this.viewDistance], [0, 0, 0], [0, 1, 0]);
+  public camPos = vec3.create(0, 0, this.viewDistance);
+  public viewMatrix: Mat4 = mat4.lookAt(this.camPos, [0, 0, 0], [0, 1, 0]);
   public viewProjectionMatrix: Mat4 = mat4.identity();
   private viewAngles: Vec2 = vec2.create(0, 0);
 
@@ -89,10 +90,10 @@ export class Scene {
     }
 
 
-    let eye = vec3.create(0, 0, this.viewDistance);
-    eye = vec3.rotateX(eye, vec3.zero(), this.viewAngles[1]);
-    eye = vec3.rotateY(eye, vec3.zero(), this.viewAngles[0]);
-    const viewMatrix = mat4.lookAt(eye, [0, 0, 0], [0, 1, 0]);
+    this.camPos = vec3.create(0, 0, this.viewDistance);
+    this.camPos = vec3.rotateX(this.camPos, vec3.zero(), this.viewAngles[1]);
+    this.camPos = vec3.rotateY(this.camPos, vec3.zero(), this.viewAngles[0]);
+    const viewMatrix = mat4.lookAt(this.camPos, [0, 0, 0], [0, 1, 0]);
 
 
 

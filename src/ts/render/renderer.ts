@@ -2,10 +2,13 @@ import { renderShaders } from "./shaders.ts";
 import { createSquareData } from "./square.ts";
 import { instanceDataLength } from "../common.ts";
 
+import { type Mat4, mat4 } from "wgpu-matrix"
+
 export class WGPURenderer {
   private initialised = false;
 
   public device: GPUDevice = {} as GPUDevice;
+  public canvas: HTMLCanvasElement = {} as HTMLCanvasElement;
   public ctx: GPUCanvasContext = {} as GPUCanvasContext;
   private renderPipeline: GPURenderPipeline = {} as GPURenderPipeline; 
 
@@ -24,7 +27,7 @@ export class WGPURenderer {
   public multisampleCount = 4;
   
   async init(): Promise<boolean> {
-    const canvas = document.querySelector("#gpuCanvas") as HTMLCanvasElement;
+    this.canvas = document.querySelector("#gpuCanvas") as HTMLCanvasElement;
 
     if (!navigator.gpu) {
       throw Error("WebGPU not supported.");
@@ -37,7 +40,7 @@ export class WGPURenderer {
 
 
     this.device = await adapter.requestDevice();
-    this.ctx = canvas.getContext("webgpu") as GPUCanvasContext;
+    this.ctx = this.canvas.getContext("webgpu") as GPUCanvasContext;
 
     this.ctx.configure({
       device: this.device,
@@ -164,9 +167,10 @@ export class WGPURenderer {
     // UNIFORMS
     const uniformSize =
       16 * 4 +  // view-proj matrix
+      16 * 4 +  // inverse view-proj matrix
       4 * 4 +   // background colour
-      1 * 4 +  // aspect ratio
-      3 * 4 // padding
+      3 * 4 + // cam pos
+      1 * 4;  // aspect ratio
     this.uniformBuffer = this.device.createBuffer({
       size: uniformSize,
       usage: GPUBufferUsage.UNIFORM | GPUBufferUsage.COPY_DST
@@ -182,7 +186,7 @@ export class WGPURenderer {
   }
 
 
-  render(viewProjectionMatrix: Float32Array) {
+  render(viewProjectionMatrix: Mat4, camPos: Float32Array) {
     if (!this.initialised) {
       throw ("WebGPU not initialised");
     }
@@ -190,9 +194,12 @@ export class WGPURenderer {
 
     const canvasTexture = this.ctx.getCurrentTexture();
 
+    // place in uniforms
     const uniformData = new Float32Array([
       ...viewProjectionMatrix, 
+      ...mat4.inverse(viewProjectionMatrix),
       this.clearColour.r, this.clearColour.g, this.clearColour.b, this.clearColour.a,
+      ...camPos,
       canvasTexture.width / canvasTexture.height])
     this.device.queue.writeBuffer(this.uniformBuffer, 0, uniformData, 0);
 
