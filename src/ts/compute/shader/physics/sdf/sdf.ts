@@ -3,7 +3,7 @@ import { primitiveSDFsSrc } from "./primitives";
 import { wordSDFSrc } from "./word";
 
 const mass = str(0.05);
-const positionStiffness = str(-2);
+const positionStiffness = str(-0.5);
 const velocityDamping = str(-1);
 const gravityClamp = str(200); // limit gravity so it doesn't explode if we're far away
 
