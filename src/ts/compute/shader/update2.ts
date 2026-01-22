@@ -1,6 +1,6 @@
 import { shaderInputLayoutSrc, mainFunc, getID } from "./shaderLayout";
 import { gridAccessFuncs } from "./grid/gridAccess";
-import { sdfSrc } from "./physics/sdf";
+import { sdfSrc } from "./physics/sdf/sdf";
 import { sphSrc } from "./physics/sph";
 
 

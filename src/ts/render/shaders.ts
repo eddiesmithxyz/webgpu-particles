@@ -1,3 +1,8 @@
+import { wgslNumStr as str } from "../common"
+
+
+const particleSize = str(0.9);
+
 export const renderShaders = /* wgsl */`
 struct Uniforms {
   viewProjectionMatrix : mat4x4<f32>,
@@ -61,7 +66,7 @@ fn vertex_main(
   // let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize) * output.position.w;
 
   // WORLD SPACE SIZE PARTICLES
-  const particleSize = 1.0;
+  const particleSize = ${particleSize};
   let vertPos = vertex.position.xy * vec2f(particleSize / uniforms.aspectRatio, particleSize);
   
 

@@ -2,11 +2,12 @@ import { wgslNumStr as str, wgslVec3Str as strV, wgslIVec3Str as strIntV } from 
 import { vec3 } from "wgpu-matrix"
 
 
-export const smoothingRadius = 1; // SPH smoothing radius, also defines the grid cell size
+export const smoothingRadius = 0.9; // SPH smoothing radius, also defines the grid cell size
 
 // unit size of spatial grid. this is centred around 0, so will span [-0.5*bound, +0.5*bound]
 // points outside the bounds will be modulo'd 
-const bound = vec3.create(200, 100, 25); 
+// const bound = vec3.create(200, 100, 25); // for EDDIE
+const bound = vec3.create(150, 150, 25); // for HI
 
 export const gridSize = vec3.floor(vec3.divScalar(bound, smoothingRadius));
 export const trueBound = vec3.mulScalar(gridSize, smoothingRadius); // reduce bound to nearest multiple of smoothingRadius
